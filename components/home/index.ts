@@ -1,0 +1,10 @@
+export { HeroSection } from "./HeroSection";
+export { WhyZoikoSection } from "./WhyZoikoSection";
+export { EvidenceSection } from "./EvidenceSection";
+export { RoomsAvailableSection } from "./RoomsAvailableSection";
+export { RoomPassportSection } from "./RoomPassportSection";
+export { ProcessSection } from "./ProcessSection";
+export { RelocationSection } from "./RelocationSection";
+export { AudienceSection } from "./AudienceSection";
+export { FaqSection } from "./FaqSection";
+export { FinalCtaSection } from "./FinalCtaSection";
