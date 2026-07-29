@@ -16,7 +16,7 @@ export function NavLinks() {
   return (
     <nav
       ref={navRef}
-      className="hidden items-center lg:flex"
+      className="hidden items-center xl:flex"
       onMouseLeave={() => setOpenKey(null)}
     >
       {navSections.map((section) => {

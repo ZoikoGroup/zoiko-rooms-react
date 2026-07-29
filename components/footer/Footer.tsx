@@ -12,7 +12,7 @@ export function Footer() {
       <Container className="py-14">
         <Reveal className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,320px)_1fr]">
           <FooterNewsletter />
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 xl:grid-cols-5">
             <FooterColumn title="Find a Room" groups={[{ links: findARoom.links }]} />
             <FooterColumn title="List a Room" groups={[{ links: listARoom.links }]} />
             <FooterColumn title="How It Works" groups={[{ links: howItWorks.links }]} />

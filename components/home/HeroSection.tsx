@@ -230,7 +230,7 @@ export function HeroSection() {
           {/* Floating testimonial card — positioned against the whole card, own z-index, own width */}
           <motion.div
             variants={fadeUp}
-            className="absolute bottom-5 right-5 z-10 flex w-75 flex-col gap-4 rounded-3xl bg-white p-5 shadow-lg sm:bottom-8 sm:right-8 sm:w-100"
+            className="absolute inset-x-5 bottom-5 z-10 flex flex-col gap-4 rounded-3xl bg-white p-5 shadow-lg sm:inset-x-auto sm:bottom-8 sm:right-8 sm:w-100"
           >
             <div className="flex items-center gap-3">
               <div className="flex -space-x-3">

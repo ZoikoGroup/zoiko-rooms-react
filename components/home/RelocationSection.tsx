@@ -40,7 +40,7 @@ export function RelocationSection() {
         <Reveal className="flex flex-col gap-16 rounded-4xl bg-[#F1E7DA] p-6 sm:p-10 lg:p-12">
           <div className="flex flex-col gap-12">
             <SectionHeading eyebrow="Find what suits you" title="Every relocation is different" />
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
               {scenarios.map(({ image, eyebrow, title, description }) => (
                 <motion.div
                   key={title}

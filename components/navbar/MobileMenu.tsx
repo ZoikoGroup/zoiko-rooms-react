@@ -124,7 +124,7 @@ export function MobileMenu() {
   );
 
   return (
-    <div className="lg:hidden">
+    <div className="xl:hidden">
       <button
         type="button"
         onClick={() => setIsOpen(true)}
