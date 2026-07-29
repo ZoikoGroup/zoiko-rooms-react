@@ -5,14 +5,16 @@ import { motion, type HTMLMotionProps } from "framer-motion";
 
 const MotionLink = motion.create(Link);
 
-type Variant = "primary" | "secondary" | "outline" | "ghost";
+type Variant = "primary" | "secondary" | "outline" | "outline-red" | "ghost" | "subtle";
 type Size = "sm" | "md" | "lg";
 
 const variantClasses: Record<Variant, string> = {
   primary: "bg-brand-red text-white hover:bg-brand-red-dark",
   secondary: "bg-brand-navy text-white hover:bg-brand-navy-dark",
   outline: "border border-brand-navy text-brand-navy hover:bg-brand-navy hover:text-white",
+  "outline-red": "border border-brand-red text-brand-red hover:bg-brand-red hover:text-white",
   ghost: "text-brand-navy hover:bg-brand-navy/5",
+  subtle: "border border-black/10 bg-transparent text-brand-navy hover:bg-black/5",
 };
 
 const sizeClasses: Record<Size, string> = {

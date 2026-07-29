@@ -3,6 +3,8 @@
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui";
 import { useSearchModal } from "@/components/search";
+import { currencyOptions, languageOptions } from "@/lib/nav-data";
+import { NavPillDropdown } from "./NavPillDropdown";
 
 export function NavActions() {
   const { open } = useSearchModal();
@@ -13,7 +15,7 @@ export function NavActions() {
         type="button"
         onClick={open}
         aria-label="Open search"
-        className="flex h-10 w-10 items-center justify-center rounded-full text-brand-navy transition-colors hover:bg-brand-navy/5"
+        className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 text-brand-navy transition-colors hover:bg-brand-navy/5"
       >
         <Search className="h-5 w-5" />
       </button>
@@ -23,12 +25,8 @@ export function NavActions() {
       </Button>
 
       <div className="hidden items-center gap-1 xl:flex">
-        <span className="rounded-full px-2.5 py-1 text-xs font-medium text-neutral-500">
-          EN
-        </span>
-        <span className="rounded-full px-2.5 py-1 text-xs font-medium text-neutral-500">
-          USD
-        </span>
+        <NavPillDropdown storageKey="zoiko-language" ariaLabel="Select language" options={languageOptions} />
+        <NavPillDropdown storageKey="zoiko-currency" ariaLabel="Select currency" options={currencyOptions} />
       </div>
     </div>
   );

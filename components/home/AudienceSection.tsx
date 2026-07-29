@@ -28,7 +28,7 @@ const audiences = [
 
 export function AudienceSection() {
   return (
-    <section className="py-16 sm:py-24">
+    <section className="py-5 sm:py-5">
       <Container>
         <Reveal className="grid grid-cols-1 gap-6 sm:grid-cols-3">
           {audiences.map(({ title, description, cta, href }) => (

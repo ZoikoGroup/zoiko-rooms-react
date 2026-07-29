@@ -5,11 +5,15 @@ import Image from "next/image";
 
 type LogoProps = {
   className?: string;
+  width?: number;
+  height?: number;
 };
 
 // Renders the real /public/logo.png once it exists; falls back to a styled
 // text wordmark (rather than a broken-image icon) until then.
-export function Logo({ className = "" }: LogoProps) {
+// Pass width/height to size this instance manually (the real file is
+// 836x128 — keep that ~6.53:1 ratio or it will look stretched).
+export function Logo({ className = "", width = 209, height = 32 }: LogoProps) {
   const [imageFailed, setImageFailed] = useState(false);
 
   if (imageFailed) {
@@ -27,10 +31,10 @@ export function Logo({ className = "" }: LogoProps) {
     <Image
       src="/logo.png"
       alt="Zoiko Rooms"
-      width={168}
-      height={36}
+      width={width}
+      height={height}
       priority
-      className={`h-8 w-auto sm:h-9 ${className}`}
+      className={className}
       onError={() => setImageFailed(true)}
     />
   );

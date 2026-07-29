@@ -29,7 +29,7 @@ const steps = [
 
 export function ProcessSection() {
   return (
-    <section className="bg-white py-16 sm:py-24">
+    <section className="bg-[#FAF6F0] py-16 sm:py-24">
       <Container>
         <Reveal className="flex flex-col gap-12">
           <SectionHeading
@@ -43,13 +43,13 @@ export function ProcessSection() {
             className="relative flex h-64 w-full items-center justify-center overflow-hidden rounded-4xl sm:h-80"
           >
             <ImageFade
-              src="https://picsum.photos/seed/zoiko-process-banner/1600/700"
+              src="/images/home/process.webp"
               alt="Bright living room representing the rental process"
               fill
               sizes="100vw"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-brand-navy/40" />
+            <div className="absolute" />
             <p className="relative px-6 text-center font-heading text-lg font-medium text-white sm:text-2xl">
               Search · passport · agreement · support — product screens
             </p>
@@ -60,7 +60,7 @@ export function ProcessSection() {
               <motion.div key={step.number} variants={fadeUp} className="flex flex-col gap-2">
                 <span className="text-sm font-semibold text-brand-red">{step.number}</span>
                 <h3 className="font-heading text-lg font-medium text-brand-navy">{step.title}</h3>
-                <p className="text-sm text-neutral-600">{step.description}</p>
+                <p className="text-[13px] text-neutral-600">{step.description}</p>
               </motion.div>
             ))}
           </div>

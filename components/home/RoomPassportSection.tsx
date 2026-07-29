@@ -20,20 +20,20 @@ export function RoomPassportSection() {
           <span className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-red">
             The room passport
           </span>
-          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
-            <motion.h2
-              variants={fadeUp}
-              className="font-heading text-3xl font-medium text-brand-navy sm:text-4xl lg:hidden"
-            >
-              Not every detail carries the same evidence
-            </motion.h2>
+          <motion.h2
+            variants={fadeUp}
+            className="font-heading text-3xl font-medium text-brand-navy sm:text-4xl"
+          >
+            Not every detail carries the same evidence
+          </motion.h2>
 
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
             <motion.div
               variants={fadeUp}
               className="relative aspect-4/3 w-full overflow-hidden rounded-4xl"
             >
               <ImageFade
-                src="https://picsum.photos/seed/zoiko-passport-kitchen/900/700"
+                src="/images/home/room-passport-section.png"
                 alt="Friends gathered in a shared kitchen"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
@@ -42,24 +42,21 @@ export function RoomPassportSection() {
             </motion.div>
 
             <motion.div variants={fadeUp} className="flex flex-col gap-6">
-              <h2 className="hidden font-heading text-3xl font-medium text-brand-navy sm:text-4xl lg:block">
-                Not every detail carries the same evidence
-              </h2>
-              <p className="text-xs font-medium uppercase tracking-wide text-neutral-400">
+              <p className="text-xs font-medium tracking-wide text-neutral-400">
                 Sample passport · demonstration data
               </p>
               <div className="flex flex-col gap-3">
                 {passportRows.map(({ label, badge, tone }) => (
                   <div
                     key={label}
-                    className="flex items-center justify-between rounded-xl border border-black/5 bg-white px-4 py-3 shadow-sm"
+                    className="flex items-center justify-between rounded-xl border border-[#E9E0D3] bg-white px-4 py-3 shadow-sm"
                   >
                     <span className="text-sm font-medium text-brand-navy">{label}</span>
                     <EvidenceBadge label={badge} tone={tone} variant="outline" />
                   </div>
                 ))}
               </div>
-              <Button href="/how-it-works" variant="outline" className="w-fit">
+              <Button href="/how-it-works" variant="subtle" className="w-fit">
                 See a sample room passport
               </Button>
             </motion.div>

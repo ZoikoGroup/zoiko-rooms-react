@@ -94,3 +94,24 @@ export const legalLinks: NavLink[] = [
   { label: "Cookie preferences", href: "#" },
   { label: "Fair housing", href: "#" },
 ];
+
+export type PillOption = {
+  code: string;
+  label: string;
+};
+
+// UI-only for now — picking an option updates the navbar label and is
+// remembered locally. It doesn't translate copy or convert prices yet.
+export const languageOptions: PillOption[] = [
+  { code: "EN", label: "English" },
+  { code: "DE", label: "Deutsch" },
+  { code: "FR", label: "Français" },
+  { code: "ES", label: "Español" },
+  { code: "PT", label: "Português" },
+];
+
+export const currencyOptions: PillOption[] = [
+  { code: "USD", label: "US Dollar (USD)" },
+  { code: "EUR", label: "Euro (EUR)" },
+  { code: "GBP", label: "British Pound (GBP)" },
+];

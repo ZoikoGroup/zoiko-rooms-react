@@ -6,28 +6,28 @@ import { fadeUp, easeOut } from "@/lib/motion";
 
 const features = [
   {
-    image: "zoiko-provider-authority",
+    image: "/images/home/provider-authority.png",
     title: "Provider authority",
     description: "We check whether the provider is entitled to offer the room.",
     badge: "Evidence-based",
     tone: "amber" as const,
   },
   {
-    image: "zoiko-room-passport",
+    image: "/images/home/room-passport.png",
     title: "Room passport",
     description: "See which details were declared, documented or physically verified.",
     badge: "Tiered evidence",
     tone: "amber" as const,
   },
   {
-    image: "zoiko-connected-record",
+    image: "/images/home/connected-record.png",
     title: "Connected record",
     description: "Applications, agreements, payments and move-in evidence stay linked.",
     badge: "One timeline",
     tone: "teal" as const,
   },
   {
-    image: "zoiko-human-support",
+    image: "/images/home/human-support.png",
     title: "Human support",
     description: "Report concerns before, during and after the rental.",
     badge: "Always reachable",
@@ -54,9 +54,9 @@ export function WhyZoikoSection() {
                 transition={{ duration: 0.25, ease: easeOut }}
                 className="flex flex-col overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm"
               >
-                <div className="relative aspect-4/3 w-full overflow-hidden">
+                <div className="relative aspect-5/3 w-full overflow-hidden">
                   <ImageFade
-                    src={`https://picsum.photos/seed/${image}/640/480`}
+                    src={image}
                     alt={title}
                     fill
                     sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
@@ -66,7 +66,7 @@ export function WhyZoikoSection() {
                 <div className="flex flex-1 flex-col gap-3 p-5">
                   <h3 className="font-heading text-lg font-medium text-brand-navy">{title}</h3>
                   <p className="flex-1 text-sm text-neutral-600">{description}</p>
-                  <EvidenceBadge label={badge} tone={tone} variant="dashed" />
+                  <EvidenceBadge className="bg-[#EFEBE2]" label={badge} tone={tone} variant="dashed" />
                 </div>
               </motion.div>
             ))}

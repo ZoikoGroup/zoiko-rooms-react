@@ -8,7 +8,7 @@ export function Footer() {
   const [findARoom, listARoom, howItWorks, organizations, pro, resources] = navSections;
 
   return (
-    <footer className="mt-auto bg-brand-cream">
+    <footer className="mt-auto bg-[#F1E7DA]">
       <Container className="py-14">
         <Reveal className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,320px)_1fr]">
           <FooterNewsletter />

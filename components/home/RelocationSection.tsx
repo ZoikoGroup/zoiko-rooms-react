@@ -7,19 +7,19 @@ import { fadeUp, easeOut } from "@/lib/motion";
 
 const scenarios = [
   {
-    image: "zoiko-relocation-work",
+    image: "/images/home/relocation-1.png",
     eyebrow: "Work relocation",
     title: "Settle in before day one",
     description: "Verified rooms near your new office, ready before you arrive.",
   },
   {
-    image: "zoiko-relocation-study",
+    image: "/images/home/relocation-2.png",
     eyebrow: "Study abroad",
     title: "Near campus, fully checked",
     description: "Rooms close to your university with honest evidence, not guesswork.",
   },
   {
-    image: "zoiko-relocation-healthcare",
+    image: "/images/home/relocation-3.png",
     eyebrow: "Healthcare placement",
     title: "Housing for shift life",
     description: "Flexible terms built for rotations and placements, not vacations.",
@@ -27,17 +27,17 @@ const scenarios = [
 ];
 
 const cities = [
-  { name: "Berlin", image: "zoiko-city-berlin", status: "live" as const },
-  { name: "Amsterdam", image: "zoiko-city-amsterdam", status: "live" as const },
-  { name: "Lisbon", image: "zoiko-city-lisbon", status: "live" as const },
-  { name: "Nairobi", image: "zoiko-city-nairobi", status: "announced" as const },
+  { name: "Berlin", image: "/images/home/location-1.png", status: "live" as const },
+  { name: "Amsterdam", image: "/images/home/location-2.png", status: "live" as const },
+  { name: "Lisbon", image: "/images/home/location-3.png", status: "live" as const },
+  { name: "Nairobi", image: "/images/home/location-4.png", status: "announced" as const },
 ];
 
 export function RelocationSection() {
   return (
-    <section className="py-16 sm:py-24">
+    <section className="bg-brand-cream py-16 sm:py-24">
       <Container>
-        <Reveal className="flex flex-col gap-16">
+        <Reveal className="flex flex-col gap-16 rounded-4xl bg-[#F1E7DA] p-6 sm:p-10 lg:p-12">
           <div className="flex flex-col gap-12">
             <SectionHeading eyebrow="Find what suits you" title="Every relocation is different" />
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
@@ -49,9 +49,9 @@ export function RelocationSection() {
                   transition={{ duration: 0.25, ease: easeOut }}
                   className="flex flex-col overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm"
                 >
-                  <div className="relative aspect-4/3 w-full overflow-hidden">
+                  <div className="relative aspect-5/3 w-full overflow-hidden">
                     <ImageFade
-                      src={`https://picsum.photos/seed/${image}/640/480`}
+                      src={image}
                       alt={title}
                       fill
                       sizes="(min-width: 640px) 33vw, 100vw"
@@ -94,10 +94,10 @@ export function RelocationSection() {
               {cities.map(({ name, image, status }) => (
                 <div
                   key={name}
-                  className="relative aspect-4/3 w-full overflow-hidden rounded-2xl"
+                  className="relative aspect-5/3 w-full overflow-hidden rounded-2xl"
                 >
                   <ImageFade
-                    src={`https://picsum.photos/seed/${image}/480/360`}
+                    src={image}
                     alt={name}
                     fill
                     sizes="(min-width: 640px) 25vw, 50vw"

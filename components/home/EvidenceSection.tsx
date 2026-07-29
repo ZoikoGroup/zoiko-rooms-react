@@ -14,7 +14,7 @@ export function EvidenceSection() {
             className="relative h-105 w-full overflow-hidden rounded-4xl sm:h-120"
           >
             <ImageFade
-              src="https://picsum.photos/seed/zoiko-evidence-room/1600/900"
+              src="/images/home/evidence.webp"
               alt="Verified room interior with kitchen and living space"
               fill
               sizes="100vw"

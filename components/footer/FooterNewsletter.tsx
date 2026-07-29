@@ -10,7 +10,7 @@ export function FooterNewsletter() {
 
   return (
     <div className="flex flex-col gap-4 lg:max-w-xs">
-      <Logo />
+      <Logo width={170} height={26} />
       <p className="text-sm text-neutral-600">
         Verified private rooms for 30 nights or longer.
       </p>
