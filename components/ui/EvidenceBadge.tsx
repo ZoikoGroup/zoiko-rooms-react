@@ -1,4 +1,4 @@
-type Tone = "green" | "amber" | "teal" | "gray";
+type Tone = "green" | "amber" | "teal" | "gray" | "red";
 type Variant = "plain" | "dashed" | "outline";
 
 const toneClasses: Record<Tone, { dot: string; text: string; border: string; bg: string }> = {
@@ -25,6 +25,12 @@ const toneClasses: Record<Tone, { dot: string; text: string; border: string; bg:
     text: "text-neutral-600",
     border: "border-neutral-300",
     bg: "bg-neutral-50",
+  },
+  red: {
+    dot: "bg-red-500",
+    text: "text-red-700",
+    border: "border-red-300",
+    bg: "bg-red-50",
   },
 };
 
