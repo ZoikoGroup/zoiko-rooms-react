@@ -1,19 +1,53 @@
+import type { LucideIcon } from "lucide-react";
+import {
+  Briefcase,
+  Code2,
+  FileText,
+  GraduationCap,
+  Globe,
+  Compass,
+  Home,
+  HelpCircle,
+  LayoutGrid,
+  Plus,
+  Search,
+  ShieldCheck,
+} from "lucide-react";
+
 export type NavLink = {
   label: string;
   href: string;
+};
+
+export type NavMenuItem = {
+  icon: LucideIcon;
+  label: string;
+  description: string;
+  href: string;
+};
+
+export type NavMenuColumn = {
+  title: string;
+  items: NavMenuItem[];
+};
+
+export type NavMenuFit = {
+  title: string;
+  links: NavLink[];
 };
 
 export type NavSection = {
   key: string;
   label: string;
   href: string;
-  links: NavLink[];
+  columns: [NavMenuColumn, NavMenuColumn];
+  fit: NavMenuFit;
 };
 
-// Sub-links all point at the parent section's placeholder page for now —
-// swap in real routes as each destination page gets built.
-function withParentHref(href: string, labels: string[]): NavLink[] {
-  return labels.map((label) => ({ label, href }));
+export function sectionLinks(section: NavSection): NavLink[] {
+  return section.columns.flatMap((column) =>
+    column.items.map((item) => ({ label: item.label, href: item.href })),
+  );
 }
 
 export const navSections: NavSection[] = [
@@ -21,68 +55,367 @@ export const navSections: NavSection[] = [
     key: "find-a-room",
     label: "Find a Room",
     href: "/find-a-room",
-    links: withParentHref("/find-a-room", [
-      "Overview",
-      "Search Rooms",
-      "Rooms by City",
-      "University Rooms",
-      "Work & Healthcare",
-      "International Moves",
-    ]),
+    columns: [
+      {
+        title: "Search & Explore",
+        items: [
+          {
+            icon: Compass,
+            label: "Find a Room overview",
+            description: "Start here to see every way to search",
+            href: "/find-a-room",
+          },
+          {
+            icon: Search,
+            label: "Search Rooms",
+            description: "Filter by budget, dates, and features",
+            href: "/find-a-room",
+          },
+          {
+            icon: Home,
+            label: "Rooms by City",
+            description: "Cost patterns, transport, and coverage",
+            href: "/find-a-room",
+          },
+        ],
+      },
+      {
+        title: "By Situation",
+        items: [
+          {
+            icon: GraduationCap,
+            label: "University Rooms",
+            description: "Near campus, matched to term dates",
+            href: "/find-a-room",
+          },
+          {
+            icon: Briefcase,
+            label: "Work & Healthcare Rooms",
+            description: "Near workplaces, hospitals, rotations",
+            href: "/find-a-room",
+          },
+          {
+            icon: Globe,
+            label: "International Moves",
+            description: "Search before you arrive, safely",
+            href: "/find-a-room",
+          },
+        ],
+      },
+    ],
+    fit: {
+      title: "What's bringing you to Zoiko Rooms?",
+      links: [
+        { label: "I'm a student", href: "/find-a-room" },
+        { label: "I'm relocating for work", href: "/find-a-room" },
+        { label: "I'm moving internationally", href: "/find-a-room" },
+      ],
+    },
   },
   {
     key: "list-a-room",
     label: "List a Room",
     href: "/list-a-room",
-    links: withParentHref("/list-a-room", [
-      "Overview",
-      "Start a Listing",
-      "Live-in Providers",
-      "Landlords & Agents",
-      "Authorized Sublets",
-      "Requirements & Pricing",
-    ]),
+    columns: [
+      {
+        title: "Get Started",
+        items: [
+          {
+            icon: Compass,
+            label: "List a Room overview",
+            description: "See requirements for your role",
+            href: "/list-a-room",
+          },
+          {
+            icon: Plus,
+            label: "Start a Listing",
+            description: "Create a Room Passport and publish",
+            href: "/list-a-room",
+          },
+          {
+            icon: FileText,
+            label: "Requirements & Pricing",
+            description: "Evidence needed and current charges",
+            href: "/list-a-room",
+          },
+        ],
+      },
+      {
+        title: "By Provider Type",
+        items: [
+          {
+            icon: Home,
+            label: "Live-in Providers",
+            description: "Offer a room where you live",
+            href: "/list-a-room",
+          },
+          {
+            icon: Briefcase,
+            label: "Landlords & Agents",
+            description: "List with clear ownership or instruction",
+            href: "/list-a-room",
+          },
+          {
+            icon: Code2,
+            label: "Authorized Sublets",
+            description: "Sublet within your permitted scope",
+            href: "/list-a-room",
+          },
+        ],
+      },
+    ],
+    fit: {
+      title: "How are you offering the room?",
+      links: [
+        { label: "I live in the home", href: "/list-a-room" },
+        { label: "I own or manage it", href: "/list-a-room" },
+        { label: "I'm subletting", href: "/list-a-room" },
+      ],
+    },
   },
   {
     key: "how-it-works",
     label: "How It Works",
     href: "/how-it-works",
-    links: withParentHref("/how-it-works", [
-      "Overview",
-      "For Room Seekers",
-      "For Providers",
-      "Verification & Authority",
-      "Room Passport",
-      "Payments & Safety",
-    ]),
+    columns: [
+      {
+        title: "By Audience",
+        items: [
+          {
+            icon: Compass,
+            label: "How It Works overview",
+            description: "The full search-to-move-out journey",
+            href: "/how-it-works",
+          },
+          {
+            icon: Search,
+            label: "For Room Seekers",
+            description: "Search, review evidence, apply safely",
+            href: "/how-it-works",
+          },
+          {
+            icon: Plus,
+            label: "For Providers",
+            description: "List, verify, and manage demand",
+            href: "/how-it-works",
+          },
+        ],
+      },
+      {
+        title: "Trust & Process",
+        items: [
+          {
+            icon: ShieldCheck,
+            label: "Verification & Authority",
+            description: "What's checked, and what isn't",
+            href: "/how-it-works",
+          },
+          {
+            icon: FileText,
+            label: "Room Passport",
+            description: "The evidence-based room record",
+            href: "/how-it-works",
+          },
+          {
+            icon: ShieldCheck,
+            label: "Payments, Safety & Support",
+            description: "Protection and human help",
+            href: "/how-it-works",
+          },
+        ],
+      },
+    ],
+    fit: {
+      title: "What do you want to understand?",
+      links: [
+        { label: "I'm searching for a room", href: "/how-it-works" },
+        { label: "I'm listing a room", href: "/how-it-works" },
+        { label: "How verification works", href: "/how-it-works" },
+      ],
+    },
   },
   {
     key: "organizations",
     label: "Organizations",
     href: "/organizations",
-    links: withParentHref("/organizations", [
-      "Overview",
-      "Universities",
-      "Employers",
-      "Healthcare",
-      "Relocation & Mobility",
-      "Public Sector",
-    ]),
+    columns: [
+      {
+        title: "By Sector",
+        items: [
+          {
+            icon: Compass,
+            label: "Organizations overview",
+            description: "Accountable accommodation at scale",
+            href: "/organizations",
+          },
+          {
+            icon: GraduationCap,
+            label: "Universities",
+            description: "Referrals, safeguarding, reporting",
+            href: "/organizations",
+          },
+          {
+            icon: Briefcase,
+            label: "Employers",
+            description: "Relocation and mobility programs",
+            href: "/organizations",
+          },
+        ],
+      },
+      {
+        title: "More Sectors",
+        items: [
+          {
+            icon: Globe,
+            label: "Healthcare",
+            description: "Clinicians, trainees, agency staff",
+            href: "/organizations",
+          },
+          {
+            icon: Globe,
+            label: "Relocation & Mobility",
+            description: "Partner-distributed inventory",
+            href: "/organizations",
+          },
+          {
+            icon: Home,
+            label: "Government & Public Sector",
+            description: "Procurement-ready placement programs",
+            href: "/organizations",
+          },
+        ],
+      },
+    ],
+    fit: {
+      title: "What are you sourcing housing for?",
+      links: [
+        { label: "I manage student housing", href: "/organizations" },
+        { label: "I relocate employees", href: "/organizations" },
+        { label: "I place healthcare staff", href: "/organizations" },
+      ],
+    },
   },
   {
     key: "pro",
     label: "Zoiko Rooms Pro",
     href: "/pro",
-    links: withParentHref("/pro", [
-      "Compliance & Verification",
-      "Integrations & API",
-    ]),
+    columns: [
+      {
+        title: "Operate",
+        items: [
+          {
+            icon: Compass,
+            label: "Zoiko Rooms Pro overview",
+            description: "The operating system for portfolios",
+            href: "/pro",
+          },
+          {
+            icon: LayoutGrid,
+            label: "Portfolio & Availability",
+            description: "Rooms, pricing, and team workflow",
+            href: "/pro",
+          },
+          {
+            icon: ShieldCheck,
+            label: "Compliance & Verification",
+            description: "Authority, evidence, jurisdiction rules",
+            href: "/pro",
+          },
+        ],
+      },
+      {
+        title: "Scale",
+        items: [
+          {
+            icon: FileText,
+            label: "Applications, Agreements & Payments",
+            description: "One transaction pipeline",
+            href: "/pro",
+          },
+          {
+            icon: Globe,
+            label: "Institutional Distribution",
+            description: "Reach approved institutional demand",
+            href: "/pro",
+          },
+          {
+            icon: Code2,
+            label: "Integrations & API",
+            description: "Verified, permission-driven access",
+            href: "/pro",
+          },
+        ],
+      },
+    ],
+    fit: {
+      title: "What does your operation need?",
+      links: [
+        { label: "I manage multiple rooms", href: "/pro" },
+        { label: "I need compliance tooling", href: "/pro" },
+        { label: "I need to integrate systems", href: "/pro" },
+      ],
+    },
   },
   {
     key: "resources",
     label: "Resources",
     href: "/resources",
-    links: withParentHref("/resources", ["Help Center", "Safety & Scam Prevention"]),
+    columns: [
+      {
+        title: "Learn",
+        items: [
+          {
+            icon: Compass,
+            label: "Resources overview",
+            description: "Help, guides, and safety in one place",
+            href: "/resources",
+          },
+          {
+            icon: HelpCircle,
+            label: "Help Center",
+            description: "Task-based product support",
+            href: "/resources",
+          },
+          {
+            icon: FileText,
+            label: "Guides",
+            description: "Seeker and provider education",
+            href: "/resources",
+          },
+        ],
+      },
+      {
+        title: "Stay Safe",
+        items: [
+          {
+            icon: Home,
+            label: "City Guides",
+            description: "Local inventory and context",
+            href: "/resources",
+          },
+          {
+            icon: ShieldCheck,
+            label: "Safety & Scam Prevention",
+            description: "Warning signs and reporting",
+            href: "/resources",
+          },
+          {
+            icon: FileText,
+            label: "Room Rental Glossary",
+            description: "Plain-language definitions",
+            href: "/resources",
+          },
+        ],
+      },
+    ],
+    fit: {
+      title: "What do you need right now?",
+      links: [
+        { label: "I need help now", href: "/resources" },
+        { label: "I want to learn the process", href: "/resources" },
+        { label: "I'm worried about a scam", href: "/resources" },
+      ],
+    },
   },
 ];
 

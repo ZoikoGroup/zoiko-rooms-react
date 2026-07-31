@@ -90,14 +90,14 @@ export function MobileMenu() {
                           className="overflow-hidden"
                         >
                           <div className="flex flex-col gap-1 pb-2 pl-2">
-                            {section.links.map((link) => (
+                            {section.columns.flatMap((column) => column.items).map((item) => (
                               <Link
-                                key={link.label}
-                                href={link.href}
+                                key={item.label}
+                                href={item.href}
                                 onClick={() => setIsOpen(false)}
                                 className="rounded-lg px-2 py-2 text-sm text-neutral-600 hover:bg-brand-navy/5"
                               >
-                                {link.label}
+                                {item.label}
                               </Link>
                             ))}
                           </div>

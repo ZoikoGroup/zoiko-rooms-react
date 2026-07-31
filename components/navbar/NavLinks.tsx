@@ -2,11 +2,39 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { navSections } from "@/lib/nav-data";
 import { easeOut } from "@/lib/motion";
 import { useOnClickOutside } from "@/lib/hooks/useOnClickOutside";
+
+const panelVariants: Variants = {
+  hidden: { opacity: 0, y: 10, scale: 0.98 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.22, ease: easeOut },
+  },
+  exit: {
+    opacity: 0,
+    y: 8,
+    scale: 0.98,
+    transition: { duration: 0.15, ease: easeOut },
+  },
+};
+
+const listVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.04, delayChildren: 0.04 },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 6 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.18, ease: easeOut } },
+};
 
 export function NavLinks() {
   const [openKey, setOpenKey] = useState<string | null>(null);
@@ -21,6 +49,7 @@ export function NavLinks() {
     >
       {navSections.map((section) => {
         const isOpen = openKey === section.key;
+
         return (
           <div
             key={section.key}
@@ -44,24 +73,91 @@ export function NavLinks() {
             <AnimatePresence>
               {isOpen && (
                 <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8 }}
-                  transition={{ duration: 0.18, ease: easeOut }}
-                  className="absolute left-0 top-full z-40 mt-2 w-64 rounded-2xl border border-black/5 bg-white p-2 shadow-xl"
+                  variants={panelVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  className="absolute left-1/2 top-full z-40 mt-3 flex w-max -translate-x-1/2 overflow-hidden rounded-3xl border border-black/5 bg-white shadow-2xl shadow-brand-navy/10"
                 >
-                  {section.links.map((link, i) => (
-                    <Link
-                      key={link.label}
-                      href={link.href}
-                      onClick={() => setOpenKey(null)}
-                      className={`block rounded-xl px-3 py-2 text-sm transition-colors hover:bg-brand-navy/5 hover:text-brand-navy ${
-                        i === 0 ? "font-semibold text-brand-navy" : "text-neutral-600"
-                      }`}
+                  <motion.div
+                    variants={listVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="grid grid-cols-2 p-6"
+                  >
+                    {section.columns.map((column, columnIndex) => (
+                      <div
+                        key={column.title}
+                        className={`w-60 ${
+                          columnIndex === 0 ? "pr-6" : "border-l border-black/10 pl-6"
+                        }`}
+                      >
+                        <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-neutral-400">
+                          {column.title}
+                        </p>
+                        <ul className="flex flex-col gap-0.5">
+                          {column.items.map((item) => {
+                            const Icon = item.icon;
+                            return (
+                              <motion.li key={item.label} variants={itemVariants}>
+                                <Link
+                                  href={item.href}
+                                  onClick={() => setOpenKey(null)}
+                                  className="group flex items-start gap-3 rounded-xl p-2 transition-colors hover:bg-brand-red/5"
+                                >
+                                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#F1E7DA] text-[#A85A34] transition-colors duration-200 group-hover:bg-brand-red group-hover:text-white">
+                                    <Icon className="h-4 w-4" />
+                                  </span>
+                                  <span className="min-w-0">
+                                    <span className="block text-sm font-semibold text-[#1B2438] transition-colors duration-200 group-hover:text-brand-red">
+                                      {item.label}
+                                    </span>
+                                    <span className="block text-xs text-neutral-500">
+                                      {item.description}
+                                    </span>
+                                  </span>
+                                </Link>
+                              </motion.li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    ))}
+                  </motion.div>
+
+                  <motion.div
+                    variants={listVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="flex w-64 shrink-0 flex-col bg-[#1B2438] p-6"
+                  >
+                    <motion.p
+                      variants={itemVariants}
+                      className="mb-2 text-xs font-semibold uppercase tracking-wide text-[#C99A78]"
                     >
-                      {link.label}
-                    </Link>
-                  ))}
+                      Find Your Fit
+                    </motion.p>
+                    <motion.p
+                      variants={itemVariants}
+                      className="font-heading text-lg font-medium text-white"
+                    >
+                      {section.fit.title}
+                    </motion.p>
+                    <div className="mt-4 flex flex-col divide-y divide-white/10">
+                      {section.fit.links.map((link) => (
+                        <motion.div key={link.label} variants={itemVariants}>
+                          <Link
+                            href={link.href}
+                            onClick={() => setOpenKey(null)}
+                            className="group flex items-center justify-between gap-2 py-3 text-sm text-white/85 transition-colors hover:text-white"
+                          >
+                            {link.label}
+                            <ArrowRight className="h-4 w-4 shrink-0 text-white/50 transition-all duration-200 group-hover:translate-x-1 group-hover:text-white" />
+                          </Link>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
                 </motion.div>
               )}
             </AnimatePresence>
