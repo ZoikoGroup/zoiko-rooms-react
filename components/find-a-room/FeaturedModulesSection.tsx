@@ -12,7 +12,7 @@ const modules = [
     title: "Search Rooms",
     description: "Search, filter, compare, save, and continue.",
     cta: "Search Rooms",
-    href: "/find-a-room",
+    href: "/find-a-room/search-rooms",
   },
   {
     icon: Home,
@@ -26,21 +26,21 @@ const modules = [
     title: "University Rooms",
     description: "Find rooms around institutions and term timelines.",
     cta: "Explore University Rooms",
-    href: "/find-a-room",
+    href: "/find-a-room/university-rooms",
   },
   {
     icon: Briefcase,
     title: "Work & Healthcare",
     description: "Search around workplaces, hospitals, placements, and rotations.",
     cta: "Explore Work & Healthcare",
-    href: "/find-a-room",
+    href: "/find-a-room/work-healthcare-rooms",
   },
   {
     icon: Globe,
     title: "International Moves",
     description: "Plan documents, timing, payments, support, and arrival.",
     cta: "Explore International Moves",
-    href: "/find-a-room",
+    href: "/find-a-room/international-moves",
   },
 ];
 

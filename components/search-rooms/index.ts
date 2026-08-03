@@ -1,0 +1,1 @@
+export { SearchRoomsView } from "./SearchRoomsView";

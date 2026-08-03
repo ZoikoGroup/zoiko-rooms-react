@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
+import { SiteChrome } from "@/components/layout/SiteChrome";
 import { SearchProvider } from "@/components/search";
 import "./globals.css";
 
@@ -17,7 +16,7 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "Zoiko Rooms — Verified private rooms for 30 nights or longer",
+  title: "Verified Private Rooms for Rent for 30+ Nights | Zoiko Rooms",
   description:
     "Find and list verified private rooms for stays of 30 nights or longer. No broker fees, flexible terms, built-in safety.",
 };
@@ -31,9 +30,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${fraunces.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-brand-cream font-sans text-brand-ink">
         <SearchProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <SiteChrome>{children}</SiteChrome>
         </SearchProvider>
       </body>
     </html>

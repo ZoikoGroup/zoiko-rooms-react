@@ -20,7 +20,7 @@ export function NavActions() {
         <Search className="h-5 w-5" />
       </button>
 
-      <Button href="#" variant="secondary" size="sm" className="hidden sm:inline-flex">
+      <Button href="/login" variant="secondary" size="sm" className="hidden sm:inline-flex">
         Sign in
       </Button>
 

@@ -1,0 +1,12 @@
+export { HeroSection } from "./HeroSection";
+export { SafetyOverviewSection } from "./SafetyOverviewSection";
+export { BeforePayingSection } from "./BeforePayingSection";
+export { PaymentLifecycleSection } from "./PaymentLifecycleSection";
+export { SaferCommunicationSection } from "./SaferCommunicationSection";
+export { FraudAccountRecoverySection } from "./FraudAccountRecoverySection";
+export { RefundsDisputesSection } from "./RefundsDisputesSection";
+export { SupportIncidentLifecycleSection } from "./SupportIncidentLifecycleSection";
+export { OrganizationProSupportSection } from "./OrganizationProSupportSection";
+export { PrivacyFairnessAccessibilitySection } from "./PrivacyFairnessAccessibilitySection";
+export { FaqSection } from "./FaqSection";
+export { FinalCtaSection } from "./FinalCtaSection";
