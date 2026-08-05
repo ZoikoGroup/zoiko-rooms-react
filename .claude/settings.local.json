@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(chromium-cli --help)"
+      "Bash(chromium-cli --help)",
+      "Bash(curl -s http://localhost:3000/login)",
+      "Read(//tmp/**)"
     ]
   }
 }
