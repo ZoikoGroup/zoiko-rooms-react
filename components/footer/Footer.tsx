@@ -1,36 +1,49 @@
 import { Container, Reveal } from "@/components/ui";
-import { navSections, sectionLinks } from "@/lib/nav-data";
+import { regionOptions, languageOptions, currencyOptions } from "@/lib/nav-data";
+import { footerColumns } from "./footer-data";
+import { FooterBrand } from "./FooterBrand";
+import { FooterPillDropdown } from "./FooterPillDropdown";
 import { FooterColumn } from "./FooterColumn";
-import { FooterNewsletter } from "./FooterNewsletter";
+import { FooterTrustBadges } from "./FooterTrustBadges";
+import { FooterOffices } from "./FooterOffices";
 import { FooterBottomBar } from "./FooterBottomBar";
 
 export function Footer() {
-  const [findARoom, listARoom, howItWorks, organizations, pro, resources] = navSections;
-
   return (
-    <footer className="mt-auto bg-[#F1E7DA]">
-      <Container className="py-14">
-        <Reveal className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,320px)_1fr]">
-          <FooterNewsletter />
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 xl:grid-cols-5">
-            <FooterColumn title="Find a Room" groups={[{ links: sectionLinks(findARoom) }]} />
-            <FooterColumn title="List a Room" groups={[{ links: sectionLinks(listARoom) }]} />
-            <FooterColumn title="How It Works" groups={[{ links: sectionLinks(howItWorks) }]} />
-            <FooterColumn
-              title="Organizations"
-              groups={[{ links: sectionLinks(organizations) }]}
-            />
-            <FooterColumn
-              title="Pro & Resources"
-              groups={[
-                { heading: pro.label, links: sectionLinks(pro) },
-                { heading: resources.label, links: sectionLinks(resources) },
-              ]}
-            />
+    <footer className="mt-auto bg-[#1B2438]">
+      <Container className="flex flex-col gap-10 py-14">
+        <Reveal className="flex flex-col gap-10">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+            <FooterBrand />
+            <div className="flex flex-wrap items-center gap-2">
+              <FooterPillDropdown storageKey="zoiko-region" ariaLabel="Select region" options={regionOptions} />
+              <FooterPillDropdown storageKey="zoiko-language" ariaLabel="Select language" options={languageOptions} />
+              <FooterPillDropdown
+                storageKey="zoiko-currency"
+                ariaLabel="Select currency"
+                options={currencyOptions}
+                showCode
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-8 border-t border-white/10 pt-10 sm:grid-cols-3 xl:grid-cols-6">
+            {footerColumns.map((column) => (
+              <FooterColumn key={column.title} title={column.title} links={column.links} />
+            ))}
+          </div>
+
+          <div className="border-t border-white/10 pt-10">
+            <FooterTrustBadges />
+          </div>
+
+          <div className="border-t border-white/10 pt-10">
+            <FooterOffices />
           </div>
         </Reveal>
+
+        <FooterBottomBar />
       </Container>
-      <FooterBottomBar />
     </footer>
   );
 }

@@ -423,15 +423,22 @@ export const navSections: NavSection[] = [
 export const legalLinks: NavLink[] = [
   { label: "Terms", href: "#" },
   { label: "Privacy", href: "#" },
-  { label: "Accessibility", href: "#" },
-  { label: "Cookie preferences", href: "#" },
-  { label: "Fair housing", href: "#" },
+  { label: "Cookies", href: "#" },
+  { label: "Fair Housing", href: "#" },
+  { label: "Regional Notices", href: "#" },
+  { label: "Your Privacy Choices", href: "#" },
 ];
 
 export type PillOption = {
   code: string;
   label: string;
 };
+
+export const regionOptions: PillOption[] = [
+  { code: "US", label: "United States" },
+  { code: "CA", label: "Canada" },
+  { code: "UK", label: "United Kingdom" },
+];
 
 // UI-only for now — picking an option updates the navbar label and is
 // remembered locally. It doesn't translate copy or convert prices yet.
