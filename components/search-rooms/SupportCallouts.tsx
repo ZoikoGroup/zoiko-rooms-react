@@ -57,7 +57,7 @@ export function SupportCallouts({ onEditSearch, onSaveSearch }: SupportCalloutsP
           pressure to pay.
         </p>
         <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-1 text-sm font-medium text-brand-red">
-          <a href="/how-it-works" className="transition-colors hover:text-brand-red-dark">
+          <a href="/how-it-works/verification-authority" className="transition-colors hover:text-brand-red-dark">
             Verification & Authority
           </a>
           <a href="/resources" className="transition-colors hover:text-brand-red-dark">

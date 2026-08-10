@@ -31,7 +31,7 @@ export function TrustBoundarySection() {
             ))}
           </div>
 
-          <Button href="/how-it-works" variant="outline" size="md" className="w-fit">
+          <Button href="/how-it-works/verification-authority" variant="outline" size="md" className="w-fit">
             Verification & Authority
           </Button>
         </Reveal>

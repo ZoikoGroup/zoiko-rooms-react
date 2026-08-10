@@ -55,7 +55,7 @@ export function RoomDetailEvidenceSection() {
           </Callout>
 
           <a
-            href="/how-it-works"
+            href="/how-it-works/room-passport"
             className="w-fit text-sm font-semibold text-brand-red underline-offset-2 transition-colors hover:text-brand-red-dark hover:underline"
           >
             Explore Room Passport

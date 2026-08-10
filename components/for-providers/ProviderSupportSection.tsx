@@ -44,7 +44,7 @@ export function ProviderSupportSection() {
               Start a private listing draft or open the provider guide matching your authority.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-col gap-3 sm:flex-row">
-              <Button href="/list-a-room" size="lg" variant="secondary">
+              <Button href="/list-a-room/start-a-listing" size="lg" variant="secondary">
                 Start a Listing
               </Button>
               <Button href="/list-a-room" size="lg" variant="outline">

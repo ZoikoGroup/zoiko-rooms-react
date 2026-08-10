@@ -130,7 +130,7 @@ export const navSections: NavSection[] = [
             icon: Plus,
             label: "Start a Listing",
             description: "Create a Room Passport and publish",
-            href: "/list-a-room",
+            href: "/list-a-room/start-a-listing",
           },
           {
             icon: FileText,
@@ -208,13 +208,13 @@ export const navSections: NavSection[] = [
             icon: ShieldCheck,
             label: "Verification & Authority",
             description: "What's checked, and what isn't",
-            href: "/how-it-works",
+            href: "/how-it-works/verification-authority",
           },
           {
             icon: FileText,
             label: "Room Passport",
             description: "The evidence-based room record",
-            href: "/how-it-works",
+            href: "/how-it-works/room-passport",
           },
           {
             icon: ShieldCheck,
@@ -230,7 +230,7 @@ export const navSections: NavSection[] = [
       links: [
         { label: "I'm searching for a room", href: "/how-it-works/for-room-seekers" },
         { label: "I'm listing a room", href: "/how-it-works/for-providers" },
-        { label: "How verification works", href: "/how-it-works" },
+        { label: "How verification works", href: "/how-it-works/verification-authority" },
       ],
     },
   },
