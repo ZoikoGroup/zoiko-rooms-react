@@ -28,7 +28,7 @@ export function HeroSection() {
 
   return (
     <section className="py-10 sm:py-14">
-      <Container>
+      <Container className="flex flex-col gap-6">
         <Reveal className="overflow-hidden rounded-3xl bg-white shadow-sm">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             <div className="flex flex-col gap-6 p-6 sm:p-10">
@@ -100,19 +100,19 @@ export function HeroSection() {
               </div>
             </motion.div>
           </div>
+        </Reveal>
 
-          <div className="flex flex-col gap-8 bg-[#1B2438] p-6 sm:p-10 lg:flex-row lg:items-center lg:justify-between">
-            <motion.h2 variants={fadeUp} className="max-w-xs font-heading text-2xl font-medium text-white">
-              Workforce housing, kept separate from clinical work — by design.
-            </motion.h2>
-            <div className="grid flex-1 grid-cols-1 gap-6 sm:grid-cols-3">
-              {boundaries.map(({ title, description }) => (
-                <motion.div key={title} variants={fadeUp} className="flex flex-col gap-1.5">
-                  <span className="text-xs font-semibold uppercase tracking-wide text-white/50">{title}</span>
-                  <p className="text-sm leading-relaxed text-white/70">{description}</p>
-                </motion.div>
-              ))}
-            </div>
+        <Reveal className="flex flex-col gap-8 rounded-3xl bg-[#1B2438] p-6 shadow-sm sm:p-10 lg:flex-row lg:items-center lg:justify-between">
+          <motion.h2 variants={fadeUp} className="max-w-xs font-heading text-2xl font-medium text-white">
+            Workforce housing, kept separate from clinical work — by design.
+          </motion.h2>
+          <div className="grid flex-1 grid-cols-1 gap-6 sm:grid-cols-3">
+            {boundaries.map(({ title, description }) => (
+              <motion.div key={title} variants={fadeUp} className="flex flex-col gap-1.5">
+                <span className="text-xs font-semibold uppercase tracking-wide text-white/50">{title}</span>
+                <p className="text-sm leading-relaxed text-white/70">{description}</p>
+              </motion.div>
+            ))}
           </div>
         </Reveal>
       </Container>
