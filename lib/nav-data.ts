@@ -252,7 +252,7 @@ export const navSections: NavSection[] = [
             icon: GraduationCap,
             label: "Universities",
             description: "Referrals, safeguarding, reporting",
-            href: "/organizations",
+            href: "/organizations/universities",
           },
           {
             icon: Briefcase,
@@ -269,7 +269,7 @@ export const navSections: NavSection[] = [
             icon: Globe,
             label: "Healthcare",
             description: "Clinicians, trainees, agency staff",
-            href: "/organizations",
+            href: "/organizations/healthcare",
           },
           {
             icon: Globe,
@@ -281,7 +281,7 @@ export const navSections: NavSection[] = [
             icon: Home,
             label: "Government & Public Sector",
             description: "Procurement-ready placement programs",
-            href: "/organizations",
+            href: "/organizations/government-public-sector",
           },
         ],
       },
@@ -289,9 +289,9 @@ export const navSections: NavSection[] = [
     fit: {
       title: "What are you sourcing housing for?",
       links: [
-        { label: "I manage student housing", href: "/organizations" },
+        { label: "I manage student housing", href: "/organizations/universities" },
         { label: "I relocate employees", href: "/organizations" },
-        { label: "I place healthcare staff", href: "/organizations" },
+        { label: "I place healthcare staff", href: "/organizations/healthcare" },
       ],
     },
   },
