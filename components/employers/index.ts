@@ -1,0 +1,10 @@
+export { HeroSection } from "./HeroSection";
+export { WorkforcePrincipleSection } from "./WorkforcePrincipleSection";
+export { WorkforcePathwaysSection } from "./WorkforcePathwaysSection";
+export { OperatingModelsSection } from "./OperatingModelsSection";
+export { WorkerTransparencySection } from "./WorkerTransparencySection";
+export { ResponsibilityMapSection } from "./ResponsibilityMapSection";
+export { ConnectedSupplySection } from "./ConnectedSupplySection";
+export { FundingBillingSection } from "./FundingBillingSection";
+export { HowItWorksSection } from "./HowItWorksSection";
+export { FaqCtaSection } from "./FaqCtaSection";

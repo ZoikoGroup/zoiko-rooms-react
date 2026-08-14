@@ -258,7 +258,7 @@ export const navSections: NavSection[] = [
             icon: Briefcase,
             label: "Employers",
             description: "Relocation and mobility programs",
-            href: "/organizations",
+            href: "/organizations/employers",
           },
         ],
       },
@@ -275,7 +275,7 @@ export const navSections: NavSection[] = [
             icon: Globe,
             label: "Relocation & Mobility",
             description: "Partner-distributed inventory",
-            href: "/organizations",
+            href: "/organizations/relocation-mobility",
           },
           {
             icon: Home,
@@ -290,7 +290,7 @@ export const navSections: NavSection[] = [
       title: "What are you sourcing housing for?",
       links: [
         { label: "I manage student housing", href: "/organizations/universities" },
-        { label: "I relocate employees", href: "/organizations" },
+        { label: "I relocate employees", href: "/organizations/employers" },
         { label: "I place healthcare staff", href: "/organizations/healthcare" },
       ],
     },
