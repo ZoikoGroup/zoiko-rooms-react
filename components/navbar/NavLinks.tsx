@@ -77,7 +77,7 @@ export function NavLinks() {
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  className="absolute left-1/2 top-full z-40 mt-3 flex w-max -translate-x-1/2 overflow-hidden rounded-3xl border border-black/5 bg-white shadow-2xl shadow-brand-navy/10"
+                  className="fixed left-1/2 top-16 z-40 mt-3 flex w-max max-w-[calc(100vw-2rem)] -translate-x-1/2 overflow-hidden rounded-3xl border border-black/5 bg-white shadow-2xl shadow-brand-navy/10 sm:top-20"
                 >
                   <motion.div
                     variants={listVariants}
@@ -88,7 +88,7 @@ export function NavLinks() {
                     {section.columns.map((column, columnIndex) => (
                       <div
                         key={column.title}
-                        className={`w-60 ${
+                        className={`w-72 ${
                           columnIndex === 0 ? "pr-6" : "border-l border-black/10 pl-6"
                         }`}
                       >
@@ -103,13 +103,13 @@ export function NavLinks() {
                                 <Link
                                   href={item.href}
                                   onClick={() => setOpenKey(null)}
-                                  className="group flex items-start gap-3 rounded-xl p-2 transition-colors hover:bg-brand-red/5"
+                                  className="group flex items-center gap-3 rounded-xl p-2 transition-colors hover:bg-brand-red/5"
                                 >
                                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#F1E7DA] text-[#A85A34] transition-colors duration-200 group-hover:bg-brand-red group-hover:text-white">
                                     <Icon className="h-4 w-4" />
                                   </span>
                                   <span className="min-w-0">
-                                    <span className="block text-sm font-semibold text-[#1B2438] transition-colors duration-200 group-hover:text-brand-red">
+                                    <span className="block whitespace-nowrap text-sm font-semibold text-[#1B2438] transition-colors duration-200 group-hover:text-brand-red">
                                       {item.label}
                                     </span>
                                     <span className="block text-xs text-neutral-500">
