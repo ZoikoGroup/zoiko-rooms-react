@@ -1,0 +1,1 @@
+export { RequirementsPricingView } from "./RequirementsPricingView";

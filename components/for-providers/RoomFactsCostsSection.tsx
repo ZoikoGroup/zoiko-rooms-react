@@ -45,7 +45,7 @@ export function RoomFactsCostsSection() {
             disclosure structure only — not fees, averages, or guaranteed income.
           </Callout>
 
-          <Button href="/list-a-room" variant="outline" size="md" className="w-fit">
+          <Button href="/list-a-room/requirements-pricing" variant="outline" size="md" className="w-fit">
             Requirements & Pricing
           </Button>
         </Reveal>

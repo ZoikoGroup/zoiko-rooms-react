@@ -45,7 +45,7 @@ export function HeroSection() {
               <Button href="/list-a-room/start-a-listing" size="lg" variant="secondary">
                 Start a Listing
               </Button>
-              <Button href="/list-a-room" size="lg" variant="outline">
+              <Button href="/list-a-room/requirements-pricing" size="lg" variant="outline">
                 View Requirements & Pricing
               </Button>
             </motion.div>

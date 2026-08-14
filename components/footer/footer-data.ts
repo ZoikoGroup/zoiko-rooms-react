@@ -24,10 +24,10 @@ export const footerColumns: FooterColumnData[] = [
     links: [
       { label: "Overview", href: "/list-a-room" },
       { label: "Start a Listing", href: "/list-a-room/start-a-listing" },
-      { label: "Live-in Providers", href: "/list-a-room" },
-      { label: "Landlords & Agents", href: "/list-a-room" },
-      { label: "Authorized Sublets", href: "/list-a-room" },
-      { label: "Requirement & Pricing", href: "/list-a-room" },
+      { label: "Live-in Providers", href: "/list-a-room/live-in-providers" },
+      { label: "Landlords & Agents", href: "/list-a-room/landlords-agents" },
+      { label: "Authorized Sublets", href: "/list-a-room/authorized-sublets" },
+      { label: "Requirement & Pricing", href: "/list-a-room/requirements-pricing" },
     ],
   },
   {
