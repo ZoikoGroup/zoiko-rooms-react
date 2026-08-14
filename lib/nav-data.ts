@@ -391,7 +391,7 @@ export const navSections: NavSection[] = [
             icon: Home,
             label: "City Guides",
             description: "Local inventory and context",
-            href: "/resources",
+            href: "/resources/city-guides",
           },
           {
             icon: ShieldCheck,
