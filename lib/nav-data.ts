@@ -403,7 +403,7 @@ export const navSections: NavSection[] = [
             icon: FileText,
             label: "Room Rental Glossary",
             description: "Plain-language definitions",
-            href: "/resources",
+            href: "/resources/glossary",
           },
         ],
       },
