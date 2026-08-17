@@ -319,7 +319,7 @@ export const navSections: NavSection[] = [
             icon: ShieldCheck,
             label: "Compliance & Verification",
             description: "Authority, evidence, jurisdiction rules",
-            href: "/pro",
+            href: "/pro/compliance-and-verification",
           },
         ],
       },
