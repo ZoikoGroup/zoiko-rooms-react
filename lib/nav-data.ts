@@ -374,7 +374,7 @@ export const navSections: NavSection[] = [
             icon: HelpCircle,
             label: "Help Center",
             description: "Task-based product support",
-            href: "/resources",
+            href: "/resources/help-center",
           },
           {
             icon: FileText,
@@ -397,7 +397,7 @@ export const navSections: NavSection[] = [
             icon: ShieldCheck,
             label: "Safety & Scam Prevention",
             description: "Warning signs and reporting",
-            href: "/resources",
+            href: "/resources/safety-scam-prevention",
           },
           {
             icon: FileText,
