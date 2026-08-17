@@ -36,7 +36,7 @@ const costItems: CostItem[] = [
 
 export default function CompleteCostExampleSection() {
   return (
-    <section className="w-full py-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased text-[#1E2022]">
+    <section className="w-full pb-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased text-[#1E2022]">
       <div className="max-w-3xl mx-auto space-y-10">
         {/* Header Block */}
         <div className="flex flex-col items-center text-center space-y-3 w-full mx-auto">

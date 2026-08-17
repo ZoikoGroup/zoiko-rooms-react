@@ -314,7 +314,7 @@ export default function AZIndexSection() {
     termsList.find((t) => t.id === selectedTermId) || filteredTerms[0] || termsList[0];
 
   return (
-    <section className="w-full py-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased text-[#1E2022]">
+    <section className="w-full pb-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased text-[#1E2022]">
       <div className="max-w-6xl mx-auto space-y-10">
         
         {/* Section Header */}
