@@ -1,9 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 
+// Import modal popups corresponding to each core capability
+import AudienceCatalogModal from "../popups/institutional-distribution/AudienceCatalogModal";
+import ReferralInvitationModal from "../popups/institutional-distribution/ReferralInvitationModal";
+import AllocationModal from "../popups/institutional-distribution/AllocationModal";
+import SubsidyAllowanceVoucherModal from "../popups/institutional-distribution/SubsidyAllowanceVoucherModal";
+import IntegrationsApiModal from "../popups/institutional-distribution/IntegrationsApiModal";
+import SampleFundingBreakdownModal from "../popups/institutional-distribution/SampleFundingBreakdownModal";
+
 interface CapabilityCard {
+  id:
+    | "audience"
+    | "referral"
+    | "allocation"
+    | "subsidy"
+    | "operations"
+    | "integrations";
   iconSrc: string;
   iconAlt: string;
   title: string;
@@ -13,6 +28,7 @@ interface CapabilityCard {
 
 const capabilities: CapabilityCard[] = [
   {
+    id: "audience",
     iconSrc: "/icons/books.png",
     iconAlt: "Audience catalogs icon",
     title: "Audience catalogs",
@@ -21,6 +37,7 @@ const capabilities: CapabilityCard[] = [
     linkText: "Explore catalogs \u2192",
   },
   {
+    id: "referral",
     iconSrc: "/icons/mail.png",
     iconAlt: "Invitations and referrals icon",
     title: "Invitations & referrals",
@@ -29,6 +46,7 @@ const capabilities: CapabilityCard[] = [
     linkText: "Explore invitations \u2192",
   },
   {
+    id: "allocation",
     iconSrc: "/icons/target.png",
     iconAlt: "Allocations and nominations icon",
     title: "Allocations & nominations",
@@ -37,6 +55,7 @@ const capabilities: CapabilityCard[] = [
     linkText: "Explore allocations \u2192",
   },
   {
+    id: "subsidy",
     iconSrc: "/icons/card.png",
     iconAlt: "Funding and billing icon",
     title: "Funding & billing",
@@ -45,6 +64,7 @@ const capabilities: CapabilityCard[] = [
     linkText: "Explore funding \u2192",
   },
   {
+    id: "operations",
     iconSrc: "/icons/settings.png",
     iconAlt: "Program operations icon",
     title: "Program operations",
@@ -53,6 +73,7 @@ const capabilities: CapabilityCard[] = [
     linkText: "Explore operations \u2192",
   },
   {
+    id: "integrations",
     iconSrc: "/icons/plug.png",
     iconAlt: "Integrations and API icon",
     title: "Integrations & API",
@@ -63,6 +84,18 @@ const capabilities: CapabilityCard[] = [
 ];
 
 export default function CoreCapabilitiesSection() {
+  const [activeModal, setActiveModal] = useState<
+    | "audience"
+    | "referral"
+    | "allocation"
+    | "subsidy"
+    | "operations"
+    | "integrations"
+    | null
+  >(null);
+
+  const closeModal = () => setActiveModal(null);
+
   return (
     <section className="w-full text-[#14213D] py-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
       <div className="max-w-6xl mx-auto space-y-12">
@@ -89,11 +122,12 @@ export default function CoreCapabilitiesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.35, delay: idx * 0.04 }}
-              className="bg-white rounded-2xl p-7 sm:p-8 border border-[#EAE6DF] shadow-xs flex flex-col justify-between space-y-6 hover:shadow-md transition-shadow duration-200"
+              onClick={() => setActiveModal(card.id)}
+              className="bg-white rounded-2xl p-7 sm:p-8 border border-[#EAE6DF] shadow-xs flex flex-col justify-between space-y-6 hover:shadow-md transition-all duration-200 cursor-pointer group"
             >
               <div className="space-y-4">
                 {/* Icon Container */}
-                <div className="w-10 h-10 rounded-xl bg-[#F5F2EC] flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-[#F5F2EC] flex items-center justify-center shrink-0 group-hover:bg-[#EAE6DF] transition-colors">
                   <img
                     src={card.iconSrc}
                     alt={card.iconAlt}
@@ -103,20 +137,24 @@ export default function CoreCapabilitiesSection() {
 
                 {/* Card Title & Description */}
                 <div className="space-y-2">
-                  <h3 className="text-base font-serif font-bold text-[#14213D]">
+                  <h3 className="text-base font-serif font-bold text-[#14213D] group-hover:text-[#C8202C] transition-colors">
                     {card.title}
                   </h3>
                   <p className="text-sm text-[#6B6F76] leading-relaxed">
                     {card.description}
                   </p>
 
-                  <div>
-                    <a
-                      href="#"
-                      className="text-xs font-bold text-[#C8202C] hover:underline inline-flex items-center gap-1 transition-colors"
+                  <div className="pt-1">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveModal(card.id);
+                      }}
+                      className="text-xs font-bold text-[#C8202C] hover:underline inline-flex items-center gap-1 transition-colors cursor-pointer"
                     >
                       {card.linkText}
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -124,6 +162,32 @@ export default function CoreCapabilitiesSection() {
           ))}
         </div>
       </div>
+
+      {/* POPUP MODALS */}
+      <AudienceCatalogModal
+        isOpen={activeModal === "audience"}
+        onClose={closeModal}
+      />
+      <ReferralInvitationModal
+        isOpen={activeModal === "referral"}
+        onClose={closeModal}
+      />
+      <AllocationModal
+        isOpen={activeModal === "allocation"}
+        onClose={closeModal}
+      />
+      <SampleFundingBreakdownModal
+        isOpen={activeModal === "operations"}
+        onClose={closeModal}
+      />
+      <SubsidyAllowanceVoucherModal
+        isOpen={activeModal === "subsidy"}
+        onClose={closeModal}
+      />
+      <IntegrationsApiModal
+        isOpen={activeModal === "integrations"}
+        onClose={closeModal}
+      />
     </section>
   );
 }

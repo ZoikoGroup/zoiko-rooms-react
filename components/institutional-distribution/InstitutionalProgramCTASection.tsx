@@ -1,9 +1,19 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 
+// Import corresponding modal popups
+import AllocationModal from "../popups/institutional-distribution/AllocationModal";
+import SampleFundingBreakdownModal from "../popups/institutional-distribution/SampleFundingBreakdownModal";
+
 export default function InstitutionalProgramCTASection() {
+  const [activeModal, setActiveModal] = useState<
+    "allocation" | "sampleFunding" | null
+  >(null);
+
+  const closeModal = () => setActiveModal(null);
+
   return (
     <section className="w-full text-[#14213D] py-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
       <div className="max-w-6xl mx-auto">
@@ -25,6 +35,7 @@ export default function InstitutionalProgramCTASection() {
             {/* Primary Dark Button */}
             <button
               type="button"
+              onClick={() => setActiveModal("allocation")}
               className="bg-[#1C2C5E] hover:bg-[#14213D] text-white text-xs sm:text-sm font-semibold py-3.5 px-7 rounded-full transition-all duration-200 cursor-pointer shadow-xs active:scale-95"
             >
               Explore Distribution Models
@@ -33,6 +44,7 @@ export default function InstitutionalProgramCTASection() {
             {/* Secondary Red Outlined Button */}
             <button
               type="button"
+              onClick={() => setActiveModal("sampleFunding")}
               className="bg-transparent hover:bg-white/40 text-[#C8202C] text-xs sm:text-sm font-semibold py-3.5 px-7 rounded-full border border-[#C8202C] transition-all duration-200 cursor-pointer active:scale-95"
             >
               Talk to Zoiko Rooms
@@ -46,6 +58,16 @@ export default function InstitutionalProgramCTASection() {
           </p>
         </motion.div>
       </div>
+
+      {/* POPUP MODALS */}
+      <AllocationModal
+        isOpen={activeModal === "allocation"}
+        onClose={closeModal}
+      />
+      <SampleFundingBreakdownModal
+        isOpen={activeModal === "sampleFunding"}
+        onClose={closeModal}
+      />
     </section>
   );
 }

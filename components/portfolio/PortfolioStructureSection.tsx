@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import PortfolioStructureModal from "../popups/PortfolioStructureModal";
+import PortfolioStructureModal from "../popups/pro-portfolio/PortfolioStructureModal";
 
 interface HierarchyStep {
   label: string;

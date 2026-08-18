@@ -3,6 +3,15 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
+// Import all distribution & capability modal components
+import AllocationModal from "../popups/institutional-distribution/AllocationModal";
+import SubsidyAllowanceVoucherModal from "../popups/institutional-distribution/SubsidyAllowanceVoucherModal";
+import ApprovedProviderNetworksModal from "../popups/institutional-distribution/ApprovedProviderNetworksModal";
+import IntegrationsApiModal from "../popups/institutional-distribution/IntegrationsApiModal";
+import SampleFundingBreakdownModal from "../popups/institutional-distribution/SampleFundingBreakdownModal";
+import AudienceCatalogModal from "../popups/institutional-distribution/AudienceCatalogModal";
+import ReferralInvitationModal from "../popups/institutional-distribution/ReferralInvitationModal";
+
 const filterTabs = [
   "Audience-specific catalogs",
   "Referral & invitation programs",
@@ -15,18 +24,58 @@ const filterTabs = [
 export default function GovernedRoomSupplySection() {
   const [activeTab, setActiveTab] = useState("Audience-specific catalogs");
 
+  // Modal active states covering all distribution and capability options
+  const [activeModal, setActiveModal] = useState<
+    | "audience"
+    | "referral"
+    | "allocation"
+    | "subsidy"
+    | "approvedNetworks"
+    | "integrations"
+    | "sampleFunding"
+    | null
+  >(null);
+
+  const closeModal = () => setActiveModal(null);
+
+  const handleTabClick = (tab: string) => {
+    setActiveTab(tab);
+    switch (tab) {
+      case "Audience-specific catalogs":
+        setActiveModal("audience");
+        break;
+      case "Referral & invitation programs":
+        setActiveModal("referral");
+        break;
+      case "Managed allocation workflows":
+        setActiveModal("allocation");
+        break;
+      case "Subsidies & direct billing":
+        setActiveModal("subsidy");
+        break;
+      case "Approved provider networks":
+        setActiveModal("approvedNetworks");
+        break;
+      case "Institutional integrations":
+        setActiveModal("integrations");
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div className="w-full font-sans antialiased">
       {/* SECTION 1: Dark background image hero container */}
       <section
         className="
-    relative w-full min-h-screen
-    bg-[#0D1526]
-    text-white
-    px-4 sm:px-8 md:px-12 lg:px-16
-    pt-12 sm:pt-16
-    pb-28 sm:pb-36
-  "
+          relative w-full min-h-screen
+          bg-[#0D1526]
+          text-white
+          px-4 sm:px-8 md:px-12 lg:px-16
+          pt-12 sm:pt-16
+          pb-28 sm:pb-36
+        "
       >
         {/* Background Image Layer */}
         <img
@@ -80,6 +129,7 @@ export default function GovernedRoomSupplySection() {
               <div className="flex flex-wrap items-center gap-3.5 pt-1">
                 <button
                   type="button"
+                  onClick={() => setActiveModal("allocation")}
                   className="bg-[#1A2E6E] hover:bg-[#153061] text-white text-xs sm:text-sm font-semibold py-3 px-6 rounded-full transition-all duration-200 cursor-pointer shadow-md active:scale-95"
                 >
                   Explore Distribution Models
@@ -87,6 +137,7 @@ export default function GovernedRoomSupplySection() {
 
                 <button
                   type="button"
+                  onClick={() => setActiveModal("sampleFunding")}
                   className="hover:bg-[#1E293B] text-white text-xs sm:text-sm font-semibold py-3 px-6 rounded-full border border-white/15 transition-all duration-200 cursor-pointer backdrop-blur-md active:scale-95"
                 >
                   Talk to Zoiko Rooms
@@ -113,11 +164,11 @@ export default function GovernedRoomSupplySection() {
                   <button
                     key={tab}
                     type="button"
-                    onClick={() => setActiveTab(tab)}
+                    onClick={() => handleTabClick(tab)}
                     className={`text-xs font-bold py-2.5 px-4 rounded-full transition-all duration-200 cursor-pointer ${
                       isActive
                         ? "bg-[#1A2E6E] text-white shadow-xs"
-                        : "text-[#555E68] text-[#16233F] hover:bg-[#EAE6DF] hover:text-[#14213D]"
+                        : "text-[#555E68] hover:bg-[#EAE6DF] hover:text-[#14213D]"
                     }`}
                   >
                     {tab}
@@ -143,11 +194,14 @@ export default function GovernedRoomSupplySection() {
               </h2>
             </div>
 
-            {/* Right Sub-features */}
+            {/* Right Sub-features with Modal Triggers */}
             <div className="md:col-span-7 md:mt-15 flex flex-col sm:flex-row gap-8 sm:gap-10 md:gap-12 pt-1 md:pt-1">
-              <div className="flex-1 space-y-1.5">
-                <span className="text-[10px] font-bold tracking-wider text-[#8FA3D9] uppercase block">
-                  EVERY VIEW STAYS SCOPED
+              <div
+                onClick={() => setActiveModal("audience")}
+                className="flex-1 space-y-1.5 cursor-pointer group"
+              >
+                <span className="text-[10px] font-bold tracking-wider text-[#8FA3D9] group-hover:text-white transition-colors uppercase block">
+                  EVERY VIEW STAYS SCOPED &rarr;
                 </span>
 
                 <p className="text-xs text-[#C6CCDE] leading-relaxed max-w-[260px]">
@@ -156,9 +210,12 @@ export default function GovernedRoomSupplySection() {
                 </p>
               </div>
 
-              <div className="flex-1 space-y-1.5">
-                <span className="text-[10px] font-bold tracking-wider text-[#8FA3D9] uppercase block">
-                  NO HIDDEN SURVEILLANCE
+              <div
+                onClick={() => setActiveModal("integrations")}
+                className="flex-1 space-y-1.5 cursor-pointer group"
+              >
+                <span className="text-[10px] font-bold tracking-wider text-[#8FA3D9] group-hover:text-white transition-colors uppercase block">
+                  NO HIDDEN SURVEILLANCE &rarr;
                 </span>
 
                 <p className="text-xs text-[#C6CCDE] leading-relaxed max-w-[260px]">
@@ -170,6 +227,36 @@ export default function GovernedRoomSupplySection() {
           </motion.div>
         </div>
       </section>
+
+      {/* ALL ATTACHED MODALS */}
+      <AudienceCatalogModal
+        isOpen={activeModal === "audience"}
+        onClose={closeModal}
+      />
+      <ReferralInvitationModal
+        isOpen={activeModal === "referral"}
+        onClose={closeModal}
+      />
+      <AllocationModal
+        isOpen={activeModal === "allocation"}
+        onClose={closeModal}
+      />
+      <SubsidyAllowanceVoucherModal
+        isOpen={activeModal === "subsidy"}
+        onClose={closeModal}
+      />
+      <ApprovedProviderNetworksModal
+        isOpen={activeModal === "approvedNetworks"}
+        onClose={closeModal}
+      />
+      <IntegrationsApiModal
+        isOpen={activeModal === "integrations"}
+        onClose={closeModal}
+      />
+      <SampleFundingBreakdownModal
+        isOpen={activeModal === "sampleFunding"}
+        onClose={closeModal}
+      />
     </div>
   );
 }

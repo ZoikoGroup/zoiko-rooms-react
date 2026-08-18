@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import OperatingModelModal from "../popups/OperatingModelModal";
-import PortfolioStructureModal from "../popups/PortfolioStructureModal";
+import OperatingModelModal from "../popups/pro-portfolio/OperatingModelModal";
+import PortfolioStructureModal from "../popups/pro-portfolio/PortfolioStructureModal";
 
 interface TagItem {
   label: string;
