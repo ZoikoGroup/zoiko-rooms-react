@@ -1,0 +1,9 @@
+export { default as GovernedRoomSupplyHero } from "./GovernedRoomSupplyHero";
+export { default as CoreCapabilitiesSection } from "./CoreCapabilitiesSection";
+export { default as CanonicalDistributionModelsSection } from "./CanonicalDistributionModelsSection";
+export { default as ResponsibilityMapSection } from "./ResponsibilityMapSection";
+export { default as AudienceCatalogPreviewSection } from "./AudienceCatalogPreviewSection";
+export { default as InstitutionalFundingBillingSection } from "./InstitutionalFundingBillingSection";
+export { default as ProgramLifecycleSection } from "./ProgramLifecycleSection";
+export { default as FAQSection } from "./FAQSection";
+export { default as InstitutionalProgramCTASection } from "./InstitutionalProgramCTASection";
