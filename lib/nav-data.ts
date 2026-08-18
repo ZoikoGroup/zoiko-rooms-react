@@ -307,7 +307,7 @@ export const navSections: NavSection[] = [
             icon: Compass,
             label: "Zoiko Rooms Pro overview",
             description: "The operating system for portfolios",
-            href: "/pro",
+            href: "/pro/overview",
           },
           {
             icon: LayoutGrid,
@@ -330,7 +330,7 @@ export const navSections: NavSection[] = [
             icon: FileText,
             label: "Applications, Agreements & Payments",
             description: "One transaction pipeline",
-            href: "/pro",
+            href: "/pro/applications",
           },
           {
             icon: Globe,
