@@ -1,7 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import OperatingModelModal from "../popups/OperatingModelModal";
+import PortfolioStructureModal from "../popups/PortfolioStructureModal";
 
 interface OperatingStep {
   number: string;
@@ -61,6 +63,20 @@ const operatingSteps: OperatingStep[] = [
 ];
 
 export default function OperatingViewSection() {
+  const [isOperatingModalOpen, setIsOperatingModalOpen] = useState(false);
+  const [isStructureModalOpen, setIsStructureModalOpen] = useState(false);
+
+  const handleStepClick = (stepNumber: string) => {
+    if (stepNumber === "02") {
+      setIsStructureModalOpen(true);
+    }
+  };
+
+  const handleSwitchToStructureModal = () => {
+    setIsOperatingModalOpen(false);
+    setIsStructureModalOpen(true);
+  };
+
   return (
     <section className="w-full text-[#14213D] py-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
       <div className="max-w-6xl mx-auto space-y-12">
@@ -82,35 +98,53 @@ export default function OperatingViewSection() {
         </div>
 
         {/* 8 Card Step Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 pt-2">
-          {operatingSteps.map((step, idx) => (
-            <motion.div
-              key={step.number}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.35, delay: idx * 0.04 }}
-              className="bg-white rounded-2xl p-6 border border-[#EAE6DF] shadow-xs flex flex-col justify-start space-y-3 hover:shadow-md transition-shadow duration-200"
-            >
-              <span className="text-xs font-bold text-[#C8202C] block">
-                {step.number}
-              </span>
-              <div className="space-y-1.5">
-                <h3 className="text-sm font-serif font-bold text-[#14213D]">
-                  {step.title}
-                </h3>
-                <p className="text-[11px] text-[#555E68] leading-relaxed">
-                  {step.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 pt-2">
+          {operatingSteps.map((step, idx) => {
+            const isClickable = step.number === "02";
+
+            return (
+              <motion.div
+                key={step.number}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: idx * 0.04 }}
+                onClick={() => handleStepClick(step.number)}
+                className={`bg-white rounded-2xl p-6 border border-[#EAE6DF] shadow-xs flex flex-col justify-start space-y-3 transition-all duration-200 ${
+                  isClickable
+                    ? "cursor-pointer hover:shadow-md hover:border-[#14213D]/40 active:scale-[0.98]"
+                    : "hover:shadow-xs"
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-[#C8202C] block">
+                    {step.number}
+                  </span>
+                  {isClickable && (
+                    <span className="text-[10px] uppercase font-mono font-semibold text-[#14213D]/60 bg-[#FAF8F5] px-2 py-0.5 rounded border border-[#EAE6DF]">
+                      Click to View
+                    </span>
+                  )}
+                </div>
+
+                <div className="space-y-1.5">
+                  <h3 className="text-sm font-serif font-bold text-[#14213D]">
+                    {step.title}
+                  </h3>
+                  <p className="text-[11px] text-[#555E68] leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Center CTA Button */}
         <div className="flex justify-center pt-2">
           <button
             type="button"
+            onClick={() => setIsOperatingModalOpen(true)}
             className="bg-transparent hover:bg-white text-[#14213D] text-xs font-bold py-3.5 px-7 rounded-full border border-[#14213D] transition-all duration-200 cursor-pointer shadow-xs active:scale-95"
           >
             See the Full Operating Model
@@ -141,6 +175,19 @@ export default function OperatingViewSection() {
           </p>
         </motion.div>
       </div>
+
+      {/* Operating Model Popup */}
+      <OperatingModelModal
+        isOpen={isOperatingModalOpen}
+        onClose={() => setIsOperatingModalOpen(false)}
+        onExplorePortfolioStructure={handleSwitchToStructureModal}
+      />
+
+      {/* Portfolio Structure Popup */}
+      <PortfolioStructureModal
+        isOpen={isStructureModalOpen}
+        onClose={() => setIsStructureModalOpen(false)}
+      />
     </section>
   );
 }

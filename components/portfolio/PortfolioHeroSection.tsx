@@ -1,7 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import OperatingModelModal from "../popups/OperatingModelModal";
+import PortfolioStructureModal from "../popups/PortfolioStructureModal";
 
 interface TagItem {
   label: string;
@@ -19,6 +21,20 @@ const featureTags: TagItem[] = [
 ];
 
 export default function PortfolioHeroSection() {
+  const [isOperatingModalOpen, setIsOperatingModalOpen] = useState(false);
+  const [isStructureModalOpen, setIsStructureModalOpen] = useState(false);
+
+  const handleTagClick = (label: string) => {
+    if (label === "Portfolio Structure") {
+      setIsStructureModalOpen(true);
+    }
+  };
+
+  const handleSwitchToStructureModal = () => {
+    setIsOperatingModalOpen(false);
+    setIsStructureModalOpen(true);
+  };
+
   return (
     <section className="w-full text-[#14213D] py-16 sm:py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
       <div className="max-w-6xl mx-auto">
@@ -31,7 +47,7 @@ export default function PortfolioHeroSection() {
             </span>
 
             {/* Headline */}
-            <h1 className="text-3xl sm:text-4xl lg:text-[42px] max-w-150 font-serif font-bold text-[#101C33] leading-[1.18] tracking-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-[42px] max-w-[600px] font-serif font-bold text-[#101C33] leading-[1.18] tracking-tight">
               Operate room portfolios from current evidence &mdash; not
               disconnected spreadsheets and assumptions.
             </h1>
@@ -48,6 +64,7 @@ export default function PortfolioHeroSection() {
             <div className="flex flex-wrap items-center gap-3.5 pt-1">
               <button
                 type="button"
+                onClick={() => setIsOperatingModalOpen(true)}
                 className="bg-[#1C2C5E] hover:bg-[#14213D] text-white text-xs sm:text-sm font-semibold py-3.5 px-6 rounded-full transition-all duration-200 cursor-pointer shadow-xs active:scale-95"
               >
                 Explore the Operating Model
@@ -62,15 +79,25 @@ export default function PortfolioHeroSection() {
             </div>
 
             {/* Feature Pills / Badges Grid */}
-            <div className="flex flex-wrap gap-2 pt-2 max-w-135">
-              {featureTags.map((tag) => (
-                <span
-                  key={tag.label}
-                  className="bg-white text-[#14213D] text-xs font-semibold px-4 py-2 rounded-full border border-[#EAE6DF] shadow-2xs hover:border-[#14213D]/30 transition-colors"
-                >
-                  {tag.label}
-                </span>
-              ))}
+            <div className="flex flex-wrap gap-2 pt-2 max-w-[540px]">
+              {featureTags.map((tag) => {
+                const isClickable = tag.label === "Portfolio Structure";
+
+                return (
+                  <button
+                    key={tag.label}
+                    type="button"
+                    onClick={() => handleTagClick(tag.label)}
+                    className={`text-xs font-semibold px-4 py-2 rounded-full border shadow-xs transition-all duration-200 text-left ${
+                      isClickable
+                        ? "bg-white text-[#14213D] border-[#14213D]/40 hover:border-[#C8202C] hover:text-[#C8202C] cursor-pointer active:scale-95"
+                        : "bg-white text-[#14213D] border-[#EAE6DF] hover:border-[#14213D]/30 cursor-default"
+                    }`}
+                  >
+                    {tag.label}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
@@ -91,6 +118,19 @@ export default function PortfolioHeroSection() {
           </div>
         </div>
       </div>
+
+      {/* Operating Model Modal */}
+      <OperatingModelModal
+        isOpen={isOperatingModalOpen}
+        onClose={() => setIsOperatingModalOpen(false)}
+        onExplorePortfolioStructure={handleSwitchToStructureModal}
+      />
+
+      {/* Portfolio Structure Modal */}
+      <PortfolioStructureModal
+        isOpen={isStructureModalOpen}
+        onClose={() => setIsStructureModalOpen(false)}
+      />
     </section>
   );
 }

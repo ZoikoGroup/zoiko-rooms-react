@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import PortfolioStructureModal from "../popups/PortfolioStructureModal";
 
 interface HierarchyStep {
   label: string;
@@ -42,6 +43,8 @@ const subCards: SubCard[] = [
 ];
 
 export default function PortfolioStructureSection() {
+  const [isStructureModalOpen, setIsStructureModalOpen] = useState(false);
+
   return (
     <section className="w-full bg-[#EFE1D0] text-[#14213D] py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
       <div className="max-w-6xl mx-auto space-y-12">
@@ -105,15 +108,16 @@ export default function PortfolioStructureSection() {
           <div className="flex flex-wrap items-center justify-between gap-2 overflow-x-auto pb-2">
             {hierarchySteps.map((step, idx) => (
               <React.Fragment key={step.label}>
-                <div
-                  className={`px-6 py-2.5 rounded-xl text-xs font-bold transition-all shrink-0 ${
+                <button
+                  type="button"
+                  className={`px-6 py-2.5 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer active:scale-95 ${
                     step.isHighlighted
-                      ? "bg-[#1B2A4A] border border-[#1B2A4A] text-white shadow-xs"
-                      : "bg-[#F8F2E8] border border-[#ECDFC9] text-[#14213D]"
+                      ? "bg-[#1B2A4A] border border-[#1B2A4A] text-white shadow-xs hover:bg-[#14213D]"
+                      : "bg-[#F8F2E8] border border-[#ECDFC9] text-[#14213D] hover:border-[#14213D]/40"
                   }`}
                 >
                   {step.label}
-                </div>
+                </button>
 
                 {idx < hierarchySteps.length - 1 && (
                   <span className="text-[#A59D93] text-xs font-serif shrink-0 px-0.5">
@@ -169,12 +173,19 @@ export default function PortfolioStructureSection() {
         <div className="flex justify-center pt-2">
           <button
             type="button"
+            onClick={() => setIsStructureModalOpen(true)}
             className="hover:bg-[#E5D5C2] text-[#14213D] text-xs font-bold py-3.5 px-7 rounded-full border border-[#1B2A4A] transition-all duration-200 cursor-pointer shadow-2xs active:scale-95"
           >
             Explore Portfolio Model
           </button>
         </div>
       </div>
+
+      {/* Portfolio Structure Popup */}
+      <PortfolioStructureModal
+        isOpen={isStructureModalOpen}
+        onClose={() => setIsStructureModalOpen(false)}
+      />
     </section>
   );
 }
