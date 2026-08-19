@@ -70,7 +70,7 @@ export const footerColumns: FooterColumnData[] = [
       { label: "Privacy Notice", href: "#" },
       { label: "Cookie Notice", href: "#" },
       { label: "Cookie Preferences", href: "#" },
-      { label: "Fair Housing & Anti-Discrimination", href: "#" },
+      { label: "Fair Housing & Anti-Discrimination", href: "/legal/fair-housing-anti-discrimination" },
       { label: "Community Standards", href: "#" },
       { label: "Payment Terms", href: "/legal/payment-terms" },
       { label: "Regional Legal Notices", href: "#" },
