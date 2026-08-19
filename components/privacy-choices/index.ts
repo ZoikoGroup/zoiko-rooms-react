@@ -1,0 +1,9 @@
+export { HeroSection } from "./HeroSection";
+export { PrivacyContextSection } from "./PrivacyContextSection";
+export { QuickPrivacyChoicesSection } from "./QuickPrivacyChoicesSection";
+export { BrowserPrivacySignalSection } from "./BrowserPrivacySignalSection";
+export { DeletionAccountClosureSection } from "./DeletionAccountClosureSection";
+export { AutomatedDecisionsSection } from "./AutomatedDecisionsSection";
+export { RequestStatusHistorySection } from "./RequestStatusHistorySection";
+export { AuthorizedAgentAppealsSection } from "./AuthorizedAgentAppealsSection";
+export { RelatedControlsSection } from "./RelatedControlsSection";

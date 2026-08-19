@@ -72,9 +72,9 @@ export const footerColumns: FooterColumnData[] = [
       { label: "Cookie Preferences", href: "#" },
       { label: "Fair Housing & Anti-Discrimination", href: "#" },
       { label: "Community Standards", href: "#" },
-      { label: "Payment Terms", href: "#" },
+      { label: "Payment Terms", href: "/legal/payment-terms" },
       { label: "Regional Legal Notices", href: "#" },
-      { label: "Your Privacy Choices", href: "#" },
+      { label: "Your Privacy Choices", href: "/legal/your-privacy-choices" },
     ],
   },
 ];
