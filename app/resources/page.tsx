@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
-import { PlaceholderSection } from "@/components/placeholder";
+import { HeroSection, DestinationsSection, BoundarySection, SafetyBannerSection, FaqCtaSection } from "@/components/resources-overview";
 
-export const metadata: Metadata = { title: "Resources — Zoiko Rooms" };
+export const metadata: Metadata = {
+  title: "Resources — Zoiko Rooms",
+  description:
+    "Find direct, current guidance for every stage of renting, listing, moving, and operating rooms.",
+};
 
 export default function ResourcesPage() {
   return (
-    <PlaceholderSection
-      eyebrow="Resources"
-      title="Help Center & safety guides"
-      description="This page will bring together the Zoiko Rooms Help Center and our safety & scam prevention guides."
-    />
+    <>
+      <HeroSection />
+      <DestinationsSection />
+      <BoundarySection />
+      <SafetyBannerSection />
+      <FaqCtaSection />
+    </>
   );
 }
