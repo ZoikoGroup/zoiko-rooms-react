@@ -68,7 +68,7 @@ export const footerColumns: FooterColumnData[] = [
     links: [
       { label: "Terms of Use", href: "#" },
       { label: "Privacy Notice", href: "#" },
-      { label: "Cookie Notice", href: "#" },
+      { label: "Cookie Notice", href: "/legal/cookie-notice" },
       { label: "Cookie Preferences", href: "#" },
       { label: "Fair Housing & Anti-Discrimination", href: "/legal/fair-housing-anti-discrimination" },
       { label: "Community Standards", href: "#" },
@@ -99,7 +99,7 @@ export const trustBadges: TrustBadge[] = [
     icon: Scale,
     title: "Fair Housing by Design",
     description: "Anti-discrimination rules and accountable compatibility controls.",
-    href: "#",
+    href: "/legal/fair-housing-anti-discrimination",
     tone: "teal",
   },
   {

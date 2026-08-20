@@ -1,14 +1,38 @@
 import type { Metadata } from "next";
-import { PlaceholderSection } from "@/components/placeholder";
+import {
+  HeroSection,
+  RelationshipBoundarySection,
+  SixPathwaysSection,
+  OperatingModelSection,
+  InstitutionalRoomSupplySection,
+  ParticipantJourneySection,
+  FundingBillingSection,
+  GovernanceDataSection,
+  ZoikoRoomsProSection,
+  ProofProcurementSection,
+  FaqCtaSection,
+} from "@/components/organizations-overview";
 
-export const metadata: Metadata = { title: "Organizations — Zoiko Rooms" };
+export const metadata: Metadata = {
+  title: "Organizations — Zoiko Rooms",
+  description:
+    "Coordinate room access, supply, funding, and support through clear organizational responsibility — universities, employers, healthcare, relocation, and government.",
+};
 
 export default function OrganizationsPage() {
   return (
-    <PlaceholderSection
-      eyebrow="Organizations"
-      title="Housing solutions for teams and institutions"
-      description="This page will cover how universities, employers, healthcare systems, and public-sector partners use Zoiko Rooms."
-    />
+    <>
+      <HeroSection />
+      <RelationshipBoundarySection />
+      <SixPathwaysSection />
+      <OperatingModelSection />
+      <InstitutionalRoomSupplySection />
+      <ParticipantJourneySection />
+      <FundingBillingSection />
+      <GovernanceDataSection />
+      <ZoikoRoomsProSection />
+      <ProofProcurementSection />
+      <FaqCtaSection />
+    </>
   );
 }
