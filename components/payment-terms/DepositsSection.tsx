@@ -24,7 +24,7 @@ export function DepositsSection() {
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {depositCards.map(({ tag, tone, title, description, facts }) => (
-            <motion.div key={title} variants={fadeUp} className="flex flex-col gap-3 rounded-2xl border border-[#E9E0D3] bg-white p-5">
+            <motion.div key={title} variants={fadeUp} className="flex flex-col gap-3 rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8] p-5">
               <span className={`w-fit rounded-full border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide ${tagToneClasses[tone]}`}>
                 {tag}
               </span>
@@ -60,7 +60,7 @@ export function DepositsSection() {
               <span>Question</span>
               <span>If no or unresolved</span>
             </div>
-            <div className="divide-y divide-[#E9E0D3] bg-white">
+            <div className="divide-y divide-[#E9E0D3] bg-[#FFFDF8]">
               {decisionGateRows.map((row) => (
                 <div key={row.question} className="grid grid-cols-[1.8fr_1fr] gap-4 px-5 py-3.5 text-sm">
                   <span className="text-brand-navy">{row.question}</span>

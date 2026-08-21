@@ -8,7 +8,7 @@ import { accessibilityCards } from "./data";
 
 export function DisabilityAccessibilitySection() {
   return (
-    <SectionDivider className="bg-white">
+    <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
@@ -22,7 +22,7 @@ export function DisabilityAccessibilitySection() {
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {accessibilityCards.map(({ title, description, points }) => (
-              <motion.div key={title} variants={fadeUp} className="flex flex-col gap-3 rounded-2xl border border-[#E9E0D3] bg-white p-6">
+              <motion.div key={title} variants={fadeUp} className="flex flex-col gap-3 rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8] p-6">
                 <h3 className="font-heading text-base font-medium text-brand-navy">{title}</h3>
                 <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
                 <BulletList items={points} />

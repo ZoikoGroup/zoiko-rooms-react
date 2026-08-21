@@ -30,7 +30,7 @@ export function RequestStatusHistorySection() {
                 <span>Status</span>
                 <span />
               </div>
-              <div className="divide-y divide-[#E9E0D3] bg-white">
+              <div className="divide-y divide-[#E9E0D3] bg-[#FFFDF8]">
                 {requestHistoryRows.map((row) => (
                   <div key={row.id} className="grid grid-cols-[1.3fr_1.2fr_1fr_1fr_1fr_0.6fr] items-center gap-4 px-6 py-4 text-sm">
                     <span className="font-mono text-xs text-neutral-500">{row.id}</span>

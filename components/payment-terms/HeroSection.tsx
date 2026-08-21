@@ -20,13 +20,13 @@ export function HeroSection() {
           </motion.h1>
 
           <motion.div variants={fadeUp} className="flex flex-wrap gap-2">
-            <span className="rounded-full border border-[#E9E0D3] bg-white px-3.5 py-1.5 text-xs font-medium text-brand-navy">
+            <span className="rounded-full border border-[#E9E0D3] bg-[#FFFDF8] px-3.5 py-1.5 text-xs font-medium text-brand-navy">
               Effective 17 August 2026
             </span>
             <span className="rounded-full border border-brand-red/25 bg-[#FBE9E9] px-3.5 py-1.5 text-xs font-semibold text-brand-red">
               Applies to: England, United Kingdom
             </span>
-            <span className="rounded-full border border-[#E9E0D3] bg-white px-3.5 py-1.5 text-xs font-medium text-brand-navy">
+            <span className="rounded-full border border-[#E9E0D3] bg-[#FFFDF8] px-3.5 py-1.5 text-xs font-medium text-brand-navy">
               English (UK)
             </span>
           </motion.div>

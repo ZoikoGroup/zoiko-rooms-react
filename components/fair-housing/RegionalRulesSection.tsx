@@ -10,7 +10,7 @@ export function RegionalRulesSection({ region }: { region: RegionKey }) {
   const profile = regionProfiles[region];
 
   return (
-    <SectionDivider className="bg-white">
+    <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <AnimatePresence mode="wait">
@@ -28,7 +28,7 @@ export function RegionalRulesSection({ region }: { region: RegionKey }) {
                 <Paragraph>{profile.intro}</Paragraph>
               </div>
 
-              <div className="overflow-hidden rounded-2xl border border-[#E9E0D3] bg-white">
+              <div className="overflow-hidden rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8]">
                 <div className="px-6 pt-5">
                   <span className="text-xs font-semibold uppercase tracking-wide text-neutral-400">
                     How this applies in this region

@@ -8,7 +8,7 @@ import { enforcementLevels } from "./data";
 
 export function PlatformEnforcementSection() {
   return (
-    <SectionDivider className="bg-white">
+    <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">

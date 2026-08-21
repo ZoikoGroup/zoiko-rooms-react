@@ -23,7 +23,7 @@ export function WhoIsInvolvedSection() {
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {partyRoles.map(({ tag, title, description }) => (
-            <motion.div key={title} variants={fadeUp} className="flex flex-col gap-1.5 rounded-2xl border border-[#E9E0D3] bg-white p-5">
+            <motion.div key={title} variants={fadeUp} className="flex flex-col gap-1.5 rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8] p-5">
               <span className="text-[11px] font-semibold uppercase tracking-wide text-brand-red">{tag}</span>
               <h3 className="font-heading text-base font-medium text-brand-navy">{title}</h3>
               <p className="text-sm leading-relaxed text-[#5B5548]">{description}</p>

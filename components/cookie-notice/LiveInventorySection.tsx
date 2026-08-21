@@ -42,7 +42,7 @@ export function LiveInventorySection() {
                         <span key={column}>{column}</span>
                       ))}
                     </div>
-                    <div className="divide-y divide-[#E9E0D3] bg-white">
+                    <div className="divide-y divide-[#E9E0D3] bg-[#FFFDF8]">
                       {items.map((item) => (
                         <div
                           key={item.technology}

@@ -7,14 +7,14 @@ import { Eyebrow, SectionDivider } from "./shared";
 
 export function BrowserPrivacySignalSection() {
   return (
-    <SectionDivider className="bg-white">
+    <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-6">
           <Eyebrow>Browser Privacy Signal</Eyebrow>
 
           <motion.div
             variants={fadeUp}
-            className="flex flex-col items-start gap-4 rounded-2xl border border-[#E9E0D3] bg-white p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7"
+            className="flex flex-col items-start gap-4 rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8] p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7"
           >
             <div className="flex items-center gap-4">
               <span className="flex h-11 w-16 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-xs font-bold text-emerald-700">

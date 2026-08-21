@@ -8,14 +8,14 @@ import { privacyContextItems } from "./data";
 
 export function PrivacyContextSection() {
   return (
-    <SectionDivider className="bg-white">
+    <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-6">
           <Eyebrow>Your Privacy Context</Eyebrow>
 
           <motion.div
             variants={fadeUp}
-            className="grid grid-cols-1 divide-y divide-[#E9E0D3] rounded-2xl border border-[#E9E0D3] bg-white sm:grid-cols-4 sm:divide-x sm:divide-y-0"
+            className="grid grid-cols-1 divide-y divide-[#E9E0D3] rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8] sm:grid-cols-4 sm:divide-x sm:divide-y-0"
           >
             {privacyContextItems.map((item) => (
               <div key={item.label} className="flex flex-col gap-1.5 px-6 py-5">

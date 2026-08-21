@@ -25,7 +25,7 @@ export function HarassmentRetaliationSafetySection() {
               <span>What&apos;s happening</span>
               <span>Where it goes</span>
             </div>
-            <div className="divide-y divide-[#E9E0D3] bg-white">
+            <div className="divide-y divide-[#E9E0D3] bg-[#FFFDF8]">
               {harassmentRouting.map((row) => (
                 <div key={row.what} className="grid grid-cols-[1.6fr_1fr] items-center gap-4 px-6 py-3.5 text-sm">
                   <span className="text-brand-navy">{row.what}</span>

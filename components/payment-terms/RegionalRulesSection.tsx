@@ -21,7 +21,7 @@ export function RegionalRulesSection() {
 
         <motion.div
           variants={fadeUp}
-          className="grid grid-cols-1 divide-y divide-[#E9E0D3] rounded-2xl border border-[#E9E0D3] bg-white sm:grid-cols-2 sm:divide-x sm:divide-y-0"
+          className="grid grid-cols-1 divide-y divide-[#E9E0D3] rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8] sm:grid-cols-2 sm:divide-x sm:divide-y-0"
         >
           {regionalFacts.map((fact) => (
             <div key={fact.label} className="flex items-center justify-between gap-4 px-6 py-4">

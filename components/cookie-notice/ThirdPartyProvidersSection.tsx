@@ -8,7 +8,7 @@ import { providerQuestions } from "./data";
 
 export function ThirdPartyProvidersSection() {
   return (
-    <SectionDivider className="bg-white">
+    <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
@@ -22,7 +22,7 @@ export function ThirdPartyProvidersSection() {
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             {providerQuestions.map(({ question, answer }) => (
-              <motion.div key={question} variants={fadeUp} className="rounded-2xl border border-[#E9E0D3] bg-white p-6">
+              <motion.div key={question} variants={fadeUp} className="rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8] p-6">
                 <h3 className="font-heading text-base font-medium text-brand-navy">{question}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-neutral-600">{answer}</p>
               </motion.div>

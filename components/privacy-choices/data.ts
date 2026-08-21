@@ -132,4 +132,9 @@ export const appealPoints = [
   "Relevant regulator or supervisory authority contact",
 ];
 
-export const relatedControls = ["Cookie Preferences", "Privacy Notice", "Marketing preferences", "Regional Legal Notices"];
+export const relatedControls = [
+  { label: "Cookie Preferences", href: "#" },
+  { label: "Privacy Notice", href: "/legal/privacy-notice" },
+  { label: "Marketing preferences", href: "#" },
+  { label: "Regional Legal Notices", href: "#" },
+];

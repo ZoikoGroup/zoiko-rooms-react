@@ -51,7 +51,7 @@ export function QuickPrivacyChoicesSection() {
             {toggleChoices.map(({ key, title, description, scope, onLabel, offLabel }) => {
               const isOn = toggles[key];
               return (
-                <motion.div key={key} variants={fadeUp} className="flex flex-col gap-4 rounded-2xl border border-[#E9E0D3] bg-white p-6">
+                <motion.div key={key} variants={fadeUp} className="flex flex-col gap-4 rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8] p-6">
                   <div className="flex items-start justify-between gap-4">
                     <h3 className="font-heading text-base font-medium text-brand-navy">{title}</h3>
                     <button
@@ -67,7 +67,7 @@ export function QuickPrivacyChoicesSection() {
                       <motion.span
                         layout
                         transition={{ duration: 0.18, ease: easeOut }}
-                        className="absolute top-0.5 h-5 w-5 rounded-full bg-white shadow-sm"
+                        className="absolute top-0.5 h-5 w-5 rounded-full bg-[#FFFDF8] shadow-sm"
                         style={{ left: isOn ? "22px" : "2px" }}
                       />
                     </button>

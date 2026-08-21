@@ -8,10 +8,10 @@ import { agentPoints, appealPoints } from "./data";
 
 export function AuthorizedAgentAppealsSection() {
   return (
-    <SectionDivider className="bg-white">
+    <SectionDivider>
       <Container>
         <Reveal className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-          <motion.div variants={fadeUp} className="flex flex-col gap-4 rounded-2xl border border-[#E9E0D3] bg-white p-6">
+          <motion.div variants={fadeUp} className="flex flex-col gap-4 rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8] p-6">
             <Eyebrow>Authorized Agent</Eyebrow>
             <h3 className="font-heading text-lg font-medium text-brand-navy">Submitting on someone else&apos;s behalf?</h3>
             <p className="text-sm leading-relaxed text-neutral-600">
@@ -22,7 +22,7 @@ export function AuthorizedAgentAppealsSection() {
             <BulletList items={agentPoints} />
           </motion.div>
 
-          <motion.div variants={fadeUp} className="flex flex-col gap-4 rounded-2xl border border-[#E9E0D3] bg-white p-6">
+          <motion.div variants={fadeUp} className="flex flex-col gap-4 rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8] p-6">
             <Eyebrow>Appeals &amp; Complaints</Eyebrow>
             <h3 className="font-heading text-lg font-medium text-brand-navy">If a request is denied or partial</h3>
             <p className="text-sm leading-relaxed text-neutral-600">

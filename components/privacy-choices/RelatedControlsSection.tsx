@@ -21,13 +21,13 @@ export function RelatedControlsSection() {
           </div>
 
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {relatedControls.map((label) => (
+            {relatedControls.map(({ label, href }) => (
               <motion.a
                 key={label}
-                href="#"
+                href={href}
                 variants={fadeUp}
                 whileHover={{ y: -3 }}
-                className="flex items-center justify-between gap-2 rounded-xl border border-[#E9E0D3] bg-white px-5 py-4 text-sm font-semibold text-brand-navy transition-colors hover:border-brand-navy/30"
+                className="flex items-center justify-between gap-2 rounded-xl border border-[#E9E0D3] bg-[#FFFDF8] px-5 py-4 text-sm font-semibold text-brand-navy transition-colors hover:border-brand-navy/30"
               >
                 {label}
                 <ArrowRight className="h-4 w-4 shrink-0 text-neutral-400" />

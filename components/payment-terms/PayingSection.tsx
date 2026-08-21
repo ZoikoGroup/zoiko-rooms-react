@@ -58,7 +58,7 @@ export function PayingSection() {
           <div className="bg-[#F1E7DA] px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wide text-[#8A6A24]">
             At checkout — what you&apos;ll see
           </div>
-          <div className="flex flex-col gap-3 bg-white p-5">
+          <div className="flex flex-col gap-3 bg-[#FFFDF8] p-5">
             <span className="font-heading text-base font-medium text-brand-navy">Rent — September 2026</span>
             <div className="flex flex-col gap-2 border-t border-dashed border-[#E9E0D3] pt-3">
               {checkoutPreviewRows.map((row) => (

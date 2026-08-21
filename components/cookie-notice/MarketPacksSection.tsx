@@ -22,7 +22,7 @@ export function MarketPacksSection() {
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {marketPacks.map(({ title, description }) => (
-              <motion.div key={title} variants={fadeUp} className="rounded-2xl border border-[#E9E0D3] bg-white p-6">
+              <motion.div key={title} variants={fadeUp} className="rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8] p-6">
                 <h3 className="font-heading text-base font-medium text-brand-navy">{title}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-neutral-600">{description}</p>
               </motion.div>

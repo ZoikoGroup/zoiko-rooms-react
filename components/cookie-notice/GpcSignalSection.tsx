@@ -22,7 +22,7 @@ export function GpcSignalSection() {
   return (
     <SectionDivider>
       <Container>
-        <Reveal className="flex flex-col gap-6 rounded-3xl border border-[#E9E0D3] bg-white p-6 sm:p-10">
+        <Reveal className="flex flex-col gap-6 rounded-3xl border border-[#E9E0D3] bg-[#FFFDF8] p-6 sm:p-10">
           <div className="flex flex-col gap-4">
             <Eyebrow>Global Privacy Control &amp; Preference Signals</Eyebrow>
             <SectionTitle>We honor recognized browser signals automatically.</SectionTitle>
