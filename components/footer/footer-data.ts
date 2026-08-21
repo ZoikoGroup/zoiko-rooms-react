@@ -66,14 +66,14 @@ export const footerColumns: FooterColumnData[] = [
   {
     title: "Legal",
     links: [
-      { label: "Terms of Use", href: "#" },
+      { label: "Terms of Use", href: "/legal/terms-of-use" },
       { label: "Privacy Notice", href: "/legal/privacy-notice" },
       { label: "Cookie Notice", href: "/legal/cookie-notice" },
-      { label: "Cookie Preferences", href: "#" },
+      { label: "Cookie Preferences", href: "/legal/cookie-preferences" },
       { label: "Fair Housing & Anti-Discrimination", href: "/legal/fair-housing-anti-discrimination" },
       { label: "Community Standards", href: "#" },
       { label: "Payment Terms", href: "/legal/payment-terms" },
-      { label: "Regional Legal Notices", href: "#" },
+      { label: "Regional Legal Notices", href: "/legal/regional-notice" },
       { label: "Your Privacy Choices", href: "/legal/your-privacy-choices" },
     ],
   },
