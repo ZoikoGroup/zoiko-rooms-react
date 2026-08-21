@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
@@ -36,17 +36,37 @@ const itemVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.18, ease: easeOut } },
 };
 
+// The dropdown panel below is `position: fixed` and centered on screen so it
+// never overflows off-screen for nav items near the edge — but that visually
+// detaches it from the trigger's own bounding box, so a naive onMouseLeave
+// (which fires on the mouse crossing that box, not on DOM nesting) closes it
+// the instant the cursor travels from the trigger down into the panel. A
+// short close delay, cancelled on re-entry into either the trigger or the
+// panel, gives the cursor time to make that trip.
+const CLOSE_DELAY_MS = 200;
+
 export function NavLinks() {
   const [openKey, setOpenKey] = useState<string | null>(null);
   const navRef = useRef<HTMLElement>(null);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   useOnClickOutside(navRef, () => setOpenKey(null));
 
+  const cancelClose = useCallback(() => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  }, []);
+
+  const scheduleClose = useCallback(() => {
+    cancelClose();
+    closeTimerRef.current = setTimeout(() => setOpenKey(null), CLOSE_DELAY_MS);
+  }, [cancelClose]);
+
+  useEffect(() => cancelClose, [cancelClose]);
+
   return (
-    <nav
-      ref={navRef}
-      className="hidden items-center xl:flex"
-      onMouseLeave={() => setOpenKey(null)}
-    >
+    <nav ref={navRef} className="hidden items-center xl:flex">
       {navSections.map((section) => {
         const isOpen = openKey === section.key;
 
@@ -54,7 +74,11 @@ export function NavLinks() {
           <div
             key={section.key}
             className="relative shrink-0"
-            onMouseEnter={() => setOpenKey(section.key)}
+            onMouseEnter={() => {
+              cancelClose();
+              setOpenKey(section.key);
+            }}
+            onMouseLeave={scheduleClose}
           >
             <button
               type="button"
@@ -77,7 +101,9 @@ export function NavLinks() {
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  className="fixed left-1/2 top-16 z-40 mt-3 flex w-max max-w-[calc(100vw-2rem)] -translate-x-1/2 overflow-hidden rounded-3xl border border-black/5 bg-white shadow-2xl shadow-brand-navy/10 sm:top-20"
+                  onMouseEnter={cancelClose}
+                  onMouseLeave={scheduleClose}
+                  className="fixed left-1/2 top-16 z-40 mt-3 flex w-max max-w-[calc(100vw-2rem)] -translate-x-1/2 overflow-hidden rounded-3xl border border-black/5 bg-white shadow-2xl shadow-brand-navy/10 sm:top-10"
                 >
                   <motion.div
                     variants={listVariants}
