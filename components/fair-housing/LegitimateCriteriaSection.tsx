@@ -27,7 +27,7 @@ export function LegitimateCriteriaSection() {
                 <span>Allowed posture</span>
                 <span>Guardrail</span>
               </div>
-              <div className="divide-y divide-[#E9E0D3] bg-white">
+              <div className="divide-y divide-[#E9E0D3] bg-[#FFFDF8]">
                 {legitimateCriteria.map((row) => (
                   <div key={row.criterion} className="grid grid-cols-[1fr_1.3fr_1.3fr] gap-4 px-6 py-3.5 text-sm">
                     <span className="font-semibold text-emerald-700">{row.criterion}</span>

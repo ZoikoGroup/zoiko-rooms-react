@@ -68,7 +68,7 @@ export function TableOfContentsSidebar() {
           })}
         </div>
 
-        <div className="rounded-2xl border border-[#E9E0D3] bg-white p-5">
+        <div className="rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8] p-5">
           <span className="mb-3 block text-xs font-semibold uppercase tracking-wide text-neutral-400">
             Help &amp; escalation
           </span>

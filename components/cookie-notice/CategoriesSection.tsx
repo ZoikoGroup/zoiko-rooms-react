@@ -8,7 +8,7 @@ import { categoryRows } from "./data";
 
 export function CategoriesSection() {
   return (
-    <SectionDivider className="bg-white">
+    <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
@@ -34,7 +34,7 @@ export function CategoriesSection() {
                 <span>Default treatment</span>
                 <span>Examples (if deployed)</span>
               </div>
-              <div className="divide-y divide-[#E9E0D3] bg-white">
+              <div className="divide-y divide-[#E9E0D3] bg-[#FFFDF8]">
                 {categoryRows.map((row) => (
                   <div key={row.category} className="grid grid-cols-[1.1fr_1.5fr_1fr_1.4fr] items-center gap-4 px-6 py-3.5 text-sm">
                     <span className="font-semibold text-brand-navy">{row.category}</span>

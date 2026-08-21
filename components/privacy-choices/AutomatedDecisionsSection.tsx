@@ -8,7 +8,7 @@ import { automatedDecisionRows } from "./data";
 
 export function AutomatedDecisionsSection() {
   return (
-    <SectionDivider className="bg-white">
+    <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
@@ -28,7 +28,7 @@ export function AutomatedDecisionsSection() {
                 <span>Human review</span>
                 <span>Available to you</span>
               </div>
-              <div className="divide-y divide-[#E9E0D3] bg-white">
+              <div className="divide-y divide-[#E9E0D3] bg-[#FFFDF8]">
                 {automatedDecisionRows.map((row) => (
                   <div key={row.useCase} className="grid grid-cols-[1.2fr_1.6fr_0.6fr_1.4fr] gap-4 px-6 py-4 text-sm sm:px-6">
                     <span className="font-semibold text-brand-navy">{row.useCase}</span>

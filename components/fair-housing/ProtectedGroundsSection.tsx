@@ -8,7 +8,7 @@ import { protectedGrounds, prohibitedConduct } from "./data";
 
 export function ProtectedGroundsSection() {
   return (
-    <SectionDivider className="bg-white">
+    <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
@@ -28,7 +28,7 @@ export function ProtectedGroundsSection() {
                 <span>Platform treatment</span>
                 <span>Notes</span>
               </div>
-              <div className="divide-y divide-[#E9E0D3] bg-white">
+              <div className="divide-y divide-[#E9E0D3] bg-[#FFFDF8]">
                 {protectedGrounds.map((row) => (
                   <div key={row.ground} className="grid grid-cols-[1.6fr_1fr_1.6fr] items-center gap-4 px-6 py-3.5 text-sm">
                     <span className="font-medium text-brand-navy">{row.ground}</span>
@@ -44,7 +44,7 @@ export function ProtectedGroundsSection() {
             <SubHeading>Conduct we prohibit</SubHeading>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {prohibitedConduct.map(({ title, description }) => (
-                <motion.div key={title} variants={fadeUp} className="flex flex-col gap-1.5 rounded-2xl border border-[#E9E0D3] bg-white p-5">
+                <motion.div key={title} variants={fadeUp} className="flex flex-col gap-1.5 rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8] p-5">
                   <h4 className="font-heading text-sm font-semibold text-brand-red">{title}</h4>
                   <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
                 </motion.div>

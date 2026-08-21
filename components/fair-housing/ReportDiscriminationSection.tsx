@@ -43,7 +43,7 @@ function RadioOptions({
             type="button"
             onClick={() => onChange(option)}
             className={`flex items-center gap-3 rounded-xl border px-4 py-3.5 text-left text-sm transition-colors ${
-              isSelected ? "border-brand-red bg-[#FBE9E9] text-brand-navy" : "border-[#E9E0D3] bg-white text-brand-navy hover:border-brand-navy/30"
+              isSelected ? "border-brand-red bg-[#FBE9E9] text-brand-navy" : "border-[#E9E0D3] bg-[#FFFDF8] text-brand-navy hover:border-brand-navy/30"
             }`}
           >
             <span
@@ -115,7 +115,7 @@ export function ReportDiscriminationSection() {
 
           <motion.div
             variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }}
-            className="overflow-hidden rounded-2xl border border-[#E9E0D3] bg-white"
+            className="overflow-hidden rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8]"
           >
             {submitted ? (
               <div className="flex flex-col items-center gap-3 px-6 py-14 text-center">
@@ -217,7 +217,7 @@ export function ReportDiscriminationSection() {
                             onChange={(event) => setForm({ ...form, evidence: event.target.value })}
                             rows={5}
                             placeholder="Describe what happened, in your own words…"
-                            className="w-full rounded-xl border border-[#E9E0D3] bg-white px-4 py-3 text-sm text-brand-ink outline-none placeholder:text-neutral-400 focus:border-brand-navy"
+                            className="w-full rounded-xl border border-[#E9E0D3] bg-[#FFFDF8] px-4 py-3 text-sm text-brand-ink outline-none placeholder:text-neutral-400 focus:border-brand-navy"
                           />
                         </>
                       )}

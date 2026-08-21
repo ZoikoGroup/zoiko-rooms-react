@@ -26,7 +26,7 @@ export function DeletionAccountClosureSection() {
                 key={title}
                 variants={fadeUp}
                 className={`flex flex-col gap-3 rounded-2xl border p-6 ${
-                  tone === "rose" ? "border-brand-red/30 bg-[#FBE9E9]" : "border-[#E9E0D3] bg-white"
+                  tone === "rose" ? "border-brand-red/30 bg-[#FBE9E9]" : "border-[#E9E0D3] bg-[#FFFDF8]"
                 }`}
               >
                 <h3 className="font-heading text-base font-medium text-brand-navy">{title}</h3>

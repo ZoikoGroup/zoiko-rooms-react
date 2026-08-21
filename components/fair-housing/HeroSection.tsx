@@ -47,7 +47,7 @@ export function HeroSection({ region, onRegionChange }: HeroSectionProps) {
               onClick={() => setOpen((v) => !v)}
               aria-haspopup="listbox"
               aria-expanded={open}
-              className="flex items-center gap-2 rounded-full border border-[#E9E0D3] bg-white px-4 py-2 text-sm font-semibold text-brand-navy"
+              className="flex items-center gap-2 rounded-full border border-[#E9E0D3] bg-[#FFFDF8] px-4 py-2 text-sm font-semibold text-brand-navy"
             >
               Your region: {activeLabel}
               <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
@@ -55,7 +55,7 @@ export function HeroSection({ region, onRegionChange }: HeroSectionProps) {
             <span className="text-xs text-neutral-400">Effective: {effectiveDate}</span>
 
             {open && (
-              <div className="absolute left-0 top-full z-20 mt-2 w-64 overflow-hidden rounded-xl border border-[#E9E0D3] bg-white shadow-lg">
+              <div className="absolute left-0 top-full z-20 mt-2 w-64 overflow-hidden rounded-xl border border-[#E9E0D3] bg-[#FFFDF8] shadow-lg">
                 {regionOptions.map((option) => (
                   <button
                     key={option.key}

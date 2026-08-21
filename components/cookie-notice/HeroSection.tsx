@@ -27,10 +27,10 @@ export function HeroSection() {
           </Paragraph>
 
           <motion.div variants={fadeUp} className="flex flex-wrap gap-2">
-            <span className="rounded-full border border-[#E9E0D3] bg-white px-3.5 py-1.5 text-xs font-medium text-brand-navy">
+            <span className="rounded-full border border-[#E9E0D3] bg-[#FFFDF8] px-3.5 py-1.5 text-xs font-medium text-brand-navy">
               Last updated: 5 Feb 2026
             </span>
-            <span className="rounded-full border border-[#E9E0D3] bg-white px-3.5 py-1.5 text-xs font-medium text-brand-navy">
+            <span className="rounded-full border border-[#E9E0D3] bg-[#FFFDF8] px-3.5 py-1.5 text-xs font-medium text-brand-navy">
               Effective: 20 Apr 2026
             </span>
             <span className="rounded-full border border-brand-red/25 bg-[#FBE9E9] px-3.5 py-1.5 text-xs font-semibold text-brand-red">
@@ -40,7 +40,7 @@ export function HeroSection() {
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-5">
             {previewCards.map(({ title, status, tone }) => (
-              <motion.div key={title} variants={fadeUp} className="flex flex-col gap-2 rounded-2xl border border-[#E9E0D3] bg-white p-5">
+              <motion.div key={title} variants={fadeUp} className="flex flex-col gap-2 rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8] p-5">
                 <span className="font-heading text-sm font-semibold text-brand-navy">{title}</span>
                 <Pill label={status} tone={tone} />
               </motion.div>

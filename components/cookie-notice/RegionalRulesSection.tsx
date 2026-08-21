@@ -8,7 +8,7 @@ import { englandUseCases } from "./data";
 
 export function RegionalRulesSection() {
   return (
-    <SectionDivider className="bg-white">
+    <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
@@ -33,7 +33,7 @@ export function RegionalRulesSection() {
                 <span>Use case</span>
                 <span>England treatment</span>
               </div>
-              <div className="divide-y divide-[#E9E0D3] bg-white">
+              <div className="divide-y divide-[#E9E0D3] bg-[#FFFDF8]">
                 {englandUseCases.map((row) => (
                   <div key={row.useCase} className="grid grid-cols-[1fr_2fr] gap-4 px-6 py-3.5 text-sm">
                     <span className="font-semibold text-brand-navy">{row.useCase}</span>
