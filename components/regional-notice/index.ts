@@ -1,0 +1,9 @@
+export { default as RegionalLegalHeroSection } from "./RegionalLegalHeroSection";
+export { default as LegalContextSection } from "./LegalContextSection";
+export { default as ApplicableNoticesSection } from "./ApplicableNoticesSection";
+export { default as WhoYouContractWithSection } from "./WhoYouContractWithSection";
+export { default as HousingPropertyNoticesSection } from "./HousingPropertyNoticesSection";
+export { default as ConsumerPaymentsPrivacySection } from "./ConsumerPaymentsPrivacySection";
+export { default as DisputesRegulatorsRedressSection } from "./DisputesRegulatorsRedressSection";
+export { default as VersionEffectiveDateSection } from "./VersionEffectiveDateSection";
+export { default as RelatedLegalPagesSection } from "./RelatedLegalPagesSection";
