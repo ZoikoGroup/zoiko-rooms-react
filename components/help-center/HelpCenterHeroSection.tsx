@@ -28,7 +28,7 @@ export default function HelpCenterHeroSection() {
 
   const quickPills = [
     "I may be at risk or seeing a scam",
-    "I can't access my account",
+    "I can&apos;t access my account",
     "I need help with a room or listing",
     "I need help with an application or agreement",
     "I have a payment, refund, or deposit issue",
@@ -227,7 +227,7 @@ export default function HelpCenterHeroSection() {
                   <span className="text-[11px] text-[#7A838E] font-normal">
                     {t(cat.lastReviewed)}
                   </span>
-                  <a
+                  
                     href="#"
                     className="inline-flex underline items-center text-xs font-bold text-[#A85A34] hover:underline space-x-1 group"
                   >

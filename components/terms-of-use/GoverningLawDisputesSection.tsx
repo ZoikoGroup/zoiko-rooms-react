@@ -62,10 +62,10 @@ export default function GoverningLawDisputesSection() {
               {t("Alternative dispute resolution")}
             </span>
             <span className="md:col-span-2 text-sm text-[#5C5B57] leading-relaxed">
-              {t(
-                "Where a currently available, legally applicable ADR scheme exists for your dispute, it's linked from our Regional Legal Notices.",
-              )}
-            </span>
+  {t(
+    "Where a currently available, legally applicable ADR scheme exists for your dispute, it's linked from our Regional Legal Notices.",
+  )}
+</span>
           </div>
 
           {/* Row 4: Class or jury waivers */}

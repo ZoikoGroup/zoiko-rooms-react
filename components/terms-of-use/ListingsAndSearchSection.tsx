@@ -29,7 +29,7 @@ export default function ListingsAndSearchSection() {
 
       {/* Paragraph Content */}
       <div className="space-y-6 text-sm sm:text-base text-[#5C5B57] font-normal leading-relaxed">
-        <p>
+         <p>
           {t(
             "Providers are responsible for the accuracy of their listings — price basis, room type, availability, restrictions and charges. Zoiko Rooms doesn't independently verify every listing detail unless a specific verification tier states otherwise, and displayed availability can change before you complete a booking or application.",
           )}

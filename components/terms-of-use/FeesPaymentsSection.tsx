@@ -28,10 +28,10 @@ export default function FeesPaymentsSection() {
 
       {/* Paragraph Content */}
       <p className="text-sm sm:text-base text-[#5C5B57] font-normal leading-relaxed mb-6">
-        {t(
-          "Fees, rent, deposits, taxes, payment methods, refunds and provider payouts are governed in detail by our Payment Terms, which are incorporated into these Terms by reference. The version of Payment Terms in effect at the time of a transaction applies to that transaction; we don't duplicate or re-charge amounts already correctly processed.",
-        )}
-      </p>
+  {t(
+    "Fees, rent, deposits, taxes, payment methods, refunds and provider payouts are governed in detail by our Payment Terms, which are incorporated into these Terms by reference. The version of Payment Terms in effect at the time of a transaction applies to that transaction; we don't duplicate or re-charge amounts already correctly processed.",
+  )}
+</p>
 
       {/* Action Link */}
       <div>

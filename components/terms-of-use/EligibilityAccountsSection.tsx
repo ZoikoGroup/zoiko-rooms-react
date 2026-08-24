@@ -45,7 +45,7 @@ export default function EligibilityAccountsSection() {
             "Information you provide — identity, contact details, authority to list or apply — must be accurate and kept up to date.",
           )}
         </li>
-        <li>
+       <li>
           <strong className="font-bold text-[#101C33]">
             {t("Account security.")}
           </strong>{" "}

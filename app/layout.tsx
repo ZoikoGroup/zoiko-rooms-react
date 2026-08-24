@@ -3,7 +3,10 @@ import { Fraunces, Inter } from "next/font/google";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { SearchProvider } from "@/components/search";
 import { LanguageProvider } from "@/lib/i18n/LanguageProvider";
+import { ChatProvider } from "@/components/assistant";
 import "./globals.css";
+
+export const dynamic = 'force-dynamic';
 
 const inter = Inter({
   variable: "--font-inter",
@@ -32,7 +35,9 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col bg-brand-cream font-sans text-brand-ink">
         <LanguageProvider>
           <SearchProvider>
-            <SiteChrome>{children}</SiteChrome>
+            <ChatProvider>
+              <SiteChrome>{children}</SiteChrome>
+            </ChatProvider>
           </SearchProvider>
         </LanguageProvider>
       </body>

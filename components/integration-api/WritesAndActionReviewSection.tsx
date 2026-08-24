@@ -76,13 +76,13 @@ const eventFamilyRows: EventFamilyRow[] = [
     whatYourSystemShouldDo:
       "Deduplicate, verify current capacity, and prevent stale booking actions.",
   },
-  {
-    family: "Verification",
-    representativeEvents:
-      "verification.status_changed \u00B7 evidence.expiring",
-    whatYourSystemShouldDo:
-      "Apply the current permission effect \u2014 don't infer a universal trust score.",
-  },
+{
+      family: "Verification",
+      representativeEvents:
+        "verification.status_changed \u00B7 evidence.expiring",
+      whatYourSystemShouldDo:
+        "Apply the current permission effect \u2014 don&apos;t infer a universal trust score.",
+    },
   {
     family: "Application",
     representativeEvents: "application.submitted \u00B7 decision_recorded",
@@ -125,8 +125,8 @@ export default function WritesAndActionReviewSection() {
               </span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-              {t("Automation can prepare a high-risk action. It can't approve one.")}
-            </h2>
+  {t("Automation can prepare a high-risk action. It can't approve one.")}
+</h2>
             <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
               {t(
                 "Signing an agreement, changing a payment recipient, or approving an application always routes through the same sequence — visible, reversible, and owned by a named person.",

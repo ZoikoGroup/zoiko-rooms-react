@@ -117,11 +117,11 @@ export default function CapabilityMapSection() {
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
             {t("Nine domains, each with its own boundary.")}
           </h2>
-          <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
-            {t(
-              "Every connection sits inside one of these domains. Statuses stay separate even when a single integration touches more than one — an availability sync can't quietly pick up payment authority.",
-            )}
-          </p>
+         <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
+  {t(
+    "Every connection sits inside one of these domains. Statuses stay separate even when a single integration touches more than one — an availability sync can't quietly pick up payment authority.",
+  )}
+</p>
         </div>
 
         {/* 9 Capability Cards Grid */}

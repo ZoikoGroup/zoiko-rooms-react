@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { FairHousingView } from "@/components/fair-housing";
 
 export const metadata: Metadata = {
-  title: "Fair Housing & Anti-Discrimination — Zoiko Rooms",
+  title: "Fair Housing & Anti-Discrimination Policy | Zoiko Rooms",
   description:
-    "Zoiko Rooms prohibits discrimination in listings, searches, messages, applications, screening, pricing, payments and housing decisions based on protected characteristics.",
+    "Read Zoiko Rooms fair housing policy and learn how we promote equal opportunities and help prevent discrimination across accommodation and housing services.",
 };
 
 export default function FairHousingPage() {

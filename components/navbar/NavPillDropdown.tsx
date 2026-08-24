@@ -19,18 +19,18 @@ export function NavPillDropdown({ storageKey, options, ariaLabel, onSelect, valu
   const rootRef = useRef<HTMLDivElement>(null);
   const selected = value ?? internalSelected;
 
-  useEffect(() => {
-    if (value !== undefined) return;
-    const stored = window.localStorage.getItem(storageKey);
-    if (stored && options.some((option) => option.code === stored)) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time sync from localStorage on mount, not a render loop
-      setInternalSelected(stored);
-      onSelect?.(stored);
-    } else {
-      onSelect?.(options[0].code);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- run once on mount, to apply the stored (or default) choice's side effect
-  }, []);
+ useEffect(() => {
+  if (value !== undefined) return;
+  const stored = window.localStorage.getItem(storageKey);
+  if (stored && options.some((option) => option.code === stored)) {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time sync from localStorage on mount, not a render loop
+    setInternalSelected(stored);
+    onSelect?.(stored);
+  } else {
+    onSelect?.(options[0].code);
+  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- run once on mount, to apply the stored (or default) choice's side effect
+}, []);
 
   useEffect(() => {
     if (!open) return;

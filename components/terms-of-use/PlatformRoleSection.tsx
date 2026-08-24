@@ -35,7 +35,7 @@ export default function PlatformRoleSection() {
           )}
         </p>
 
-        <p>
+      <p>
           {t(
             "We don't guarantee that any listing, room, or provider will remain available, that a transaction will complete, or that a stay will meet your expectations. Verification features described elsewhere describe what was specifically checked — they are not a general safety or quality guarantee.",
           )}

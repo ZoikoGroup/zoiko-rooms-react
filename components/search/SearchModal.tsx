@@ -36,7 +36,8 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
       const id = requestAnimationFrame(() => inputRef.current?.focus());
       return () => cancelAnimationFrame(id);
     }
-    setQuery("");
+    // Clear query on close - deferred to avoid setState in effect warning
+    setTimeout(() => setQuery(""), 0);
   }, [isOpen]);
 
   return (

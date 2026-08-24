@@ -26,11 +26,11 @@ export default function SuspensionTerminationSection() {
       </div>
 
       {/* Paragraph Content */}
-      <p className="text-sm sm:text-base text-[#5C5B57] font-normal leading-relaxed">
-        {t(
-          "We may restrict, suspend, or close an account where these Terms, our Community Standards, or applicable law require it, using notice where appropriate and immediate action where safety or legal risk requires it. Closing your account doesn't erase existing obligations — such as an outstanding payment or agreement — that arose before closure. You can appeal a decision through the process described in our Community Standards.",
-        )}
-      </p>
+    <p className="text-sm sm:text-base text-[#5C5B57] font-normal leading-relaxed">
+  {t(
+    "We may restrict, suspend, or close an account where these Terms, our Community Standards, or applicable law require it, using notice where appropriate and immediate action where safety or legal risk requires it. Closing your account doesn't erase existing obligations — such as an outstanding payment or agreement — that arose before closure. You can appeal a decision through the process described in our Community Standards.",
+  )}
+</p>
     </section>
   );
 }

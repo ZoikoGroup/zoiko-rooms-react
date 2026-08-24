@@ -21,10 +21,10 @@ export function MobileMenu() {
   const { language, setLanguage, t } = useLanguage();
   useLockBodyScroll(isOpen);
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time mount flag to gate the createPortal call, not a render loop
-    setMounted(true);
-  }, []);
+useEffect(() => {
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time mount flag to gate the createPortal call, not a render loop
+  setMounted(true);
+}, []);
 
   const menu = (
     <AnimatePresence>

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { PaymentTermsView } from "@/components/payment-terms";
 
 export const metadata: Metadata = {
-  title: "Payment Terms — Zoiko Rooms",
+  title: "Payment Terms for Rent & Deposits | Zoiko Rooms",
   description:
-    "How rent, holding deposits, and tenancy deposits are collected and protected, what fees apply, and what happens if a payment fails, needs a refund, or is disputed.",
+    "Learn about Zoiko Rooms payment terms, including rent payments, deposits, fees, refunds, payment methods and other important financial conditions.",
 };
 
 export default function PaymentTermsPage() {

@@ -51,9 +51,9 @@ export default function ReliabilityAndObservabilitySection() {
               {t("RELIABILITY & OBSERVABILITY")}
             </span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            {t("An honest picture of a connection's health — always current.")}
-          </h2>
+        <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
+  {t("An honest picture of a connection's health — always current.")}
+</h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
             {t(
               "No integration hides its own bad day. Freshness, delivery, and reconciliation state are visible before they become a support ticket.",

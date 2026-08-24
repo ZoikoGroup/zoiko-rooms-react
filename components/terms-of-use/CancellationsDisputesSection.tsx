@@ -28,11 +28,11 @@ export default function CancellationsDisputesSection() {
       </div>
 
       {/* Paragraph Content */}
-      <p className="text-sm sm:text-base text-[#5C5B57] font-normal leading-relaxed">
-        {t(
-          "Cancellation and change rights depend on the specific booking, agreement type, and Regional Schedule that applied at the time. Where local law grants you a mandatory right that these Terms don't otherwise provide, that mandatory right prevails. Charge disputes are handled through the process described in our Payment Terms.",
-        )}
-      </p>
+   <p className="text-sm sm:text-base text-[#5C5B57] font-normal leading-relaxed">
+  {t(
+    "Cancellation and change rights depend on the specific booking, agreement type, and Regional Schedule that applied at the time. Where local law grants you a mandatory right that these Terms don't otherwise provide, that mandatory right prevails. Charge disputes are handled through the process described in our Payment Terms.",
+  )}
+</p>
     </section>
   );
 }

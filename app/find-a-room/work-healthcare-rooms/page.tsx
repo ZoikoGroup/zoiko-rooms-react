@@ -16,9 +16,9 @@ import {
 } from "@/components/work-healthcare-rooms";
 
 export const metadata: Metadata = {
-  title: "Work & Healthcare Rooms — Zoiko Rooms",
+  title: "Work & Healthcare Rooms Near Your Workplace | Zoiko Rooms",
   description:
-    "Find a room around your workplace, hospital, clinic, project, placement, or rotation — with relationship assurance, travel-estimate honesty, and privacy boundaries built in.",
+    "Find work & healthcare rooms near your workplace, hospital, or clinic with Zoiko Rooms. Search stays by location, budget, commute, timing, and preferences.",
 };
 
 export default function WorkHealthcareRoomsPage() {

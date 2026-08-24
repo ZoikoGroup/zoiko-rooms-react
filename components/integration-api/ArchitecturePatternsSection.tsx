@@ -85,10 +85,10 @@ export default function ArchitecturePatternsSection() {
             {t("Pick the pattern that fits how current the data needs to be.")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
-            {t(
-              "Most connections are one of these seven shapes. Each comes with the controls it requires and the limitation it doesn't outgrow.",
-            )}
-          </p>
+  {t(
+    "Most connections are one of these seven shapes. Each comes with the controls it requires and the limitation it doesn't outgrow.",
+  )}
+</p>
         </div>
 
         {/* Architecture Patterns Table Card */}

@@ -24,11 +24,13 @@ export default function VerificationSafetySection() {
           {t(
             "In short: verification means exactly what's shown, nothing more — and it's not a guarantee of safety.",
           )}
+          In short: verification means exactly what&apos;s shown, nothing more
+          &mdash; and it&apos;s not a guarantee of safety.
         </p>
       </div>
 
       {/* Paragraph Content */}
-      <p className="text-sm sm:text-base text-[#5C5B57] font-normal leading-relaxed">
+     <p className="text-sm sm:text-base text-[#5C5B57] font-normal leading-relaxed">
         {t(
           "Where a listing or provider shows a verification badge or evidence tier, that reflects the specific checks actually performed — never treat it as a general guarantee of safety, legality, or suitability. Report safety or trust concerns through our Community Standards reporting tools; if you're in immediate danger, contact local emergency services first.",
         )}

@@ -29,10 +29,10 @@ export default function ChangesToTermsSection() {
 
       {/* Paragraph Content */}
       <p className="text-sm sm:text-base text-[#5C5B57] font-normal leading-relaxed">
-        {t(
-          "We may update these Terms. Material changes are published with a clear change summary and a future effective date, and we notify affected users appropriate to the change and your region. Where re-acceptance is legally required, you'll see a clear review step before the change applies to you; if you don't agree, you may need to stop using the affected service. Prior versions remain archived, and a transaction snapshot from an earlier version is never silently rewritten by a later one.",
-        )}
-      </p>
+  {t(
+    "We may update these Terms. Material changes are published with a clear change summary and a future effective date, and we notify affected users appropriate to the change and your region. Where re-acceptance is legally required, you'll see a clear review step before the change applies to you; if you don't agree, you may need to stop using the affected service. Prior versions remain archived, and a transaction snapshot from an earlier version is never silently rewritten by a later one.",
+  )}
+</p>
     </section>
   );
 }

@@ -91,10 +91,10 @@ export default function DataAndSourceOfTruthRulesSection() {
             {t("Every field knows where it comes from.")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
-            {t(
-              "Sync isn't a black box. Each field carries a direction, an authority, a freshness threshold, and a rule for what happens when two sources disagree.",
-            )}
-          </p>
+  {t(
+    "Sync isn't a black box. Each field carries a direction, an authority, a freshness threshold, and a rule for what happens when two sources disagree.",
+  )}
+</p>
         </div>
 
         {/* Content Split: Rules Table Left, Dark Callout Card Right */}

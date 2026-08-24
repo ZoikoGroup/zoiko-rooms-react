@@ -16,9 +16,9 @@ import {
 } from "@/components/university-rooms";
 
 export const metadata: Metadata = {
-  title: "University Rooms — Zoiko Rooms",
+  title: "Student Accommodation Near Universities | Zoiko Rooms",
   description:
-    "Find a room around your university, campus, term, or placement — with relationship assurance, term-aware availability, and document guidance built in.",
+    "Find student accommodation near universities with verified rooms, trusted providers & clear rental details. Explore safe housing options with Zoiko Rooms.",
 };
 
 export default function UniversityRoomsPage() {

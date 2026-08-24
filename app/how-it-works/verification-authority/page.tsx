@@ -14,9 +14,9 @@ import {
 } from "@/components/verification-authority";
 
 export const metadata: Metadata = {
-  title: "Verification & Authority — Zoiko Rooms",
+  title: "Room Verification and Authority | Zoiko Rooms",
   description:
-    "Know what was checked, whose authority applies, and what each status does — and does not — prove, across identity, listing authority, room evidence, and more.",
+    "Zoiko Rooms connects verification and authority to source evidence, helping confirm room data, provider responsibility, status, limitations, and decisions.",
 };
 
 export default function VerificationAuthorityPage() {
