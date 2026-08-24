@@ -12,6 +12,7 @@ import {
   Building2,
   ShieldCheck,
 } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface HelpCategory {
   id: string;
@@ -22,6 +23,7 @@ interface HelpCategory {
 }
 
 export default function HelpCenterHeroSection() {
+  const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
 
   const quickPills = [
@@ -124,19 +126,19 @@ export default function HelpCenterHeroSection() {
         <div className="max-w-4xl mx-auto text-center space-y-6 relative z-10">
           {/* Eyebrow */}
           <span className="text-[13px] font-bold tracking-widest text-[#F0C9A8] uppercase block">
-            HELP CENTER
+            {t("HELP CENTER")}
           </span>
 
           {/* Heading */}
           <h1 className="text-3xl lg:text-[34px] font-serif font-bold leading-tight text-white mx-auto">
-            Find the right answer, safety action, or accountable support path.
+            {t("Find the right answer, safety action, or accountable support path.")}
           </h1>
 
           {/* Subtext */}
           <p className="text-sm text-[#FFFFFFCC] leading-relaxed max-w-180 mx-auto font-normal">
-            Search current help, choose what you're trying to do, or start with
-            the issue affecting your room, listing, application, agreement,
-            payment, organization, or Pro workspace.
+            {t(
+              "Search current help, choose what you're trying to do, or start with the issue affecting your room, listing, application, agreement, payment, organization, or Pro workspace.",
+            )}
           </p>
 
           {/* Search Bar */}
@@ -149,22 +151,23 @@ export default function HelpCenterHeroSection() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="What do you need help with?"
+                placeholder={t("What do you need help with?")}
                 className="w-full bg-transparent text-[#14213D] placeholder-[#7A838E] text-xs sm:text-sm font-medium focus:outline-none pr-3"
               />
               <button
                 type="submit"
                 className="bg-[#1A2E6E] hover:bg-[#0D1629] text-white text-xs sm:text-sm font-bold py-3 px-6 rounded-[8px] transition-all duration-200 flex-shrink-0 active:scale-95"
               >
-                Search Help
+                {t("Search Help")}
               </button>
             </div>
           </form>
 
           {/* Warning disclaimer */}
           <p className="text-[11px] text-[#FFFFFF99] pt-1">
-            Don&apos;t include passwords, verification codes, bank credentials,
-            full card details, exact private addresses, or sensitive documents.
+            {t(
+              "Don't include passwords, verification codes, bank credentials, full card details, exact private addresses, or sensitive documents.",
+            )}
           </p>
 
           {/* Quick Filter Pills */}
@@ -175,7 +178,7 @@ export default function HelpCenterHeroSection() {
                 type="button"
                 className="bg-[#FFFFFF24] hover:bg-white/20 border border-[#FFFFFF4D] text-white text-xs py-2 px-4 rounded-full transition-colors duration-150 backdrop-blur-sm cursor-pointer"
               >
-                {pill}
+                {t(pill)}
               </button>
             ))}
           </div>
@@ -203,32 +206,32 @@ export default function HelpCenterHeroSection() {
                   <div className="w-10 h-10 rounded-[10px] bg-[#F1E7DA] flex items-center justify-center">
                     <img
                       src={cat.iconSrc}
-                      alt={cat.title}
+                      alt={t(cat.title)}
                       className="w-5 h-5 object-contain"
                     />
                   </div>
 
                   {/* Card Title */}
                   <h3 className="text-base font-bold text-[#1B2438]">
-                    {cat.title}
+                    {t(cat.title)}
                   </h3>
 
                   {/* Description */}
                   <p className="text-[14px] text-[#7A7266] leading-relaxed font-normal">
-                    {cat.description}
+                    {t(cat.description)}
                   </p>
                 </div>
 
                 {/* Card Footer */}
                 <div className="flex items-center justify-between pt-4 border-t border-[#F3EFEA]">
                   <span className="text-[11px] text-[#7A838E] font-normal">
-                    {cat.lastReviewed}
+                    {t(cat.lastReviewed)}
                   </span>
                   <a
                     href="#"
                     className="inline-flex underline items-center text-xs font-bold text-[#A85A34] hover:underline space-x-1 group"
                   >
-                    <span>Open help pathway</span>
+                    <span>{t("Open help pathway")}</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-150" />
                   </a>
                 </div>

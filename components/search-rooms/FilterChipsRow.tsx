@@ -2,6 +2,7 @@
 
 import { X, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { quickFilters } from "./data";
 
 type FilterChipsRowProps = {
@@ -25,6 +26,7 @@ export function FilterChipsRow({
   linkCopied,
   onShareSearch,
 }: FilterChipsRowProps) {
+  const { t } = useLanguage();
   return (
     <div className="flex flex-wrap items-center justify-between gap-3">
       <div className="flex flex-wrap items-center gap-2">
@@ -44,7 +46,7 @@ export function FilterChipsRow({
                 onClick={() => onRemove(key)}
                 className="flex items-center gap-1.5 rounded-full bg-[#F1E7DA] px-3 py-1.5 text-sm font-medium text-[#A85A34] transition-colors hover:bg-[#EADCC7]"
               >
-                {filter.label}
+                {t(filter.label)}
                 <X className="h-3 w-3" />
               </motion.button>
             );
@@ -59,7 +61,7 @@ export function FilterChipsRow({
           className="inline-flex items-center gap-1 text-brand-red underline-offset-2 transition-colors hover:text-brand-red-dark hover:underline"
         >
           {searchSaved && <Check className="h-3.5 w-3.5" />}
-          {searchSaved ? "Search saved" : "Save Search"}
+          {searchSaved ? t("Search saved") : t("Save Search")}
         </button>
         <button
           type="button"
@@ -67,7 +69,7 @@ export function FilterChipsRow({
           className="inline-flex items-center gap-1 text-brand-red underline-offset-2 transition-colors hover:text-brand-red-dark hover:underline"
         >
           {alertCreated && <Check className="h-3.5 w-3.5" />}
-          {alertCreated ? "Alert created" : "Create Alert"}
+          {alertCreated ? t("Alert created") : t("Create Alert")}
         </button>
         <button
           type="button"
@@ -75,7 +77,7 @@ export function FilterChipsRow({
           className="inline-flex items-center gap-1 text-brand-red underline-offset-2 transition-colors hover:text-brand-red-dark hover:underline"
         >
           {linkCopied && <Check className="h-3.5 w-3.5" />}
-          {linkCopied ? "Link copied" : "Share Search"}
+          {linkCopied ? t("Link copied") : t("Share Search")}
         </button>
       </div>
     </div>

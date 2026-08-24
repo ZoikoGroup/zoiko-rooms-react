@@ -4,10 +4,13 @@ import { motion } from "framer-motion";
 import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const tags = ["Flexible arrival", "Furnished", "Remote viewing", "Accessibility", "Organization referral"];
 
 export function HeroSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="border-b border-[#E9E0D3] py-10 sm:py-14">
       <Container>
@@ -17,19 +20,18 @@ export function HeroSection() {
               variants={fadeUp}
               className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-red"
             >
-              International Moves
+              {t("International Moves")}
             </motion.span>
             <motion.h1
               variants={fadeUp}
               className="font-heading text-4xl font-bold text-[#1B2438] sm:text-[34px]"
             >
-              Search for a room across borders with clearer timing, costs, documents, and support.
+              {t("Search for a room across borders with clearer timing, costs, documents, and support.")}
             </motion.h1>
             <motion.p variants={fadeUp} className="max-w-lg text-[15px] leading-relaxed text-[#7A7266]">
-              Choose a destination, expected arrival, stay length, and monthly budget in the
-              listing currency. Refine by furnished status, university, workplace, healthcare
-              location, organization referral, accessibility, guarantor alternatives, and
-              remote-viewing needs.
+              {t(
+                "Choose a destination, expected arrival, stay length, and monthly budget in the listing currency. Refine by furnished status, university, workplace, healthcare location, organization referral, accessibility, guarantor alternatives, and remote-viewing needs."
+              )}
             </motion.p>
 
             <motion.div
@@ -38,38 +40,38 @@ export function HeroSection() {
             >
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                 <div className="flex min-w-0 flex-col gap-1">
-                  <span className="px-1 text-xs font-medium text-neutral-600">Destination</span>
+                  <span className="px-1 text-xs font-medium text-neutral-600">{t("Destination")}</span>
                   <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
                     <input
                       type="text"
-                      placeholder="City, institution, or work"
+                      placeholder={t("City, institution, or work")}
                       className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none placeholder:text-neutral-400"
                     />
                   </div>
                 </div>
                 <div className="flex min-w-0 flex-col gap-1">
-                  <span className="px-1 text-xs font-medium text-neutral-600">Arrival</span>
+                  <span className="px-1 text-xs font-medium text-neutral-600">{t("Arrival")}</span>
                   <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
                     <input
                       type="text"
-                      placeholder="Date or flexible"
+                      placeholder={t("Date or flexible")}
                       className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none placeholder:text-neutral-400"
                     />
                   </div>
                 </div>
                 <div className="flex min-w-0 flex-col gap-1">
-                  <span className="px-1 text-xs font-medium text-neutral-600">Budget</span>
+                  <span className="px-1 text-xs font-medium text-neutral-600">{t("Budget")}</span>
                   <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
                     <input
                       type="text"
-                      placeholder="In listing currency"
+                      placeholder={t("In listing currency")}
                       className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none placeholder:text-neutral-400"
                     />
                   </div>
                 </div>
               </div>
               <Button variant="secondary" size="md" className="w-fit">
-                Search Rooms
+                {t("Search Rooms")}
               </Button>
             </motion.div>
 
@@ -78,7 +80,7 @@ export function HeroSection() {
               className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-neutral-500"
             >
               {tags.map((tag) => (
-                <span key={tag}>{tag}</span>
+                <span key={tag}>{t(tag)}</span>
               ))}
             </motion.div>
           </div>
@@ -91,7 +93,7 @@ export function HeroSection() {
           >
             <NaturalImage
               src="/images/international-moves/hero-workspace-room.webp"
-              alt="A furnished room set up for remote work, ready to search and book internationally"
+              alt={t("A furnished room set up for remote work, ready to search and book internationally")}
             />
           </motion.div>
         </Reveal>

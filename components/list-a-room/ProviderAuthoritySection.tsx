@@ -2,8 +2,10 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function ProviderAuthoritySection() {
+  const { t } = useLanguage();
   const ctaHref = "#"; // Dynamic link for bottom button
 
   const sequenceSteps = [
@@ -73,17 +75,15 @@ export default function ProviderAuthoritySection() {
         {/* Section Header */}
         <div className="flex flex-col items-center text-center space-y-3 w-full">
           <span className="text-[11px] font-bold tracking-widest text-[#C0272D] uppercase block">
-            PROVIDER AUTHORITY
+            {t("PROVIDER AUTHORITY")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            We establish your authority to offer the{" "}
-            <br className="hidden sm:inline" />
-            room &mdash; not only your identity.
+            {t("We establish your authority to offer the room — not only your identity.")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] leading-relaxed">
-            Identity confirms who you are. Provider authority confirms why you
-            &mdash; specifically &mdash; <br className="hidden sm:inline" />
-            may offer this specific room.
+            {t(
+              "Identity confirms who you are. Provider authority confirms why you — specifically — may offer this specific room.",
+            )}
           </p>
         </div>
 
@@ -107,7 +107,7 @@ export default function ProviderAuthoritySection() {
                         : "bg-[#F8F2E8] text-[#14213D] border border-[#ECDFC9]"
                     }`}
                   >
-                    {step.label}
+                    {t(step.label)}
                   </div>
 
                   {/* Arrow Connector */}
@@ -126,8 +126,7 @@ export default function ProviderAuthoritySection() {
           {/* Bottom Status Badges Row */}
           <div className="space-y-3">
             <p className="text-xs text-[#555E68] font-normal">
-              Authority evidence moves through explicit states &mdash; never
-              &ldquo;fully verified&rdquo;:
+              {t('Authority evidence moves through explicit states — never "fully verified":')}
             </p>
 
             <div className="flex flex-wrap items-center gap-2 pt-1">
@@ -139,7 +138,7 @@ export default function ProviderAuthoritySection() {
                   <span
                     className={`w-1.5 h-1.5 rounded-full ${badge.dot}`}
                   ></span>
-                  <span>{badge.label}</span>
+                  <span>{t(badge.label)}</span>
                 </span>
               ))}
             </div>
@@ -152,7 +151,7 @@ export default function ProviderAuthoritySection() {
             href={ctaHref}
             className="px-6 py-3 rounded-full border border-[#14213D] text-[#14213D] hover:bg-[#14213D] hover:text-white transition-all duration-200 text-xs font-semibold tracking-wide whitespace-nowrap active:scale-95 shadow-sm"
           >
-            How Verification &amp; Authority Work
+            {t("How Verification & Authority Work")}
           </a>
         </div>
       </div>

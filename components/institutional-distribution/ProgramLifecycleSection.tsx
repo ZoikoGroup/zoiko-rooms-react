@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface StepItem {
   number: string;
@@ -38,20 +39,22 @@ const lifecycleSteps: StepItem[] = [
 ];
 
 export default function ProgramLifecycleSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full text-[#14213D] py-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
       <div className="max-w-6xl mx-auto space-y-16">
         {/* Header Block */}
         <div className="text-center space-y-3 mx-auto">
           <span className="text-[11px] font-bold tracking-widest text-[#C8202C] uppercase block">
-            PROGRAM LIFECYCLE
+            {t("PROGRAM LIFECYCLE")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            A governed path from design to closure
+            {t("A governed path from design to closure")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl mx-auto">
-            No program moves forward with unsupported authority, excess data,
-            stale supply, or an unresolved material change.
+            {t(
+              "No program moves forward with unsupported authority, excess data, stale supply, or an unresolved material change.",
+            )}
           </p>
         </div>
 
@@ -74,10 +77,10 @@ export default function ProgramLifecycleSection() {
               {/* Step Title & Description */}
               <div className="space-y-2">
                 <h3 className="text-base sm:text-lg font-serif font-bold text-[#14213D]">
-                  {step.title}
+                  {t(step.title)}
                 </h3>
                 <p className="text-xs text-[#555E68] leading-relaxed">
-                  {step.description}
+                  {t(step.description)}
                 </p>
               </div>
             </motion.div>

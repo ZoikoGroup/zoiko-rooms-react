@@ -1,8 +1,10 @@
 "use client";
 
 import React from "react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function ContactLegalNoticesSection() {
+  const { t } = useLanguage();
   return (
     <section
       id="contact-and-notices"
@@ -13,23 +15,21 @@ export default function ContactLegalNoticesSection() {
         <span className="font-mono text-lg sm:text-xl text-[#C8202C] font-normal">
           20
         </span>
-        <span>Contact, legal notices &amp; language</span>
+        <span>{t("Contact, legal notices & language")}</span>
       </h2>
 
       {/* "In short" Highlight Box */}
       <div className="bg-[#F2DED2] rounded-2xl px-4 py-3 mb-8">
         <p className="text-sm font-bold text-[#93321F] leading-relaxed">
-          In short: here's how to reach us, and which language version controls.
+          {t("In short: here's how to reach us, and which language version controls.")}
         </p>
       </div>
 
       {/* Paragraph Content */}
       <p className="text-sm sm:text-base text-[#5C5B57] font-normal leading-relaxed mb-8">
-        Legal notices and formal correspondence should be sent to the contact
-        details in Clause 2, or through the Regional Legal Notices page for your
-        market. These Terms are drafted in English; where a translation is
-        provided for convenience, the English version controls in the event of a
-        conflict, unless a Regional Schedule states otherwise.
+        {t(
+          "Legal notices and formal correspondence should be sent to the contact details in Clause 2, or through the Regional Legal Notices page for your market. These Terms are drafted in English; where a translation is provided for convenience, the English version controls in the event of a conflict, unless a Regional Schedule states otherwise.",
+        )}
       </p>
 
       {/* Contact Button */}
@@ -38,7 +38,7 @@ export default function ContactLegalNoticesSection() {
           href="#"
           className="inline-block px-5 py-2.5 rounded-full border border-[#101C33] text-sm font-bold text-[#101C33] transition-colors hover:bg-[#101C33] hover:text-white"
         >
-          Contact Legal / Get help
+          {t("Contact Legal / Get help")}
         </a>
       </div>
     </section>

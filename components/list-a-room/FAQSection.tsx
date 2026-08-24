@@ -3,8 +3,10 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function FAQSection() {
+  const { t } = useLanguage();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleAccordion = (index: number) => {
@@ -65,10 +67,10 @@ export default function FAQSection() {
         {/* Section Header */}
         <div className="flex flex-col items-center text-center space-y-3 w-full">
           <span className="text-[11px] font-bold tracking-widest text-[#C0272D] uppercase block">
-            FAQ
+            {t("FAQ")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Questions about listing a room
+            {t("Questions about listing a room")}
           </h2>
         </div>
 
@@ -88,7 +90,7 @@ export default function FAQSection() {
                   aria-expanded={isOpen}
                 >
                   <span className="text-sm sm:text-base font-bold text-[#14213D] group-hover:text-[#C0272D] transition-colors pr-4">
-                    {faq.question}
+                    {t(faq.question)}
                   </span>
 
                   {/* Plus / Minus Icon Toggle */}
@@ -112,7 +114,7 @@ export default function FAQSection() {
                       className="overflow-hidden"
                     >
                       <p className="pb-5 text-xs sm:text-sm text-[#555E68] leading-relaxed font-normal pr-8">
-                        {faq.answer}
+                        {t(faq.answer)}
                       </p>
                     </motion.div>
                   )}

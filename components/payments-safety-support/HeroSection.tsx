@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const needs = [
   "Before paying",
@@ -16,6 +17,7 @@ const needs = [
 ];
 
 export function HeroSection() {
+  const { t } = useLanguage();
   const [selected, setSelected] = useState<string | null>(null);
 
   return (
@@ -27,33 +29,34 @@ export function HeroSection() {
               variants={fadeUp}
               className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-red"
             >
-              Payments, Safety & Support
+              {t("Payments, Safety & Support")}
             </motion.span>
             <motion.h1
               variants={fadeUp}
               className="font-heading text-4xl font-bold text-[#1B2438] sm:text-[34px]"
             >
-              Know what you are paying, who receives it, how to act safely, and where to get help
-              at every stage.
+              {t(
+                "Know what you are paying, who receives it, how to act safely, and where to get help at every stage."
+              )}
             </motion.h1>
             <motion.p variants={fadeUp} className="max-w-lg text-[15px] leading-relaxed text-[#7A7266]">
-              Review complete costs and current terms before commitment, use only the disclosed
-              authorized payment route, recognize risky requests, report concerns in context, and
-              follow a visible support and dispute lifecycle.
+              {t(
+                "Review complete costs and current terms before commitment, use only the disclosed authorized payment route, recognize risky requests, report concerns in context, and follow a visible support and dispute lifecycle."
+              )}
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-col gap-3 sm:flex-row">
               <Button href="#before-paying" size="lg" variant="secondary">
-                Review Payment Steps
+                {t("Review Payment Steps")}
               </Button>
               <Button href="/resources" size="lg" variant="outline">
-                Get Help Now
+                {t("Get Help Now")}
               </Button>
             </motion.div>
 
             <motion.div variants={fadeUp} className="flex flex-col gap-3">
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-navy">
-                Choose a Need
+                {t("Choose a Need")}
               </span>
               <div className="flex flex-wrap gap-2">
                 {needs.map((need) => {
@@ -69,7 +72,7 @@ export function HeroSection() {
                           : "border-[#E9E0D3] bg-white text-brand-ink hover:border-brand-navy/40"
                       }`}
                     >
-                      {need}
+                      {t(need)}
                     </button>
                   );
                 })}
@@ -85,7 +88,7 @@ export function HeroSection() {
           >
             <NaturalImage
               src="/images/payments-safety-support/hero-couple.png"
-              alt="A couple who feel safe and supported after a room viewing"
+              alt={t("A couple who feel safe and supported after a room viewing")}
             />
           </motion.div>
         </Reveal>

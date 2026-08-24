@@ -1,5 +1,8 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
 import { regionOptions, languageOptions, currencyOptions } from "@/lib/nav-data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { footerColumns } from "./footer-data";
 import { FooterBrand } from "./FooterBrand";
 import { FooterPillDropdown } from "./FooterPillDropdown";
@@ -9,6 +12,8 @@ import { FooterOffices } from "./FooterOffices";
 import { FooterBottomBar } from "./FooterBottomBar";
 
 export function Footer() {
+  const { language, setLanguage } = useLanguage();
+
   return (
     <footer className="mt-auto bg-[#1B2438]">
       <Container className="flex flex-col gap-10 py-14">
@@ -17,7 +22,13 @@ export function Footer() {
             <FooterBrand />
             <div className="flex flex-wrap items-center gap-2">
               <FooterPillDropdown storageKey="zoiko-region" ariaLabel="Select region" options={regionOptions} />
-              <FooterPillDropdown storageKey="zoiko-language" ariaLabel="Select language" options={languageOptions} />
+              <FooterPillDropdown
+                storageKey="zoiko-language"
+                ariaLabel="Select language"
+                options={languageOptions}
+                value={language}
+                onSelect={setLanguage}
+              />
               <FooterPillDropdown
                 storageKey="zoiko-currency"
                 ariaLabel="Select currency"

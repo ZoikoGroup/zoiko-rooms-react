@@ -1,5 +1,6 @@
 "use client";
 
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { StepShell } from "../StepShell";
 import { WizardFooter } from "../WizardFooter";
 import type { ListingFormData } from "../types";
@@ -15,6 +16,7 @@ type Step4Props = {
 };
 
 export function Step4RoomPassportMedia({ data, onToggleChecklist, onBack, onSaveExit, onContinue }: Step4Props) {
+  const { t } = useLanguage();
   return (
     <StepShell
       title="Room Passport media"
@@ -22,7 +24,7 @@ export function Step4RoomPassportMedia({ data, onToggleChecklist, onBack, onSave
       footer={<WizardFooter showBack onBack={onBack} onSaveExit={onSaveExit} onContinue={onContinue} />}
     >
       <div className="flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-[#E9E0D3] text-sm text-neutral-400">
-        Drag photos here, or click to upload (disabled in this prototype)
+        {t("Drag photos here, or click to upload (disabled in this prototype)")}
       </div>
 
       <div className="flex flex-col gap-2.5">
@@ -34,7 +36,7 @@ export function Step4RoomPassportMedia({ data, onToggleChecklist, onBack, onSave
               onChange={() => onToggleChecklist(item)}
               className="h-4 w-4 rounded border-neutral-300 accent-brand-navy"
             />
-            {item}
+            {t(item)}
           </label>
         ))}
       </div>

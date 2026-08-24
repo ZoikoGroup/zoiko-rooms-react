@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface FeatureItem {
   title: string;
@@ -43,6 +44,7 @@ const financialRows: FinancialRow[] = [
 ];
 
 export default function ApplicationsAgreementsPaymentsSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full bg-white py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -51,16 +53,17 @@ export default function ApplicationsAgreementsPaymentsSection() {
           {/* Header Block */}
           <div className="space-y-3">
             <span className="text-xs font-mono font-bold tracking-widest text-[#DC2626] uppercase">
-              APPLICATIONS, AGREEMENTS &amp; PAYMENTS
+              {t("Applications, Agreements & Payments")}
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-[27px] font-serif font-bold text-[#14213D] leading-tight">
-              Applications, decisions, agreements, and payments &mdash;
-              separately owned, never blurred together.
+              {t(
+                "Applications, decisions, agreements, and payments — separately owned, never blurred together."
+              )}
             </h2>
             <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed">
-              Every decision has a named human owner and a criteria version.
-              Every payment shows payer, recipient, route, and status confirmed
-              by the processor &mdash; never assumed.
+              {t(
+                "Every decision has a named human owner and a criteria version. Every payment shows payer, recipient, route, and status confirmed by the processor — never assumed."
+              )}
             </p>
           </div>
 
@@ -78,11 +81,11 @@ export default function ApplicationsAgreementsPaymentsSection() {
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#1A2E6E] shrink-0" />
                   <h3 className="text-sm font-bold text-[#14213D]">
-                    {item.title}
+                    {t(item.title)}
                   </h3>
                 </div>
                 <p className="text-xs text-[#555E68] leading-relaxed pl-3.5 font-normal">
-                  {item.description}
+                  {t(item.description)}
                 </p>
               </motion.div>
             ))}
@@ -94,7 +97,7 @@ export default function ApplicationsAgreementsPaymentsSection() {
               href="#explore-workflow"
               className="inline-block bg-transparent hover:bg-white text-[#14213D] text-xs font-semibold px-6 py-3 rounded-full border border-[#14213D] transition-colors shadow-xs"
             >
-              Explore this workflow
+              {t("Explore this workflow")}
             </a>
           </div>
         </div>
@@ -112,7 +115,7 @@ export default function ApplicationsAgreementsPaymentsSection() {
             <div className="relative w-full h-[200px] sm:h-[240px]">
               <Image
                 src="/images/pro-overview/3.png"
-                alt="Applications, Agreements and Payments Illustration"
+                alt={t("Applications, Agreements and Payments Illustration")}
                 fill
                 className="object-cover object-center"
                 priority
@@ -122,7 +125,7 @@ export default function ApplicationsAgreementsPaymentsSection() {
             {/* Financial Lifecycle Table */}
             <div className="p-6 sm:p-8 space-y-5">
               <span className="text-[11px] font-mono font-bold text-[#736B62] block">
-                Generic room financial lifecycle &middot; illustrative, USD
+                {t("Generic room financial lifecycle · illustrative, USD")}
               </span>
 
               <div className="divide-y divide-[#F0ECE1]">
@@ -132,7 +135,7 @@ export default function ApplicationsAgreementsPaymentsSection() {
                     className="py-3 flex items-center justify-between gap-4 text-xs font-sans first:pt-1 last:pb-1"
                   >
                     <span className="text-[#555E68] font-normal">
-                      {row.label}
+                      {t(row.label)}
                     </span>
                     <span
                       className={`${
@@ -141,7 +144,9 @@ export default function ApplicationsAgreementsPaymentsSection() {
                           : "font-semibold text-[#14213D]"
                       }`}
                     >
-                      {row.value}
+                      {row.label === "Refund state example"
+                        ? t(row.value)
+                        : row.value}
                     </span>
                   </div>
                 ))}
@@ -149,9 +154,9 @@ export default function ApplicationsAgreementsPaymentsSection() {
 
               {/* Disclaimer Note */}
               <p className="text-[10px] text-[#A0AEC0] leading-relaxed font-normal pt-2 border-t border-dashed border-[#EAE6DF]">
-                These figures demonstrate how Pro displays charges and statuses.
-                They are not Zoiko Rooms prices, an escrow promise, or a
-                guaranteed refund.
+                {t(
+                  "These figures demonstrate how Pro displays charges and statuses. They are not Zoiko Rooms prices, an escrow promise, or a guaranteed refund."
+                )}
               </p>
             </div>
           </motion.div>

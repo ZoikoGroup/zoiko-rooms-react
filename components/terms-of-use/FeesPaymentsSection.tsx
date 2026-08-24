@@ -2,8 +2,10 @@
 
 import React from "react";
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function FeesPaymentsSection() {
+  const { t } = useLanguage();
   return (
     <section
       id="fees-and-payments"
@@ -14,24 +16,21 @@ export default function FeesPaymentsSection() {
         <span className="font-mono text-lg sm:text-xl text-[#C8202C] font-normal">
           09
         </span>
-        <span>Fees, payments, deposits &amp; payouts</span>
+        <span>{t("Fees, payments, deposits & payouts")}</span>
       </h2>
 
       {/* "In short" Highlight Box */}
       <div className="bg-[#F2DED2] rounded-2xl px-4 py-3 mb-8">
         <p className="text-sm font-bold text-[#93321F] leading-relaxed">
-          In short: our Payment Terms govern the details &mdash; this clause
-          just incorporates them.
+          {t("In short: our Payment Terms govern the details — this clause just incorporates them.")}
         </p>
       </div>
 
       {/* Paragraph Content */}
       <p className="text-sm sm:text-base text-[#5C5B57] font-normal leading-relaxed mb-6">
-        Fees, rent, deposits, taxes, payment methods, refunds and provider
-        payouts are governed in detail by our Payment Terms, which are
-        incorporated into these Terms by reference. The version of Payment Terms
-        in effect at the time of a transaction applies to that transaction; we
-        don't duplicate or re-charge amounts already correctly processed.
+        {t(
+          "Fees, rent, deposits, taxes, payment methods, refunds and provider payouts are governed in detail by our Payment Terms, which are incorporated into these Terms by reference. The version of Payment Terms in effect at the time of a transaction applies to that transaction; we don't duplicate or re-charge amounts already correctly processed.",
+        )}
       </p>
 
       {/* Action Link */}
@@ -40,7 +39,7 @@ export default function FeesPaymentsSection() {
           href="#"
           className="inline-flex items-center gap-1.5 text-sm font-bold text-[#93321F] hover:underline"
         >
-          <span>Read the full Payment Terms</span>
+          <span>{t("Read the full Payment Terms")}</span>
           <ArrowRight className="w-4 h-4" />
         </a>
       </div>

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface FAQItem {
   question: string;
@@ -37,6 +38,7 @@ const faqData: FAQItem[] = [
 ];
 
 export default function FAQSection() {
+  const { t } = useLanguage();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleAccordion = (index: number) => {
@@ -49,10 +51,10 @@ export default function FAQSection() {
         {/* Header Block */}
         <div className="text-center space-y-3">
           <span className="text-[11px] font-bold tracking-widest text-[#C8202C] uppercase block">
-            FAQ
+            {t("FAQ")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Common questions
+            {t("Common questions")}
           </h2>
         </div>
 
@@ -70,7 +72,7 @@ export default function FAQSection() {
                   aria-expanded={isOpen}
                 >
                   <span className="text-sm sm:text-base font-bold text-[#14213D] group-hover:text-[#C8202C] transition-colors pr-6">
-                    {item.question}
+                    {t(item.question)}
                   </span>
 
                   {/* Plus / Minus Icon in #C8202C */}
@@ -97,7 +99,7 @@ export default function FAQSection() {
                       className="overflow-hidden"
                     >
                       <p className="pt-3 pb-1 text-xs sm:text-sm text-[#555E68] leading-relaxed max-w-3xl">
-                        {item.answer}
+                        {t(item.answer)}
                       </p>
                     </motion.div>
                   )}

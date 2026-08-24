@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion, type Variants } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const floatUpVariants: Variants = {
   hidden: {
@@ -24,6 +25,7 @@ interface BrowseMethodsProps {
 }
 
 export default function BrowseMethodsSection({ onJumpToFilters }: BrowseMethodsProps) {
+  const { t } = useLanguage();
   return (
     <section className="w-full border-t border-stone-200 px-6 py-12 font-['Inter',sans-serif] md:px-24">
       <div className="w-full max-w-[1240px] md:px-8">
@@ -37,7 +39,7 @@ export default function BrowseMethodsSection({ onJumpToFilters }: BrowseMethodsP
             className="flex w-full flex-col items-start justify-start"
           >
             <span className="text-xs font-semibold uppercase leading-5 tracking-wide text-red-600">
-              BROWSE METHODS
+              {t("BROWSE METHODS")}
             </span>
           </motion.div>
 
@@ -50,7 +52,7 @@ export default function BrowseMethodsSection({ onJumpToFilters }: BrowseMethodsP
             className="flex w-full flex-col items-start justify-start"
           >
             <h2 className="font-['Fraunces',serif] text-2xl font-semibold leading-10 text-gray-800">
-              Find cities by region, university, work, healthcare, or move type
+              {t("Find cities by region, university, work, healthcare, or move type")}
             </h2>
           </motion.div>
 
@@ -63,8 +65,9 @@ export default function BrowseMethodsSection({ onJumpToFilters }: BrowseMethodsP
             className="flex max-w-[640px] flex-col items-start justify-start pb-5 pt-1"
           >
             <p className="text-sm font-normal leading-6 text-stone-500">
-              The tabs above the city grid filter by these same categories. They organize supported
-              city pages without duplicating the same destination under misleading labels.
+              {t(
+                "The tabs above the city grid filter by these same categories. They organize supported city pages without duplicating the same destination under misleading labels.",
+              )}
             </p>
           </motion.div>
 
@@ -81,7 +84,7 @@ export default function BrowseMethodsSection({ onJumpToFilters }: BrowseMethodsP
               onClick={onJumpToFilters}
               className="inline-flex cursor-pointer items-center justify-center rounded-full border border-stone-200 bg-white px-7 py-3.5 text-base font-semibold text-gray-800 transition-colors duration-200"
             >
-              Jump to city filters
+              {t("Jump to city filters")}
             </motion.button>
           </motion.div>
         </div>

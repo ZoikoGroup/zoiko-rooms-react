@@ -5,6 +5,7 @@ import { Flag, Wallet, ShieldCheck, FileText, CreditCard, AlertTriangle } from "
 import { Container, Reveal, EvidenceBadge } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
 import { Eyebrow, SectionTitle, SectionDivider } from "./shared";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const items = [
   { icon: Flag, label: "Availability and arrival-date status" },
@@ -25,15 +26,16 @@ const statuses = [
 ];
 
 export function ConfirmationSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-10">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Before You Continue</Eyebrow>
+            <Eyebrow>{t("Before You Continue")}</Eyebrow>
             <SectionTitle>
-              Know what&apos;s confirmed, what&apos;s flexible, and what still needs local
-              confirmation
+              {t("Know what's confirmed, what's flexible, and what still needs local confirmation")}
             </SectionTitle>
           </div>
 
@@ -47,14 +49,14 @@ export function ConfirmationSection() {
                 className="flex items-center gap-3 rounded-xl border border-[#E9E0D3] bg-white px-5 py-4 shadow-sm"
               >
                 <Icon className="h-4 w-4 shrink-0 text-brand-red" />
-                <span className="text-sm text-brand-ink">{label}</span>
+                <span className="text-sm text-brand-ink">{t(label)}</span>
               </motion.div>
             ))}
           </div>
 
           <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
             {statuses.map(({ label, tone }) => (
-              <EvidenceBadge key={label} label={label} tone={tone} variant="outline" />
+              <EvidenceBadge key={label} label={t(label)} tone={tone} variant="outline" />
             ))}
           </motion.div>
         </Reveal>

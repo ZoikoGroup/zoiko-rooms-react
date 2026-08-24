@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface AuthorizationCard {
   title: string;
@@ -115,6 +116,7 @@ const scopeCategories: ScopeCategory[] = [
 ];
 
 export default function AuthorizationAndEnvironmentsSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full bg-[#FAF8F5] text-[#14213D] py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto space-y-14">
@@ -123,16 +125,16 @@ export default function AuthorizationAndEnvironmentsSection() {
           <div className="flex items-center gap-2">
             <span className="w-4 h-[2px] bg-[#1A2E6E]" />
             <span className="text-xs font-bold tracking-widest text-[#1A2E6E] uppercase">
-              AUTHORIZATION &amp; ENVIRONMENTS
+              {t("AUTHORIZATION & ENVIRONMENTS")}
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Least privilege, by default &mdash; not by request.
+            {t("Least privilege, by default — not by request.")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
-            Every connection has a named owner, a supported authorization
-            method, and scopes that are explicit about what they read, write, or
-            hear about.
+            {t(
+              "Every connection has a named owner, a supported authorization method, and scopes that are explicit about what they read, write, or hear about.",
+            )}
           </p>
         </div>
 
@@ -148,10 +150,10 @@ export default function AuthorizationAndEnvironmentsSection() {
               className="bg-[#FFFFFF01] rounded-2xl p-6 sm:p-7 border border-[#EAE6DF] shadow-xs space-y-2.5"
             >
               <h3 className="text-xs font-bold tracking-wider text-[#1A2E6E] uppercase">
-                {card.title}
+                {t(card.title)}
               </h3>
               <p className="text-xs text-[#555E68] leading-relaxed">
-                {card.description}
+                {t(card.description)}
               </p>
             </motion.div>
           ))}
@@ -163,7 +165,7 @@ export default function AuthorizationAndEnvironmentsSection() {
           <div className="flex items-center gap-2">
             <span className="w-4 h-[2px] bg-[#1A2E6E]" />
             <span className="text-xs font-bold tracking-widest text-[#1A2E6E] uppercase">
-              ENVIRONMENT LADDER
+              {t("ENVIRONMENT LADDER")}
             </span>
           </div>
 
@@ -181,10 +183,10 @@ export default function AuthorizationAndEnvironmentsSection() {
                   {step.number}
                 </span>
                 <h3 className="text-sm font-serif font-bold text-[#14213D]">
-                  {step.title}
+                  {t(step.title)}
                 </h3>
                 <p className="text-xs text-[#555E68] leading-relaxed">
-                  {step.description}
+                  {t(step.description)}
                 </p>
               </div>
             ))}
@@ -205,7 +207,7 @@ export default function AuthorizationAndEnvironmentsSection() {
                 <span
                   className={`inline-block px-2.5 py-1 rounded-md text-[10px] font-mono font-bold tracking-wider ${cat.badgeBg} ${cat.badgeTextColor}`}
                 >
-                  {cat.badgeText}
+                  {t(cat.badgeText)}
                 </span>
 
                 {/* Code Scopes List */}
@@ -221,8 +223,9 @@ export default function AuthorizationAndEnvironmentsSection() {
           {/* Footer Note */}
           <div className="pt-2 text-center sm:text-left">
             <p className="text-xs font-mono text-[#706B65]">
-              Every scope maps to a named approver and a review date &mdash;
-              nothing is granted &quot;just in case.&quot;
+              {t(
+                'Every scope maps to a named approver and a review date — nothing is granted "just in case."',
+              )}
             </p>
           </div>
         </div>

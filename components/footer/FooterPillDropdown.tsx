@@ -9,20 +9,35 @@ type FooterPillDropdownProps = {
   options: PillOption[];
   ariaLabel: string;
   showCode?: boolean;
+  onSelect?: (code: string) => void;
+  /** When provided, the displayed selection is controlled externally (e.g. shared language state) instead of tracked locally. */
+  value?: string;
 };
 
-export function FooterPillDropdown({ storageKey, options, ariaLabel, showCode = false }: FooterPillDropdownProps) {
-  const [selected, setSelected] = useState(options[0].code);
+export function FooterPillDropdown({
+  storageKey,
+  options,
+  ariaLabel,
+  showCode = false,
+  onSelect,
+  value,
+}: FooterPillDropdownProps) {
+  const [internalSelected, setInternalSelected] = useState(options[0].code);
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const selected = value ?? internalSelected;
 
   useEffect(() => {
+    if (value !== undefined) return;
     const stored = window.localStorage.getItem(storageKey);
     if (stored && options.some((option) => option.code === stored)) {
       // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time sync from localStorage on mount, not a render loop
-      setSelected(stored);
+      setInternalSelected(stored);
+      onSelect?.(stored);
+    } else {
+      onSelect?.(options[0].code);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- run once on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- run once on mount, to apply the stored (or default) choice's side effect
   }, []);
 
   useEffect(() => {
@@ -46,9 +61,10 @@ export function FooterPillDropdown({ storageKey, options, ariaLabel, showCode = 
   }, [open]);
 
   function handleSelect(code: string) {
-    setSelected(code);
+    if (value === undefined) setInternalSelected(code);
     setOpen(false);
     window.localStorage.setItem(storageKey, code);
+    onSelect?.(code);
   }
 
   const current = options.find((option) => option.code === selected) ?? options[0];

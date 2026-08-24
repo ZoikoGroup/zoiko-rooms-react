@@ -1,5 +1,8 @@
+"use client";
+
 import { Container, Reveal, Card } from "@/components/ui";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const models = [
   { title: "Public referral", description: "Invites or directs a participant in — no eligibility or outcome guarantee." },
@@ -14,23 +17,25 @@ const models = [
 ];
 
 export function OperatingModelsSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col items-center gap-4 text-center">
-          <Eyebrow>Operating Models</Eyebrow>
-          <SectionTitle>Choose the relationship, never hide the decision</SectionTitle>
+          <Eyebrow>{t("Operating Models")}</Eyebrow>
+          <SectionTitle>{t("Choose the relationship, never hide the decision")}</SectionTitle>
           <Paragraph className="mx-auto">
-            A public body can refer, assess, distribute, manage, nominate, allocate, subsidize,
-            bill directly, or simply support — but what it doesn&apos;t cover always stays
-            visible.
+            {t(
+              "A public body can refer, assess, distribute, manage, nominate, allocate, subsidize, bill directly, or simply support — but what it doesn't cover always stays visible."
+            )}
           </Paragraph>
 
           <div className="mt-6 grid w-full grid-cols-1 gap-4 text-left sm:grid-cols-3">
             {models.map(({ title, description }) => (
               <Card key={title} className="p-6">
-                <h3 className="font-heading text-base font-medium text-brand-navy">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{description}</p>
+                <h3 className="font-heading text-base font-medium text-brand-navy">{t(title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{t(description)}</p>
               </Card>
             ))}
           </div>

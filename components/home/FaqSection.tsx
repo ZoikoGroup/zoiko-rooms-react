@@ -5,6 +5,7 @@ import { Plus } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Container, Reveal } from "@/components/ui";
 import { easeOut } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const intro = {
   question: "What is Zoiko Rooms?",
@@ -41,6 +42,7 @@ const faqs = [
 
 export function FaqSection() {
   const [openIndex, setOpenIndex] = useState(0);
+  const { t } = useLanguage();
 
   return (
     <section className="py-16 sm:py-24">
@@ -48,9 +50,9 @@ export function FaqSection() {
         <Reveal className="mx-auto flex max-w-3xl flex-col gap-8">
           <div className="rounded-2xl bg-white p-6 shadow-sm sm:p-8">
             <h3 className="font-heading text-lg font-semibold text-brand-navy sm:text-xl">
-              {intro.question}
+              {t(intro.question)}
             </h3>
-            <p className="mt-3 text-sm text-neutral-600 sm:text-base">{intro.answer}</p>
+            <p className="mt-3 text-sm text-neutral-600 sm:text-base">{t(intro.answer)}</p>
           </div>
 
           <div className="flex flex-col divide-y divide-black/10">
@@ -64,7 +66,7 @@ export function FaqSection() {
                     className="flex w-full items-center justify-between gap-4 py-5 text-left"
                   >
                     <span className="font-heading text-base font-medium text-brand-navy sm:text-lg">
-                      {faq.question}
+                      {t(faq.question)}
                     </span>
                     <motion.span
                       animate={{ rotate: isOpen ? 45 : 0 }}
@@ -83,7 +85,7 @@ export function FaqSection() {
                         transition={{ duration: 0.25, ease: easeOut }}
                         className="overflow-hidden"
                       >
-                        <p className="pb-5 text-sm text-neutral-600 sm:text-base">{faq.answer}</p>
+                        <p className="pb-5 text-sm text-neutral-600 sm:text-base">{t(faq.answer)}</p>
                       </motion.div>
                     )}
                   </AnimatePresence>

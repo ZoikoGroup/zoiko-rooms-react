@@ -5,6 +5,7 @@ import { Container, Reveal } from "@/components/ui";
 import { fadeUp, easeOut } from "@/lib/motion";
 import { Eyebrow, SectionTitle, SectionDivider } from "./shared";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const destinations = [
   {
@@ -31,13 +32,15 @@ const destinations = [
 ];
 
 export function DestinationPathwaysSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-10">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Destination Pathways</Eyebrow>
-            <SectionTitle>Only destinations with current inventory or substantial guidance</SectionTitle>
+            <Eyebrow>{t("Destination Pathways")}</Eyebrow>
+            <SectionTitle>{t("Only destinations with current inventory or substantial guidance")}</SectionTitle>
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -56,21 +59,21 @@ export function DestinationPathwaysSection() {
                 </div>
                 <div className="flex flex-col gap-1.5 p-5">
                   <h3 className="font-heading text-lg font-medium text-brand-navy">{city}</h3>
-                  <p className="text-sm text-neutral-500">{description}</p>
+                  <p className="text-sm text-neutral-500">{t(description)}</p>
                   <p className="mt-1 text-sm font-semibold text-brand-navy">{priceRange}</p>
-                  <p className="text-xs text-neutral-400">{reviewedDate}</p>
+                  <p className="text-xs text-neutral-400">{t(reviewedDate)}</p>
                   <div className="mt-3 flex items-center justify-between border-t border-[#E9E0D3] pt-3">
                     <a
                       href="/find-a-room"
                       className="text-xs font-semibold text-brand-red transition-colors hover:text-brand-red-dark"
                     >
-                      Explore Rooms
+                      {t("Explore Rooms")}
                     </a>
                     <button
                       type="button"
                       className="text-xs font-semibold text-neutral-500 transition-colors hover:text-brand-navy"
                     >
-                      Save alert
+                      {t("Save alert")}
                     </button>
                   </div>
                 </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { StepShell } from "../StepShell";
 import { WizardFooter } from "../WizardFooter";
 
@@ -18,6 +19,7 @@ type Step1Props = {
 };
 
 export function Step1ProgressOverview({ onSaveExit, onContinue }: Step1Props) {
+  const { t } = useLanguage();
   return (
     <StepShell
       title="Preparing your listing"
@@ -29,17 +31,18 @@ export function Step1ProgressOverview({ onSaveExit, onContinue }: Step1Props) {
           <li key={title} className="flex items-start gap-2.5 text-sm leading-relaxed text-neutral-600">
             <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-red" />
             <span>
-              <span className="font-semibold text-brand-navy">{title}</span> — {description}
+              <span className="font-semibold text-brand-navy">{t(title)}</span> — {t(description)}
             </span>
           </li>
         ))}
       </ul>
 
       <div className="rounded-2xl border-l-4 border-brand-red bg-[#F6ECD4] p-5">
-        <p className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-red">Nothing Is Public Yet</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-red">{t("Nothing Is Public Yet")}</p>
         <p className="mt-2 text-sm leading-relaxed text-brand-navy">
-          Everything you enter stays in a private draft. Zoiko Rooms reviews authority evidence
-          before any listing can publish.
+          {t(
+            "Everything you enter stays in a private draft. Zoiko Rooms reviews authority evidence before any listing can publish.",
+          )}
         </p>
       </div>
     </StepShell>

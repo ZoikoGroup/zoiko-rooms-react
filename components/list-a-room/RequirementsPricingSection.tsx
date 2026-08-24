@@ -3,8 +3,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function RequirementsPricingSection() {
+  const { t } = useLanguage();
   const ctaHref = "#"; // Dynamic link for button
 
   const requirementsList = [
@@ -36,15 +38,15 @@ export default function RequirementsPricingSection() {
         {/* Section Header */}
         <div className="flex flex-col items-center text-center space-y-3 w-full">
           <span className="text-[11px] font-bold tracking-widest text-[#C0272D] uppercase block">
-            REQUIREMENTS &amp; PRICING
+            {t("REQUIREMENTS & PRICING")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Know what is required before you <br className="hidden sm:inline" />
-            commit.
+            {t("Know what is required before you commit.")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] leading-relaxed max-w-xl">
-            What&apos;s required depends on your market, provider type, property
-            arrangement and applicable licensing.
+            {t(
+              "What's required depends on your market, provider type, property arrangement and applicable licensing.",
+            )}
           </p>
         </div>
 
@@ -77,10 +79,10 @@ export default function RequirementsPricingSection() {
                 {/* Text Block */}
                 <div className="space-y-0.5">
                   <h3 className="text-sm font-bold text-[#14213D] leading-snug">
-                    {item.title}
+                    {t(item.title)}
                   </h3>
                   <p className="text-xs text-[#555E68] leading-relaxed font-normal">
-                    {item.description}
+                    {t(item.description)}
                   </p>
                 </div>
               </div>
@@ -97,12 +99,12 @@ export default function RequirementsPricingSection() {
           >
             <div className="space-y-3">
               <h3 className="text-2xl sm:text-3xl font-serif font-bold leading-snug">
-                See current charges for your market
+                {t("See current charges for your market")}
               </h3>
               <p className="text-xs sm:text-sm text-[#A0AEC0] leading-relaxed font-normal">
-                Standard listing charges and optional services are shown on the
-                Requirements &amp; Pricing page before you commit to anything
-                &mdash; no hidden or preselected upgrades.
+                {t(
+                  "Standard listing charges and optional services are shown on the Requirements & Pricing page before you commit to anything — no hidden or preselected upgrades.",
+                )}
               </p>
             </div>
 
@@ -111,7 +113,7 @@ export default function RequirementsPricingSection() {
                 href={ctaHref}
                 className="w-full w-full inline-flex items-center justify-center bg-white hover:bg-gray-100 text-[#14213D] text-xs font-semibold px-6 py-3.5 rounded-full transition-all duration-200 shadow-sm active:scale-95"
               >
-                View Requirements &amp; Pricing &rarr;
+                {t("View Requirements & Pricing")} &rarr;
               </a>
             </div>
           </motion.div>

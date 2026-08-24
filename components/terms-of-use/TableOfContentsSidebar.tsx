@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export interface TocItem {
   id: string;
@@ -64,6 +65,7 @@ export const tocItems: TocItem[] = [
 ];
 
 export default function TableOfContentsSidebar() {
+  const { t } = useLanguage();
   const [activeId, setActiveId] = useState<string>("about-these-terms");
 
   useEffect(() => {
@@ -102,7 +104,7 @@ export default function TableOfContentsSidebar() {
     <aside className="w-full lg:w-72 flex-shrink-0 lg:sticky lg:top-10 space-y-8 font-sans antialiased">
       <div>
         <span className="text-[11px] font-mono font-bold tracking-widest text-[#A39B8B] uppercase block mb-4">
-          ON THIS PAGE
+          {t("ON THIS PAGE")}
         </span>
 
         {/* Vertical Stepper List */}
@@ -136,7 +138,7 @@ export default function TableOfContentsSidebar() {
                   {item.number}
                 </span>
 
-                <span className="truncate">{item.title}</span>
+                <span className="truncate">{t(item.title)}</span>
               </a>
             );
           })}

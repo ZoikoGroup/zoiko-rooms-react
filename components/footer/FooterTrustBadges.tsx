@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { trustBadges, type TrustBadge } from "./footer-data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const toneClasses: Record<TrustBadge["tone"], string> = {
   red: "bg-red-500/10 text-red-400",
@@ -9,6 +12,8 @@ const toneClasses: Record<TrustBadge["tone"], string> = {
 };
 
 export function FooterTrustBadges() {
+  const { t } = useLanguage();
+
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {trustBadges.map(({ icon: Icon, title, description, href, tone }) => (
@@ -17,11 +22,11 @@ export function FooterTrustBadges() {
             <Icon className="h-4 w-4" />
           </span>
           <div className="flex flex-col gap-1">
-            <p className="text-sm font-semibold text-white">{title}</p>
+            <p className="text-sm font-semibold text-white">{t(title)}</p>
             <p className="text-[12px] leading-relaxed text-white/60">
-              {description}{" "}
+              {t(description)}{" "}
               <Link href={href} className="font-medium text-[#D98C5F] underline-offset-2 hover:text-white hover:underline">
-                Learn more
+                {t("Learn more")}
               </Link>
             </p>
           </div>

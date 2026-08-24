@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface TagItem {
   label: string;
@@ -18,6 +19,7 @@ const tags: TagItem[] = [
 ];
 
 export default function FinalStepSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto">
@@ -32,7 +34,7 @@ export default function FinalStepSection() {
           <div className="bg-gradient-to-r from-[#0F0B08F0] to-[#0F0B088C] absolute inset-0 z-0 select-none pointer-events-none">
             <Image
               src="/images/integration/final.png"
-              alt="Background overlay"
+              alt={t("Background overlay")}
               fill
               className="object-cover object-center opacity-25 mix-blend-luminosity"
               priority
@@ -48,17 +50,18 @@ export default function FinalStepSection() {
               <div className="flex items-center gap-2">
                 <span className="w-4 h-[2px] bg-[#F8A182]" />
                 <span className="text-xs font-mono font-bold tracking-widest text-[#F8A182] uppercase">
-                  FINAL STEP
+                  {t("FINAL STEP")}
                 </span>
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-serif font-medium leading-tight text-white">
-                Design the connection around explicit authority &mdash; not
-                around convenience.
+                {t(
+                  "Design the connection around explicit authority — not around convenience.",
+                )}
               </h2>
               <p className="text-xs sm:text-sm text-[#A0AEC0] leading-relaxed font-normal max-w-xl">
-                Choose an integration pattern, review authorization and data
-                governance, examine event and failure behavior, or start a
-                controlled technical discovery with our team.
+                {t(
+                  "Choose an integration pattern, review authorization and data governance, examine event and failure behavior, or start a controlled technical discovery with our team.",
+                )}
               </p>
             </div>
 
@@ -70,7 +73,7 @@ export default function FinalStepSection() {
                   href={tag.href}
                   className="px-4 py-1.5 rounded-full border border-[#2D3748] hover:bg-[#2D3748] hover:border-[#4A5568] transition-colors text-xs font-mono text-[#E2E8F0]"
                 >
-                  {tag.label}
+                  {t(tag.label)}
                 </a>
               ))}
             </div>
@@ -81,7 +84,7 @@ export default function FinalStepSection() {
                 href="#contact"
                 className="inline-block bg-[#1E3A8A] hover:bg-[#2563EB] text-white text-xs font-semibold px-6 py-3 rounded-full transition-colors shadow-md"
               >
-                Talk to Zoiko Rooms
+                {t("Talk to Zoiko Rooms")}
               </a>
             </div>
           </div>

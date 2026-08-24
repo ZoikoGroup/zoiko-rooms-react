@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface AssuranceCard {
   title: string;
@@ -42,16 +43,17 @@ const assuranceCards: AssuranceCard[] = [
 ];
 
 export default function AssuranceAndProcurementSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header Block */}
         <div className="text-center space-y-3 max-w-3xl mx-auto">
           <span className="text-xs font-mono font-bold tracking-widest text-[#DC2626] uppercase">
-            ASSURANCE &amp; PROCUREMENT
+            {t("Assurance & Procurement")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-serif font-bold text-[#14213D] leading-tight">
-            What a compliance or security reviewer can expect to see
+            {t("What a compliance or security reviewer can expect to see")}
           </h2>
         </div>
 
@@ -67,10 +69,10 @@ export default function AssuranceAndProcurementSection() {
               className="bg-white rounded-2xl p-6 border border-[#EAE6DF] shadow-xs flex flex-col justify-start space-y-2 text-left"
             >
               <h3 className="text-sm font-serif font-bold text-[#14213D] leading-snug">
-                {card.title}
+                {t(card.title)}
               </h3>
               <p className="text-xs text-[#555E68] leading-relaxed font-normal">
-                {card.description}
+                {t(card.description)}
               </p>
             </motion.div>
           ))}

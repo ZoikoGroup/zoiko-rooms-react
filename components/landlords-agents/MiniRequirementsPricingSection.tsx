@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Container, Reveal } from "@/components/ui";
 import { fadeUp, easeOut } from "@/lib/motion";
 import { FormField } from "@/components/start-a-listing/FormField";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
 import { calculatorProviderTypes, calculatorLocations, buildRequirementsMessage, requirementCards, platformCostRows } from "./data";
 
@@ -21,6 +22,7 @@ function renderMessage(message: string) {
 }
 
 export function MiniRequirementsPricingSection() {
+  const { t } = useLanguage();
   const [providerType, setProviderType] = useState(calculatorProviderTypes[0]);
   const [location, setLocation] = useState(calculatorLocations[0]);
   const [resultKey, setResultKey] = useState(`${calculatorProviderTypes[0]}|${calculatorLocations[0]}`);
@@ -33,29 +35,30 @@ export function MiniRequirementsPricingSection() {
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Requirements &amp; Pricing</Eyebrow>
-            <SectionTitle>What&apos;s required, and what it costs</SectionTitle>
+            <Eyebrow>{t("Requirements & Pricing")}</Eyebrow>
+            <SectionTitle>{t("What's required, and what it costs")}</SectionTitle>
             <Paragraph>
-              Requirements depend on your role, property, and local rules. All platform fees are
-              shown before you commit — nothing is charged silently.
+              {t(
+                "Requirements depend on your role, property, and local rules. All platform fees are shown before you commit — nothing is charged silently.",
+              )}
             </Paragraph>
           </div>
 
           <motion.div variants={fadeUp} className="rounded-2xl border border-[#E9E0D3] bg-white p-6 shadow-sm sm:p-8">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <FormField
-                label="Provider type"
+                label={t("Provider type")}
                 value={providerType}
                 onChange={setProviderType}
                 as="select"
-                options={calculatorProviderTypes.map((option) => ({ value: option, label: option }))}
+                options={calculatorProviderTypes.map((option) => ({ value: option, label: t(option) }))}
               />
               <FormField
-                label="Property location"
+                label={t("Property location")}
                 value={location}
                 onChange={setLocation}
                 as="select"
-                options={calculatorLocations.map((option) => ({ value: option, label: option }))}
+                options={calculatorLocations.map((option) => ({ value: option, label: t(option) }))}
               />
             </div>
             <motion.button
@@ -65,7 +68,7 @@ export function MiniRequirementsPricingSection() {
               onClick={() => setResultKey(`${providerType}|${location}`)}
               className="mt-5 rounded-full bg-brand-navy px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-navy-dark"
             >
-              Check My Requirements
+              {t("Check My Requirements")}
             </motion.button>
 
             <AnimatePresence mode="wait">

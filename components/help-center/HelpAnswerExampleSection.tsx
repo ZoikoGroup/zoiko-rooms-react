@@ -2,8 +2,10 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function HelpAnswerExampleSection() {
+  const { t } = useLanguage();
   const [selectedPersona, setSelectedPersona] = useState("Room Seeker");
 
   const personas = [
@@ -20,7 +22,7 @@ export default function HelpAnswerExampleSection() {
         {/* Top Section: Who are you helping today? */}
         <div className="space-y-4">
           <h2 className="text-2xl sm:text-[28px] font-serif font-bold text-[#14213D] leading-tight">
-            Who are you helping today?
+            {t("Who are you helping today?")}
           </h2>
 
           <div className="flex flex-wrap gap-2.5">
@@ -37,7 +39,7 @@ export default function HelpAnswerExampleSection() {
                       : "bg-white text-[#14213D] border-[#EAE6DF] hover:border-[#1A2E6E]"
                   }`}
                 >
-                  {persona}
+                  {t(persona)}
                 </button>
               );
             })}
@@ -48,11 +50,12 @@ export default function HelpAnswerExampleSection() {
         <div className="space-y-6">
           <div className="space-y-1.5">
             <h2 className="text-2xl sm:text-[28px] font-serif font-bold text-[#14213D] leading-tight">
-              Current answer example
+              {t("Current answer example")}
             </h2>
             <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed">
-              This is what a real Help Center answer looks like &mdash; source,
-              owner, date, applicability, and limitation always visible.
+              {t(
+                "This is what a real Help Center answer looks like — source, owner, date, applicability, and limitation always visible.",
+              )}
             </p>
           </div>
 
@@ -67,23 +70,23 @@ export default function HelpAnswerExampleSection() {
             {/* Answer Header & Metadata */}
             <div className="space-y-2">
               <h3 className="text-lg sm:text-xl font-serif font-bold text-[#14213D]">
-                How do I verify where a payment should go?
+                {t("How do I verify where a payment should go?")}
               </h3>
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-[#7A838E]">
                 <span>
-                  Applies to:{" "}
+                  {t("Applies to:")}{" "}
                   <strong className="text-[#14213D] font-semibold">
-                    Room Seeker &middot; Pay stage
+                    {t("Room Seeker · Pay stage")}
                   </strong>
                 </span>
                 <span>
-                  Source:{" "}
+                  {t("Source:")}{" "}
                   <strong className="text-[#14213D] font-semibold">
-                    Payments Support
+                    {t("Payments Support")}
                   </strong>
                 </span>
                 <span>
-                  Reviewed:{" "}
+                  {t("Reviewed:")}{" "}
                   <strong className="text-[#14213D] font-semibold">
                     Jul 20, 2026
                   </strong>
@@ -94,27 +97,23 @@ export default function HelpAnswerExampleSection() {
             {/* Answer Body */}
             <div className="space-y-4 text-xs sm:text-sm text-[#14213D] leading-relaxed">
               <p className="font-normal text-[#555E68]">
-                Use the current authenticated payment request and verified
-                recipient in your account. Do not pay from a message that
-                conflicts with that record.
+                {t(
+                  "Use the current authenticated payment request and verified recipient in your account. Do not pay from a message that conflicts with that record.",
+                )}
               </p>
 
               <ol className="list-decimal list-inside space-y-2 text-[#14213D] font-medium pl-1">
                 <li>
-                  Open your current agreement and payment request in your
-                  account.
+                  {t("Open your current agreement and payment request in your account.")}
                 </li>
                 <li>
-                  Compare the recipient name and account against any message you
-                  received.
+                  {t("Compare the recipient name and account against any message you received.")}
                 </li>
                 <li>
-                  If they don&apos;t match, stop &mdash; don&apos;t pay, and
-                  report the mismatch.
+                  {t("If they don't match, stop — don't pay, and report the mismatch.")}
                 </li>
                 <li>
-                  If they match, pay only through the approved route shown in
-                  your account.
+                  {t("If they match, pay only through the approved route shown in your account.")}
                 </li>
               </ol>
             </div>
@@ -122,19 +121,20 @@ export default function HelpAnswerExampleSection() {
             {/* Limitation Callout Box */}
             <div className="bg-[#FAF7F2] border border-[#EAE6DF] rounded-xl p-3.5 sm:p-4 text-xs">
               <p className="text-[#A05E2B] font-medium leading-relaxed">
-                <strong className="font-bold">Limitation:</strong> This answer
-                explains the process. It cannot confirm today&apos;s specific
-                recipient or amount &mdash; only your live account record can.
+                <strong className="font-bold">{t("Limitation:")}</strong>{" "}
+                {t(
+                  "This answer explains the process. It cannot confirm today's specific recipient or amount — only your live account record can.",
+                )}
               </p>
             </div>
 
             {/* Links / Footer Actions */}
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-xs sm:text-sm font-bold">
               <a href="#" className="text-[#A05E2B] hover:underline">
-                Open my payment record
+                {t("Open my payment record")}
               </a>
               <span className="text-[#A05E2B]">
-                Related: Payments, Safety &amp; Support
+                {t("Related: Payments, Safety & Support")}
               </span>
             </div>
           </motion.div>
@@ -150,12 +150,12 @@ export default function HelpAnswerExampleSection() {
         >
           <div className="space-y-1">
             <h4 className="text-sm font-bold text-[#14213D]">
-              Sign in to view your payment, application, agreement, or case
-              record.
+              {t("Sign in to view your payment, application, agreement, or case record.")}
             </h4>
             <p className="text-sm text-[#555E68] max-w-120 leading-relaxed font-normal">
-              Public help stays open without an account &mdash; we only ask you
-              to sign in when opening or changing something private.
+              {t(
+                "Public help stays open without an account — we only ask you to sign in when opening or changing something private.",
+              )}
             </p>
           </div>
 
@@ -163,7 +163,7 @@ export default function HelpAnswerExampleSection() {
             href="#"
             className="inline-flex items-center justify-center bg-[#1A2E6E] hover:bg-[#0D1629] text-white text-xs sm:text-sm font-bold py-3.5 px-7 rounded-full transition-all duration-200 shadow-sm active:scale-95 whitespace-nowrap"
           >
-            Sign In Securely
+            {t("Sign In Securely")}
           </a>
         </motion.div>
       </div>

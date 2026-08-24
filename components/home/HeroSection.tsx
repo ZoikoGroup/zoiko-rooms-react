@@ -18,6 +18,7 @@ import {
 import { Container, Button, ImageFade } from "@/components/ui";
 import { useSearchModal } from "@/components/search";
 import { fadeUp, staggerContainer } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const checklist = [
   {
@@ -60,6 +61,7 @@ const stats = [
 
 // Animates "100+" / "500K+" style values counting up from 0 once the stat scrolls into view.
 function AnimatedStat({ value }: { value: string }) {
+  const { t } = useLanguage();
   const match = value.match(/^([\d,]+)(.*)$/);
   const target = match ? Number(match[1].replace(/,/g, "")) : null;
   const suffix = match ? match[2] : "";
@@ -79,13 +81,14 @@ function AnimatedStat({ value }: { value: string }) {
 
   return (
     <span ref={ref}>
-      {target === null ? value : `${display.toLocaleString()}${suffix}`}
+      {target === null ? t(value) : `${display.toLocaleString()}${suffix}`}
     </span>
   );
 }
 
 export function HeroSection() {
   const { open } = useSearchModal();
+  const { t } = useLanguage();
 
   return (
     <section className="pb-10 pt-8 sm:pb-14 sm:pt-12">
@@ -100,7 +103,7 @@ export function HeroSection() {
           <div className="pointer-events-none absolute inset-0 hidden lg:block">
             <ImageFade
               src={HERO_IMAGE_URL}
-              alt="Verified private room with a bed, desk, and plants"
+              alt={t("Verified private room with a bed, desk, and plants")}
               fill
               preload
               sizes="100vw"
@@ -114,7 +117,7 @@ export function HeroSection() {
           <div className="relative h-64 lg:hidden">
             <ImageFade
               src={HERO_IMAGE_URL}
-              alt="Verified private room with a bed, desk, and plants"
+              alt={t("Verified private room with a bed, desk, and plants")}
               fill
               preload
               sizes="100vw"
@@ -129,21 +132,21 @@ export function HeroSection() {
               className="inline-flex w-fit items-center gap-2 rounded-full bg-[#F6ECD4] px-4 py-1.5 text-sm font-medium text-[#8A4626]"
             >
               <ShieldCheck className="h-4 w-4" />
-              Verified rooms. Clearer rental journeys.
+              {t("Verified rooms. Clearer rental journeys.")}
             </motion.span>
 
             <motion.h1
               variants={fadeUp}
               className="max-w-xl font-heading text-4xl font-bold text-[#1B2438] sm:text-5xl"
             >
-              Find a verified room
-              you can{" "}
-              <span className="text-[#0E2F73]">trust.</span>
+              {t("Find a verified room you can")}{" "}
+              <span className="text-[#0E2F73]">{t("trust.")}</span>
             </motion.h1>
 
             <motion.p variants={fadeUp} className="max-w-lg text-[14px] text-[#7A7266]">
-              Search private rooms for 30 nights or longer, connect safely with providers, and
-              keep a clear record from application to move-out.
+              {t(
+                "Search private rooms for 30 nights or longer, connect safely with providers, and keep a clear record from application to move-out.",
+              )}
             </motion.p>
 
             {/* Search bar — exact Figma spec: cream card (#FAF6F0, 1px #D9C7B3 border,
@@ -153,17 +156,17 @@ export function HeroSection() {
               className="flex flex-col gap-3 rounded-2xl border border-[#D9C7B3] bg-brand-cream p-3 shadow-sm sm:flex-row sm:items-center"
             >
               <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-                <span className="px-1 text-[12px] font-[#1B2438] text-neutral-600">Where do you want to live?</span>
+                <span className="px-1 text-[12px] font-[#1B2438] text-neutral-600">{t("Where do you want to live?")}</span>
                 <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
                   <input
                     type="text"
-                    placeholder="City, neighborhood, or address"
+                    placeholder={t("City, neighborhood, or address")}
                     className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none placeholder:text-neutral-400"
                   />
                 </div>
               </div>
               <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-                <span className="px-1 text-xs font-medium text-neutral-600">Move-in date</span>
+                <span className="px-1 text-xs font-medium text-neutral-600">{t("Move-in date")}</span>
                 <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
                   <input
                     type="date"
@@ -172,13 +175,13 @@ export function HeroSection() {
                 </div>
               </div>
               <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-                <span className="px-1 text-xs font-medium text-neutral-600">Stay length</span>
+                <span className="px-1 text-xs font-medium text-neutral-600">{t("Stay length")}</span>
                 <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
                   <select className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none">
-                    <option>1+ month</option>
-                    <option>3+ months</option>
-                    <option>6+ months</option>
-                    <option>12+ months</option>
+                    <option>{t("1+ month")}</option>
+                    <option>{t("3+ months")}</option>
+                    <option>{t("6+ months")}</option>
+                    <option>{t("12+ months")}</option>
                   </select>
                 </div>
               </div>
@@ -189,7 +192,7 @@ export function HeroSection() {
                   className="w-full sm:w-auto"
                   onClick={open}
                 >
-                  Search rooms
+                  {t("Search rooms")}
                 </Button>
               </div>
             </motion.div>
@@ -205,8 +208,8 @@ export function HeroSection() {
                     <Icon className="h-4 w-4" />
                   </span>
                   <div className="min-w-0">
-                    <p className="text-[11px] font-semibold text-brand-navy">{title}</p>
-                    <p className="text-[10.5px] text-neutral-500">{description}</p>
+                    <p className="text-[11px] font-semibold text-brand-navy">{t(title)}</p>
+                    <p className="text-[10.5px] text-neutral-500">{t(description)}</p>
                   </div>
                 </div>
               ))}
@@ -217,11 +220,11 @@ export function HeroSection() {
               className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm font-medium"
             >
               <a href="/list-a-room" className="inline-flex items-center gap-1.5 text-brand-red transition-colors hover:text-brand-red-dark">
-                Have a room to rent? List it free
+                {t("Have a room to rent? List it free")}
                 <ArrowRight className="h-4 w-4" />
               </a>
               <a href="/how-it-works" className="inline-flex items-center gap-1.5 text-brand-red transition-colors hover:text-brand-navy-dark">
-                See how verification works
+                {t("See how verification works")}
                 <ArrowRight className="h-4 w-4" />
               </a>
             </motion.div>
@@ -246,7 +249,7 @@ export function HeroSection() {
                 ))}
               </div>
               <p className="text-sm font-regular leading-snug ml-10 text-brand-navy">
-                Join thousands of verified renters and landlords
+                {t("Join thousands of verified renters and landlords")}
               </p>
             </div>
             <div className="h-px w-full bg-[#E9E0D3]" />
@@ -256,7 +259,7 @@ export function HeroSection() {
                   <Star key={i} className="h-4 w-4 fill-current" />
                 ))}
               </div>
-              <span className="text-xs text-neutral-500">Trusted worldwide by our community</span>
+              <span className="text-xs text-neutral-500">{t("Trusted worldwide by our community")}</span>
             </div>
           </motion.div>
         </motion.div>
@@ -269,7 +272,7 @@ export function HeroSection() {
           className="flex flex-col gap-6 rounded-b-2xl bg-white p-6 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-8"
         >
           <p className="max-w-56 text-sm font-medium text-brand-navy">
-            Trusted by renters and landlords around the world
+            {t("Trusted by renters and landlords around the world")}
           </p>
           <div className="grid flex-1 grid-cols-2 gap-y-6 sm:flex sm:items-center sm:justify-between">
             {stats.flatMap(({ icon: Icon, value, label, tone }, i) => {
@@ -286,7 +289,7 @@ export function HeroSection() {
                     <p className="font-heading text-3xl font-semibold leading-[22.8px] text-brand-red">
                       <AnimatedStat value={value} />
                     </p>
-                    <p className="text-sm text-[#7A7266]">{label}</p>
+                    <p className="text-sm text-[#7A7266]">{t(label)}</p>
                   </div>
                 </div>
               );

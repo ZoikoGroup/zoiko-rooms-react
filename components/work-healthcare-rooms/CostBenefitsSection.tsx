@@ -1,5 +1,8 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
 import { Eyebrow, SectionTitle, Callout, InfoTable, SectionDivider } from "./shared";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const rows = [
   ["Rent", "$1,250/month"],
@@ -11,21 +14,26 @@ const rows = [
 ];
 
 export function CostBenefitsSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Cost and Benefits</Eyebrow>
-            <SectionTitle>Total room cost, separate from any organization contribution</SectionTitle>
+            <Eyebrow>{t("Cost and Benefits")}</Eyebrow>
+            <SectionTitle>{t("Total room cost, separate from any organization contribution")}</SectionTitle>
           </div>
 
-          <InfoTable columns={["Item", "Illustrative Display"]} rows={rows} />
+          <InfoTable
+            columns={[t("Item"), t("Illustrative Display")]}
+            rows={rows.map(([item, value]) => [t(item), t(value)])}
+          />
 
-          <Callout label="Commercial Boundary">
-            Zoiko Rooms does not determine employment benefit entitlement, tax treatment,
-            reimbursement approval, or clinical placement eligibility. We display current
-            documented program facts and route questions to the responsible organization.
+          <Callout label={t("Commercial Boundary")}>
+            {t(
+              "Zoiko Rooms does not determine employment benefit entitlement, tax treatment, reimbursement approval, or clinical placement eligibility. We display current documented program facts and route questions to the responsible organization."
+            )}
           </Callout>
         </Reveal>
       </Container>

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion, type Variants } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const floatUpVariants: Variants = {
   hidden: {
@@ -30,6 +31,7 @@ export default function CityComparisonSection({
   onCompare,
   onSearchRooms,
 }: CityComparisonProps) {
+  const { t } = useLanguage();
   return (
     <section className="w-full border-t border-stone-200 bg-white px-6 pb-20 pt-12 font-['Inter',sans-serif] md:px-24">
       <div className="w-full max-w-[1240px] md:px-8">
@@ -43,7 +45,7 @@ export default function CityComparisonSection({
             className="flex w-full flex-col items-start justify-start"
           >
             <span className="text-xs font-semibold uppercase leading-5 tracking-wide text-red-600">
-              CITY COMPARISON
+              {t("CITY COMPARISON")}
             </span>
           </motion.div>
 
@@ -56,7 +58,7 @@ export default function CityComparisonSection({
             className="flex w-full flex-col items-start justify-start"
           >
             <h2 className="font-['Fraunces',serif] text-2xl font-semibold leading-10 text-gray-800">
-              Compare only like-for-like, dated signals
+              {t("Compare only like-for-like, dated signals")}
             </h2>
           </motion.div>
 
@@ -69,9 +71,9 @@ export default function CityComparisonSection({
             className="flex max-w-[640px] flex-col items-start justify-start pb-[0.78px] pt-1"
           >
             <p className="text-sm font-normal leading-6 text-stone-500">
-              Check &quot;Compare&quot; on up to three city cards above, then compare current room
-              inventory, displayed price ranges, and review dates. Never safety scores or
-              unsourced affordability rankings.
+              {t(
+                'Check "Compare" on up to three city cards above, then compare current room inventory, displayed price ranges, and review dates. Never safety scores or unsourced affordability rankings.',
+              )}
             </p>
           </motion.div>
 
@@ -84,9 +86,14 @@ export default function CityComparisonSection({
             className="flex max-w-[760px] flex-col items-start justify-start pb-[0.63px] pt-4"
           >
             <p className="text-sm font-normal leading-6 text-stone-500">
-              {selectedCount > 0
-                ? `${selectedCount} ${selectedCount === 1 ? "city" : "cities"} selected for comparison.`
-                : 'No cities selected yet. Check "Compare" on any city card above, then come back here.'}
+              {selectedCount > 0 ? (
+                <>
+                  {selectedCount} {selectedCount === 1 ? t("city") : t("cities")}{" "}
+                  {t("selected for comparison.")}
+                </>
+              ) : (
+                t('No cities selected yet. Check "Compare" on any city card above, then come back here.')
+              )}
             </p>
           </motion.div>
 
@@ -104,7 +111,7 @@ export default function CityComparisonSection({
               onClick={onCompare}
               className="flex cursor-pointer items-center justify-center rounded-full border border-stone-200 bg-white px-7 py-3.5 text-base font-semibold text-gray-800 transition-colors duration-200"
             >
-              Compare Selected Cities
+              {t("Compare Selected Cities")}
             </motion.button>
 
             <motion.button
@@ -117,7 +124,7 @@ export default function CityComparisonSection({
               onClick={onSearchRooms}
               className="flex cursor-pointer items-center justify-center rounded-full bg-sky-900 px-7 py-3.5 text-base font-semibold text-white transition-all duration-200"
             >
-              Search Rooms
+              {t("Search Rooms")}
             </motion.button>
           </motion.div>
 
@@ -130,12 +137,12 @@ export default function CityComparisonSection({
             className="flex max-w-[720px] flex-col items-start justify-start gap-[5.2px] rounded-[10px] border-l-4 border-red-600 bg-orange-100/80 px-6 py-5 shadow-sm"
           >
             <span className="text-xs font-bold uppercase leading-4 tracking-wide text-yellow-800">
-              COMPARISON EXCLUSIONS
+              {t("COMPARISON EXCLUSIONS")}
             </span>
             <p className="text-sm font-normal leading-6 text-gray-800">
-              No city safety score, crime score, desirability rank, or resident-type stereotype.
-              No cost-of-living index presented as room affordability. No institutional endorsement
-              unless explicitly documented.
+              {t(
+                "No city safety score, crime score, desirability rank, or resident-type stereotype. No cost-of-living index presented as room affordability. No institutional endorsement unless explicitly documented.",
+              )}
             </p>
           </motion.div>
         </div>

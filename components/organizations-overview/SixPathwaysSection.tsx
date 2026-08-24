@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Container, Reveal, ImageFade } from "@/components/ui";
 import { fadeUp, easeOut } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, SectionDivider } from "./shared";
 import { pathwayCards } from "./data";
 
@@ -10,13 +11,14 @@ import { pathwayCards } from "./data";
 // hover treatment: white body at rest, cross-fading to the dark-navy/white/
 // peach look on hover, alongside the same lift/shadow and image-zoom motion.
 export function SixPathwaysSection() {
+  const { t } = useLanguage();
   return (
     <SectionDivider id="pathways" className="bg-white">
       <Container>
         <Reveal className="flex flex-col items-center gap-10">
           <div className="flex max-w-2xl flex-col items-center gap-4 text-center">
-            <Eyebrow>Six Pathways, One Governed Model</Eyebrow>
-            <SectionTitle>Route to the organization type that matches your responsibility</SectionTitle>
+            <Eyebrow>{t("Six Pathways, One Governed Model")}</Eyebrow>
+            <SectionTitle>{t("Route to the organization type that matches your responsibility")}</SectionTitle>
           </div>
 
           <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -33,7 +35,7 @@ export function SixPathwaysSection() {
                   <div className="relative h-[150px] w-full overflow-hidden">
                     <ImageFade
                       src={image}
-                      alt={title}
+                      alt={t(title)}
                       fill
                       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                       className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
@@ -42,13 +44,13 @@ export function SixPathwaysSection() {
                 )}
                 <div className="flex flex-1 flex-col gap-2 bg-white p-5 transition-colors duration-300 group-hover:bg-brand-navy">
                   <h3 className="font-heading text-lg font-medium text-brand-navy transition-colors duration-300 group-hover:text-white">
-                    {title}
+                    {t(title)}
                   </h3>
                   <p className="text-sm leading-relaxed text-neutral-600 transition-colors duration-300 group-hover:text-white/70">
-                    {description}
+                    {t(description)}
                   </p>
                   <span className="mt-auto pt-1 text-sm font-semibold text-brand-red transition-colors duration-300 group-hover:text-[#F2A38C]">
-                    Explore {title} →
+                    {t("Explore {name} →").replace("{name}", t(title))}
                   </span>
                 </div>
               </motion.a>

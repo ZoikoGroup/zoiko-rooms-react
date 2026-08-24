@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { SearchProvider } from "@/components/search";
+import { LanguageProvider } from "@/lib/i18n/LanguageProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -29,9 +30,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${fraunces.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-brand-cream font-sans text-brand-ink">
-        <SearchProvider>
-          <SiteChrome>{children}</SiteChrome>
-        </SearchProvider>
+        <LanguageProvider>
+          <SearchProvider>
+            <SiteChrome>{children}</SiteChrome>
+          </SearchProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

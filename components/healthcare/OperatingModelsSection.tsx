@@ -1,5 +1,8 @@
+"use client";
+
 import { Container, Reveal, Card } from "@/components/ui";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const models = [
   { title: "Independent", description: "No formal relationship. Standard search, standard seeker journey." },
@@ -14,25 +17,27 @@ const models = [
 ];
 
 export function OperatingModelsSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider id="healthcare-models">
       <Container>
         <Reveal className="flex flex-col items-center gap-10">
           <div className="flex max-w-2xl flex-col items-center gap-4 text-center">
-            <Eyebrow>Operating Models</Eyebrow>
-            <SectionTitle>Choose the relationship that fits your role</SectionTitle>
+            <Eyebrow>{t("Operating Models")}</Eyebrow>
+            <SectionTitle>{t("Choose the relationship that fits your role")}</SectionTitle>
             <Paragraph className="mx-auto">
-              An organization can refer, distribute, manage, allocate, subsidize, reimburse, bill
-              directly, or simply support — never imply clinical approval or control it doesn&apos;t
-              have.
+              {t(
+                "An organization can refer, distribute, manage, allocate, subsidize, reimburse, bill directly, or simply support — never imply clinical approval or control it doesn't have."
+              )}
             </Paragraph>
           </div>
 
           <div className="grid w-full grid-cols-1 gap-4 text-left sm:grid-cols-3">
             {models.map(({ title, description }) => (
               <Card key={title} className="p-6">
-                <h3 className="font-heading text-base font-medium text-brand-navy">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{description}</p>
+                <h3 className="font-heading text-base font-medium text-brand-navy">{t(title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{t(description)}</p>
               </Card>
             ))}
           </div>

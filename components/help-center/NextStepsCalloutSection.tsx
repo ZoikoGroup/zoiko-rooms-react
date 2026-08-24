@@ -2,8 +2,10 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function NextStepsCalloutSection() {
+  const { t } = useLanguage();
   const [activeStep, setActiveStep] = useState("Search Help");
 
   const steps = [
@@ -25,7 +27,7 @@ export default function NextStepsCalloutSection() {
         >
           {/* Section Heading */}
           <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#14213D] leading-tight">
-            Still need help? Choose your next step.
+            {t("Still need help? Choose your next step.")}
           </h2>
 
           {/* Button Group */}
@@ -43,7 +45,7 @@ export default function NextStepsCalloutSection() {
                       : "bg-transparent text-[#555E68] border-[#DCD3C7] hover:border-[#142550] hover:text-[#14213D]"
                   }`}
                 >
-                  {step.label}
+                  {t(step.label)}
                 </button>
               );
             })}

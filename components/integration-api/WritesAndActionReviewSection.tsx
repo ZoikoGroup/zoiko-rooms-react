@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface WorkflowStep {
   number: string;
@@ -109,6 +110,7 @@ const eventFamilyRows: EventFamilyRow[] = [
 ];
 
 export default function WritesAndActionReviewSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full text-[#14213D] py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto space-y-16">
@@ -119,16 +121,16 @@ export default function WritesAndActionReviewSection() {
             <div className="flex items-center gap-2">
               <span className="w-4 h-[2px] bg-[#1A2E6E]" />
               <span className="text-xs font-bold tracking-widest text-[#1A2E6E] uppercase">
-                WRITES &amp; ACTION REVIEW
+                {t("WRITES & ACTION REVIEW")}
               </span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-              Automation can prepare a high-risk action. It can't approve one.
+              {t("Automation can prepare a high-risk action. It can't approve one.")}
             </h2>
             <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
-              Signing an agreement, changing a payment recipient, or approving
-              an application always routes through the same sequence &mdash;
-              visible, reversible, and owned by a named person.
+              {t(
+                "Signing an agreement, changing a payment recipient, or approving an application always routes through the same sequence — visible, reversible, and owned by a named person.",
+              )}
             </p>
           </div>
 
@@ -158,10 +160,10 @@ export default function WritesAndActionReviewSection() {
                 {/* Step Title & Description */}
                 <div className="space-y-1.5">
                   <h3 className="text-sm font-serif font-bold text-[#14213D]">
-                    {step.title}
+                    {t(step.title)}
                   </h3>
                   <p className="text-[11px] text-[#555E68] leading-relaxed">
-                    {step.description}
+                    {t(step.description)}
                   </p>
                 </div>
               </div>
@@ -175,7 +177,7 @@ export default function WritesAndActionReviewSection() {
           <div className="flex items-center gap-2">
             <span className="w-4 h-[2px] bg-[#1A2E6E]" />
             <span className="text-xs font-bold tracking-widest text-[#1A2E6E] uppercase">
-              CANONICAL EVENT FAMILIES
+              {t("CANONICAL EVENT FAMILIES")}
             </span>
           </div>
 
@@ -193,13 +195,13 @@ export default function WritesAndActionReviewSection() {
                 <thead>
                   <tr className="bg-[#EEDFC5] border-b border-[#EAE6DF]">
                     <th className="py-4 px-6 text-[10px] font-bold tracking-wider text-[#706B65] uppercase w-[20%]">
-                      FAMILY
+                      {t("FAMILY")}
                     </th>
                     <th className="py-4 px-6 text-[10px] font-bold tracking-wider text-[#706B65] uppercase w-[40%]">
-                      REPRESENTATIVE EVENTS
+                      {t("REPRESENTATIVE EVENTS")}
                     </th>
                     <th className="py-4 px-6 text-[10px] font-bold tracking-wider text-[#706B65] uppercase w-[40%]">
-                      WHAT YOUR SYSTEM SHOULD DO
+                      {t("WHAT YOUR SYSTEM SHOULD DO")}
                     </th>
                   </tr>
                 </thead>
@@ -212,13 +214,13 @@ export default function WritesAndActionReviewSection() {
                       className="hover:bg-[#FAF8F5]/60 transition-colors"
                     >
                       <td className="py-5 px-6 font-serif font-bold text-sm text-[#14213D] align-top">
-                        {item.family}
+                        {t(item.family)}
                       </td>
                       <td className="py-5 px-6 font-mono text-xs text-[#1A2E6E] leading-relaxed align-top">
                         {item.representativeEvents}
                       </td>
                       <td className="py-5 px-6 text-xs text-[#555E68] leading-relaxed align-top">
-                        {item.whatYourSystemShouldDo}
+                        {t(item.whatYourSystemShouldDo)}
                       </td>
                     </tr>
                   ))}

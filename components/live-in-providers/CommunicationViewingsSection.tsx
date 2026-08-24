@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Container, Reveal } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, BulletList, SectionDivider } from "./shared";
 
 const points = [
@@ -15,23 +16,24 @@ const points = [
 ];
 
 export function CommunicationViewingsSection() {
+  const { t } = useLanguage();
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Communication and Viewings</Eyebrow>
-            <SectionTitle>Safe contact from first message to move-in</SectionTitle>
+            <Eyebrow>{t("Communication and Viewings")}</Eyebrow>
+            <SectionTitle>{t("Safe contact from first message to move-in")}</SectionTitle>
           </div>
 
           <motion.div variants={fadeUp} className="w-full overflow-hidden rounded-2xl">
             <NaturalImage
               src="/images/live-in-providers/communication-viewing.png"
-              alt="A provider greeting a room seeker for a scheduled viewing"
+              alt={t("A provider greeting a room seeker for a scheduled viewing")}
             />
           </motion.div>
 
-          <BulletList items={points} className="max-w-3xl" />
+          <BulletList items={points.map(t)} className="max-w-3xl" />
         </Reveal>
       </Container>
     </SectionDivider>

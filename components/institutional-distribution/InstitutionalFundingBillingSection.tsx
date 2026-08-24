@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 // Import corresponding modal popups
 import SampleFundingBreakdownModal from "../popups/institutional-distribution/SampleFundingBreakdownModal";
@@ -54,6 +55,7 @@ const billingRows: BillingRow[] = [
 ];
 
 export default function InstitutionalFundingBillingSection() {
+  const { t } = useLanguage();
   const [activeModal, setActiveModal] = useState<"funding" | "subsidy" | null>(
     null,
   );
@@ -66,14 +68,15 @@ export default function InstitutionalFundingBillingSection() {
         {/* Header Block */}
         <div className="text-center space-y-3 max-w-3xl mx-auto">
           <span className="text-[11px] font-bold tracking-widest text-[#C8202C] uppercase block">
-            INSTITUTIONAL FUNDING &amp; BILLING
+            {t("INSTITUTIONAL FUNDING & BILLING")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Complete costs before anyone commits
+            {t("Complete costs before anyone commits")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-xl mx-auto">
-            Institution-paid and participant-paid amounts, always shown side by
-            side &mdash; nothing treated as confirmed until authorized.
+            {t(
+              "Institution-paid and participant-paid amounts, always shown side by side — nothing treated as confirmed until authorized.",
+            )}
           </p>
         </div>
 
@@ -91,7 +94,7 @@ export default function InstitutionalFundingBillingSection() {
             >
               <img
                 src="/images/institutional-distribution/room-interior.png"
-                alt="Cozy bedroom interior"
+                alt={t("Cozy bedroom interior")}
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
               />
               <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
@@ -112,9 +115,9 @@ export default function InstitutionalFundingBillingSection() {
               >
                 <div className="space-y-0.5">
                   <h3 className="text-xs sm:text-sm font-bold text-[#14213D] group-hover:text-[#C8202C] transition-colors">
-                    {row.title}
+                    {t(row.title)}
                   </h3>
-                  <p className="text-[11px] text-[#7A838E]">{row.subtitle}</p>
+                  <p className="text-[11px] text-[#7A838E]">{t(row.subtitle)}</p>
                 </div>
 
                 {/* Badge / Value */}
@@ -123,7 +126,9 @@ export default function InstitutionalFundingBillingSection() {
                     className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border ${row.badgeStyle}`}
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-current" />
-                    {row.badgeText}
+                    {row.badgeText === "Pending approval"
+                      ? t(row.badgeText)
+                      : row.badgeText}
                   </span>
                 </div>
               </motion.div>
@@ -136,7 +141,7 @@ export default function InstitutionalFundingBillingSection() {
                 onClick={() => setActiveModal("funding")}
                 className="bg-white hover:bg-[#F5F2EC] text-[#14213D] text-xs font-bold py-3 px-6 rounded-full border border-[#14213D] transition-all duration-200 cursor-pointer shadow-xs active:scale-95"
               >
-                See a sample funding breakdown
+                {t("See a sample funding breakdown")}
               </button>
             </div>
           </div>

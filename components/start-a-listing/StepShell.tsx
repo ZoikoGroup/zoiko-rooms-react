@@ -1,5 +1,7 @@
 "use client";
 
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+
 type StepShellProps = {
   title: string;
   subtitle: string;
@@ -8,11 +10,12 @@ type StepShellProps = {
 };
 
 export function StepShell({ title, subtitle, children, footer }: StepShellProps) {
+  const { t } = useLanguage();
   return (
     <div className="flex flex-1 flex-col gap-6 rounded-2xl border border-[#E9E0D3] bg-white p-6 sm:p-8">
       <div className="flex flex-col gap-1.5">
-        <h2 className="font-heading text-xl font-semibold text-brand-navy">{title}</h2>
-        <p className="text-sm text-neutral-500">{subtitle}</p>
+        <h2 className="font-heading text-xl font-semibold text-brand-navy">{t(title)}</h2>
+        <p className="text-sm text-neutral-500">{t(subtitle)}</p>
       </div>
 
       <div className="flex flex-col gap-4">{children}</div>

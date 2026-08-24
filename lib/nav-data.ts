@@ -440,8 +440,8 @@ export const regionOptions: PillOption[] = [
   { code: "UK", label: "United Kingdom" },
 ];
 
-// UI-only for now — picking an option updates the navbar label and is
-// remembered locally. It doesn't translate copy or convert prices yet.
+// Drives real translation for the navbar and footer via lib/i18n — see
+// LanguageProvider. Page body copy across the rest of the site stays English.
 export const languageOptions: PillOption[] = [
   { code: "EN", label: "English" },
   { code: "DE", label: "Deutsch" },

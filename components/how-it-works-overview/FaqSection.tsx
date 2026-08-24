@@ -5,11 +5,13 @@ import { Plus } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Container, Reveal, Button } from "@/components/ui";
 import { easeOut, fadeUp } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle } from "./shared";
 import { faqs, relatedLinks } from "./data";
 
 export function FaqSection() {
   const [openIndex, setOpenIndex] = useState(0);
+  const { t } = useLanguage();
 
   return (
     <section className="py-16 sm:py-24">
@@ -17,8 +19,8 @@ export function FaqSection() {
         <Reveal className="flex flex-col gap-16">
           <div className="mx-auto flex max-w-3xl flex-col gap-8">
             <div className="flex flex-col items-center gap-4 text-center">
-              <Eyebrow>FAQ</Eyebrow>
-              <SectionTitle>Common questions</SectionTitle>
+              <Eyebrow>{t("FAQ")}</Eyebrow>
+              <SectionTitle>{t("Common questions")}</SectionTitle>
             </div>
 
             <div className="flex flex-col divide-y divide-black/10">
@@ -32,7 +34,7 @@ export function FaqSection() {
                       className="flex w-full items-center justify-between gap-4 py-5 text-left"
                     >
                       <span className="font-heading text-base font-medium text-brand-navy sm:text-lg">
-                        {faq.question}
+                        {t(faq.question)}
                       </span>
                       <motion.span
                         animate={{ rotate: isOpen ? 45 : 0 }}
@@ -51,7 +53,7 @@ export function FaqSection() {
                           transition={{ duration: 0.25, ease: easeOut }}
                           className="overflow-hidden"
                         >
-                          <p className="pb-5 text-sm text-neutral-600 sm:text-base">{faq.answer}</p>
+                          <p className="pb-5 text-sm text-neutral-600 sm:text-base">{t(faq.answer)}</p>
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -63,14 +65,14 @@ export function FaqSection() {
 
           <Reveal className="flex flex-col items-center gap-4 rounded-4xl bg-[#F1E7DA] py-16 text-center">
             <motion.h2 variants={fadeUp} className="font-heading text-3xl font-medium text-brand-navy sm:text-4xl">
-              Choose the next step that matches your role.
+              {t("Choose the next step that matches your role.")}
             </motion.h2>
             <motion.div variants={fadeUp} className="flex flex-col gap-3 sm:flex-row">
               <Button href="/find-a-room" size="lg" variant="secondary">
-                Find a Room
+                {t("Find a Room")}
               </Button>
               <Button href="/list-a-room" size="lg" variant="outline-red">
-                List a Room
+                {t("List a Room")}
               </Button>
             </motion.div>
             <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm text-neutral-500">
@@ -78,7 +80,7 @@ export function FaqSection() {
                 <span key={link.href} className="flex items-center gap-2">
                   {index > 0 && <span className="text-neutral-300">·</span>}
                   <a href={link.href} className="font-medium text-neutral-600 transition-colors hover:text-brand-red">
-                    {link.label}
+                    {t(link.label)}
                   </a>
                 </span>
               ))}

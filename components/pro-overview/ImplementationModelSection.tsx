@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface ImplementationStep {
   number: string;
@@ -43,17 +44,19 @@ const steps: ImplementationStep[] = [
 ];
 
 export default function ImplementationModelSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header Block */}
         <div className="text-center space-y-3 max-w-3xl mx-auto">
           <span className="text-xs font-mono font-bold tracking-widest text-[#DC2626] uppercase">
-            IMPLEMENTATION MODEL
+            {t("Implementation Model")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-serif font-bold text-[#14213D] leading-tight">
-            Discovery through exit &mdash; every phase has an owner and an exit
-            criterion
+            {t(
+              "Discovery through exit — every phase has an owner and an exit criterion"
+            )}
           </h2>
         </div>
 
@@ -75,12 +78,12 @@ export default function ImplementationModelSection() {
 
               {/* Title */}
               <h3 className="text-sm font-serif font-bold text-[#14213D] leading-snug">
-                {step.title}
+                {t(step.title)}
               </h3>
 
               {/* Description */}
               <p className="text-xs text-[#555E68] leading-relaxed font-normal">
-                {step.description}
+                {t(step.description)}
               </p>
             </motion.div>
           ))}

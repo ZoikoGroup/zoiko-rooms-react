@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface BoundaryStep {
   number: string;
@@ -37,6 +38,7 @@ const steps: BoundaryStep[] = [
 ];
 
 export default function IntegrationTrustBoundarySection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full py-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
       <div className="max-w-6xl mx-auto">
@@ -54,23 +56,22 @@ export default function IntegrationTrustBoundarySection() {
               <div className="flex items-center gap-2">
                 <span className="w-4 h-[2px] bg-[#14213D]" />
                 <span className="text-[11px] font-bold tracking-widest text-[#1A2E6E] uppercase">
-                  INTEGRATION TRUST BOUNDARY
+                  {t("INTEGRATION TRUST BOUNDARY")}
                 </span>
               </div>
 
               {/* Title */}
               <h2 className="text-2xl font-serif font-bold text-[#241C14] leading-tight">
-                A connected system receives only what its current purpose
-                requires.
+                {t(
+                  "A connected system receives only what its current purpose requires.",
+                )}
               </h2>
 
               {/* Description */}
               <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed">
-                No integration gets standing access to everything Zoiko Rooms
-                knows. Every connection is scoped to a job &mdash; read this,
-                write that, hear about this &mdash; and the scope is visible to
-                everyone who has to trust it: the provider, the institution, and
-                the person whose room or payment is involved.
+                {t(
+                  "No integration gets standing access to everything Zoiko Rooms knows. Every connection is scoped to a job — read this, write that, hear about this — and the scope is visible to everyone who has to trust it: the provider, the institution, and the person whose room or payment is involved.",
+                )}
               </p>
             </div>
 
@@ -80,7 +81,7 @@ export default function IntegrationTrustBoundarySection() {
                 href="#authorization-model"
                 className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#1A2E6E] hover:text-[#C8202C] transition-colors group"
               >
-                <span>Review the authorization model</span>
+                <span>{t("Review the authorization model")}</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
@@ -98,7 +99,7 @@ export default function IntegrationTrustBoundarySection() {
                     {step.number}
                   </span>
                   <h3 className="text-xs sm:text-sm font-bold text-[#1A2E6E] leading-snug">
-                    {step.title}
+                    {t(step.title)}
                   </h3>
                 </div>
               ))}

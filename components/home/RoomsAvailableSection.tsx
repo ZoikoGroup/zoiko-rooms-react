@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Container, Reveal, ImageFade, EvidenceBadge } from "@/components/ui";
 import { fadeUp, easeOut } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const rooms = [
   {
@@ -41,6 +42,7 @@ const rooms = [
 ];
 
 export function RoomsAvailableSection() {
+  const { t } = useLanguage();
   return (
     <section className="bg-brand-cream py-16 sm:py-24">
       <Container>
@@ -51,17 +53,17 @@ export function RoomsAvailableSection() {
           >
             <div className="flex flex-col gap-3">
               <span className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-red">
-                Live in Berlin
+                {t("Live in Berlin")}
               </span>
               <h2 className="font-heading text-3xl font-medium text-brand-navy sm:text-4xl">
-                Rooms available now
+                {t("Rooms available now")}
               </h2>
             </div>
             <a
               href="/find-a-room"
               className="inline-flex w-fit items-center gap-1.5 text-sm font-medium text-brand-red transition-colors hover:text-brand-red-dark"
             >
-              View all rooms
+              {t("View all rooms")}
               <ArrowRight className="h-4 w-4" />
             </a>
           </motion.div>
@@ -78,7 +80,7 @@ export function RoomsAvailableSection() {
                 <div className="relative aspect-5/3 w-full overflow-hidden">
                   <ImageFade
                     src={image}
-                    alt={`Room in ${location}`}
+                    alt={`${t("Room in")} ${location}`}
                     fill
                     sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                     className="object-cover"
@@ -87,9 +89,9 @@ export function RoomsAvailableSection() {
                 <div className="flex flex-col gap-2 p-5">
                   <p className="font-heading text-lg font-semibold text-brand-navy">{price}</p>
                   <p className="text-sm text-neutral-500">
-                    {location} · {availability}
+                    {location} · {t(availability)}
                   </p>
-                  <EvidenceBadge label={badge} tone={tone} variant="outline" className="mt-1" />
+                  <EvidenceBadge label={t(badge)} tone={tone} variant="outline" className="mt-1" />
                 </div>
               </motion.div>
             ))}

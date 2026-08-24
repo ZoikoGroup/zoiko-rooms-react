@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface ResponsibilityCard {
   iconSrc: string;
@@ -42,20 +43,22 @@ const responsibilities: ResponsibilityCard[] = [
 ];
 
 export default function ResponsibilityMapSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full text-[#14213D] py-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header Block */}
         <div className="text-center space-y-3 max-w-3xl mx-auto">
           <span className="text-[11px] font-bold tracking-widest text-[#C8202C] uppercase block">
-            RESPONSIBILITY MAP
+            {t("RESPONSIBILITY MAP")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Who owns what, at every step
+            {t("Who owns what, at every step")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-xl mx-auto">
-            Institution, provider, participant, and Zoiko Rooms each carry
-            distinct, named responsibilities &mdash; never a silent shift.
+            {t(
+              "Institution, provider, participant, and Zoiko Rooms each carry distinct, named responsibilities — never a silent shift.",
+            )}
           </p>
         </div>
 
@@ -74,7 +77,7 @@ export default function ResponsibilityMapSection() {
               <div className="w-10 h-10 rounded-xl bg-[#F5F2EC] flex items-center justify-center shrink-0">
                 <img
                   src={card.iconSrc}
-                  alt={card.iconAlt}
+                  alt={t(card.iconAlt)}
                   className="w-4 h-4 object-contain"
                 />
               </div>
@@ -82,10 +85,10 @@ export default function ResponsibilityMapSection() {
               {/* Text Content */}
               <div className="space-y-2">
                 <h3 className="text-base font-serif font-bold text-[#14213D]">
-                  {card.title}
+                  {t(card.title)}
                 </h3>
                 <p className="text-xs text-[#555E68] leading-relaxed">
-                  {card.description}
+                  {t(card.description)}
                 </p>
               </div>
             </motion.div>

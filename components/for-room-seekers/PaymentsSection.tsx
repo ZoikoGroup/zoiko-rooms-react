@@ -1,4 +1,7 @@
+"use client";
+
 import { Container, Reveal, Button } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, InfoTable, SectionDivider } from "./shared";
 
 const rows = [
@@ -9,19 +12,21 @@ const rows = [
 ];
 
 export function PaymentsSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Payments</Eyebrow>
-            <SectionTitle>Confirm recipient, route, and refund terms before paying</SectionTitle>
+            <Eyebrow>{t("Payments")}</Eyebrow>
+            <SectionTitle>{t("Confirm recipient, route, and refund terms before paying")}</SectionTitle>
           </div>
 
-          <InfoTable columns={["Warning Sign", "Required Response"]} rows={rows} />
+          <InfoTable columns={[t("Warning Sign"), t("Required Response")]} rows={rows.map((row) => row.map((cell) => t(cell)))} />
 
           <Button href="/how-it-works/payments-safety-support" variant="outline" size="md" className="w-fit">
-            Payments, Safety & Support
+            {t("Payments, Safety & Support")}
           </Button>
         </Reveal>
       </Container>

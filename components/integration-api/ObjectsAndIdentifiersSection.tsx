@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface ObjectIdentifierRow {
   object: string;
@@ -61,6 +62,7 @@ const tableData: ObjectIdentifierRow[] = [
 ];
 
 export default function ObjectsAndIdentifiersSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full bg-[#FBF7EF] text-[#14213D] py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto space-y-10">
@@ -69,16 +71,16 @@ export default function ObjectsAndIdentifiersSection() {
           <div className="flex items-center gap-2">
             <span className="w-4 h-[2px] bg-[#1A2E6E]" />
             <span className="text-[11px] font-bold tracking-widest text-[#1A2E6E] uppercase">
-              OBJECTS &amp; IDENTIFIERS
+              {t("OBJECTS & IDENTIFIERS")}
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Stable IDs in, governed mappings out.
+            {t("Stable IDs in, governed mappings out.")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
-            Zoiko Rooms and your external IDs stay distinct and linked
-            deliberately &mdash; never guessed from a name, an email, or an
-            amount.
+            {t(
+              "Zoiko Rooms and your external IDs stay distinct and linked deliberately — never guessed from a name, an email, or an amount.",
+            )}
           </p>
         </div>
 
@@ -96,13 +98,13 @@ export default function ObjectsAndIdentifiersSection() {
               <thead>
                 <tr className="bg-[#EEDFC5] border-b border-[#EAE6DF]">
                   <th className="py-4 px-6 text-[10px] font-bold tracking-wider text-[#706B65] uppercase w-[28%]">
-                    OBJECT
+                    {t("OBJECT")}
                   </th>
                   <th className="py-4 px-6 text-[10px] font-bold tracking-wider text-[#706B65] uppercase w-[36%]">
-                    CANONICAL REQUIREMENT
+                    {t("CANONICAL REQUIREMENT")}
                   </th>
                   <th className="py-4 px-6 text-[10px] font-bold tracking-wider text-[#706B65] uppercase w-[36%]">
-                    EXTERNAL MAPPING
+                    {t("EXTERNAL MAPPING")}
                   </th>
                 </tr>
               </thead>
@@ -115,13 +117,13 @@ export default function ObjectsAndIdentifiersSection() {
                     className="hover:bg-[#FAF8F5]/60 transition-colors"
                   >
                     <td className="py-5 px-6 font-serif font-bold text-sm text-[#14213D] align-top">
-                      {item.object}
+                      {t(item.object)}
                     </td>
                     <td className="py-5 px-6 text-xs text-[#555E68] leading-relaxed align-top">
-                      {item.canonicalRequirement}
+                      {t(item.canonicalRequirement)}
                     </td>
                     <td className="py-5 px-6 text-xs text-[#555E68] leading-relaxed align-top">
-                      {item.externalMapping}
+                      {t(item.externalMapping)}
                     </td>
                   </tr>
                 ))}
@@ -139,13 +141,12 @@ export default function ObjectsAndIdentifiersSection() {
           className="bg-[#1C2C3E] text-white p-6 sm:p-7 rounded-2xl space-y-2 shadow-sm"
         >
           <span className="text-[10px] font-mono font-bold tracking-widest text-[#4ADE80] uppercase block">
-            IDENTIFIER RULE
+            {t("IDENTIFIER RULE")}
           </span>
           <p className="text-xs sm:text-sm text-[#EDE6DA] leading-relaxed font-normal">
-            Names, email addresses, room labels, URLs, amounts, and dates are
-            never safe primary identifiers for a consequential write. Every
-            write resolves through a stable ID and a governed mapping &mdash;
-            not a best guess.
+            {t(
+              "Names, email addresses, room labels, URLs, amounts, and dates are never safe primary identifiers for a consequential write. Every write resolves through a stable ID and a governed mapping — not a best guess.",
+            )}
           </p>
         </motion.div>
       </div>

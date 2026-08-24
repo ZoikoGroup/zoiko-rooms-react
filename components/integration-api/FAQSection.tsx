@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface FAQItem {
   question: string;
@@ -44,6 +45,7 @@ const faqData: FAQItem[] = [
 ];
 
 export default function FAQSection() {
+  const { t } = useLanguage();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
@@ -58,11 +60,11 @@ export default function FAQSection() {
           <div className="flex items-center gap-2">
             <span className="w-4 h-[2px] bg-[#1A2E6E]" />
             <span className="text-xs font-bold tracking-widest text-[#1A2E6E] uppercase">
-              FAQ
+              {t("FAQ")}
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Common integration questions
+            {t("Common integration questions")}
           </h2>
         </div>
 
@@ -80,7 +82,7 @@ export default function FAQSection() {
                   aria-expanded={isOpen}
                 >
                   <span className="text-base sm:text-lg font-serif font-medium text-[#14213D] pr-4 group-hover:text-[#1A2E6E] transition-colors">
-                    {item.question}
+                    {t(item.question)}
                   </span>
                   <motion.div
                     animate={{ rotate: isOpen ? 45 : 0 }}
@@ -101,7 +103,7 @@ export default function FAQSection() {
                       className="overflow-hidden"
                     >
                       <p className="pt-3 text-xs sm:text-sm text-[#555E68] leading-relaxed max-w-2xl font-normal">
-                        {item.answer}
+                        {t(item.answer)}
                       </p>
                     </motion.div>
                   )}

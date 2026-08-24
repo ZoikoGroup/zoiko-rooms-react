@@ -1,4 +1,7 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, BulletList, Callout, SectionDivider } from "./shared";
 
 const points = [
@@ -9,21 +12,23 @@ const points = [
 ];
 
 export function CommunicationViewingsSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Communication and Viewings</Eyebrow>
-            <SectionTitle>Safe questions, controlled address disclosure</SectionTitle>
+            <Eyebrow>{t("Communication and Viewings")}</Eyebrow>
+            <SectionTitle>{t("Safe questions, controlled address disclosure")}</SectionTitle>
           </div>
 
-          <BulletList items={points} />
+          <BulletList items={points.map((point) => t(point))} />
 
-          <Callout label="Safety boundary">
-            No payment pressure, credential request, secret meeting, unauthorized recording, or
-            access-code exposure. Use the mismatch report route for any room, media, access, cost,
-            provider, or relationship difference.
+          <Callout label={t("Safety boundary")}>
+            {t(
+              "No payment pressure, credential request, secret meeting, unauthorized recording, or access-code exposure. Use the mismatch report route for any room, media, access, cost, provider, or relationship difference.",
+            )}
           </Callout>
         </Reveal>
       </Container>

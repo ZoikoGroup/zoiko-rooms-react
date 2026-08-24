@@ -1,4 +1,7 @@
+"use client";
+
 import { Container, Reveal, Card } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, Callout, SectionDivider } from "./shared";
 
 const items = [
@@ -29,27 +32,28 @@ const items = [
 ];
 
 export function SafetyOverviewSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Safety Overview</Eyebrow>
-            <SectionTitle>Everything that protects you, in one place</SectionTitle>
+            <Eyebrow>{t("Safety Overview")}</Eyebrow>
+            <SectionTitle>{t("Everything that protects you, in one place")}</SectionTitle>
           </div>
 
-          <Callout label="Emergency boundary" className="max-w-3xl">
-            Zoiko Rooms is not an emergency service. Where there is immediate danger or urgent
-            medical, fire, law-enforcement, shelter, legal, or crisis need, use the appropriate
-            current local service. Zoiko Rooms can preserve evidence, restrict platform actions,
-            and support the room-related case.
+          <Callout label={t("Emergency boundary")} className="max-w-3xl">
+            {t(
+              "Zoiko Rooms is not an emergency service. Where there is immediate danger or urgent medical, fire, law-enforcement, shelter, legal, or crisis need, use the appropriate current local service. Zoiko Rooms can preserve evidence, restrict platform actions, and support the room-related case."
+            )}
           </Callout>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {items.map(({ title, description }) => (
               <Card key={title} className="p-6">
-                <h3 className="font-heading text-base font-medium text-brand-navy">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{description}</p>
+                <h3 className="font-heading text-base font-medium text-brand-navy">{t(title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{t(description)}</p>
               </Card>
             ))}
           </div>

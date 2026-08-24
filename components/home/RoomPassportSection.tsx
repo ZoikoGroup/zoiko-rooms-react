@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Container, Reveal, Button, ImageFade, EvidenceBadge } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const passportRows = [
   { label: "Address", badge: "Regulatory verified", tone: "green" as const },
@@ -13,18 +14,19 @@ const passportRows = [
 ];
 
 export function RoomPassportSection() {
+  const { t } = useLanguage();
   return (
     <section className="py-16 sm:py-24">
       <Container>
         <Reveal className="flex flex-col gap-12">
           <span className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-red">
-            The room passport
+            {t("The room passport")}
           </span>
           <motion.h2
             variants={fadeUp}
             className="font-heading text-3xl font-medium text-brand-navy sm:text-4xl"
           >
-            Not every detail carries the same evidence
+            {t("Not every detail carries the same evidence")}
           </motion.h2>
 
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
@@ -34,7 +36,7 @@ export function RoomPassportSection() {
             >
               <ImageFade
                 src="/images/home/room-passport-section.png"
-                alt="Friends gathered in a shared kitchen"
+                alt={t("Friends gathered in a shared kitchen")}
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className="object-cover"
@@ -43,7 +45,7 @@ export function RoomPassportSection() {
 
             <motion.div variants={fadeUp} className="flex flex-col gap-6">
               <p className="text-xs font-medium tracking-wide text-neutral-400">
-                Sample passport · demonstration data
+                {t("Sample passport · demonstration data")}
               </p>
               <div className="flex flex-col gap-3">
                 {passportRows.map(({ label, badge, tone }) => (
@@ -51,13 +53,13 @@ export function RoomPassportSection() {
                     key={label}
                     className="flex items-center justify-between rounded-xl border border-[#E9E0D3] bg-white px-4 py-3 shadow-sm"
                   >
-                    <span className="text-sm font-medium text-brand-navy">{label}</span>
-                    <EvidenceBadge label={badge} tone={tone} variant="outline" />
+                    <span className="text-sm font-medium text-brand-navy">{t(label)}</span>
+                    <EvidenceBadge label={t(badge)} tone={tone} variant="outline" />
                   </div>
                 ))}
               </div>
               <Button href="/how-it-works" variant="subtle" className="w-fit">
-                See a sample room passport
+                {t("See a sample room passport")}
               </Button>
             </motion.div>
           </div>

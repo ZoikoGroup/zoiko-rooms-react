@@ -2,19 +2,21 @@
 
 import { useState } from "react";
 import { Container, Reveal } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
 import { lifecycleStages } from "./data";
 
 export function LifecycleChangesSection() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { t } = useLanguage();
 
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Lifecycle and Changes</Eyebrow>
-            <SectionTitle>Authority changes have immediate consequences</SectionTitle>
+            <Eyebrow>{t("Lifecycle and Changes")}</Eyebrow>
+            <SectionTitle>{t("Authority changes have immediate consequences")}</SectionTitle>
           </div>
 
           <div className="flex flex-wrap gap-2">
@@ -31,16 +33,16 @@ export function LifecycleChangesSection() {
                       : "border-transparent bg-[#F1E7DA] text-[#A85A34] hover:bg-[#EADCC7]"
                   }`}
                 >
-                  {stage}
+                  {t(stage)}
                 </button>
               );
             })}
           </div>
 
           <Paragraph>
-            Permission expiry, revocation, a primary-agreement change, or a provider move-out
-            pauses the listing and any risky action immediately — extension requires new
-            permission, not an assumption that the old scope continues.
+            {t(
+              "Permission expiry, revocation, a primary-agreement change, or a provider move-out pauses the listing and any risky action immediately — extension requires new permission, not an assumption that the old scope continues.",
+            )}
           </Paragraph>
         </Reveal>
       </Container>

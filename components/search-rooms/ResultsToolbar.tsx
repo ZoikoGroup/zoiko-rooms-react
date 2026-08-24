@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ChevronDown, List, Map, Columns2 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { easeOut } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { quickFilters, sortOptions } from "./data";
 
 export type ViewMode = "list" | "map" | "split";
@@ -37,13 +38,14 @@ export function ResultsToolbar({
   viewMode,
   onViewModeChange,
 }: ResultsToolbarProps) {
+  const { t } = useLanguage();
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="text-sm font-medium text-brand-navy">
-          {resultCount} {resultCount === 1 ? "room matches" : "rooms match"} this search
+          {resultCount} {resultCount === 1 ? t("room matches") : t("rooms match")} {t("this search")}
         </p>
 
         <div className="flex flex-wrap items-center gap-2">
@@ -56,7 +58,7 @@ export function ResultsToolbar({
                 : "border-[#E9E0D3] text-brand-navy hover:bg-brand-navy/5"
             }`}
           >
-            Filters ({activeFilters.length})
+            {t("Filters")} ({activeFilters.length})
             <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${filtersOpen ? "rotate-180" : ""}`} />
           </button>
 
@@ -69,7 +71,7 @@ export function ResultsToolbar({
                 : "border-[#E9E0D3] text-brand-navy hover:bg-brand-navy/5"
             }`}
           >
-            Accessible features
+            {t("Accessible features")}
           </button>
 
           <div className="flex h-8 items-center rounded-full border border-[#E9E0D3] px-3">
@@ -80,7 +82,7 @@ export function ResultsToolbar({
             >
               {sortOptions.map((option) => (
                 <option key={option.key} value={option.key}>
-                  {option.label}
+                  {t(option.label)}
                 </option>
               ))}
             </select>
@@ -97,7 +99,7 @@ export function ResultsToolbar({
                 }`}
               >
                 <Icon className="h-3.5 w-3.5" />
-                {label}
+                {t(label)}
               </button>
             ))}
           </div>
@@ -127,7 +129,7 @@ export function ResultsToolbar({
                       onChange={() => onToggleFilter(filter.key)}
                       className="h-4 w-4 rounded border-neutral-300 accent-brand-navy"
                     />
-                    {filter.label}
+                    {t(filter.label)}
                   </label>
                 );
               })}

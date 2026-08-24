@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
 import { NaturalImage } from "./NaturalImage";
 
@@ -40,6 +41,7 @@ const rows = [
 ];
 
 export function AudienceRowsSection() {
+  const { t } = useLanguage();
   return (
     <SectionDivider>
       <Container>
@@ -52,16 +54,16 @@ export function AudienceRowsSection() {
               }`}
             >
               <motion.div variants={fadeUp} className="w-full overflow-hidden rounded-3xl">
-                <NaturalImage src={image} alt={title} />
+                <NaturalImage src={image} alt={t(title)} />
               </motion.div>
 
               <div className="flex flex-col gap-4">
-                <Eyebrow>{eyebrow}</Eyebrow>
-                <SectionTitle>{title}</SectionTitle>
-                <Paragraph>{description}</Paragraph>
+                <Eyebrow>{t(eyebrow)}</Eyebrow>
+                <SectionTitle>{t(title)}</SectionTitle>
+                <Paragraph>{t(description)}</Paragraph>
                 <motion.div variants={fadeUp}>
                   <Button href={href} variant="outline" size="md" className="w-fit">
-                    {cta}
+                    {t(cta)}
                   </Button>
                 </motion.div>
               </div>

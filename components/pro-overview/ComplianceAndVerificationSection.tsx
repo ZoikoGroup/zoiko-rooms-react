@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface FeatureItem {
   title: string;
@@ -57,6 +58,7 @@ const statusBadges: StatusBadge[] = [
 ];
 
 export default function ComplianceAndVerificationSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full bg-white py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -65,17 +67,17 @@ export default function ComplianceAndVerificationSection() {
           {/* Header Block */}
           <div className="space-y-3">
             <span className="text-xs font-mono font-bold tracking-widest text-[#DC2626] uppercase">
-              COMPLIANCE &amp; VERIFICATION
+              {t("Compliance & Verification")}
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-[26px] font-serif font-bold text-[#14213D] leading-tight">
-              Identity, authority, and evidence stay reviewable &mdash; not a
-              badge taken on faith.
+              {t(
+                "Identity, authority, and evidence stay reviewable — not a badge taken on faith."
+              )}
             </h2>
             <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed">
-              Provider identity, listing authority, and room evidence move
-              through a named lifecycle. High-risk changes &mdash; bank
-              recipient, legal party, room identity, signer &mdash; always route
-              through Action Review.
+              {t(
+                "Provider identity, listing authority, and room evidence move through a named lifecycle. High-risk changes — bank recipient, legal party, room identity, signer — always route through Action Review."
+              )}
             </p>
           </div>
 
@@ -93,11 +95,11 @@ export default function ComplianceAndVerificationSection() {
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#1A2E6E] shrink-0" />
                   <h3 className="text-sm font-bold text-[#14213D]">
-                    {item.title}
+                    {t(item.title)}
                   </h3>
                 </div>
                 <p className="text-xs text-[#555E68] leading-relaxed pl-3.5 font-normal">
-                  {item.description}
+                  {t(item.description)}
                 </p>
               </motion.div>
             ))}
@@ -109,7 +111,7 @@ export default function ComplianceAndVerificationSection() {
               href="#explore-compliance"
               className="inline-block bg-transparent hover:bg-white text-[#14213D] text-xs font-semibold px-6 py-3 rounded-full border border-[#14213D] transition-colors shadow-xs"
             >
-              Explore Compliance &amp; Verification
+              {t("Explore Compliance & Verification")}
             </a>
           </div>
         </div>
@@ -127,7 +129,7 @@ export default function ComplianceAndVerificationSection() {
             <div className="relative w-full h-[360px] sm:h-[420px]">
               <Image
                 src="/images/pro-overview/2.png"
-                alt="Compliance and Verification Demonstration"
+                alt={t("Compliance and Verification Demonstration")}
                 fill
                 className="object-cover object-center"
                 priority
@@ -143,7 +145,7 @@ export default function ComplianceAndVerificationSection() {
                     <span
                       className={`w-1.5 h-1.5 rounded-full ${badge.dotColor}`}
                     />
-                    {badge.label}
+                    {t(badge.label)}
                   </span>
                 ))}
               </div>
@@ -151,7 +153,7 @@ export default function ComplianceAndVerificationSection() {
               {/* Italic Bottom Caption */}
               <div className="absolute bottom-4 left-0 right-0 text-center z-10">
                 <span className="text-xs font-serif italic text-white/90 drop-shadow-sm">
-                  Named evidence, reviewer, and review path at every stage
+                  {t("Named evidence, reviewer, and review path at every stage")}
                 </span>
               </div>
 

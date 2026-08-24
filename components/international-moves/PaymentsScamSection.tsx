@@ -1,5 +1,8 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
 import { Eyebrow, SectionTitle, InfoTable, SectionDivider } from "./shared";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const rows = [
   { label: "Gift card, cryptocurrency, or unrelated payee", value: "Warn, block where policy applies, and offer report/support" },
@@ -15,16 +18,21 @@ const links = [
 ];
 
 export function PaymentsScamSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Payments and Scam Prevention</Eyebrow>
-            <SectionTitle>Don&apos;t let urgency replace authority and a receipt</SectionTitle>
+            <Eyebrow>{t("Payments and Scam Prevention")}</Eyebrow>
+            <SectionTitle>{t("Don't let urgency replace authority and a receipt")}</SectionTitle>
           </div>
 
-          <InfoTable columns={["Warning Sign", "Required Action"]} rows={rows} />
+          <InfoTable
+            columns={[t("Warning Sign"), t("Required Action")]}
+            rows={rows.map(({ label, value }) => ({ label: t(label), value: t(value) }))}
+          />
 
           <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm font-medium">
             {links.map((link) => (
@@ -33,7 +41,7 @@ export function PaymentsScamSection() {
                 href={link.href}
                 className="text-brand-red transition-colors hover:text-brand-red-dark"
               >
-                {link.label}
+                {t(link.label)}
               </a>
             ))}
           </div>

@@ -1,8 +1,10 @@
 "use client";
 
 import React from "react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function UserTypesSection() {
+  const { t } = useLanguage();
   const userTypes = [
     {
       role: "Room seeker / renter",
@@ -36,14 +38,15 @@ export default function UserTypesSection() {
         <span className="font-mono text-lg sm:text-xl text-[#C8202C] font-normal">
           05
         </span>
-        <span>User types &amp; responsibilities</span>
+        <span>{t("User types & responsibilities")}</span>
       </h2>
 
       {/* "In short" Highlight Box with custom styling */}
       <div className="bg-[#F2DED2] rounded-2xl px-4 py-3 mb-8">
         <p className="text-sm font-bold text-[#93321F] leading-relaxed">
-          In short: different roles carry different responsibilities under these
-          Terms.
+          {t(
+            "In short: different roles carry different responsibilities under these Terms.",
+          )}
         </p>
       </div>
 
@@ -56,10 +59,10 @@ export default function UserTypesSection() {
           >
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
               <span className="text-sm text-[#7A7467] font-normal max-w-[70px]">
-                {item.role}
+                {t(item.role)}
               </span>
               <p className="text-[13.5px] font-bold text-[#101C33] text-left sm:text-right flex-1 leading-snug">
-                {item.responsibility}
+                {t(item.responsibility)}
               </p>
             </div>
           </div>

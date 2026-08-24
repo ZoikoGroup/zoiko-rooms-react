@@ -1,5 +1,8 @@
+"use client";
+
 import { footerOffices } from "./footer-data";
 import { LinkedinIcon, YoutubeIcon, XIcon, InstagramIcon, FacebookIcon } from "./SocialIcons";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const socialLinks = [
   { label: "LinkedIn", href: "#", Icon: LinkedinIcon },
@@ -10,11 +13,13 @@ const socialLinks = [
 ];
 
 export function FooterOffices() {
+  const { t } = useLanguage();
+
   return (
     <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
       {footerOffices.map(({ title, name, address }) => (
         <div key={title} className="flex flex-col gap-1">
-          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white">{title}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white">{t(title)}</p>
           <p className="text-sm font-semibold text-white">{name}</p>
           <p className="whitespace-nowrap text-sm text-white">{address}</p>
         </div>

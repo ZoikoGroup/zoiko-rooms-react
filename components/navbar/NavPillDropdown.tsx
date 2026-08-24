@@ -8,19 +8,28 @@ type NavPillDropdownProps = {
   storageKey: string;
   options: PillOption[];
   ariaLabel: string;
+  onSelect?: (code: string) => void;
+  /** When provided, the displayed selection is controlled externally (e.g. shared language state) instead of tracked locally. */
+  value?: string;
 };
 
-export function NavPillDropdown({ storageKey, options, ariaLabel }: NavPillDropdownProps) {
-  const [selected, setSelected] = useState(options[0].code);
+export function NavPillDropdown({ storageKey, options, ariaLabel, onSelect, value }: NavPillDropdownProps) {
+  const [internalSelected, setInternalSelected] = useState(options[0].code);
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const selected = value ?? internalSelected;
 
   useEffect(() => {
+    if (value !== undefined) return;
     const stored = window.localStorage.getItem(storageKey);
     if (stored && options.some((option) => option.code === stored)) {
-      setSelected(stored);
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time sync from localStorage on mount, not a render loop
+      setInternalSelected(stored);
+      onSelect?.(stored);
+    } else {
+      onSelect?.(options[0].code);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- run once on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- run once on mount, to apply the stored (or default) choice's side effect
   }, []);
 
   useEffect(() => {
@@ -44,9 +53,10 @@ export function NavPillDropdown({ storageKey, options, ariaLabel }: NavPillDropd
   }, [open]);
 
   function handleSelect(code: string) {
-    setSelected(code);
+    if (value === undefined) setInternalSelected(code);
     setOpen(false);
     window.localStorage.setItem(storageKey, code);
+    onSelect?.(code);
   }
 
   return (

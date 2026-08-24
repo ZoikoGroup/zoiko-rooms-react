@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface StepNode {
   title: string;
@@ -72,23 +73,24 @@ const lifecycleSteps: StepNode[] = [
 ];
 
 export default function TransactionLifecycleSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header Block */}
         <div className="text-center space-y-4 mx-auto max-w-4xl">
           <span className="text-xs font-mono font-bold tracking-widest text-[#DC2626] uppercase">
-            ZOIKO ROOMS PRO &mdash; APPLICATIONS, AGREEMENTS &amp; PAYMENTS
+            {t("ZOIKO ROOMS PRO — APPLICATIONS, AGREEMENTS & PAYMENTS")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-serif font-bold text-[#14213D] leading-tight">
-            Turn a room decision into an attributable agreement and a controlled
-            payment lifecycle.
+            {t(
+              "Turn a room decision into an attributable agreement and a controlled payment lifecycle.",
+            )}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed">
-            Coordinate applications, criteria, decisions, reservations, terms,
-            signatures, contributions, payments, receipts, refunds, disputes,
-            and reconciliation &mdash; without losing room, party, cost,
-            authority, or status context.
+            {t(
+              "Coordinate applications, criteria, decisions, reservations, terms, signatures, contributions, payments, receipts, refunds, disputes, and reconciliation — without losing room, party, cost, authority, or status context.",
+            )}
           </p>
 
           {/* Action Buttons */}
@@ -97,13 +99,13 @@ export default function TransactionLifecycleSection() {
               href="#explore-lifecycle"
               className="bg-[#14213D] hover:bg-[#0D1629] text-white text-xs font-semibold px-6 py-3 rounded-full transition-colors shadow-xs"
             >
-              Explore the Transaction Lifecycle
+              {t("Explore the Transaction Lifecycle")}
             </a>
             <a
               href="#talk-to-zoiko"
               className="bg-transparent hover:bg-white text-[#DC2626] text-xs font-semibold px-6 py-3 rounded-full border border-[#DC2626] transition-colors shadow-xs"
             >
-              Talk to Zoiko Rooms
+              {t("Talk to Zoiko Rooms")}
             </a>
           </div>
         </div>
@@ -130,7 +132,7 @@ export default function TransactionLifecycleSection() {
                     <div className="relative w-4 h-4">
                       <Image
                         src={step.iconSrc}
-                        alt={step.alt}
+                        alt={t(step.alt)}
                         fill
                         className="object-contain object-center"
                       />
@@ -140,10 +142,10 @@ export default function TransactionLifecycleSection() {
                   {/* Node Title & Subtitle */}
                   <div className="space-y-0.5">
                     <h3 className="text-xs font-serif font-bold text-[#14213D]">
-                      {step.title}
+                      {t(step.title)}
                     </h3>
                     <p className="text-[10px] text-[#736B62] font-normal">
-                      {step.subtitle}
+                      {t(step.subtitle)}
                     </p>
                   </div>
                 </div>
@@ -169,8 +171,9 @@ export default function TransactionLifecycleSection() {
             {/* Left Statement */}
             <div className="lg:col-span-5">
               <h3 className="text-xl sm:text-2xl lg:text-[26px] font-serif font-bold leading-snug">
-                Nothing here implies guaranteed approval, legal certainty, or
-                instant settlement.
+                {t(
+                  "Nothing here implies guaranteed approval, legal certainty, or instant settlement.",
+                )}
               </h3>
             </div>
 
@@ -178,21 +181,23 @@ export default function TransactionLifecycleSection() {
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="space-y-1.5">
                 <span className="text-[10px] font-mono font-bold tracking-wider text-[#8FA3D9] uppercase">
-                  HUMAN-OWNED DECISIONS
+                  {t("HUMAN-OWNED DECISIONS")}
                 </span>
                 <p className="text-xs text-white/80 leading-relaxed font-normal">
-                  Application decisions have a named accountable owner &mdash;
-                  never a silent algorithm.
+                  {t(
+                    "Application decisions have a named accountable owner — never a silent algorithm.",
+                  )}
                 </p>
               </div>
 
               <div className="space-y-1.5">
                 <span className="text-[10px] font-mono font-bold tracking-wider text-[#8FA3D9] uppercase">
-                  FULL COST, PARTY, AND STATUS CONTEXT
+                  {t("FULL COST, PARTY, AND STATUS CONTEXT")}
                 </span>
                 <p className="text-xs text-white/80 leading-relaxed font-normal">
-                  Room, party, cost, and authority context stay attached at
-                  every stage.
+                  {t(
+                    "Room, party, cost, and authority context stay attached at every stage.",
+                  )}
                 </p>
               </div>
             </div>

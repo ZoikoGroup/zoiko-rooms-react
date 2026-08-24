@@ -1,5 +1,6 @@
 "use client";
 
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { StepShell } from "../StepShell";
 import { WizardFooter } from "../WizardFooter";
 import { FormField } from "../FormField";
@@ -15,6 +16,7 @@ type Step5Props = {
 };
 
 export function Step5AuthorityCompliance({ data, errors, onChange, onBack, onSaveExit, onContinue }: Step5Props) {
+  const { t } = useLanguage();
   return (
     <StepShell
       title="Authority and compliance"
@@ -30,7 +32,7 @@ export function Step5AuthorityCompliance({ data, errors, onChange, onBack, onSav
       />
 
       <div className="flex h-24 items-center justify-center rounded-xl border-2 border-dashed border-[#E9E0D3] text-sm text-neutral-400">
-        Upload ownership evidence (disabled in this prototype)
+        {t("Upload ownership evidence (disabled in this prototype)")}
       </div>
     </StepShell>
   );

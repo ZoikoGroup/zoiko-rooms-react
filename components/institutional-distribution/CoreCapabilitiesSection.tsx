@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 // Import modal popups corresponding to each core capability
 import AudienceCatalogModal from "../popups/institutional-distribution/AudienceCatalogModal";
@@ -84,6 +85,7 @@ const capabilities: CapabilityCard[] = [
 ];
 
 export default function CoreCapabilitiesSection() {
+  const { t } = useLanguage();
   const [activeModal, setActiveModal] = useState<
     | "audience"
     | "referral"
@@ -102,14 +104,15 @@ export default function CoreCapabilitiesSection() {
         {/* Header Block */}
         <div className="text-center space-y-3 mx-auto">
           <span className="text-[11px] font-bold tracking-widest text-[#C8202C] uppercase block">
-            CORE CAPABILITIES
+            {t("CORE CAPABILITIES")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Six governed distribution capabilities
+            {t("Six governed distribution capabilities")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-xl mx-auto">
-            Each capability is scoped, auditable, and never blends institutional
-            access with hidden entitlement.
+            {t(
+              "Each capability is scoped, auditable, and never blends institutional access with hidden entitlement.",
+            )}
           </p>
         </div>
 
@@ -130,7 +133,7 @@ export default function CoreCapabilitiesSection() {
                 <div className="w-10 h-10 rounded-xl bg-[#F5F2EC] flex items-center justify-center shrink-0 group-hover:bg-[#EAE6DF] transition-colors">
                   <img
                     src={card.iconSrc}
-                    alt={card.iconAlt}
+                    alt={t(card.iconAlt)}
                     className="w-5 h-5 object-contain"
                   />
                 </div>
@@ -138,10 +141,10 @@ export default function CoreCapabilitiesSection() {
                 {/* Card Title & Description */}
                 <div className="space-y-2">
                   <h3 className="text-base font-serif font-bold text-[#14213D] group-hover:text-[#C8202C] transition-colors">
-                    {card.title}
+                    {t(card.title)}
                   </h3>
                   <p className="text-sm text-[#6B6F76] leading-relaxed">
-                    {card.description}
+                    {t(card.description)}
                   </p>
 
                   <div className="pt-1">
@@ -153,7 +156,7 @@ export default function CoreCapabilitiesSection() {
                       }}
                       className="text-xs font-bold text-[#C8202C] hover:underline inline-flex items-center gap-1 transition-colors cursor-pointer"
                     >
-                      {card.linkText}
+                      {t(card.linkText)}
                     </button>
                   </div>
                 </div>

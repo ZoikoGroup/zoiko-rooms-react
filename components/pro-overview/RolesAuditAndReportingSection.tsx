@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface RoleCard {
   title: string;
@@ -51,21 +52,22 @@ const roles: RoleCard[] = [
 ];
 
 export default function RolesAuditAndReportingSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header Block */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
           <span className="text-xs font-mono font-bold tracking-widest text-[#DC2626] uppercase">
-            ROLES, AUDIT &amp; REPORTING
+            {t("Roles, Audit & Reporting")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-serif font-bold text-[#14213D] leading-tight">
-            Authority before capability &mdash; for every role, every time
+            {t("Authority before capability — for every role, every time")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed">
-            No user, system, automation, organization, or partner can act beyond
-            their current identity, role, object, program, market, and time
-            scope.
+            {t(
+              "No user, system, automation, organization, or partner can act beyond their current identity, role, object, program, market, and time scope."
+            )}
           </p>
         </div>
 
@@ -84,10 +86,10 @@ export default function RolesAuditAndReportingSection() {
               className="bg-white rounded-2xl p-5 border border-[#EAE6DF] shadow-xs flex flex-col justify-start space-y-1.5"
             >
               <h3 className="text-xs font-serif font-bold text-[#14213D] leading-snug">
-                {role.title}
+                {t(role.title)}
               </h3>
               <p className="text-[11px] text-[#555E68] leading-relaxed font-normal">
-                {role.description}
+                {t(role.description)}
               </p>
             </motion.div>
           ))}

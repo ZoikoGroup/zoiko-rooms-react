@@ -2,8 +2,10 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function ReadyToListSection() {
+  const { t } = useLanguage();
   // Dynamic links for buttons/text CTA
   const startListingHref = "#";
   const checkRequirementsHref = "#";
@@ -20,7 +22,7 @@ export default function ReadyToListSection() {
       >
         {/* Headline */}
         <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-          Ready to list your room?
+          {t("Ready to list your room?")}
         </h2>
 
         {/* Action Buttons */}
@@ -30,7 +32,7 @@ export default function ReadyToListSection() {
             href={startListingHref}
             className="w-full sm:w-auto inline-flex items-center justify-center bg-[#14213D] hover:bg-[#0D1629] text-white text-xs font-semibold px-8 py-3.5 rounded-full transition-all duration-200 shadow-sm active:scale-95"
           >
-            Start a Listing
+            {t("Start a Listing")}
           </a>
 
           {/* Secondary Red Outlined Button */}
@@ -38,18 +40,18 @@ export default function ReadyToListSection() {
             href={checkRequirementsHref}
             className="w-full sm:w-auto inline-flex items-center justify-center bg-[#EFE6D8] hover:bg-[#EAE0CE] text-[#C0272D] border border-[#C0272D] text-xs font-semibold px-8 py-3.5 rounded-full transition-all duration-200 active:scale-95"
           >
-            Check Requirements
+            {t("Check Requirements")}
           </a>
         </div>
 
         {/* Sub-link */}
         <p className="text-xs text-[#555E68] font-normal pt-2">
-          Managing several rooms?{" "}
+          {t("Managing several rooms?")}{" "}
           <a
             href={zoikoProHref}
             className="font-bold text-[#14213D] underline hover:text-[#C0272D] transition-colors"
           >
-            Explore Zoiko Rooms Pro
+            {t("Explore Zoiko Rooms Pro")}
           </a>
         </p>
       </motion.div>

@@ -3,8 +3,11 @@
 import { motion } from "framer-motion";
 import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export function FinalCtaSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="pb-16 sm:pb-24">
       <Container>
@@ -13,24 +16,25 @@ export function FinalCtaSection() {
             variants={fadeUp}
             className="font-heading text-3xl font-medium text-brand-navy sm:text-4xl"
           >
-            Use the current route for the current issue
+            {t("Use the current route for the current issue")}
           </motion.h2>
           <motion.p variants={fadeUp} className="max-w-md text-base text-neutral-600">
-            Review payment guidance, report a concern, start a refund or dispute, or contact
-            support — without sharing sensitive credentials in messages.
+            {t(
+              "Review payment guidance, report a concern, start a refund or dispute, or contact support — without sharing sensitive credentials in messages."
+            )}
           </motion.p>
           <motion.div variants={fadeUp} className="flex flex-col gap-3 sm:flex-row">
             <Button href="#before-paying" size="lg" variant="secondary">
-              Payment Guidance
+              {t("Payment Guidance")}
             </Button>
             <Button href="/resources" size="lg" variant="outline">
-              Report a Concern
+              {t("Report a Concern")}
             </Button>
             <Button href="/resources" size="lg" variant="outline">
-              Refund or Dispute
+              {t("Refund or Dispute")}
             </Button>
             <Button href="/resources" size="lg" variant="outline">
-              Contact Support
+              {t("Contact Support")}
             </Button>
           </motion.div>
         </Reveal>

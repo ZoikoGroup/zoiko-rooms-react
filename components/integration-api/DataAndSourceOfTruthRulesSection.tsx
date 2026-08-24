@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface DataRuleRow {
   label: string;
@@ -74,6 +75,7 @@ const forbiddenFlows: ForbiddenFlowItem[] = [
 ];
 
 export default function DataAndSourceOfTruthRulesSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full bg-[#EEDFC5] text-[#14213D] py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto space-y-12">
@@ -82,16 +84,16 @@ export default function DataAndSourceOfTruthRulesSection() {
           <div className="flex items-center gap-2">
             <span className="w-4 h-[2px] bg-[#1A2E6E]" />
             <span className="text-xs font-bold tracking-widest text-[#1A2E6E] uppercase">
-              DATA &amp; SOURCE-OF-TRUTH RULES
+              {t("DATA & SOURCE-OF-TRUTH RULES")}
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Every field knows where it comes from.
+            {t("Every field knows where it comes from.")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
-            Sync isn't a black box. Each field carries a direction, an
-            authority, a freshness threshold, and a rule for what happens when
-            two sources disagree.
+            {t(
+              "Sync isn't a black box. Each field carries a direction, an authority, a freshness threshold, and a rule for what happens when two sources disagree.",
+            )}
           </p>
         </div>
 
@@ -111,10 +113,10 @@ export default function DataAndSourceOfTruthRulesSection() {
                 className="py-5 grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-6 items-baseline"
               >
                 <span className="sm:col-span-3 text-xs font-bold text-[#1A2E6E]">
-                  {rule.label}
+                  {t(rule.label)}
                 </span>
                 <p className="sm:col-span-9 text-xs sm:text-sm text-[#555E68] leading-relaxed">
-                  {rule.description}
+                  {t(rule.description)}
                 </p>
               </div>
             ))}
@@ -129,7 +131,7 @@ export default function DataAndSourceOfTruthRulesSection() {
             className="lg:col-span-5 bg-[#1C2C3E] text-white p-6 sm:p-8 rounded-2xl space-y-5 shadow-sm"
           >
             <span className="text-[10px] font-mono font-bold tracking-widest text-[#F8A182] uppercase block">
-              NEVER A DEFAULT DATA FLOW
+              {t("NEVER A DEFAULT DATA FLOW")}
             </span>
 
             <div className="space-y-4">
@@ -143,9 +145,9 @@ export default function DataAndSourceOfTruthRulesSection() {
                   </span>
                   <p>
                     <strong className="text-white font-semibold">
-                      {item.title}
+                      {t(item.title)}
                     </strong>{" "}
-                    &mdash; {item.description}
+                    — {t(item.description)}
                   </p>
                 </div>
               ))}

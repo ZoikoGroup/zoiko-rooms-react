@@ -8,8 +8,10 @@ import {
   BookOpen,
   Layers,
 } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function WhyListSection() {
+  const { t } = useLanguage();
   const ctaHref = "#"; // Dynamic link for bottom button
 
   const features = [
@@ -84,15 +86,15 @@ export default function WhyListSection() {
         {/* Section Header (Centered without hardcoded width caps) */}
         <div className="flex flex-col items-center text-center space-y-3 w-full">
           <span className="text-[11px] font-bold tracking-widest text-[#C0272D] uppercase block">
-            WHY LIST ON ZOIKO ROOMS
+            {t("WHY LIST ON ZOIKO ROOMS")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            More than a listing page.
+            {t("More than a listing page.")}
           </h2>
           <p className="text-xs max-w-xl sm:text-sm text-[#555E68] leading-relaxed">
-            Your room, your applications, and your rental record &mdash;
-            connected in one place instead of scattered across messages and
-            paperwork.
+            {t(
+              "Your room, your applications, and your rental record — connected in one place instead of scattered across messages and paperwork.",
+            )}
           </p>
         </div>
 
@@ -116,10 +118,10 @@ export default function WhyListSection() {
               {/* Title & Description */}
               <div className="space-y-2">
                 <h3 className="text-base font-serif font-bold text-[#14213D] leading-snug">
-                  {item.title}
+                  {t(item.title)}
                 </h3>
                 <p className="text-xs text-[#555E68] leading-relaxed font-normal">
-                  {item.description}
+                  {t(item.description)}
                 </p>
               </div>
             </motion.div>
@@ -132,7 +134,7 @@ export default function WhyListSection() {
             href={ctaHref}
             className="px-6 py-3 rounded-full border border-[#14213D] text-[#14213D] hover:bg-[#14213D] hover:text-white transition-all duration-200 text-xs font-semibold tracking-wide whitespace-nowrap active:scale-95 shadow-sm"
           >
-            See How It Works for Providers
+            {t("See How It Works for Providers")}
           </a>
         </div>
       </div>

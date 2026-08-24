@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface NodeItem {
   id: string;
@@ -10,6 +11,7 @@ interface NodeItem {
 }
 
 export default function UnifiedOperatingModelSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full bg-[#FAF8F5] py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
       <div className="max-w-6xl mx-auto">
@@ -25,26 +27,24 @@ export default function UnifiedOperatingModelSection() {
             <div className="lg:col-span-6 space-y-6">
               <div className="space-y-3">
                 <span className="text-xs font-mono font-bold tracking-widest text-[#DC2626] uppercase">
-                  UNIFIED OPERATING MODEL
+                  {t("Unified Operating Model")}
                 </span>
                 <h2 className="text-3xl lg:text-[28px] font-serif font-bold text-[#14213D] leading-tight">
-                  One shared operational graph &mdash; separate sources,
-                  permissions, decisions, money, and evidence.
+                  {t("One shared operational graph — separate sources, permissions, decisions, money, and evidence.")}
                 </h2>
                 <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed">
-                  A canonical Room Passport links provider authority, room
-                  facts, availability, applications, agreements, payments,
-                  institutional relationships, support cases, and changes
-                  &mdash; without flattening them into one unreviewable status.
+                  {t(
+                    "A canonical Room Passport links provider authority, room facts, availability, applications, agreements, payments, institutional relationships, support cases, and changes — without flattening them into one unreviewable status."
+                  )}
                 </p>
               </div>
 
               {/* Note Callout Container */}
               <div className="bg-[#FAF6F0] rounded-xl p-4 sm:p-5 border border-[#EAE2D8]">
                 <p className="text-[11px] sm:text-xs text-[#736B62] leading-relaxed font-normal">
-                  Linked records do not mean every role sees every object. Each
-                  relationship is filtered by purpose, organization, role,
-                  program, participant, room, market, time, and sensitivity.
+                  {t(
+                    "Linked records do not mean every role sees every object. Each relationship is filtered by purpose, organization, role, program, participant, room, market, time, and sensitivity."
+                  )}
                 </p>
               </div>
             </div>
@@ -133,7 +133,7 @@ export default function UnifiedOperatingModelSection() {
                   {/* Level 1: Root Node */}
                   <div className="flex justify-center">
                     <div className="w-16 h-16 rounded-full bg-[#0D2163] text-white flex items-center justify-center text-xs font-serif font-bold shadow-md">
-                      Room
+                      {t("Room")}
                     </div>
                   </div>
 
@@ -141,25 +141,19 @@ export default function UnifiedOperatingModelSection() {
                   <div className="grid grid-cols-3 gap-3 w-full">
                     <div className="bg-white border border-[#E0D9CE] rounded-2xl p-2.5 sm:p-3 text-center shadow-xs">
                       <span className="text-[11px] font-bold text-[#14213D] leading-tight block font-serif">
-                        Provider &amp;
-                        <br />
-                        portfolio
+                        {t("Provider & portfolio")}
                       </span>
                     </div>
 
                     <div className="bg-white border border-[#E0D9CE] rounded-2xl p-2.5 sm:p-3 text-center shadow-xs">
                       <span className="text-[11px] font-bold text-[#14213D] leading-tight block font-serif">
-                        Applications
-                        <br />
-                        &amp; agreements
+                        {t("Applications & agreements")}
                       </span>
                     </div>
 
                     <div className="bg-white border border-[#E0D9CE] rounded-2xl p-2.5 sm:p-3 text-center shadow-xs">
                       <span className="text-[11px] font-bold text-[#14213D] leading-tight block font-serif">
-                        Payments &amp;
-                        <br />
-                        refunds
+                        {t("Payments & refunds")}
                       </span>
                     </div>
                   </div>
@@ -168,33 +162,25 @@ export default function UnifiedOperatingModelSection() {
                   <div className="grid grid-cols-4 gap-2 w-full">
                     <div className="bg-[#FAF0D9] border border-[#ECE0C8] rounded-2xl p-2 sm:p-2.5 text-center shadow-xs">
                       <span className="text-[10px] font-semibold text-[#826117] leading-tight block font-sans">
-                        Evidence &amp;
-                        <br />
-                        authority
+                        {t("Evidence & authority")}
                       </span>
                     </div>
 
                     <div className="bg-[#FAF0D9] border border-[#ECE0C8] rounded-2xl p-2 sm:p-2.5 text-center shadow-xs">
                       <span className="text-[10px] font-semibold text-[#826117] leading-tight block font-sans">
-                        Institutional
-                        <br />
-                        programs
+                        {t("Institutional programs")}
                       </span>
                     </div>
 
                     <div className="bg-[#FAF0D9] border border-[#ECE0C8] rounded-2xl p-2 sm:p-2.5 text-center shadow-xs">
                       <span className="text-[10px] font-semibold text-[#826117] leading-tight block font-sans">
-                        Integrations
-                        <br />
-                        &amp; events
+                        {t("Integrations & events")}
                       </span>
                     </div>
 
                     <div className="bg-[#FAF0D9] border border-[#ECE0C8] rounded-2xl p-2 sm:p-2.5 text-center shadow-xs">
                       <span className="text-[10px] font-semibold text-[#826117] leading-tight block font-sans">
-                        Support &amp;
-                        <br />
-                        trust cases
+                        {t("Support & trust cases")}
                       </span>
                     </div>
                   </div>
@@ -203,7 +189,7 @@ export default function UnifiedOperatingModelSection() {
                 {/* Subtitle Footer Tagline */}
                 <div className="pt-8 text-center">
                   <span className="text-xs font-serif italic text-[#998F82]">
-                    Sourced &middot; scoped &middot; reviewable
+                    {t("Sourced · scoped · reviewable")}
                   </span>
                 </div>
               </div>

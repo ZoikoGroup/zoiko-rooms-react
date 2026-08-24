@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Container } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { easeOut } from "@/lib/motion";
 import { StepSidebar } from "./StepSidebar";
 import { Step1ProgressOverview } from "./steps/Step1ProgressOverview";
@@ -19,6 +20,7 @@ import { EMPTY_FORM_DATA, TOTAL_STEPS, validateStep, type ListingFormData, type 
 const STORAGE_KEY = "zoiko-start-a-listing-draft";
 
 export function StartListingWizard() {
+  const { t } = useLanguage();
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
   const [data, setData] = useState<ListingFormData>(EMPTY_FORM_DATA);
@@ -98,10 +100,11 @@ export function StartListingWizard() {
   return (
     <Container className="flex flex-col gap-8 py-10 sm:py-14">
       <div className="flex flex-col gap-1.5">
-        <h1 className="font-heading text-2xl font-semibold text-brand-navy">Start a listing</h1>
+        <h1 className="font-heading text-2xl font-semibold text-brand-navy">{t("Start a listing")}</h1>
         <p className="text-sm text-neutral-500">
-          This takes about 10–15 minutes. You can save a private draft and continue later at any
-          step — nothing here is public until you submit for review.
+          {t(
+            "This takes about 10–15 minutes. You can save a private draft and continue later at any step — nothing here is public until you submit for review.",
+          )}
         </p>
       </div>
 

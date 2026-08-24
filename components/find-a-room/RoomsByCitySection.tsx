@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp, easeOut } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
 import { NaturalImage } from "./NaturalImage";
 
@@ -30,16 +31,18 @@ const cities = [
 ];
 
 export function RoomsByCitySection() {
+  const { t } = useLanguage();
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-12">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Rooms by City</Eyebrow>
-            <SectionTitle>Explore rooms and practical renting context, city by city</SectionTitle>
+            <Eyebrow>{t("Rooms by City")}</Eyebrow>
+            <SectionTitle>{t("Explore rooms and practical renting context, city by city")}</SectionTitle>
             <Paragraph>
-              Only cities with current, sufficient inventory or genuinely useful guidance are
-              shown — no thin or empty city pages.
+              {t(
+                "Only cities with current, sufficient inventory or genuinely useful guidance are shown — no thin or empty city pages.",
+              )}
             </Paragraph>
           </div>
 
@@ -57,7 +60,7 @@ export function RoomsByCitySection() {
                 </div>
                 <div className="flex flex-col gap-1 p-5">
                   <p className="font-heading text-lg font-medium text-brand-navy">{name}</p>
-                  <p className="text-sm text-neutral-500">{status}</p>
+                  <p className="text-sm text-neutral-500">{t(status)}</p>
                 </div>
               </motion.div>
             ))}
@@ -65,7 +68,7 @@ export function RoomsByCitySection() {
 
           <motion.div variants={fadeUp}>
             <Button href="/find-a-room" variant="outline" size="md" className="w-fit">
-              Explore Rooms by City
+              {t("Explore Rooms by City")}
             </Button>
           </motion.div>
         </Reveal>

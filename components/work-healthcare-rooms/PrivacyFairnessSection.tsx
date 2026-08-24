@@ -1,5 +1,8 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
 import { Eyebrow, SectionTitle, BulletList, SectionDivider } from "./shared";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const points = [
   "No employee ID, patient information, diagnosis, roster, or full clinical schedule is ever collected on this page.",
@@ -9,16 +12,18 @@ const points = [
 ];
 
 export function PrivacyFairnessSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Privacy and Fairness</Eyebrow>
-            <SectionTitle>Your search doesn&apos;t become a workforce or health profile</SectionTitle>
+            <Eyebrow>{t("Privacy and Fairness")}</Eyebrow>
+            <SectionTitle>{t("Your search doesn't become a workforce or health profile")}</SectionTitle>
           </div>
 
-          <BulletList items={points} />
+          <BulletList items={points.map((point) => t(point))} />
         </Reveal>
       </Container>
     </SectionDivider>

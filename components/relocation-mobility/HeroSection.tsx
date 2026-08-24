@@ -5,8 +5,11 @@ import { Package } from "lucide-react";
 import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export function HeroSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="py-10 sm:py-14">
       <Container>
@@ -18,22 +21,24 @@ export function HeroSection() {
                 className="inline-flex w-fit items-center gap-1.5 rounded-full border border-white/60 bg-white/50 px-3 py-1.5 text-xs font-medium text-brand-navy backdrop-blur-sm"
               >
                 <Package className="h-3.5 w-3.5" />
-                Relocation &amp; Mobility
+                {t("Relocation & Mobility")}
               </motion.span>
 
               <motion.h1 variants={fadeUp} className="font-heading text-4xl font-bold text-brand-navy sm:text-[34px]">
-                Coordinate room access across moves, providers, and borders — through one
-                accountable workflow.
+                {t(
+                  "Coordinate room access across moves, providers, and borders — through one accountable workflow."
+                )}
               </motion.h1>
 
               <motion.p variants={fadeUp} className="max-w-lg text-[15px] leading-relaxed text-[#5B5A66]">
-                Connect every move without losing responsibility at the handoff. Costs, dates,
-                choice, and data sharing stay explicit from case creation to close.
+                {t(
+                  "Connect every move without losing responsibility at the handoff. Costs, dates, choice, and data sharing stay explicit from case creation to close."
+                )}
               </motion.p>
 
               <motion.div variants={fadeUp} className="flex flex-col gap-3 sm:flex-row">
                 <Button href="/find-a-room/international-moves" size="lg" variant="secondary">
-                  Explore International Moves
+                  {t("Explore International Moves")}
                 </Button>
                 <Button
                   href="/resources"
@@ -41,7 +46,7 @@ export function HeroSection() {
                   variant="outline"
                   className="border-brand-navy/30 bg-white/40 text-brand-navy hover:bg-white"
                 >
-                  Talk to Zoiko Rooms
+                  {t("Talk to Zoiko Rooms")}
                 </Button>
               </motion.div>
             </div>
@@ -51,15 +56,15 @@ export function HeroSection() {
                 <div className="overflow-hidden rounded-2xl">
                   <NaturalImage
                     src="/images/relocation-mobility/hero-moving-boxes.png"
-                    alt="A couple carrying moving boxes into their new home"
+                    alt={t("A couple carrying moving boxes into their new home")}
                   />
                 </div>
                 <div className="absolute -bottom-10 -left-10 max-w-xs translate-y-1/3 rounded-xl bg-white p-4 shadow-lg">
                   <p className="text-xs font-semibold uppercase tracking-[0.1em] text-brand-red">
-                    Delegation, Made Visible
+                    {t("Delegation, Made Visible")}
                   </p>
                   <p className="mt-1.5 text-sm leading-relaxed text-brand-navy">
-                    Every handoff shows the current owner, the next owner, and what changed.
+                    {t("Every handoff shows the current owner, the next owner, and what changed.")}
                   </p>
                 </div>
               </div>

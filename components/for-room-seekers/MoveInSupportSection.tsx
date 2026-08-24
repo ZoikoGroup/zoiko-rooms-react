@@ -1,4 +1,7 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, DotSteps, SectionDivider } from "./shared";
 
 const steps = [
@@ -21,16 +24,18 @@ const steps = [
 ];
 
 export function MoveInSupportSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Move-in and Ongoing Support</Eyebrow>
-            <SectionTitle>Access, condition, and mismatch recovery</SectionTitle>
+            <Eyebrow>{t("Move-in and Ongoing Support")}</Eyebrow>
+            <SectionTitle>{t("Access, condition, and mismatch recovery")}</SectionTitle>
           </div>
 
-          <DotSteps steps={steps} />
+          <DotSteps steps={steps.map(({ title, description }) => ({ title: t(title), description: t(description) }))} />
         </Reveal>
       </Container>
     </SectionDivider>

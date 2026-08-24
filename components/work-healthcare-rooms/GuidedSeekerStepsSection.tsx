@@ -1,5 +1,8 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
 import { Eyebrow, SectionTitle, DotSteps, SectionDivider } from "./shared";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const steps = [
   {
@@ -25,16 +28,18 @@ const steps = [
 ];
 
 export function GuidedSeekerStepsSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Guided Seeker Steps</Eyebrow>
-            <SectionTitle>From search to move-in</SectionTitle>
+            <Eyebrow>{t("Guided Seeker Steps")}</Eyebrow>
+            <SectionTitle>{t("From search to move-in")}</SectionTitle>
           </div>
 
-          <DotSteps steps={steps} />
+          <DotSteps steps={steps.map(({ title, description }) => ({ title: t(title), description: t(description) }))} />
         </Reveal>
       </Container>
     </SectionDivider>

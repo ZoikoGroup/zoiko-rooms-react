@@ -1,8 +1,10 @@
 "use client";
 
 import React from "react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function CancellationsDisputesSection() {
+  const { t } = useLanguage();
   return (
     <section
       id="cancellations-and-disputes"
@@ -13,24 +15,23 @@ export default function CancellationsDisputesSection() {
         <span className="font-mono text-lg sm:text-xl text-[#C8202C] font-normal">
           10
         </span>
-        <span>Cancellations, changes, refunds &amp; disputes</span>
+        <span>{t("Cancellations, changes, refunds & disputes")}</span>
       </h2>
 
       {/* "In short" Highlight Box with custom styling */}
       <div className="bg-[#F2DED2] rounded-2xl px-4 py-3 mb-8">
         <p className="text-sm font-bold text-[#93321F] leading-relaxed">
-          In short: the applicable cancellation basis and any mandatory local
-          rights govern refunds and disputes.
+          {t(
+            "In short: the applicable cancellation basis and any mandatory local rights govern refunds and disputes.",
+          )}
         </p>
       </div>
 
       {/* Paragraph Content */}
       <p className="text-sm sm:text-base text-[#5C5B57] font-normal leading-relaxed">
-        Cancellation and change rights depend on the specific booking, agreement
-        type, and Regional Schedule that applied at the time. Where local law
-        grants you a mandatory right that these Terms don't otherwise provide,
-        that mandatory right prevails. Charge disputes are handled through the
-        process described in our Payment Terms.
+        {t(
+          "Cancellation and change rights depend on the specific booking, agreement type, and Regional Schedule that applied at the time. Where local law grants you a mandatory right that these Terms don't otherwise provide, that mandatory right prevails. Charge disputes are handled through the process described in our Payment Terms.",
+        )}
       </p>
     </section>
   );

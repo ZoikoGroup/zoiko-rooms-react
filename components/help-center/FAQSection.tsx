@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, X } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface FaqItem {
   id: string;
@@ -11,6 +12,7 @@ interface FaqItem {
 }
 
 export default function FAQSection() {
+  const { t } = useLanguage();
   const [openFaq, setOpenFaq] = useState<string | null>("contact-support");
 
   const faqs: FaqItem[] = [
@@ -63,7 +65,7 @@ export default function FAQSection() {
         {/* Section Header */}
         <div className="flex flex-col items-start text-left space-y-3 w-full">
           <h2 className="text-2xl lg:text-[28px] font-serif font-bold text-[#14213D] leading-tight max-w-2xl">
-            Frequently asked questions
+            {t("Frequently asked questions")}
           </h2>
         </div>
 
@@ -81,7 +83,7 @@ export default function FAQSection() {
                   className="w-full flex items-center justify-between text-left focus:outline-none group cursor-pointer"
                 >
                   <span className="text-sm sm:text-base font-bold text-[#14213D] group-hover:text-[#1A2E6E] transition-colors duration-150 pr-4">
-                    {faq.question}
+                    {t(faq.question)}
                   </span>
                   <div className="text-[#A05E2B] flex-shrink-0 ml-4">
                     {isOpen ? (
@@ -104,7 +106,7 @@ export default function FAQSection() {
                     >
                       <div className="pt-3 pb-1 max-w-2xl">
                         <p className="text-xs sm:text-sm text-[#555E68] leading-relaxed font-normal">
-                          {faq.answer}
+                          {t(faq.answer)}
                         </p>
                       </div>
                     </motion.div>

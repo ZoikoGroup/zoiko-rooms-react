@@ -5,6 +5,7 @@ import { Container, Reveal } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
 import { motion } from "framer-motion";
 import { Eyebrow, SectionTitle, Callout, SectionDivider } from "./shared";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const items = [
   { icon: Clock, label: "Availability status and last checked" },
@@ -16,13 +17,15 @@ const items = [
 ];
 
 export function BeforeYouContinueSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col gap-10">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Before You Continue</Eyebrow>
-            <SectionTitle>Know the relationship — and what we never collect</SectionTitle>
+            <Eyebrow>{t("Before You Continue")}</Eyebrow>
+            <SectionTitle>{t("Know the relationship — and what we never collect")}</SectionTitle>
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -35,15 +38,15 @@ export function BeforeYouContinueSection() {
                 className="flex items-center gap-3 rounded-xl border border-[#E9E0D3] bg-white px-5 py-4 shadow-sm"
               >
                 <Icon className="h-4 w-4 shrink-0 text-brand-red" />
-                <span className="text-sm text-brand-ink">{label}</span>
+                <span className="text-sm text-brand-ink">{t(label)}</span>
               </motion.div>
             ))}
           </div>
 
-          <Callout label="Health-Data Boundary" className="max-w-3xl">
-            A healthcare-location search indicates only a chosen destination. We do not infer or
-            collect diagnosis, treatment, patient status, clinical condition, specialty, medical
-            history, or protected health information.
+          <Callout label={t("Health-Data Boundary")} className="max-w-3xl">
+            {t(
+              "A healthcare-location search indicates only a chosen destination. We do not infer or collect diagnosis, treatment, patient status, clinical condition, specialty, medical history, or protected health information."
+            )}
           </Callout>
         </Reveal>
       </Container>

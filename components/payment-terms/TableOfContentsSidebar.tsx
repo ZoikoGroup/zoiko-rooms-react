@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { easeOut } from "@/lib/motion";
 import { tocItems, helpLinks } from "./data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export function TableOfContentsSidebar() {
+  const { t } = useLanguage();
   const [activeId, setActiveId] = useState(tocItems[0].id);
 
   useEffect(() => {
@@ -39,7 +41,7 @@ export function TableOfContentsSidebar() {
     <div className="w-full shrink-0 lg:sticky lg:top-24 lg:w-60 lg:self-start">
       <div className="flex flex-col gap-6">
         <div className="relative flex flex-col gap-1">
-          <span className="mb-2 text-xs font-semibold uppercase tracking-wide text-neutral-400">On this page</span>
+          <span className="mb-2 text-xs font-semibold uppercase tracking-wide text-neutral-400">{t("On this page")}</span>
           {tocItems.map((item) => {
             const isActive = activeId === item.id;
             return (
@@ -61,7 +63,7 @@ export function TableOfContentsSidebar() {
                     isActive ? "font-semibold text-brand-navy" : "text-neutral-500"
                   }`}
                 >
-                  {item.label}
+                  {t(item.label)}
                 </span>
               </a>
             );
@@ -70,7 +72,7 @@ export function TableOfContentsSidebar() {
 
         <div className="rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8] p-5">
           <span className="mb-3 block text-xs font-semibold uppercase tracking-wide text-neutral-400">
-            Help &amp; escalation
+            {t("Help & escalation")}
           </span>
           <div className="flex flex-col divide-y divide-[#E9E0D3]">
             {helpLinks.map((label) => (
@@ -79,7 +81,7 @@ export function TableOfContentsSidebar() {
                 href="/resources"
                 className="py-2.5 text-sm font-medium text-brand-navy transition-colors first:pt-0 last:pb-0 hover:text-brand-red"
               >
-                {label} →
+                {t(label)} →
               </a>
             ))}
           </div>

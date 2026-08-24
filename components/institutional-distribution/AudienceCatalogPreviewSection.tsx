@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface CatalogItem {
   imageSrc: string;
@@ -40,21 +41,22 @@ const catalogItems: CatalogItem[] = [
 ];
 
 export default function AudienceCatalogPreviewSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full text-[#14213D] py-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header Block */}
         <div className="text-center space-y-3 max-w-3xl mx-auto">
           <span className="text-[11px] font-bold tracking-widest text-[#C8202C] uppercase block">
-            AUDIENCE CATALOG PREVIEW
+            {t("AUDIENCE CATALOG PREVIEW")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Scoped supply, evidence attached
+            {t("Scoped supply, evidence attached")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-xl mx-auto">
-            Every catalog entry carries provider authority, current
-            availability, and complete costs &mdash; labeled by exactly how it
-            was verified.
+            {t(
+              "Every catalog entry carries provider authority, current availability, and complete costs — labeled by exactly how it was verified.",
+            )}
           </p>
         </div>
 
@@ -73,7 +75,7 @@ export default function AudienceCatalogPreviewSection() {
               <div className="relative w-full h-[200px] sm:h-[220px] overflow-hidden bg-[#F5F2EC]">
                 <img
                   src={item.imageSrc}
-                  alt={item.imageAlt}
+                  alt={t(item.imageAlt)}
                   className="w-full h-full object-cover object-center"
                 />
               </div>
@@ -85,7 +87,7 @@ export default function AudienceCatalogPreviewSection() {
                     {item.price}
                   </h3>
                   <p className="text-xs text-[#7A838E] font-medium">
-                    {item.subtitle}
+                    {t(item.subtitle)}
                   </p>
                 </div>
 
@@ -95,7 +97,7 @@ export default function AudienceCatalogPreviewSection() {
                     className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium border ${item.badgeStyle}`}
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-current" />
-                    {item.badgeText}
+                    {t(item.badgeText)}
                   </span>
                 </div>
               </div>

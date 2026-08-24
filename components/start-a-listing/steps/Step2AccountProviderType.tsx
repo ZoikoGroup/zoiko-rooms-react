@@ -1,5 +1,6 @@
 "use client";
 
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { StepShell } from "../StepShell";
 import { WizardFooter } from "../WizardFooter";
 import { FormField } from "../FormField";
@@ -15,6 +16,7 @@ type Step2Props = {
 };
 
 export function Step2AccountProviderType({ data, errors, onChange, onBack, onSaveExit, onContinue }: Step2Props) {
+  const { t } = useLanguage();
   return (
     <StepShell
       title="Account and provider type"
@@ -36,12 +38,12 @@ export function Step2AccountProviderType({ data, errors, onChange, onBack, onSav
                     : "border-[#E9E0D3] bg-white text-brand-ink hover:border-brand-navy/40"
                 }`}
               >
-                {option.label}
+                {t(option.label)}
               </button>
             );
           })}
         </div>
-        {errors.providerType && <span className="text-xs text-red-500">{errors.providerType}</span>}
+        {errors.providerType && <span className="text-xs text-red-500">{t(errors.providerType)}</span>}
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

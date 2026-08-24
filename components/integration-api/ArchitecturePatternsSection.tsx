@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface ArchitecturePattern {
   pattern: string;
@@ -68,6 +69,7 @@ const patterns: ArchitecturePattern[] = [
 ];
 
 export default function ArchitecturePatternsSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full bg-[#FAF8F5] text-[#14213D] py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto space-y-10">
@@ -76,15 +78,16 @@ export default function ArchitecturePatternsSection() {
           <div className="flex items-center gap-2">
             <span className="w-4 h-[2px] bg-[#1A2E6E]" />
             <span className="text-[11px] font-bold tracking-widest text-[#1A2E6E] uppercase">
-              ARCHITECTURE PATTERNS
+              {t("ARCHITECTURE PATTERNS")}
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Pick the pattern that fits how current the data needs to be.
+            {t("Pick the pattern that fits how current the data needs to be.")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
-            Most connections are one of these seven shapes. Each comes with the
-            controls it requires and the limitation it doesn't outgrow.
+            {t(
+              "Most connections are one of these seven shapes. Each comes with the controls it requires and the limitation it doesn't outgrow.",
+            )}
           </p>
         </div>
 
@@ -102,16 +105,16 @@ export default function ArchitecturePatternsSection() {
               <thead>
                 <tr className="bg-[#EEDFC5] border-b border-[#EAE6DF]">
                   <th className="py-4 px-6 text-[10px] font-bold tracking-wider text-[#706B65] uppercase w-[22%]">
-                    PATTERN
+                    {t("PATTERN")}
                   </th>
                   <th className="py-4 px-6 text-[10px] font-bold tracking-wider text-[#706B65] uppercase w-[26%]">
-                    BEST FIT
+                    {t("BEST FIT")}
                   </th>
                   <th className="py-4 px-6 text-[10px] font-bold tracking-wider text-[#706B65] uppercase w-[26%]">
-                    REQUIRED CONTROLS
+                    {t("REQUIRED CONTROLS")}
                   </th>
                   <th className="py-4 px-6 text-[10px] font-bold tracking-wider text-[#706B65] uppercase w-[26%]">
-                    LIMITATION
+                    {t("LIMITATION")}
                   </th>
                 </tr>
               </thead>
@@ -124,16 +127,16 @@ export default function ArchitecturePatternsSection() {
                     className="hover:bg-[#FAF8F5]/60 transition-colors"
                   >
                     <td className="py-5 px-6 font-serif font-bold text-sm text-[#14213D] align-top">
-                      {item.pattern}
+                      {t(item.pattern)}
                     </td>
                     <td className="py-5 px-6 text-xs text-[#555E68] leading-relaxed align-top">
-                      {item.bestFit}
+                      {t(item.bestFit)}
                     </td>
                     <td className="py-5 px-6 text-xs text-[#555E68] leading-relaxed align-top">
-                      {item.requiredControls}
+                      {t(item.requiredControls)}
                     </td>
                     <td className="py-5 px-6 text-xs text-[#555E68] leading-relaxed align-top">
-                      {item.limitation}
+                      {t(item.limitation)}
                     </td>
                   </tr>
                 ))}

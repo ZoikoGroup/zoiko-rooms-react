@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface FeatureCard {
   title: string;
@@ -68,6 +69,7 @@ const passportRows: PassportRow[] = [
 ];
 
 export default function PortfolioAndAvailabilitySection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full bg-white py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -76,16 +78,15 @@ export default function PortfolioAndAvailabilitySection() {
           {/* Header */}
           <div className="space-y-3">
             <span className="text-xs font-mono font-bold tracking-widest text-[#DC2626] uppercase">
-              PORTFOLIO &amp; AVAILABILITY
+              {t("Portfolio & Availability")}
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-[27px] font-serif font-bold text-[#14213D] leading-tight">
-              Operate properties, rooms, and Room Passports without losing the
-              evidence behind each field.
+              {t("Operate properties, rooms, and Room Passports without losing the evidence behind each field.")}
             </h2>
             <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed">
-              The Room Passport stays the canonical room record &mdash; facts,
-              media, access, condition, costs, and availability are sourced,
-              dated, and owned, even as bulk changes and imports move fast.
+              {t(
+                "The Room Passport stays the canonical room record — facts, media, access, condition, costs, and availability are sourced, dated, and owned, even as bulk changes and imports move fast."
+              )}
             </p>
           </div>
 
@@ -103,11 +104,11 @@ export default function PortfolioAndAvailabilitySection() {
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#1A2E6E] shrink-0" />
                   <h3 className="text-sm font-bold text-[#14213D]">
-                    {item.title}
+                    {t(item.title)}
                   </h3>
                 </div>
                 <p className="text-xs text-[#555E68] leading-relaxed pl-3.5 font-normal">
-                  {item.description}
+                  {t(item.description)}
                 </p>
               </motion.div>
             ))}
@@ -119,7 +120,7 @@ export default function PortfolioAndAvailabilitySection() {
               href="#explore-portfolio"
               className="inline-block bg-transparent hover:bg-white text-[#14213D] text-xs font-semibold px-6 py-3 rounded-full border border-[#14213D] transition-colors shadow-xs"
             >
-              Explore Portfolio &amp; Availability
+              {t("Explore Portfolio & Availability")}
             </a>
           </div>
         </div>
@@ -137,7 +138,7 @@ export default function PortfolioAndAvailabilitySection() {
             <div className="relative w-full h-[220px] sm:h-[260px]">
               <Image
                 src="/images/pro-overview/1.png"
-                alt="Sample Room Passport"
+                alt={t("Sample Room Passport")}
                 fill
                 className="object-cover object-center"
                 priority
@@ -147,7 +148,7 @@ export default function PortfolioAndAvailabilitySection() {
             {/* Passport Data List */}
             <div className="p-6 sm:p-8 space-y-4">
               <span className="text-[11px] font-mono text-[#736B62] block">
-                Sample Room Passport &middot; demonstration data
+                {t("Sample Room Passport · demonstration data")}
               </span>
 
               <div className="divide-y divide-[#F0ECE1]">
@@ -157,7 +158,7 @@ export default function PortfolioAndAvailabilitySection() {
                     className="py-3.5 flex items-center justify-between gap-4 first:pt-1 last:pb-1"
                   >
                     <span className="text-xs font-medium text-[#555E68]">
-                      {row.label}
+                      {t(row.label)}
                     </span>
                     <span
                       className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium ${row.badgeStyle}`}
@@ -165,7 +166,7 @@ export default function PortfolioAndAvailabilitySection() {
                       <span
                         className={`w-1.5 h-1.5 rounded-full ${row.dotColor}`}
                       />
-                      {row.badgeText}
+                      {t(row.badgeText)}
                     </span>
                   </div>
                 ))}

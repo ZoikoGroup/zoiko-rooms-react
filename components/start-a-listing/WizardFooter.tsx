@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 type WizardFooterProps = {
   showBack: boolean;
@@ -12,16 +13,17 @@ type WizardFooterProps = {
 };
 
 export function WizardFooter({ showBack, onBack, onSaveExit, onContinue, continueLabel = "Continue" }: WizardFooterProps) {
+  const { t } = useLanguage();
   return (
     <>
       <div className="flex flex-wrap items-center gap-3">
         {showBack && (
           <Button variant="outline" size="md" onClick={onBack}>
-            Back
+            {t("Back")}
           </Button>
         )}
         <Button variant="outline" size="md" onClick={onSaveExit}>
-          Save &amp; Exit
+          {t("Save & Exit")}
         </Button>
       </div>
       <motion.button
@@ -32,7 +34,7 @@ export function WizardFooter({ showBack, onBack, onSaveExit, onContinue, continu
         transition={{ duration: 0.15 }}
         className="inline-flex items-center justify-center rounded-full bg-brand-navy px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-navy-dark"
       >
-        {continueLabel}
+        {t(continueLabel)}
       </motion.button>
     </>
   );

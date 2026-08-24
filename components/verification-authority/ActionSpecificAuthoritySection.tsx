@@ -1,27 +1,32 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, InfoTable, SectionDivider } from "./shared";
 
-const rows = [
-  ["Publish/unpublish listing", "Block publication or keep private"],
-  ["Read applicant data", "Deny access"],
-  ["Approve/decline applicant", "No decision; route to authorized owner"],
-  ["Sign agreement", "Block signature"],
-  ["Receive payment", "Block or hold payment"],
-  ["Change payment instructions", "Block, alert, and review"],
-  ["Invite/manage team", "Block and route to admin"],
-];
-
 export function ActionSpecificAuthoritySection() {
+  const { t } = useLanguage();
+
+  const rows = [
+    [t("Publish/unpublish listing"), t("Block publication or keep private")],
+    [t("Read applicant data"), t("Deny access")],
+    [t("Approve/decline applicant"), t("No decision; route to authorized owner")],
+    [t("Sign agreement"), t("Block signature")],
+    [t("Receive payment"), t("Block or hold payment")],
+    [t("Change payment instructions"), t("Block, alert, and review")],
+    [t("Invite/manage team"), t("Block and route to admin")],
+  ];
+
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Action-Specific Authority</Eyebrow>
-            <SectionTitle>Publishing a listing doesn&apos;t authorize everything else</SectionTitle>
+            <Eyebrow>{t("Action-Specific Authority")}</Eyebrow>
+            <SectionTitle>{t("Publishing a listing doesn't authorize everything else")}</SectionTitle>
           </div>
 
-          <InfoTable columns={["Action", "Default If Authority Is Unclear"]} rows={rows} />
+          <InfoTable columns={[t("Action"), t("Default If Authority Is Unclear")]} rows={rows} />
         </Reveal>
       </Container>
     </SectionDivider>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container, Reveal, EvidenceBadge, ImageFade } from "@/components/ui";
 import { easeOut } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow } from "./shared";
 
 // Explicit bento placement: address is a tall tile spanning column 1's first
@@ -79,6 +80,7 @@ const fields = [
 ];
 
 export function ExplorePassportSection() {
+  const { t } = useLanguage();
   const [selectedKey, setSelectedKey] = useState(fields[0].key);
   const selected = fields.find((field) => field.key === selectedKey) ?? fields[0];
 
@@ -87,9 +89,9 @@ export function ExplorePassportSection() {
       <Container>
         <Reveal className="flex flex-col gap-10">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Explore a Real Passport</Eyebrow>
+            <Eyebrow>{t("Explore a Real Passport")}</Eyebrow>
             <h2 className="max-w-2xl font-heading text-3xl font-medium text-brand-navy sm:text-4xl">
-              Click any field to see its evidence level and source
+              {t("Click any field to see its evidence level and source")}
             </h2>
           </div>
 
@@ -103,14 +105,14 @@ export function ExplorePassportSection() {
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.2, ease: easeOut }}
                   onClick={() => setSelectedKey(key)}
-                  aria-label={label}
+                  aria-label={t(label)}
                   className={`relative overflow-hidden  transition-shadow ${
                     isSelected ? "ring-brand-navy" : "ring-transparent"
                   } ${placement[key]}`}
                 >
                   <ImageFade
                     src={image}
-                    alt={label}
+                    alt={t(label)}
                     fill
                   />
                 </motion.button>
@@ -128,10 +130,10 @@ export function ExplorePassportSection() {
               className="flex flex-col gap-2  p-6"
             >
               <div className="flex items-center gap-3">
-                <span className="font-heading text-base font-medium text-brand-navy">{selected.label}</span>
-                <EvidenceBadge label={selected.tier} tone={selected.tone} variant="outline" />
+                <span className="font-heading text-base font-medium text-brand-navy">{t(selected.label)}</span>
+                <EvidenceBadge label={t(selected.tier)} tone={selected.tone} variant="outline" />
               </div>
-              <p className="text-sm leading-relaxed text-neutral-600">{selected.source}</p>
+              <p className="text-sm leading-relaxed text-neutral-600">{t(selected.source)}</p>
             </motion.div>
           </AnimatePresence>
         </Reveal>

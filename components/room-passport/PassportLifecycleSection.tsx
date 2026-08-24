@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Container, Reveal } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow } from "./shared";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
 
@@ -34,14 +35,16 @@ const steps = [
 ];
 
 export function PassportLifecycleSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="border-b border-[#E9E0D3] py-16 sm:py-24">
       <Container>
         <Reveal className="flex flex-col gap-12">
           <div className="flex flex-col items-center gap-4 text-center">
-            <Eyebrow>How a Passport Gets Built</Eyebrow>
+            <Eyebrow>{t("How a Passport Gets Built")}</Eyebrow>
             <h2 className="max-w-2xl font-heading text-3xl font-medium text-brand-navy sm:text-4xl">
-              From first draft to a living record
+              {t("From first draft to a living record")}
             </h2>
           </div>
 
@@ -59,7 +62,7 @@ export function PassportLifecycleSection() {
                     transition={{ duration: 0.4 }}
                     className={`w-full overflow-hidden rounded-3xl ${imageFirst ? "lg:order-1" : "lg:order-2"}`}
                   >
-                    <NaturalImage src={image} alt={title} />
+                    <NaturalImage src={image} alt={t(title)} />
                   </motion.div>
 
                   <motion.div
@@ -67,8 +70,8 @@ export function PassportLifecycleSection() {
                     className={`flex flex-col gap-2 ${imageFirst ? "lg:order-2" : "lg:order-1"}`}
                   >
                     <span className="font-heading text-sm font-semibold text-[#C2703C]">{number}</span>
-                    <h3 className="font-heading text-xl font-medium text-brand-navy">{title}</h3>
-                    <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
+                    <h3 className="font-heading text-xl font-medium text-brand-navy">{t(title)}</h3>
+                    <p className="text-sm leading-relaxed text-neutral-600">{t(description)}</p>
                   </motion.div>
                 </div>
               );

@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Container, Reveal } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { rooms, budgetOptions } from "./data";
 import { SearchFiltersBar, type DraftFilters } from "./SearchFiltersBar";
 import { FilterChipsRow } from "./FilterChipsRow";
@@ -18,6 +19,7 @@ const DEFAULT_DRAFT: DraftFilters = {
 };
 
 export function SearchRoomsView() {
+  const { t } = useLanguage();
   const [draft, setDraft] = useState<DraftFilters>(DEFAULT_DRAFT);
   const [applied, setApplied] = useState<DraftFilters>(DEFAULT_DRAFT);
   const [activeFilters, setActiveFilters] = useState<string[]>([
@@ -118,7 +120,7 @@ export function SearchRoomsView() {
 
   return (
     <Container className="flex flex-col gap-6 py-8 sm:py-10">
-      <h1 className="font-heading text-2xl font-semibold text-brand-navy">Search Rooms</h1>
+      <h1 className="font-heading text-2xl font-semibold text-brand-navy">{t("Search Rooms")}</h1>
 
       <SearchFiltersBar
         draft={draft}
@@ -154,8 +156,7 @@ export function SearchRoomsView() {
 
       {sortedRooms.length === 0 ? (
         <div className="rounded-2xl border border-[#E9E0D3] bg-white p-10 text-center text-sm text-neutral-500">
-          No rooms match this search yet. Try removing a filter or widening your budget or stay
-          length.
+          {t("No rooms match this search yet. Try removing a filter or widening your budget or stay length.")}
         </div>
       ) : (
         <div className={viewMode === "split" ? "grid grid-cols-1 gap-6 lg:grid-cols-2" : "flex flex-col gap-4"}>

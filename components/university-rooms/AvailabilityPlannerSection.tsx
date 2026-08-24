@@ -1,5 +1,8 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
 import { Eyebrow, SectionTitle, InfoTable, SectionDivider } from "./shared";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const rows = [
   ["Available for stated term/dates", "Recently confirmed for the displayed move-in/move-out or term range"],
@@ -11,16 +14,21 @@ const rows = [
 ];
 
 export function AvailabilityPlannerSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Term and Availability Planner</Eyebrow>
-            <SectionTitle>Availability freshness tightens around term starts</SectionTitle>
+            <Eyebrow>{t("Term and Availability Planner")}</Eyebrow>
+            <SectionTitle>{t("Availability freshness tightens around term starts")}</SectionTitle>
           </div>
 
-          <InfoTable columns={["State", "Meaning"]} rows={rows} />
+          <InfoTable
+            columns={[t("State"), t("Meaning")]}
+            rows={rows.map(([state, meaning]) => [t(state), t(meaning)])}
+          />
         </Reveal>
       </Container>
     </SectionDivider>

@@ -6,6 +6,7 @@ import { ArrowRight, Building2 } from "lucide-react";
 import { Container, Reveal, Button, ImageFade } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const workforceNeeds = ["New hires", "Domestic relocation", "International relocation", "Temporary / secondment", "Trainees & interns"];
 const relationshipModels = ["Independent", "Employer-referred", "Employer-allocated", "Allowance / stipend", "Support-only"];
@@ -21,9 +22,10 @@ function PillGroup({
   selected: string;
   onSelect: (value: string) => void;
 }) {
+  const { t } = useLanguage();
   return (
     <div className="flex flex-col gap-3">
-      <span className="text-xs font-semibold uppercase tracking-wide text-neutral-400">{label}</span>
+      <span className="text-xs font-semibold uppercase tracking-wide text-neutral-400">{t(label)}</span>
       <div className="flex flex-wrap gap-2">
         {options.map((option) => {
           const isSelected = selected === option;
@@ -38,7 +40,7 @@ function PillGroup({
                   : "border-[#E9E0D3] text-brand-navy hover:bg-brand-navy/5"
               }`}
             >
-              {option}
+              {t(option)}
             </button>
           );
         })}
@@ -50,6 +52,7 @@ function PillGroup({
 export function HeroSection() {
   const [workforceNeed, setWorkforceNeed] = useState(workforceNeeds[0]);
   const [relationshipModel, setRelationshipModel] = useState(relationshipModels[1]);
+  const { t } = useLanguage();
 
   return (
     <>
@@ -72,21 +75,20 @@ export function HeroSection() {
               className="inline-flex w-fit items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm"
             >
               <Building2 className="h-3.5 w-3.5" />
-              For employers
+              {t("For employers")}
             </motion.span>
 
             <motion.h1 variants={fadeUp} className="font-heading text-4xl font-bold text-white sm:text-[34px]">
-              Coordinate room access for workforce moves, built on <span className="text-[#A9B6F5]">clear choice.</span>
+              {t("Coordinate room access for workforce moves, built on")} <span className="text-[#A9B6F5]">{t("clear choice.")}</span>
             </motion.h1>
 
             <motion.p variants={fadeUp} className="max-w-lg text-[15px] leading-relaxed text-white/70">
-              Support new hires, transfers, temporary assignments, projects, trainees, and
-              seasonal workforces — with cost, data, and responsibility explicit at every step.
+              {t("Support new hires, transfers, temporary assignments, projects, trainees, and seasonal workforces — with cost, data, and responsibility explicit at every step.")}
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-col gap-3 sm:flex-row">
               <Button href="/find-a-room" size="lg" variant="secondary" className="gap-2">
-                Find a Room
+                {t("Find a Room")}
                 <ArrowRight className="h-4 w-4" />
               </Button>
               <Button
@@ -95,7 +97,7 @@ export function HeroSection() {
                 variant="outline"
                 className="border-white/30 text-white hover:bg-white hover:text-brand-navy"
               >
-                Talk to Zoiko Rooms
+                {t("Talk to Zoiko Rooms")}
               </Button>
             </motion.div>
           </Reveal>
@@ -103,7 +105,7 @@ export function HeroSection() {
           <motion.div variants={fadeUp} className="w-full overflow-hidden rounded-2xl">
             <NaturalImage
               src="/images/employers/hero-meeting-room.png"
-              alt="Colleagues meeting around a table to plan a workforce move"
+              alt={t("Colleagues meeting around a table to plan a workforce move")}
             />
           </motion.div>
         </Container>

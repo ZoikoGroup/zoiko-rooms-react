@@ -3,8 +3,11 @@
 import { motion } from "framer-motion";
 import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export function ProviderSupportSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="pb-16 sm:pb-24">
       <Container>
@@ -14,21 +17,22 @@ export function ProviderSupportSection() {
               variants={fadeUp}
               className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-red"
             >
-              Still Not Sure?
+              {t("Still Not Sure?")}
             </motion.span>
             <motion.h2
               variants={fadeUp}
               className="font-heading text-2xl font-medium text-brand-navy sm:text-3xl"
             >
-              Talk to Provider Support
+              {t("Talk to Provider Support")}
             </motion.h2>
             <motion.p variants={fadeUp} className="max-w-md text-base text-neutral-600">
-              Guided questions and provider support can help you choose the right path — no forced
-              self-certification.
+              {t(
+                "Guided questions and provider support can help you choose the right path — no forced self-certification.",
+              )}
             </motion.p>
             <motion.div variants={fadeUp}>
               <Button href="/resources" size="lg" variant="outline">
-                Contact Provider Help
+                {t("Contact Provider Help")}
               </Button>
             </motion.div>
           </div>
@@ -38,20 +42,20 @@ export function ProviderSupportSection() {
               variants={fadeUp}
               className="font-heading text-3xl font-medium text-brand-navy sm:text-4xl"
             >
-              Ready to prepare the room?
+              {t("Ready to prepare the room?")}
             </motion.h2>
             <motion.p variants={fadeUp} className="max-w-md text-base text-neutral-600">
-              Start a private listing draft or open the provider guide matching your authority.
+              {t("Start a private listing draft or open the provider guide matching your authority.")}
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-col gap-3 sm:flex-row">
               <Button href="/list-a-room/start-a-listing" size="lg" variant="secondary">
-                Start a Listing
+                {t("Start a Listing")}
               </Button>
               <Button href="/list-a-room/requirements-pricing" size="lg" variant="outline">
-                Requirements & Pricing
+                {t("Requirements & Pricing")}
               </Button>
               <Button href="/resources" size="lg" variant="outline">
-                Provider Help
+                {t("Provider Help")}
               </Button>
             </motion.div>
           </Reveal>

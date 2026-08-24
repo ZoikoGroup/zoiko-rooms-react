@@ -1,4 +1,7 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, Callout, InfoTable, SectionDivider } from "./shared";
 
 const rows = [
@@ -11,20 +14,23 @@ const rows = [
 ];
 
 export function AgreementsCostsSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Agreements and Costs</Eyebrow>
-            <SectionTitle>Know exactly what you&apos;re accepting</SectionTitle>
+            <Eyebrow>{t("Agreements and Costs")}</Eyebrow>
+            <SectionTitle>{t("Know exactly what you're accepting")}</SectionTitle>
           </div>
 
-          <InfoTable columns={["Item", "Illustrative Display"]} rows={rows} />
+          <InfoTable columns={[t("Item"), t("Illustrative Display")]} rows={rows.map((row) => row.map((cell) => t(cell)))} />
 
-          <Callout label="Example boundary">
-            These USD amounts demonstrate cost disclosure only. They are not Zoiko Rooms fees,
-            market averages, affordability advice, or a promise of payment protection or refund.
+          <Callout label={t("Example boundary")}>
+            {t(
+              "These USD amounts demonstrate cost disclosure only. They are not Zoiko Rooms fees, market averages, affordability advice, or a promise of payment protection or refund.",
+            )}
           </Callout>
         </Reveal>
       </Container>

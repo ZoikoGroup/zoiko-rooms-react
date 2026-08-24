@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Container, Reveal, EvidenceBadge } from "@/components/ui";
 import { fadeUp, easeOut } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow } from "./shared";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
 
@@ -31,14 +32,16 @@ const tiers = [
 ];
 
 export function ThreeTiersSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="border-b border-white/10 bg-[#1B2438] py-16 sm:py-24">
       <Container>
         <Reveal className="flex flex-col items-center gap-10 text-center">
           <div className="flex flex-col items-center gap-4">
-            <Eyebrow dark>Three Tiers, Never Blended</Eyebrow>
+            <Eyebrow dark>{t("Three Tiers, Never Blended")}</Eyebrow>
             <h2 className="max-w-2xl font-heading text-3xl font-medium text-white sm:text-4xl">
-              Every field on a Room Passport carries its own evidence level
+              {t("Every field on a Room Passport carries its own evidence level")}
             </h2>
           </div>
 
@@ -53,13 +56,13 @@ export function ThreeTiersSection() {
               >
                 <div className="overflow-hidden">
                   <div className="transition-transform duration-500 ease-out hover:scale-105">
-                    <NaturalImage src={image} alt={title} />
+                    <NaturalImage src={image} alt={t(title)} />
                   </div>
                 </div>
                 <div className="flex flex-col gap-2 p-5">
-                  <EvidenceBadge label={label} tone={tone} variant="outline" className="w-fit" />
-                  <h3 className="font-heading text-lg font-medium text-brand-navy">{title}</h3>
-                  <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
+                  <EvidenceBadge label={t(label)} tone={tone} variant="outline" className="w-fit" />
+                  <h3 className="font-heading text-lg font-medium text-brand-navy">{t(title)}</h3>
+                  <p className="text-sm leading-relaxed text-neutral-600">{t(description)}</p>
                 </div>
               </motion.div>
             ))}

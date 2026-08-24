@@ -2,8 +2,10 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function CallToActionSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full py-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto">
@@ -17,12 +19,14 @@ export default function CallToActionSection() {
           {/* Main Headline & Subtitle */}
           <div className="space-y-3 max-w-2xl mx-auto">
             <h2 className="text-2xl sm:text-3xl lg:text-[29px] font-serif font-bold leading-tight">
-              Trace every application, agreement, and payment back to a named
-              owner.
+              {t(
+                "Trace every application, agreement, and payment back to a named owner.",
+              )}
             </h2>
             <p className="text-xs sm:text-sm text-white/70 font-normal leading-relaxed">
-              No commitment required &mdash; governed discovery starts with a
-              conversation.
+              {t(
+                "No commitment required — governed discovery starts with a conversation.",
+              )}
             </p>
           </div>
 
@@ -32,13 +36,13 @@ export default function CallToActionSection() {
               href="#explore-lifecycle"
               className="bg-white hover:bg-gray-100 text-[#14213D] text-xs font-semibold px-6 py-3 rounded-full transition-colors shadow-xs"
             >
-              Explore the Transaction Lifecycle
+              {t("Explore the Transaction Lifecycle")}
             </a>
             <a
               href="#talk-to-zoiko"
               className="bg-transparent hover:bg-white/10 text-white text-xs font-semibold px-6 py-3 rounded-full border border-white/30 transition-colors shadow-xs"
             >
-              Talk to Zoiko Rooms
+              {t("Talk to Zoiko Rooms")}
             </a>
           </div>
         </motion.div>
