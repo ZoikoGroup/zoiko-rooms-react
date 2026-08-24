@@ -10,6 +10,182 @@
   --color-brand-red-dark: #b30909;
   --color-brand-cream: #faf6f0;
   --color-brand-ink: #0b1b33;
+
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  --color-assistant-bubble-bg: var(--color-gray-100);
+  --color-assistant-bubble-text: var(--color-brand-ink);
+  --color-user-bubble-bg: var(--color-brand-navy);
+  --color-user-bubble-text: #ffffff;
+  --color-composer-bg: var(--color-gray-50);
+  --color-composer-border: var(--color-gray-200);
+  --color-header-border: var(--color-gray-200);
+  --color-suggestion-bg: #ffffff;
+  --color-suggestion-border: var(--color-gray-200);
+  --color-suggestion-text: var(--color-brand-navy);
+  --color-suggestion-hover-bg: var(--color-brand-navy);
+  --color-suggestion-hover-text: #ffffff;
+  --color-citation-bg: #ffffff;
+  --color-citation-border: var(--color-gray-100);
+  --color-citation-label-bg: var(--color-brand-navy);
+  --color-citation-label-text: #ffffff;
+  --color-citation-label-text-dim: rgba(255,255,255,0.8);
+  --color-citation-text: var(--color-gray-600);
+  --color-badge-guidance-bg: #dcfce7;
+  --color-badge-guidance-text: #166534;
+  --color-badge-account-bg: #dbeafe;
+  --color-badge-account-text: #1e40af;
+  --color-badge-mixed-bg: #f3e8ff;
+  --color-badge-mixed-text: #7e22ce;
+  --color-badge-abstention-bg: var(--color-gray-100);
+  --color-badge-abstention-text: var(--color-gray-500);
+  --color-badge-navigation-bg: #cffafe;
+  --color-badge-navigation-text: #0e7490;
+  --color-hover-overlay: rgba(0,0,0,0.04);
+  --color-focus-ring: var(--color-brand-navy);
+  --color-loading-dot: var(--color-gray-400);
+  --color-error-bg: #fef2f2;
+  --color-error-border: #fecaca;
+  --color-error-text: #b91c1c;
+  --color-handoff-bg: #fffbeb;
+  --color-handoff-border: #fde68a;
+  --color-handoff-text: #92400e;
+  --color-deep-link-bg: rgba(14, 47, 115, 0.05);
+  --color-deep-link-border: rgba(14, 47, 115, 0.2);
+  --color-deep-link-text: var(--color-brand-navy);
+  --color-deep-link-hover-bg: rgba(14, 47, 115, 0.1);
+  --color-welcome-bg: var(--color-gray-100);
+  --color-welcome-text: var(--color-brand-ink);
+  --color-menu-bg: #ffffff;
+  --color-menu-border: var(--color-gray-200);
+  --color-menu-item-hover: var(--color-gray-50);
+  --color-menu-item-text: var(--color-brand-ink);
+  --color-overlay: rgba(0, 0, 0, 0.2);
+  --color-scrollbar-thumb: var(--color-gray-300);
+  --color-scrollbar-track: transparent;
+}
+
+.zoiko-assistant-root[data-theme="light"] {
+  --color-assistant-bubble-bg: var(--color-gray-100);
+  --color-assistant-bubble-text: var(--color-brand-ink);
+  --color-user-bubble-bg: var(--color-brand-navy);
+  --color-user-bubble-text: #ffffff;
+  --color-composer-bg: var(--color-gray-50);
+  --color-composer-border: var(--color-gray-200);
+  --color-header-border: var(--color-gray-200);
+  --color-suggestion-bg: #ffffff;
+  --color-suggestion-border: var(--color-gray-200);
+  --color-suggestion-text: var(--color-brand-navy);
+  --color-suggestion-hover-bg: var(--color-brand-navy);
+  --color-suggestion-hover-text: #ffffff;
+  --color-citation-bg: #ffffff;
+  --color-citation-border: var(--color-gray-100);
+  --color-citation-label-bg: var(--color-brand-navy);
+  --color-citation-label-text: #ffffff;
+  --color-citation-label-text-dim: rgba(255,255,255,0.8);
+  --color-citation-text: var(--color-gray-600);
+  --color-badge-guidance-bg: #dcfce7;
+  --color-badge-guidance-text: #166534;
+  --color-badge-account-bg: #dbeafe;
+  --color-badge-account-text: #1e40af;
+  --color-badge-mixed-bg: #f3e8ff;
+  --color-badge-mixed-text: #7e22ce;
+  --color-badge-abstention-bg: var(--color-gray-100);
+  --color-badge-abstention-text: var(--color-gray-500);
+  --color-badge-navigation-bg: #cffafe;
+  --color-badge-navigation-text: #0e7490;
+  --color-hover-overlay: rgba(0,0,0,0.04);
+  --color-focus-ring: var(--color-brand-navy);
+  --color-loading-dot: var(--color-gray-400);
+  --color-error-bg: #fef2f2;
+  --color-error-border: #fecaca;
+  --color-error-text: #b91c1c;
+  --color-handoff-bg: #fffbeb;
+  --color-handoff-border: #fde68a;
+  --color-handoff-text: #92400e;
+  --color-deep-link-bg: rgba(14, 47, 115, 0.05);
+  --color-deep-link-border: rgba(14, 47, 115, 0.2);
+  --color-deep-link-text: var(--color-brand-navy);
+  --color-deep-link-hover-bg: rgba(14, 47, 115, 0.1);
+  --color-welcome-bg: var(--color-gray-100);
+  --color-welcome-text: var(--color-brand-ink);
+  --color-menu-bg: #ffffff;
+  --color-menu-border: var(--color-gray-200);
+  --color-menu-item-hover: var(--color-gray-50);
+  --color-menu-item-text: var(--color-brand-ink);
+  --color-overlay: rgba(0, 0, 0, 0.2);
+  --color-scrollbar-thumb: var(--color-gray-300);
+  --color-scrollbar-track: transparent;
+}
+
+.zoiko-assistant-root[data-theme="dark"] {
+  --color-assistant-bubble-bg: #111827;
+  --color-assistant-bubble-text: #f3f4f6;
+  --color-user-bubble-bg: #3b82f6;
+  --color-user-bubble-text: #ffffff;
+  --color-composer-bg: #111827;
+  --color-composer-border: #374151;
+  --color-header-border: #374151;
+  --color-suggestion-bg: #1f2937;
+  --color-suggestion-border: #374151;
+  --color-suggestion-text: #93c5fd;
+  --color-suggestion-hover-bg: #3b82f6;
+  --color-suggestion-hover-text: #ffffff;
+  --color-citation-bg: #1f2937;
+  --color-citation-border: #374151;
+  --color-citation-label-bg: #3b82f6;
+  --color-citation-label-text: #ffffff;
+  --color-citation-label-text-dim: rgba(255,255,255,0.7);
+  --color-citation-text: #9ca3af;
+  --color-badge-guidance-bg: #14532d;
+  --color-badge-guidance-text: #86efac;
+  --color-badge-account-bg: #1e3a8a;
+  --color-badge-account-text: #93c5fd;
+  --color-badge-mixed-bg: #581c87;
+  --color-badge-mixed-text: #f0abfc;
+  --color-badge-abstention-bg: #1f2937;
+  --color-badge-abstention-text: #9ca3af;
+  --color-badge-navigation-bg: #164e63;
+  --color-badge-navigation-text: #67e8f9;
+  --color-hover-overlay: rgba(255,255,255,0.08);
+  --color-focus-ring: #60a5fa;
+  --color-loading-dot: #6b7280;
+  --color-error-bg: #450a0a;
+  --color-error-border: #7f1d1d;
+  --color-error-text: #fca5a5;
+  --color-handoff-bg: #451a03;
+  --color-handoff-border: #78350f;
+  --color-handoff-text: #fde047;
+  --color-deep-link-bg: rgba(59, 130, 246, 0.15);
+  --color-deep-link-border: rgba(59, 130, 246, 0.3);
+  --color-deep-link-text: #93c5fd;
+  --color-deep-link-hover-bg: rgba(59, 130, 246, 0.25);
+  --color-welcome-bg: #111827;
+  --color-welcome-text: #f3f4f6;
+  --color-menu-bg: #111827;
+  --color-menu-border: #374151;
+  --color-menu-item-hover: #1f2937;
+  --color-menu-item-text: #f3f4f6;
+  --color-overlay: rgba(0, 0, 0, 0.5);
+  --color-scrollbar-thumb: #4b5563;
+  --color-scrollbar-track: #111827;
+}
+
+.zoiko-assistant-root textarea::placeholder {
+  color: var(--color-gray-400);
+}
+
+.zoiko-assistant-root[data-theme="dark"] textarea::placeholder {
+  color: var(--color-gray-400);
 }
 
 @theme inline {
@@ -22,6 +198,17 @@
   --color-brand-red-dark: var(--color-brand-red-dark);
   --color-brand-cream: var(--color-brand-cream);
   --color-brand-ink: var(--color-brand-ink);
+
+  --color-gray-50: var(--color-gray-50);
+  --color-gray-100: var(--color-gray-100);
+  --color-gray-200: var(--color-gray-200);
+  --color-gray-300: var(--color-gray-300);
+  --color-gray-400: var(--color-gray-400);
+  --color-gray-500: var(--color-gray-500);
+  --color-gray-600: var(--color-gray-600);
+  --color-gray-700: var(--color-gray-700);
+  --color-gray-800: var(--color-gray-800);
+  --color-gray-900: var(--color-gray-900);
 
   --font-sans: var(--font-inter);
   --font-heading: var(--font-fraunces);
@@ -36,4 +223,71 @@ body {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+}
+
+.prose-chat {
+  line-height: 1.5;
+}
+.prose-chat p {
+  margin: 0.5em 0;
+}
+.prose-chat p:first-child {
+  margin-top: 0;
+}
+.prose-chat p:last-child {
+  margin-bottom: 0;
+}
+.prose-chat strong {
+  font-weight: 600;
+}
+.prose-chat em {
+  font-style: italic;
+}
+.prose-chat ul, .prose-chat ol {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+.prose-chat ul {
+  list-style-type: disc;
+}
+.prose-chat ol {
+  list-style-type: decimal;
+}
+.prose-chat li {
+  margin: 0.25em 0;
+}
+.prose-chat h1, .prose-chat h2, .prose-chat h3 {
+  font-weight: 600;
+  margin: 0.75em 0 0.25em;
+}
+.prose-chat h1 { font-size: 1.1em; }
+.prose-chat h2 { font-size: 1.05em; }
+.prose-chat h3 { font-size: 1em; }
+.prose-chat code {
+  font-size: 0.9em;
+  background: rgba(0,0,0,0.06);
+  padding: 0.15em 0.3em;
+  border-radius: 4px;
+}
+.prose-chat pre {
+  background: rgba(0,0,0,0.06);
+  padding: 0.5em;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 0.5em 0;
+}
+.prose-chat pre code {
+  background: none;
+  padding: 0;
+}
+.prose-chat blockquote {
+  border-left: 3px solid #d1d5db;
+  padding-left: 0.75em;
+  margin: 0.5em 0;
+  color: #6b7280;
+}
+.prose-chat hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 0.75em 0;
 }

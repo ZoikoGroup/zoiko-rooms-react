@@ -1,3 +1,5 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
 import { regionOptions, languageOptions, currencyOptions } from "@/lib/nav-data";
 import { footerColumns } from "./footer-data";

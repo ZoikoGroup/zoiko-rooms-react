@@ -19,8 +19,8 @@ export default function VerificationSafetySection() {
       {/* "In short" Highlight Box with custom styling */}
       <div className="bg-[#F2DED2] rounded-2xl px-4 py-3 mb-8">
         <p className="text-sm font-bold text-[#93321F] leading-relaxed">
-          In short: verification means exactly what's shown, nothing more
-          &mdash; and it's not a guarantee of safety.
+          In short: verification means exactly what&apos;s shown, nothing more
+          &mdash; and it&apos;s not a guarantee of safety.
         </p>
       </div>
 
@@ -30,7 +30,7 @@ export default function VerificationSafetySection() {
         that reflects the specific checks actually performed &mdash; never treat
         it as a general guarantee of safety, legality, or suitability. Report
         safety or trust concerns through our Community Standards reporting
-        tools; if you're in immediate danger, contact local emergency services
+        tools; if you&apos;re in immediate danger, contact local emergency services
         first.
       </p>
     </section>

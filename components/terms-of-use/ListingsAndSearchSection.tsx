@@ -19,8 +19,8 @@ export default function ListingsAndSearchSection() {
       {/* "In short" Highlight Box */}
       <div className="bg-[#F2DED2] rounded-2xl px-4 py-3 mb-8">
         <p className="text-sm font-bold text-[#93321F] leading-relaxed">
-          In short: listings must be accurate, and what you see in search isn't
-          a guarantee it's still available.
+          In short: listings must be accurate, and what you see in search isn&apos;t
+          a guarantee it&apos;s still available.
         </p>
       </div>
 
@@ -29,7 +29,7 @@ export default function ListingsAndSearchSection() {
         <p>
           Providers are responsible for the accuracy of their listings &mdash;
           price basis, room type, availability, restrictions and charges. Zoiko
-          Rooms doesn't independently verify every listing detail unless a
+          Rooms doesn&apos;t independently verify every listing detail unless a
           specific verification tier states otherwise, and displayed
           availability can change before you complete a booking or application.
         </p>

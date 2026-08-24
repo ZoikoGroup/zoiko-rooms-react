@@ -19,8 +19,8 @@ export default function PlatformRoleSection() {
       {/* "In short" Highlight Box with custom styling */}
       <div className="bg-[#F2DED2] rounded-2xl px-4 py-3 mb-8">
         <p className="text-sm font-bold text-[#93321F] leading-relaxed">
-          In short: we're a platform that connects renters and providers &mdash;
-          we're not your landlord, agent, or insurer.
+          In short: we&apos;re a platform that connects renters and providers &mdash;
+          we&apos;re not your landlord, agent, or insurer.
         </p>
       </div>
 
@@ -36,7 +36,7 @@ export default function PlatformRoleSection() {
         </p>
 
         <p>
-          We don't guarantee that any listing, room, or provider will remain
+          We don&apos;t guarantee that any listing, room, or provider will remain
           available, that a transaction will complete, or that a stay will meet
           your expectations. Verification features described elsewhere describe
           what was specifically checked &mdash; they are not a general safety or

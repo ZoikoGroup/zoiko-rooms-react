@@ -30,7 +30,7 @@ export default function UserContentIpSection() {
         reviews, photos &mdash; but grant Zoiko Rooms a licence to host,
         display, and use that content to operate and improve the platform.
         Reviews must reflect a genuine, eligible experience; fabricated or
-        coordinated reviews are prohibited. Zoiko Rooms' trademarks, platform
+        coordinated reviews are prohibited. Zoiko Rooms&apos; trademarks, platform
         design, and underlying software are our intellectual property, and
         automated scraping or copying of platform content is prohibited without
         permission.

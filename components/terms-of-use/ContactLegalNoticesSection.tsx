@@ -19,7 +19,7 @@ export default function ContactLegalNoticesSection() {
       {/* "In short" Highlight Box */}
       <div className="bg-[#F2DED2] rounded-2xl px-4 py-3 mb-8">
         <p className="text-sm font-bold text-[#93321F] leading-relaxed">
-          In short: here's how to reach us, and which language version controls.
+          In short: here&apos;s how to reach us, and which language version controls.
         </p>
       </div>
 

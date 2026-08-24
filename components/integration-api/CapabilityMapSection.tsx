@@ -117,8 +117,8 @@ export default function CapabilityMapSection() {
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
             Every connection sits inside one of these domains. Statuses stay
-            separate even when a single integration touches more than one — an
-            availability sync can't quietly pick up payment authority.
+            separate even when a single integration touches more than one &mdash; an
+            availability sync can&apos;t quietly pick up payment authority.
           </p>
         </div>
 

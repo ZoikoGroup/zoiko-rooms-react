@@ -50,7 +50,7 @@ export default function ReliabilityAndObservabilitySection() {
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            An honest picture of a connection's health &mdash; always current.
+            An honest picture of a connection&apos;s health &mdash; always current.
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
             No integration hides its own bad day. Freshness, delivery, and

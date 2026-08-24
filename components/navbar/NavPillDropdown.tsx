@@ -11,17 +11,15 @@ type NavPillDropdownProps = {
 };
 
 export function NavPillDropdown({ storageKey, options, ariaLabel }: NavPillDropdownProps) {
-  const [selected, setSelected] = useState(options[0].code);
-  const [open, setOpen] = useState(false);
-  const rootRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
+  const [selected, setSelected] = useState(() => {
     const stored = window.localStorage.getItem(storageKey);
     if (stored && options.some((option) => option.code === stored)) {
-      setSelected(stored);
+      return stored;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- run once on mount
-  }, []);
+    return options[0].code;
+  });
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!open) return;

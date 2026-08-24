@@ -60,12 +60,12 @@ export default function DeveloperExperienceSection() {
             />
           </div>
 
-          {/* Right Column: Code Snippet Block */}
-          <div className="lg:col-span-6 bg-[#16202B] p-6 sm:p-8 lg:p-10 flex flex-col justify-center font-mono text-xs sm:text-[13px] leading-relaxed text-[#A0AEC0] overflow-x-auto">
-            {/* Comment */}
-            <div className="text-[#526070] mb-4">
-              // sandbox &mdash; read current availability
-            </div>
+{/* Right Column: Code Snippet Block */}
+           <div className="lg:col-span-6 bg-[#16202B] p-6 sm:p-8 lg:p-10 flex flex-col justify-center font-mono text-xs sm:text-[13px] leading-relaxed text-[#A0AEC0] overflow-x-auto">
+             {/* Comment */}
+             <div className="text-[#526070] mb-4">
+               {/* sandbox &mdash; read current availability */}
+             </div>
 
             {/* Request */}
             <div className="text-[#E2E8F0] font-semibold mb-1">
