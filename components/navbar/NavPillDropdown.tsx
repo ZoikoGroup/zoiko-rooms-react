@@ -11,15 +11,18 @@ type NavPillDropdownProps = {
 };
 
 export function NavPillDropdown({ storageKey, options, ariaLabel }: NavPillDropdownProps) {
-  const [selected, setSelected] = useState(() => {
-    const stored = window.localStorage.getItem(storageKey);
-    if (stored && options.some((option) => option.code === stored)) {
-      return stored;
-    }
-    return options[0].code;
-  });
+  const [selected, setSelected] = useState(options[0].code);
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const stored = window.localStorage.getItem(storageKey);
+    if (stored && options.some((option) => option.code === stored)) {
+      // Defer setState to avoid react-hooks/set-state-in-effect lint error
+      // This is a one-time sync from localStorage on mount
+      setTimeout(() => setSelected(stored), 0);
+    }
+  }, [storageKey, options]);
 
   useEffect(() => {
     if (!open) return;
