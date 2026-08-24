@@ -12,9 +12,9 @@ import {
 } from "@/components/relocation-mobility";
 
 export const metadata: Metadata = {
-  title: "Relocation & Mobility — Zoiko Rooms",
+  title: "Corporate Relocation Housing Services | Zoiko Rooms",
   description:
-    "Coordinate room access across moves, providers, and borders — through one accountable workflow, with authority, cost, and data sharing explicit from case creation to close.",
+    "Streamline corporate relocation housing with Zoiko Rooms. Keep room access, provider handoffs, costs, dates, choices, and data sharing clear and connected.",
 };
 
 export default function RelocationMobilityPage() {

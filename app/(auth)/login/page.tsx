@@ -2,13 +2,27 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { FormField, PasswordField, SubmitButton } from "@/components/auth";
 
-export const metadata: Metadata = { title: "Login — Zoiko Rooms" };
+export const metadata: Metadata = {
+  title: "Login to Your Account | Zoiko Rooms",
+  description:
+    "Log in to Zoiko Rooms to access your account, manage bookings, view accommodation details and update your profile and account information securely online.",
+};
 
 export default function LoginPage() {
   return (
     <form className="flex flex-col gap-5">
-      <FormField label="Email" required type="email" placeholder="Enter Your Email" autoComplete="email" />
-      <PasswordField label="Password" required autoComplete="current-password" />
+      <FormField
+        label="Email"
+        required
+        type="email"
+        placeholder="Enter Your Email"
+        autoComplete="email"
+      />
+      <PasswordField
+        label="Password"
+        required
+        autoComplete="current-password"
+      />
 
       <div className="-mt-2 text-right">
         <Link
@@ -23,7 +37,10 @@ export default function LoginPage() {
 
       <p className="text-center text-sm text-neutral-500">
         Don&apos;t have an account?{" "}
-        <Link href="/register" className="font-semibold text-brand-navy transition-colors duration-200 hover:text-brand-navy-dark">
+        <Link
+          href="/register"
+          className="font-semibold text-brand-navy transition-colors duration-200 hover:text-brand-navy-dark"
+        >
           Sign Up
         </Link>
       </p>

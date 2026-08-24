@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { HeroSection, VerificationScopedSection, RoomPassportSection, EightStagesSection, FaqSection } from "@/components/how-it-works-overview";
+import {
+  HeroSection,
+  VerificationScopedSection,
+  RoomPassportSection,
+  EightStagesSection,
+  FaqSection,
+} from "@/components/how-it-works-overview";
 
 export const metadata: Metadata = {
-  title: "How It Works — Zoiko Rooms",
+  title: "How Zoiko Rooms Works | Room Management Platform",
   description:
-    "Understand the complete room journey — from first search or draft to agreement, payment, move-in, and support.",
+    "See how Zoiko Rooms connects room portfolios, availability, applications, verification, agreements, payments and support through one governed platform.",
 };
 
 export default function HowItWorksPage() {

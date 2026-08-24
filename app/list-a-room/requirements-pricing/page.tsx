@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { RequirementsPricingView } from "@/components/requirements-pricing";
 
 export const metadata: Metadata = {
-  title: "Requirements & Pricing — Zoiko Rooms",
+  title: "Room Listing Requirements & Pricing | Zoiko Rooms",
   description:
-    "See what your provider path requires and every current Zoiko Rooms charge before you start.",
+    "Review room listing requirements and pricing with Zoiko Rooms. Check eligibility, required details, costs, evidence, permissions, and listing conditions.",
 };
 
 export default function RequirementsPricingPage() {

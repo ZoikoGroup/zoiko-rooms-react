@@ -3,7 +3,11 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { FormField, SubmitButton } from "@/components/auth";
 
-export const metadata: Metadata = { title: "Reset Password — Zoiko Rooms" };
+export const metadata: Metadata = {
+  title: "Reset Password and Access Account | Zoiko Rooms",
+  description:
+    "Forgot your Zoiko Rooms password? Reset it securely and regain access to your account with a simple, convenient and reliable password recovery process.",
+};
 
 export default function ResetPasswordPage() {
   return (

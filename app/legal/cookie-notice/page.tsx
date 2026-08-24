@@ -10,9 +10,9 @@ import {
 } from "@/components/cookie-notice";
 
 export const metadata: Metadata = {
-  title: "Cookie Notice — Zoiko Rooms",
+  title: "Cookie Notice and Preferences | Zoiko Rooms",
   description:
-    "Learn how Zoiko Rooms uses cookies and similar technologies, why we use them, which providers are involved, and how you can control optional technologies.",
+    "Discover how Zoiko Rooms uses essential and optional cookies, their purposes, providers involved, and how you can review or change your cookie preferences.",
 };
 
 export default function CookieNoticePage() {
