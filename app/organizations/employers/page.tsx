@@ -13,9 +13,9 @@ import {
 } from "@/components/employers";
 
 export const metadata: Metadata = {
-  title: "Employers — Zoiko Rooms",
+  title: "Employee Housing Platform | Zoiko Rooms",
   description:
-    "Coordinate room access for workforce moves, built on clear choice — support new hires, transfers, temporary assignments, projects, trainees, and seasonal workforces.",
+    "Zoiko Rooms provides employee housing solutions for businesses, connecting workforce needs with room availability, stays, providers, costs, and relocations.",
 };
 
 export default function EmployersPage() {

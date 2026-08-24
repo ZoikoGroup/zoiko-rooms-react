@@ -17,9 +17,9 @@ import {
 } from "@/components/for-room-seekers";
 
 export const metadata: Metadata = {
-  title: "For Room Seekers — Zoiko Rooms",
+  title: "Room Seekers Guide to Find Rooms | Zoiko Rooms",
   description:
-    "Find, understand, and secure a room through visible facts, accountable decisions, complete costs, and safe next steps.",
+    "Explore the room seeker guide by Zoiko Rooms. Learn how to find, compare, view, apply, pay, and move into a room with safe and informed decisions.",
 };
 
 export default function ForRoomSeekersPage() {

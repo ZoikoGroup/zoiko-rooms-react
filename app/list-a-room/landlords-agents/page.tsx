@@ -15,9 +15,9 @@ import {
 } from "@/components/landlords-agents";
 
 export const metadata: Metadata = {
-  title: "Landlords & Agents — Zoiko Rooms",
+  title: "Landlord & Agent Room Listings Platform | Zoiko",
   description:
-    "List with clear ownership or current instruction — and keep authority, availability, costs, and responsibility visible.",
+    "Create landlord and agent room listings with Zoiko Rooms. Add room details, availability, costs, authority and evidence to help seekers choose confidently.",
 };
 
 export default function LandlordsAgentsPage() {

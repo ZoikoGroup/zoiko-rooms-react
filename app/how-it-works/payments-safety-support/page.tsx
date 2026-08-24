@@ -15,9 +15,9 @@ import {
 } from "@/components/payments-safety-support";
 
 export const metadata: Metadata = {
-  title: "Payments, Safety & Support — Zoiko Rooms",
+  title: "Secure Room Rental Payments & Safety Guide | Zoiko Rooms",
   description:
-    "Know what you are paying, who receives it, how to act safely, and where to get help at every stage — costs, authorized routes, fraud prevention, and the support lifecycle.",
+    "Get secure room rental payments with Zoiko Rooms. Learn about payment safety, fraud prevention, and reliable support for a trusted room booking experience.",
 };
 
 export default function PaymentsSafetySupportPage() {

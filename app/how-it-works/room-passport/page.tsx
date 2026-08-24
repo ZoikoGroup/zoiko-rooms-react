@@ -11,9 +11,9 @@ import {
 } from "@/components/room-passport";
 
 export const metadata: Metadata = {
-  title: "Room Passport — Zoiko Rooms",
+  title: "Room Passport: Verified Room Data | Zoiko Rooms",
   description:
-    "The record that tells you what's actually true about a room — a structured, evidence-scoped record of what's been declared, documented, or physically inspected.",
+    "Manage verified room information with room passport from Zoiko Rooms. Connect room details, availability, costs, restrictions, maintenance, and evidence.",
 };
 
 export default function RoomPassportPage() {

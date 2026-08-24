@@ -14,9 +14,9 @@ import {
 } from "@/components/organizations-overview";
 
 export const metadata: Metadata = {
-  title: "Organizations — Zoiko Rooms",
+  title: "Housing Solutions for Organizations | Zoiko Rooms",
   description:
-    "Coordinate room access, supply, funding, and support through clear organizational responsibility — universities, employers, healthcare, relocation, and government.",
+    "Zoiko Rooms provides housing solutions for organizations, connecting room supply, availability, applications, agreements, payments & operational workflows.",
 };
 
 export default function OrganizationsPage() {

@@ -17,9 +17,9 @@ import {
 } from "@/components/for-providers";
 
 export const metadata: Metadata = {
-  title: "For Providers — Zoiko Rooms",
+  title: "Room Provider Guide for Easy Listings | Zoiko Rooms",
   description:
-    "Prepare, publish, and manage a room through clear authority, accurate facts, complete costs, fair decisions, and accountable follow-through.",
+    "Become a room provider with Zoiko Rooms and learn how to list your rooms, manage bookings, connect with guests, and grow your rental opportunities easily.",
 };
 
 export default function ForProvidersPage() {

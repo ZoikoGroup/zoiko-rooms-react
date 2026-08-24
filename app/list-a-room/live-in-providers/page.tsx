@@ -14,9 +14,9 @@ import {
 } from "@/components/live-in-providers";
 
 export const metadata: Metadata = {
-  title: "Live-in Providers — Zoiko Rooms",
+  title: "Live In Room Provider Listings | Zoiko Rooms",
   description:
-    "Offer a room in the home where you live — with clear authority, household expectations, privacy, and fair access.",
+    "Zoiko Rooms helps live in room providers list available rooms with clear details on pricing, availability, conditions, household information and evidence.",
 };
 
 export default function LiveInProvidersPage() {

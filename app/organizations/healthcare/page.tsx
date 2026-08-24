@@ -11,9 +11,9 @@ import {
 } from "@/components/healthcare";
 
 export const metadata: Metadata = {
-  title: "Healthcare — Zoiko Rooms",
+  title: "Healthcare Worker Housing Solutions | Zoiko Rooms",
   description:
-    "Room access for healthcare workforces, built on clear choice — support permanent hires, rotations, trainees, researchers, and temporary staff with transparent cost, privacy, and responsibility.",
+    "Zoiko Rooms provides healthcare worker housing solutions for staff, trainees, researchers and temporary workers, connecting rooms, availability and stays.",
 };
 
 export default function HealthcarePage() {

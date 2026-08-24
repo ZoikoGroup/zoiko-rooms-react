@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { HeroSection, DestinationsSection, BoundarySection, SafetyBannerSection, FaqCtaSection } from "@/components/resources-overview";
+import {
+  HeroSection,
+  DestinationsSection,
+  BoundarySection,
+  SafetyBannerSection,
+  FaqCtaSection,
+} from "@/components/resources-overview";
 
 export const metadata: Metadata = {
-  title: "Resources — Zoiko Rooms",
+  title: "Renting, Listing and Moving Resources | Zoiko Rooms",
   description:
-    "Find direct, current guidance for every stage of renting, listing, moving, and operating rooms.",
+    "Find current Zoiko Rooms guidance for renting, listing, moving and operating rooms, with helpful guides, safety tips, city insights and support resources.",
 };
 
 export default function ResourcesPage() {

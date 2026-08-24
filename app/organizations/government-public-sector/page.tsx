@@ -12,9 +12,9 @@ import {
 } from "@/components/government-public-sector";
 
 export const metadata: Metadata = {
-  title: "Government & Public Sector — Zoiko Rooms",
+  title: "Government & Public Sector Housing | Zoiko Rooms",
   description:
-    "Accountable room access, built on transparent authority — coordinate public workforce moves, education placements, housing-access programs, and reception or resettlement transitions.",
+    "Manage public sector housing with Zoiko Rooms. Connect room availability, applications, verification, compliance, agreements, payments and operational data.",
 };
 
 export default function GovernmentPublicSectorPage() {

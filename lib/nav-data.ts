@@ -75,7 +75,7 @@ export const navSections: NavSection[] = [
             icon: Home,
             label: "Rooms by City",
             description: "Cost patterns, transport, and coverage",
-            href: "/find-a-room",
+            href: "/rooms-by-city",
           },
         ],
       },

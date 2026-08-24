@@ -12,9 +12,9 @@ import {
 } from "@/components/find-a-room";
 
 export const metadata: Metadata = {
-  title: "Find a Room — Zoiko Rooms",
+  title: "Find a Room for Rent Online | Zoiko Rooms",
   description:
-    "Search current room listings by location, move-in date, monthly budget, room type, household fit, accessibility, study, work, healthcare, or international-move needs.",
+    "Find a room with verified listings, transparent details, and trusted providers. Explore safe room rentals that match your budget & lifestyle at Zoiko Rooms.",
 };
 
 export default function FindARoomPage() {

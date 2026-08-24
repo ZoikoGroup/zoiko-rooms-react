@@ -14,9 +14,9 @@ import {
 } from "@/components/authorized-sublets";
 
 export const metadata: Metadata = {
-  title: "Authorized Sublets — Zoiko Rooms",
+  title: "Authorized Sublet Listings | Zoiko Rooms",
   description:
-    "Offer a room only within the permission, dates, price, and conditions you are authorized to use.",
+    "List authorized sublets with Zoiko Rooms. Offer rooms within approved permissions, dates, prices and conditions while keeping evidence & requirements clear.",
 };
 
 export default function AuthorizedSubletsPage() {

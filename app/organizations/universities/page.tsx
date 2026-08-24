@@ -16,9 +16,9 @@ import {
 } from "@/components/universities";
 
 export const metadata: Metadata = {
-  title: "Universities — Zoiko Rooms",
+  title: "University Student Housing Platform | Zoiko Rooms",
   description:
-    "Coordinate room access for university communities through clear eligibility, supply, funding, data, and support responsibilities.",
+    "Zoiko Rooms provides university student housing solutions for managing rooms, availability, applications, allocations, agreements, payments and support.",
 };
 
 export default function UniversitiesPage() {

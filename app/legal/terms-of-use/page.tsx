@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import {
   TermsOfUseHeader,
   TableOfContentsSidebar,
@@ -22,6 +24,12 @@ import {
   ChangesToTermsSection,
   ContactLegalNoticesSection,
 } from "@/components/terms-of-use";
+
+export const metadata: Metadata = {
+  title: "Terms of Use & Legal Conditions | Zoiko Rooms",
+  description:
+    "Read the Zoiko Rooms Terms of Use to understand the rules, conditions, responsibilities, and guidelines that apply when using our website and services.",
+};
 
 export default function TermsOfUsePage() {
   return (
