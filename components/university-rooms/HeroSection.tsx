@@ -12,7 +12,7 @@ export function HeroSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="border-b border-[#E9E0D3] py-10 sm:py-14">
+    <section id="hero" className="border-b border-[#E9E0D3] py-10 sm:py-14">
       <Container>
         <Reveal className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div className="flex flex-col gap-6">

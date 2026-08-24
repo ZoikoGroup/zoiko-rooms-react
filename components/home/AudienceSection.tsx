@@ -11,7 +11,7 @@ const audiences = [
     title: "List a room",
     description: "Offer an eligible private room with clear verification and applicant workflows.",
     cta: "Start a free listing",
-    href: "/list-a-room",
+    href: "/list-a-room/start-a-listing",
   },
   {
     title: "For organizations",
@@ -23,7 +23,7 @@ const audiences = [
     title: "Zoiko Rooms Pro",
     description: "Operate portfolios, compliance, applications and payments in one system.",
     cta: "Explore Pro",
-    href: "/pro",
+    href: "/pro/overview",
   },
 ];
 

@@ -31,7 +31,7 @@ export function ProviderSupportSection() {
               )}
             </motion.p>
             <motion.div variants={fadeUp}>
-              <Button href="/resources" size="lg" variant="outline">
+              <Button href="/resources/help-center" size="lg" variant="outline">
                 {t("Contact Provider Help")}
               </Button>
             </motion.div>
@@ -54,7 +54,7 @@ export function ProviderSupportSection() {
               <Button href="/list-a-room/requirements-pricing" size="lg" variant="outline">
                 {t("Requirements & Pricing")}
               </Button>
-              <Button href="/resources" size="lg" variant="outline">
+              <Button href="/resources/help-center" size="lg" variant="outline">
                 {t("Provider Help")}
               </Button>
             </motion.div>

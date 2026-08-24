@@ -112,13 +112,13 @@ export function FaqSection() {
             )}
           </motion.p>
           <motion.div variants={fadeUp} className="flex flex-col gap-3 sm:flex-row">
-            <Button href="/find-a-room" size="lg" variant="secondary">
+            <Button href="/find-a-room/search-rooms" size="lg" variant="secondary">
               {t("Search Rooms")}
             </Button>
             <Button href="/list-a-room" size="lg" variant="outline">
               {t("List a Room")}
             </Button>
-            <Button href="/resources" size="lg" variant="outline">
+            <Button href="/resources/help-center" size="lg" variant="outline">
               {t("Get Help")}
             </Button>
           </motion.div>

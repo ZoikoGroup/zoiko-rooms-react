@@ -15,7 +15,7 @@ export default function WhoCanListSection() {
       description:
         "You live in the home and are renting a room within it \u2014 your household disclosures and fair-access boundaries apply.",
       cta: "Live-in Providers \u2192",
-      href: "#", // Update link here
+      href: "/list-a-room/live-in-providers", // Update link here
     },
     {
       id: "2",
@@ -25,7 +25,7 @@ export default function WhoCanListSection() {
       description:
         "You own the property, manage it, or hold an agency mandate \u2014 this path covers portfolio and professional workflows.",
       cta: "Landlords & Agents \u2192",
-      href: "#", // Update link here
+      href: "/list-a-room/landlords-agents", // Update link here
     },
     {
       id: "3",
@@ -35,12 +35,12 @@ export default function WhoCanListSection() {
       description:
         "You're a tenant with lease or landlord consent to sublet or arrange a replacement \u2014 a distinct permission and classification path.",
       cta: "Authorized Sublets \u2192",
-      href: "#", // Update link here
+      href: "/list-a-room/authorized-sublets", // Update link here
     },
   ];
 
   // Dynamic link for the bottom Zoiko Rooms Pro CTA
-  const proHref = "#";
+  const proHref = "/pro/overview";
 
   const containerVariants = {
     hidden: { opacity: 0 },

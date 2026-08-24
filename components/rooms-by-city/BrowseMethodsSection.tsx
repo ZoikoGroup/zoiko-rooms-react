@@ -3,6 +3,7 @@
 import React from "react";
 import { motion, type Variants } from "framer-motion";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { useRouter } from "next/navigation";
 
 const floatUpVariants: Variants = {
   hidden: {
@@ -26,6 +27,7 @@ interface BrowseMethodsProps {
 
 export default function BrowseMethodsSection({ onJumpToFilters }: BrowseMethodsProps) {
   const { t } = useLanguage();
+  const router =useRouter();
   return (
     <section className="w-full border-t border-stone-200 px-6 py-12 font-['Inter',sans-serif] md:px-24">
       <div className="w-full max-w-[1240px] md:px-8">
@@ -81,7 +83,7 @@ export default function BrowseMethodsSection({ onJumpToFilters }: BrowseMethodsP
             <motion.button
               whileHover={{ scale: 1.02, backgroundColor: "#f5f5f4", borderColor: "#a8a29e" }}
               whileTap={{ scale: 0.98 }}
-              onClick={onJumpToFilters}
+              onClick={()=>router.push("#cities")}
               className="inline-flex cursor-pointer items-center justify-center rounded-full border border-stone-200 bg-white px-7 py-3.5 text-base font-semibold text-gray-800 transition-colors duration-200"
             >
               {t("Jump to city filters")}

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const floatUpVariants: Variants = {
   hidden: {
@@ -27,6 +28,7 @@ export default function FinalCtaSection({
   onSearchRooms,
   onListRoom,
 }: FinalCtaSectionProps) {
+  const router = useRouter();
   return (
     <section className="flex w-full justify-center px-6 py-12 font-['Inter',sans-serif] md:px-24">
       <motion.div
@@ -70,7 +72,8 @@ export default function FinalCtaSection({
               boxShadow: "0 8px 20px -4px rgba(12, 74, 110, 0.3)",
             }}
             whileTap={{ scale: 0.98 }}
-            onClick={onSearchRooms}
+            // onClick={onSearchRooms}
+            onClick={()=>router.push("/find-a-room/search-rooms")}
             className="flex cursor-pointer items-center justify-center rounded-full bg-sky-900 px-7 py-3.5 text-base font-semibold text-white transition-all duration-200"
           >
             Search Rooms
@@ -83,7 +86,8 @@ export default function FinalCtaSection({
               borderColor: "#a8a29e",
             }}
             whileTap={{ scale: 0.98 }}
-            onClick={onListRoom}
+            // onClick={onListRoom}
+            onClick={()=>router.push("/list-a-room")}
             className="flex cursor-pointer items-center justify-center rounded-full border border-stone-300 bg-white/80 px-7 py-3.5 text-base font-semibold text-gray-800 backdrop-blur-sm transition-all duration-200"
           >
             List a Room

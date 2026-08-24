@@ -7,7 +7,7 @@ import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function RequirementsPricingSection() {
   const { t } = useLanguage();
-  const ctaHref = "#"; // Dynamic link for button
+  const ctaHref = "/list-a-room/requirements-pricing"; // Dynamic link for button
 
   const requirementsList = [
     {

@@ -12,18 +12,21 @@ const scenarios = [
     eyebrow: "Work relocation",
     title: "Settle in before day one",
     description: "Verified rooms near your new office, ready before you arrive.",
+    href:"/organizations/relocation-mobility"
   },
   {
     image: "/images/home/relocation-2.png",
     eyebrow: "Study abroad",
     title: "Near campus, fully checked",
     description: "Rooms close to your university with honest evidence, not guesswork.",
+    href:"/find-a-room/international-moves"
   },
   {
     image: "/images/home/relocation-3.png",
     eyebrow: "Healthcare placement",
     title: "Housing for shift life",
     description: "Flexible terms built for rotations and placements, not vacations.",
+    href:"/find-a-room/work-healthcare-rooms"
   },
 ];
 
@@ -43,7 +46,7 @@ export function RelocationSection() {
           <div className="flex flex-col gap-12">
             <SectionHeading eyebrow={t("Find what suits you")} title={t("Every relocation is different")} />
             <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-              {scenarios.map(({ image, eyebrow, title, description }) => (
+              {scenarios.map(({ image, eyebrow, title, description,href }) => (
                 <motion.div
                   key={title}
                   variants={fadeUp}
@@ -66,7 +69,7 @@ export function RelocationSection() {
                     </span>
                     <h3 className="font-heading text-lg font-medium text-brand-navy">{t(title)}</h3>
                     <p className="flex-1 text-sm text-neutral-600">{t(description)}</p>
-                    <Button href="/how-it-works" variant="outline" size="sm" className="mt-2 w-fit">
+                    <Button href={href} variant="outline" size="sm" className="mt-2 w-fit">
                       {t("Learn more")}
                       <ArrowRight className="h-3.5 w-3.5" />
                     </Button>

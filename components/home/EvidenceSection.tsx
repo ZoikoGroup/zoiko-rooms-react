@@ -39,7 +39,7 @@ export function EvidenceSection() {
                 "Every listing shows exactly what's been checked, by whom, and when — down to the lock on the door.",
               )}
             </p>
-            <Button href="/how-it-works" variant="outline" className="w-fit">
+            <Button href="/how-it-works/room-passport" variant="outline" className="w-fit">
               {t("See a sample room passport")}
             </Button>
           </motion.div>
