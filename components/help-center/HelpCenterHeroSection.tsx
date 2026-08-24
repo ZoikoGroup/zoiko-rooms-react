@@ -227,7 +227,7 @@ export default function HelpCenterHeroSection() {
                   <span className="text-[11px] text-[#7A838E] font-normal">
                     {t(cat.lastReviewed)}
                   </span>
-                  
+                  <a
                     href="#"
                     className="inline-flex underline items-center text-xs font-bold text-[#A85A34] hover:underline space-x-1 group"
                   >
