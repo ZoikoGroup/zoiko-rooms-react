@@ -1,4 +1,7 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, BulletList, SectionDivider } from "./shared";
 
 const points = [
@@ -9,16 +12,18 @@ const points = [
 ];
 
 export function PrivacyFairnessAccessibilitySection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Privacy, Fairness and Accessibility</Eyebrow>
-            <SectionTitle>Reports and evidence stay protected</SectionTitle>
+            <Eyebrow>{t("Privacy, Fairness and Accessibility")}</Eyebrow>
+            <SectionTitle>{t("Reports and evidence stay protected")}</SectionTitle>
           </div>
 
-          <BulletList items={points} />
+          <BulletList items={points.map((point) => t(point))} />
         </Reveal>
       </Container>
     </SectionDivider>

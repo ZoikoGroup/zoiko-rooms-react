@@ -1,5 +1,8 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
 import { Eyebrow, SectionTitle, Callout, InfoTable, SectionDivider } from "./shared";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const rows = [
   {
@@ -29,21 +32,26 @@ const rows = [
 ];
 
 export function AvailabilityTimingSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Availability and Timing</Eyebrow>
-            <SectionTitle>Arrival is a range, not a promise</SectionTitle>
+            <Eyebrow>{t("Availability and Timing")}</Eyebrow>
+            <SectionTitle>{t("Arrival is a range, not a promise")}</SectionTitle>
           </div>
 
-          <InfoTable columns={["State", "Meaning"]} rows={rows} />
+          <InfoTable
+            columns={[t("State"), t("Meaning")]}
+            rows={rows.map(({ label, value }) => ({ label: t(label), value: t(value) }))}
+          />
 
-          <Callout label="No travel or entry prediction">
-            Zoiko Rooms does not infer or guarantee border entry, visa approval, flight arrival,
-            enrollment, or employment start. We use your declared dates and clear uncertainty
-            states instead.
+          <Callout label={t("No travel or entry prediction")}>
+            {t(
+              "Zoiko Rooms does not infer or guarantee border entry, visa approval, flight arrival, enrollment, or employment start. We use your declared dates and clear uncertainty states instead."
+            )}
           </Callout>
         </Reveal>
       </Container>

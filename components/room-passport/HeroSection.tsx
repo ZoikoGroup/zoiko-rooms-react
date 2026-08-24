@@ -4,8 +4,10 @@ import { motion } from "framer-motion";
 import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export function HeroSection() {
+  const { t } = useLanguage();
   return (
     <section className="bg-gradient-to-br from-[#2f2b22] via-[#20222b] to-[#0f1119] py-20 sm:py-28">
       <Container>
@@ -18,17 +20,17 @@ export function HeroSection() {
               Room Passport
             </motion.span>
             <motion.h1 variants={fadeUp} className="font-heading text-4xl font-bold text-white sm:text-5xl">
-              The record that tells you what&apos;s actually true about a room.
+              {t("The record that tells you what's actually true about a room.")}
             </motion.h1>
             <motion.p variants={fadeUp} className="max-w-lg text-[15px] leading-relaxed text-white/60">
-              Every room on Zoiko Rooms carries a Room Passport — a structured, evidence-scoped
-              record of what&apos;s been declared, documented, or physically inspected, kept
-              current from first listing to move-out.
+              {t(
+                "Every room on Zoiko Rooms carries a Room Passport — a structured, evidence-scoped record of what's been declared, documented, or physically inspected, kept current from first listing to move-out."
+              )}
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-col gap-3 sm:flex-row">
               <Button href="/list-a-room" size="lg" variant="secondary">
-                List Your Room
+                {t("List Your Room")}
               </Button>
               <Button
                 href="/how-it-works"
@@ -36,7 +38,7 @@ export function HeroSection() {
                 variant="outline"
                 className="border-white/30 text-white hover:bg-white hover:text-brand-navy"
               >
-                How Verification Works
+                {t("How Verification Works")}
               </Button>
             </motion.div>
           </div>
@@ -49,7 +51,7 @@ export function HeroSection() {
           >
             <NaturalImage
               src="/images/room-passport/hero-passport-review.png"
-              alt="Two women reviewing a Room Passport folder in a modern room"
+              alt={t("Two women reviewing a Room Passport folder in a modern room")}
             />
           </motion.div>
         </Reveal>
@@ -60,7 +62,7 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-16 flex flex-col items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/40"
         >
-          Scroll
+          {t("Scroll")}
           <motion.span
             animate={{ scaleY: [0.4, 1, 0.4] }}
             transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}

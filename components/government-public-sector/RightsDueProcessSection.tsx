@@ -6,6 +6,7 @@ import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const rights = [
   { icon: ClipboardList, title: "Notice", description: "Plain-language purpose, criteria, and current status" },
@@ -16,16 +17,19 @@ const rights = [
 ];
 
 export function RightsDueProcessSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col items-center gap-10">
           <div className="flex max-w-2xl flex-col items-center gap-4 text-center">
-            <Eyebrow>Rights &amp; Due Process</Eyebrow>
-            <SectionTitle>Participants can see the whole picture</SectionTitle>
+            <Eyebrow>{t("Rights & Due Process")}</Eyebrow>
+            <SectionTitle>{t("Participants can see the whole picture")}</SectionTitle>
             <Paragraph className="mx-auto">
-              Notice, criteria, and a named decision owner — every step designed to be understood,
-              corrected, and reviewed.
+              {t(
+                "Notice, criteria, and a named decision owner — every step designed to be understood, corrected, and reviewed."
+              )}
             </Paragraph>
           </div>
 
@@ -38,7 +42,7 @@ export function RightsDueProcessSection() {
             >
               <NaturalImage
                 src="/images/government-public-sector/rights-handshake.png"
-                alt="A participant and program representative shaking hands"
+                alt={t("A participant and program representative shaking hands")}
               />
             </motion.div>
 
@@ -55,14 +59,14 @@ export function RightsDueProcessSection() {
                     <Icon className="h-4 w-4" />
                   </span>
                   <span>
-                    <span className="block text-sm font-semibold text-brand-navy">{title}</span>
-                    <span className="block text-sm text-neutral-500">{description}</span>
+                    <span className="block text-sm font-semibold text-brand-navy">{t(title)}</span>
+                    <span className="block text-sm text-neutral-500">{t(description)}</span>
                   </span>
                 </motion.div>
               ))}
 
               <Button href="/resources" variant="outline" size="md" className="mt-2 w-fit">
-                Review Participant Rights
+                {t("Review Participant Rights")}
               </Button>
             </div>
           </div>

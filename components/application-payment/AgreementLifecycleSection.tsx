@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface LifecycleStep {
   number: string;
@@ -40,20 +41,22 @@ const lifecycleSteps: LifecycleStep[] = [
 ];
 
 export default function AgreementLifecycleSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header Block */}
         <div className="text-center space-y-3 max-w-3xl mx-auto">
           <span className="text-xs font-mono font-bold tracking-widest text-[#DC2626] uppercase">
-            AGREEMENT LIFECYCLE
+            {t("AGREEMENT LIFECYCLE")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Versioned from draft to signed
+            {t("Versioned from draft to signed")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed">
-            Every proposed change creates a new version &mdash; nothing about a
-            signed agreement changes silently.
+            {t(
+              "Every proposed change creates a new version — nothing about a signed agreement changes silently.",
+            )}
           </p>
         </div>
 
@@ -70,7 +73,7 @@ export default function AgreementLifecycleSection() {
             >
               <Image
                 src="/images/application/image.png"
-                alt="Agreement signing process"
+                alt={t("Agreement signing process")}
                 fill
                 className="object-cover object-center"
                 priority
@@ -97,10 +100,10 @@ export default function AgreementLifecycleSection() {
                 {/* Content Block */}
                 <div className="space-y-0.5">
                   <h3 className="text-sm font-serif font-bold text-[#14213D] leading-snug">
-                    {step.title}
+                    {t(step.title)}
                   </h3>
                   <p className="text-xs text-[#555E68] leading-relaxed font-normal">
-                    {step.description}
+                    {t(step.description)}
                   </p>
                 </div>
               </motion.div>

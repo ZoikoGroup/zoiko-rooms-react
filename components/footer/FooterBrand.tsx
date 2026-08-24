@@ -1,13 +1,18 @@
+"use client";
+
 import { Logo } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export function FooterBrand() {
+  const { t } = useLanguage();
+
   return (
     <div className="flex flex-col gap-3">
       <div className="w-fit rounded-lg bg-white px-4 py-3">
         <Logo width={170} height={26} />
       </div>
       <p className="text-sm text-white/60">
-        A more trusted way to find, verify, secure, and manage a private room.
+        {t("A more trusted way to find, verify, secure, and manage a private room.")}
       </p>
     </div>
   );

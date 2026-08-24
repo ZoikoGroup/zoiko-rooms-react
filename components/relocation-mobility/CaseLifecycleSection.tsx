@@ -1,5 +1,8 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const steps = [
   { number: "01", title: "Authorize", description: "Program and case authority confirmed." },
@@ -10,16 +13,19 @@ const steps = [
 ];
 
 export function CaseLifecycleSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col items-center gap-10 text-center">
           <div className="flex max-w-2xl flex-col items-center gap-4">
-            <Eyebrow>Case Lifecycle</Eyebrow>
-            <SectionTitle>A governed path from authorization to close</SectionTitle>
+            <Eyebrow>{t("Case Lifecycle")}</Eyebrow>
+            <SectionTitle>{t("A governed path from authorization to close")}</SectionTitle>
             <Paragraph className="mx-auto">
-              No case moves forward with unsupported authority, excess data, stale supply, or an
-              unresolved material change.
+              {t(
+                "No case moves forward with unsupported authority, excess data, stale supply, or an unresolved material change."
+              )}
             </Paragraph>
           </div>
 
@@ -27,8 +33,8 @@ export function CaseLifecycleSection() {
             {steps.map(({ number, title, description }) => (
               <div key={number} className="flex flex-col gap-1.5">
                 <span className="font-heading text-sm font-semibold text-brand-red">{number}</span>
-                <h3 className="font-heading text-base font-medium text-brand-navy">{title}</h3>
-                <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
+                <h3 className="font-heading text-base font-medium text-brand-navy">{t(title)}</h3>
+                <p className="text-sm leading-relaxed text-neutral-600">{t(description)}</p>
               </div>
             ))}
           </div>

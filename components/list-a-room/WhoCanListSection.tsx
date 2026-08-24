@@ -2,8 +2,10 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function WhoCanListSection() {
+  const { t } = useLanguage();
   const cards = [
     {
       id: "1",
@@ -65,14 +67,15 @@ export default function WhoCanListSection() {
         {/* Section Header (Centered without max-w constraint) */}
         <div className="flex flex-col items-center text-center space-y-3 w-full">
           <span className="text-[11px] font-bold tracking-widest text-[#C0272D] uppercase block">
-            WHO CAN LIST
+            {t("WHO CAN LIST")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] max-w-4xl font-serif font-bold text-[#14213D] leading-tight">
-            Choose the path that matches how you are offering the room.
+            {t("Choose the path that matches how you are offering the room.")}
           </h2>
           <p className="text-xs max-w-140 sm:text-sm text-[#555E68] leading-relaxed">
-            Each path has its own authority basis and journey &mdash; pick the
-            one that reflects your actual relationship to the room.
+            {t(
+              "Each path has its own authority basis and journey — pick the one that reflects your actual relationship to the room.",
+            )}
           </p>
         </div>
 
@@ -95,7 +98,7 @@ export default function WhoCanListSection() {
                 <div className="w-full h-44 sm:h-48 overflow-hidden bg-gray-100 relative">
                   <img
                     src={card.imgSrc}
-                    alt={card.title}
+                    alt={t(card.title)}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -103,13 +106,13 @@ export default function WhoCanListSection() {
                 {/* Card Content */}
                 <div className="p-6 space-y-3">
                   <span className="text-[10px] font-bold tracking-wider text-[#C0272D] uppercase block">
-                    {card.tag}
+                    {t(card.tag)}
                   </span>
                   <h3 className="text-xl font-serif font-bold text-[#14213D]">
-                    {card.title}
+                    {t(card.title)}
                   </h3>
                   <p className="text-xs text-[#555E68] leading-relaxed font-normal">
-                    {card.description}
+                    {t(card.description)}
                   </p>
                 </div>
               </div>
@@ -120,7 +123,7 @@ export default function WhoCanListSection() {
                   href={card.href}
                   className="text-xs font-bold text-[#14213D] hover:text-[#C0272D] transition-colors inline-flex items-center"
                 >
-                  {card.cta}
+                  {t(card.cta)}
                 </a>
               </div>
             </motion.div>
@@ -137,11 +140,12 @@ export default function WhoCanListSection() {
         >
           <div className="space-y-1 text-center sm:text-left">
             <h4 className="text-base font-serif font-bold text-[#14213D]">
-              Managing several rooms or a portfolio?
+              {t("Managing several rooms or a portfolio?")}
             </h4>
             <p className="text-xs text-[#555E68]">
-              Providers with multiple rooms, teams or institutional needs can
-              use Zoiko Rooms Pro.
+              {t(
+                "Providers with multiple rooms, teams or institutional needs can use Zoiko Rooms Pro.",
+              )}
             </p>
           </div>
 
@@ -149,7 +153,7 @@ export default function WhoCanListSection() {
             href={proHref}
             className="px-5 py-2.5 rounded-full border border-[#14213D] text-[#1B2A4A] hover:bg-[#14213D] hover:text-white transition-all text-xs font-medium whitespace-nowrap active:scale-95"
           >
-            Explore Zoiko Rooms Pro &rarr;
+            {t("Explore Zoiko Rooms Pro")} &rarr;
           </a>
         </motion.div>
       </div>

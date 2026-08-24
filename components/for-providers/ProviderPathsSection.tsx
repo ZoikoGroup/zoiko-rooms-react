@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Container, Reveal } from "@/components/ui";
 import { fadeUp, easeOut } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, SectionDivider } from "./shared";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
 
@@ -28,13 +29,15 @@ const paths = [
 ];
 
 export function ProviderPathsSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col gap-10">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Provider Paths</Eyebrow>
-            <SectionTitle>Route to the guide that matches your authority</SectionTitle>
+            <Eyebrow>{t("Provider Paths")}</Eyebrow>
+            <SectionTitle>{t("Route to the guide that matches your authority")}</SectionTitle>
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -48,17 +51,17 @@ export function ProviderPathsSection() {
               >
                 <div className="overflow-hidden">
                   <div className="transition-transform duration-500 ease-out group-hover:scale-105">
-                    <NaturalImage src={image} alt={title} />
+                    <NaturalImage src={image} alt={t(title)} />
                   </div>
                 </div>
                 <div className="flex flex-col gap-1.5 p-5">
-                  <h3 className="font-heading text-lg font-medium text-brand-navy">{title}</h3>
-                  <p className="text-sm text-neutral-500">{description}</p>
+                  <h3 className="font-heading text-lg font-medium text-brand-navy">{t(title)}</h3>
+                  <p className="text-sm text-neutral-500">{t(description)}</p>
                   <a
                     href={href}
                     className="mt-2 w-fit text-sm font-semibold text-brand-red underline-offset-2 transition-colors hover:text-brand-red-dark hover:underline"
                   >
-                    Open guide
+                    {t("Open guide")}
                   </a>
                 </div>
               </motion.div>

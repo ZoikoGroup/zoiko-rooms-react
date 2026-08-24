@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { STEPS, TOTAL_STEPS } from "./types";
 
 type StepSidebarProps = {
@@ -11,6 +12,7 @@ type StepSidebarProps = {
 };
 
 export function StepSidebar({ currentStep, submitted, onStepClick }: StepSidebarProps) {
+  const { t } = useLanguage();
   const draftStatus = currentStep === 1 && !submitted ? "Draft not started" : "Draft in progress";
 
   return (
@@ -41,14 +43,14 @@ export function StepSidebar({ currentStep, submitted, onStepClick }: StepSidebar
               {isComplete ? <Check className="h-3.5 w-3.5" /> : key}
             </motion.span>
             <span className={`font-medium ${isCurrent ? "text-brand-navy" : isComplete ? "text-brand-navy" : "text-neutral-400"}`}>
-              {label}
+              {t(label)}
             </span>
           </button>
         );
       })}
 
       <div className="mt-2 border-t border-[#E9E0D3] pt-3 text-xs text-neutral-400">
-        Step {currentStep} of {TOTAL_STEPS} · {draftStatus}
+        {t("Step")} {currentStep} {t("of")} {TOTAL_STEPS} · {t(draftStatus)}
       </div>
     </div>
   );

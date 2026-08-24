@@ -1,4 +1,7 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, InfoTable, SectionDivider } from "./shared";
 
 const rows = [
@@ -12,16 +15,18 @@ const rows = [
 ];
 
 export function PrivateDraftVerificationSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Private Draft and Verification</Eyebrow>
-            <SectionTitle>Save before you&apos;re public</SectionTitle>
+            <Eyebrow>{t("Private Draft and Verification")}</Eyebrow>
+            <SectionTitle>{t("Save before you're public")}</SectionTitle>
           </div>
 
-          <InfoTable columns={["Status", "Meaning / Next Action"]} rows={rows} />
+          <InfoTable columns={[t("Status"), t("Meaning / Next Action")]} rows={rows.map((row) => row.map((cell) => t(cell)))} />
         </Reveal>
       </Container>
     </SectionDivider>

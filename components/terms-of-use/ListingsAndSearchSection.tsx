@@ -1,8 +1,10 @@
 "use client";
 
 import React from "react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function ListingsAndSearchSection() {
+  const { t } = useLanguage();
   return (
     <section
       id="listings-and-search"
@@ -13,32 +15,30 @@ export default function ListingsAndSearchSection() {
         <span className="font-mono text-lg sm:text-xl text-[#C8202C] font-normal">
           06
         </span>
-        <span>Listings, search &amp; platform information</span>
+        <span>{t("Listings, search & platform information")}</span>
       </h2>
 
       {/* "In short" Highlight Box */}
       <div className="bg-[#F2DED2] rounded-2xl px-4 py-3 mb-8">
         <p className="text-sm font-bold text-[#93321F] leading-relaxed">
-          In short: listings must be accurate, and what you see in search isn&apos;t
-          a guarantee it&apos;s still available.
+          {t(
+            "In short: listings must be accurate, and what you see in search isn't a guarantee it's still available.",
+          )}
         </p>
       </div>
 
       {/* Paragraph Content */}
       <div className="space-y-6 text-sm sm:text-base text-[#5C5B57] font-normal leading-relaxed">
-        <p>
-          Providers are responsible for the accuracy of their listings &mdash;
-          price basis, room type, availability, restrictions and charges. Zoiko
-          Rooms doesn&apos;t independently verify every listing detail unless a
-          specific verification tier states otherwise, and displayed
-          availability can change before you complete a booking or application.
+         <p>
+          {t(
+            "Providers are responsible for the accuracy of their listings — price basis, room type, availability, restrictions and charges. Zoiko Rooms doesn't independently verify every listing detail unless a specific verification tier states otherwise, and displayed availability can change before you complete a booking or application.",
+          )}
         </p>
 
         <p>
-          Search results and rankings may reflect relevance, availability, your
-          preferences, and other factors. Where applicable law requires
-          disclosure of main ranking parameters, that disclosure is provided in
-          the relevant product surface rather than duplicated in full here.
+          {t(
+            "Search results and rankings may reflect relevance, availability, your preferences, and other factors. Where applicable law requires disclosure of main ranking parameters, that disclosure is provided in the relevant product surface rather than duplicated in full here.",
+          )}
         </p>
       </div>
     </section>

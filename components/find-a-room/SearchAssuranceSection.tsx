@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Clock, ShieldCheck, Wallet, MessageCircle } from "lucide-react";
 import { Container, Reveal, EvidenceBadge } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
 
 const checks = [
@@ -27,13 +28,14 @@ const statuses: { label: string; tone: "green" | "amber" | "gray" | "red" }[] = 
 ];
 
 export function SearchAssuranceSection() {
+  const { t } = useLanguage();
   return (
     <SectionDivider>
       <Container>
         <Reveal className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="flex flex-col gap-6">
-            <Eyebrow>Search Assurance</Eyebrow>
-            <SectionTitle>What you can check before you commit</SectionTitle>
+            <Eyebrow>{t("Search Assurance")}</Eyebrow>
+            <SectionTitle>{t("What you can check before you commit")}</SectionTitle>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {checks.map(({ icon: Icon, label }) => (
                 <motion.div
@@ -44,19 +46,19 @@ export function SearchAssuranceSection() {
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#F1E7DA] text-[#1B2438]">
                     <Icon className="h-4 w-4" />
                   </span>
-                  <p className="text-sm leading-snug text-brand-navy">{label}</p>
+                  <p className="text-sm leading-snug text-brand-navy">{t(label)}</p>
                 </motion.div>
               ))}
             </div>
           </div>
 
           <div className="flex flex-col gap-6">
-            <Eyebrow>Truth Strip</Eyebrow>
-            <SectionTitle>Know what is confirmed — and what still needs checking</SectionTitle>
-            <Paragraph>Status labels distinguish the following states across every listing:</Paragraph>
+            <Eyebrow>{t("Truth Strip")}</Eyebrow>
+            <SectionTitle>{t("Know what is confirmed — and what still needs checking")}</SectionTitle>
+            <Paragraph>{t("Status labels distinguish the following states across every listing:")}</Paragraph>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-2">
               {statuses.map(({ label, tone }) => (
-                <EvidenceBadge key={label} label={label} tone={tone} variant="outline" />
+                <EvidenceBadge key={label} label={t(label)} tone={tone} variant="outline" />
               ))}
             </motion.div>
           </div>

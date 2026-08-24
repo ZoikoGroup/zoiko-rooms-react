@@ -5,6 +5,7 @@ import { Plus } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Container, Reveal, Button } from "@/components/ui";
 import { easeOut, fadeUp } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle } from "./shared";
 
 const faqs = [
@@ -46,6 +47,7 @@ const faqs = [
 ];
 
 export function FaqSection() {
+  const { t } = useLanguage();
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
@@ -53,8 +55,8 @@ export function FaqSection() {
       <Container>
         <Reveal className="mx-auto flex max-w-3xl flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Frequently Asked Questions</Eyebrow>
-            <SectionTitle>Find a Room FAQ</SectionTitle>
+            <Eyebrow>{t("Frequently Asked Questions")}</Eyebrow>
+            <SectionTitle>{t("Find a Room FAQ")}</SectionTitle>
           </div>
 
           <div className="flex flex-col divide-y divide-black/10">
@@ -68,7 +70,7 @@ export function FaqSection() {
                     className="flex w-full items-center justify-between gap-4 py-5 text-left"
                   >
                     <span className="font-heading text-base font-medium text-brand-navy sm:text-lg">
-                      {faq.question}
+                      {t(faq.question)}
                     </span>
                     <motion.span
                       animate={{ rotate: isOpen ? 45 : 0 }}
@@ -87,7 +89,7 @@ export function FaqSection() {
                         transition={{ duration: 0.25, ease: easeOut }}
                         className="overflow-hidden"
                       >
-                        <p className="pb-5 text-sm text-neutral-600 sm:text-base">{faq.answer}</p>
+                        <p className="pb-5 text-sm text-neutral-600 sm:text-base">{t(faq.answer)}</p>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -102,21 +104,22 @@ export function FaqSection() {
             variants={fadeUp}
             className="font-heading text-3xl font-medium text-brand-navy sm:text-4xl"
           >
-            Ready to continue?
+            {t("Ready to continue?")}
           </motion.h2>
           <motion.p variants={fadeUp} className="max-w-md text-base text-neutral-600">
-            Search available rooms, save a search, or list a room through the appropriate provider
-            pathway.
+            {t(
+              "Search available rooms, save a search, or list a room through the appropriate provider pathway.",
+            )}
           </motion.p>
           <motion.div variants={fadeUp} className="flex flex-col gap-3 sm:flex-row">
             <Button href="/find-a-room" size="lg" variant="secondary">
-              Search Rooms
+              {t("Search Rooms")}
             </Button>
             <Button href="/list-a-room" size="lg" variant="outline">
-              List a Room
+              {t("List a Room")}
             </Button>
             <Button href="/resources" size="lg" variant="outline">
-              Get Help
+              {t("Get Help")}
             </Button>
           </motion.div>
         </Reveal>

@@ -5,10 +5,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Container, Reveal, ImageFade } from "@/components/ui";
 import { fadeUp, easeOut } from "@/lib/motion";
 import { FormField } from "@/components/start-a-listing/FormField";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, SectionDivider } from "./shared";
 import { locationOptions, costDisclosuresByLocation } from "./data";
 
 export function PricingPrimaryObligationSection() {
+  const { t } = useLanguage();
   const [location, setLocation] = useState(locationOptions[0]);
   const [confirmedLocation, setConfirmedLocation] = useState(locationOptions[0]);
 
@@ -19,14 +21,14 @@ export function PricingPrimaryObligationSection() {
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Pricing and Primary Obligation</Eyebrow>
-            <SectionTitle>Rent, markup, and fees must stay inside your permission</SectionTitle>
+            <Eyebrow>{t("Pricing and Primary Obligation")}</Eyebrow>
+            <SectionTitle>{t("Rent, markup, and fees must stay inside your permission")}</SectionTitle>
           </div>
 
           <motion.div variants={fadeUp} className="relative h-[220px] w-full overflow-hidden rounded-2xl">
             <ImageFade
               src="/images/authorized-sublets/pricing-room-divider.png"
-              alt="A subletted room space divided by a folding screen"
+              alt={t("A subletted room space divided by a folding screen")}
               fill
               sizes="(min-width: 768px) 768px, 100vw"
               className="object-cover"
@@ -35,13 +37,19 @@ export function PricingPrimaryObligationSection() {
 
           <motion.div variants={fadeUp} className="rounded-2xl border border-[#E9E0D3] bg-white p-6 shadow-sm sm:p-8">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <FormField label="Provider type" value="Authorized sublet" onChange={() => {}} as="select" options={[{ value: "Authorized sublet", label: "Authorized sublet" }]} />
               <FormField
-                label="Property location"
+                label={t("Provider type")}
+                value="Authorized sublet"
+                onChange={() => {}}
+                as="select"
+                options={[{ value: "Authorized sublet", label: t("Authorized sublet") }]}
+              />
+              <FormField
+                label={t("Property location")}
                 value={location}
                 onChange={setLocation}
                 as="select"
-                options={locationOptions.map((option) => ({ value: option, label: option }))}
+                options={locationOptions.map((option) => ({ value: option, label: t(option) }))}
               />
             </div>
             <motion.button
@@ -51,14 +59,14 @@ export function PricingPrimaryObligationSection() {
               onClick={() => setConfirmedLocation(location)}
               className="mt-5 rounded-full bg-brand-red px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-red-dark"
             >
-              Check My Requirements
+              {t("Check My Requirements")}
             </motion.button>
           </motion.div>
 
           <div className="overflow-hidden rounded-2xl border border-[#E9E0D3]">
             <div className="grid grid-cols-2 gap-4 bg-[#F7F2EA] px-5 py-3 text-xs font-semibold uppercase tracking-wide text-neutral-500 sm:px-6">
-              <span>Item</span>
-              <span>Illustrative display</span>
+              <span>{t("Item")}</span>
+              <span>{t("Illustrative display")}</span>
             </div>
             <AnimatePresence mode="wait">
               <motion.div
@@ -70,8 +78,8 @@ export function PricingPrimaryObligationSection() {
               >
                 {rows.map((row) => (
                   <div key={row.item} className="grid grid-cols-2 gap-4 px-5 py-4 text-sm sm:px-6">
-                    <span className="font-medium text-brand-navy">{row.item}</span>
-                    <span className="text-neutral-600">{row.display}</span>
+                    <span className="font-medium text-brand-navy">{t(row.item)}</span>
+                    <span className="text-neutral-600">{t(row.display)}</span>
                   </div>
                 ))}
               </motion.div>
@@ -79,8 +87,9 @@ export function PricingPrimaryObligationSection() {
           </div>
 
           <p className="text-xs text-neutral-400">
-            These USD amounts illustrate disclosure structure only. They are not Zoiko Rooms fees, a
-            market benchmark, legal limits, or a recommendation to charge a markup.
+            {t(
+              "These USD amounts illustrate disclosure structure only. They are not Zoiko Rooms fees, a market benchmark, legal limits, or a recommendation to charge a markup.",
+            )}
           </p>
         </Reveal>
       </Container>

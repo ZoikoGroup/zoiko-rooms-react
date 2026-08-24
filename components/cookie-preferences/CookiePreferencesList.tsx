@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface CookieSetting {
   id: string;
@@ -198,6 +199,7 @@ const categoriesData: PreferenceCategory[] = [
 ];
 
 export default function CookiePreferencesList() {
+  const { t } = useLanguage();
   const [toggles, setToggles] = useState<Record<string, boolean>>(() => {
     const initial: Record<string, boolean> = {};
     categoriesData.forEach((cat) => {
@@ -242,16 +244,16 @@ export default function CookiePreferencesList() {
                 <div className="w-9 h-9 rounded-full bg-[#F4EFE6] flex items-center justify-center flex-shrink-0">
                   <img
                     src={category.iconSrc}
-                    alt={`${category.title} icon`}
+                    alt={`${t(category.title)} icon`}
                     className="w-[12px] h-[12px] object-contain"
                   />
                 </div>
                 <div>
                   <h3 className="text-base sm:text-lg font-bold text-[#101C33]">
-                    {category.title}
+                    {t(category.title)}
                   </h3>
                   <p className="text-xs text-[#7A7467] font-normal">
-                    {category.subtitle}
+                    {t(category.subtitle)}
                   </p>
                 </div>
               </div>
@@ -262,7 +264,7 @@ export default function CookiePreferencesList() {
                   category.badgeType,
                 )}`}
               >
-                {category.badgeText}
+                {t(category.badgeText)}
               </span>
             </div>
 
@@ -285,10 +287,10 @@ export default function CookiePreferencesList() {
                       {/* Title & Description */}
                       <div className="space-y-1 max-w-2xl">
                         <h4 className="text-xs sm:text-sm font-bold text-[#101C33]">
-                          {setting.title}
+                          {t(setting.title)}
                         </h4>
                         <p className="text-xs text-[#7A7467] font-normal leading-relaxed">
-                          {setting.description}
+                          {t(setting.description)}
                         </p>
                       </div>
 
@@ -298,10 +300,10 @@ export default function CookiePreferencesList() {
                           <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#2D6A4F]">
                             <img
                               src="/icons/lock.png"
-                              alt="Lock icon"
+                              alt={t("Lock icon")}
                               className="w-[12px] h-[12px] object-contain"
                             />
-                            <span>{setting.activeText}</span>
+                            <span>{t(setting.activeText)}</span>
                           </div>
                         ) : (
                           <div className="flex flex-col items-end gap-1.5">
@@ -339,7 +341,7 @@ export default function CookiePreferencesList() {
                                     : "text-[#8C8275]"
                               }`}
                             >
-                              {currentStatusText}
+                              {t(currentStatusText)}
                             </span>
                           </div>
                         )}
@@ -356,12 +358,11 @@ export default function CookiePreferencesList() {
         <div className="bg-[#EFE2C8] border border-[#E3DCCE] rounded-2xl p-5 sm:px-6 sm:py-5">
           <p className="text-xs sm:text-sm text-[#5E5445] font-normal leading-relaxed">
             <strong className="font-bold text-[#5E5445]">
-              Where this applies.
+              {t("Where this applies.")}
             </strong>{" "}
-            Preferences are saved for this browser and device. If you&apos;re
-            signed in on a device or browser that supports account sync, we
-            apply the more privacy-protective setting where the two differ,
-            rather than silently overwriting either one.
+            {t(
+              "Preferences are saved for this browser and device. If you're signed in on a device or browser that supports account sync, we apply the more privacy-protective setting where the two differ, rather than silently overwriting either one.",
+            )}
           </p>
         </div>
       </div>

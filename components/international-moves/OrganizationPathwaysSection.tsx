@@ -1,5 +1,8 @@
+"use client";
+
 import { Container, Reveal, Card } from "@/components/ui";
 import { Eyebrow, SectionTitle, SectionDivider } from "./shared";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const pathways = [
   {
@@ -37,20 +40,22 @@ const links = [
 ];
 
 export function OrganizationPathwaysSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-[#fff]">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Organization Pathways</Eyebrow>
-            <SectionTitle>Referral, distribution, and management are separate relationships</SectionTitle>
+            <Eyebrow>{t("Organization Pathways")}</Eyebrow>
+            <SectionTitle>{t("Referral, distribution, and management are separate relationships")}</SectionTitle>
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {pathways.map(({ title, description }) => (
               <Card key={title} className="p-6">
-                <h3 className="font-heading text-base font-medium text-brand-navy">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{description}</p>
+                <h3 className="font-heading text-base font-medium text-brand-navy">{t(title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{t(description)}</p>
               </Card>
             ))}
           </div>
@@ -62,7 +67,7 @@ export function OrganizationPathwaysSection() {
                 href={link.href}
                 className="text-brand-red transition-colors hover:text-brand-red-dark"
               >
-                {link.label}
+                {t(link.label)}
               </a>
             ))}
           </div>

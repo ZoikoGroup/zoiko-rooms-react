@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Container, Reveal, Button } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
 
 const stages = [
@@ -17,6 +18,7 @@ const stages = [
 ];
 
 export function SupportIncidentLifecycleSection() {
+  const { t } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
@@ -24,8 +26,8 @@ export function SupportIncidentLifecycleSection() {
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Support and Incident Lifecycle</Eyebrow>
-            <SectionTitle>Every case moves through visible states</SectionTitle>
+            <Eyebrow>{t("Support and Incident Lifecycle")}</Eyebrow>
+            <SectionTitle>{t("Every case moves through visible states")}</SectionTitle>
           </div>
 
           <div className="flex flex-wrap gap-2">
@@ -42,20 +44,20 @@ export function SupportIncidentLifecycleSection() {
                       : "border-transparent bg-[#F1E7DA] text-[#A85A34] hover:bg-[#EADCC7]"
                   }`}
                 >
-                  {stage}
+                  {t(stage)}
                 </button>
               );
             })}
           </div>
 
           <Paragraph>
-            A report changes status and may restrict action — it does not automatically establish
-            wrongdoing. We show current status, owner category, and next communication rather than
-            inventing a resolution deadline.
+            {t(
+              "A report changes status and may restrict action — it does not automatically establish wrongdoing. We show current status, owner category, and next communication rather than inventing a resolution deadline."
+            )}
           </Paragraph>
 
           <Button href="/resources" variant="outline" size="md" className="w-fit">
-            Contact Support
+            {t("Contact Support")}
           </Button>
         </Reveal>
       </Container>

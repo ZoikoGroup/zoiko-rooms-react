@@ -5,6 +5,7 @@ import { Check } from "lucide-react";
 import { EvidenceBadge } from "@/components/ui";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
 import { easeOut } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import type { Room } from "./data";
 
 type RoomCardProps = {
@@ -16,6 +17,7 @@ type RoomCardProps = {
 };
 
 export function RoomCard({ room, saved, onToggleSaved, comparing, onToggleComparing }: RoomCardProps) {
+  const { t } = useLanguage();
   return (
     <motion.div
       layout
@@ -29,32 +31,32 @@ export function RoomCard({ room, saved, onToggleSaved, comparing, onToggleCompar
       }`}
     >
       <div className="w-full shrink-0 overflow-hidden rounded-xl sm:w-40">
-        <NaturalImage src={room.image} alt={room.title} />
+        <NaturalImage src={room.image} alt={t(room.title)} />
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col gap-2">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <p className="font-heading text-lg font-semibold text-brand-navy">
             ${room.price.toLocaleString()}/month
-            <span className="ml-2 font-sans text-sm font-normal text-neutral-400">{room.priceNote}</span>
+            <span className="ml-2 font-sans text-sm font-normal text-neutral-400">{t(room.priceNote)}</span>
           </p>
-          <EvidenceBadge label={room.statusLabel} tone={room.statusTone} variant="outline" />
+          <EvidenceBadge label={t(room.statusLabel)} tone={room.statusTone} variant="outline" />
         </div>
 
-        <p className="text-sm text-neutral-700">{room.title}</p>
-        <p className="text-sm text-neutral-500">{room.facts}</p>
+        <p className="text-sm text-neutral-700">{t(room.title)}</p>
+        <p className="text-sm text-neutral-500">{t(room.facts)}</p>
 
-        <EvidenceBadge label={room.evidenceLabel} tone={room.evidenceTone} variant="outline" className="w-fit" />
+        <EvidenceBadge label={t(room.evidenceLabel)} tone={room.evidenceTone} variant="outline" className="w-fit" />
 
         <div className="mt-1 flex flex-wrap items-center gap-x-5 gap-y-1 text-sm font-medium text-brand-red">
-          <span className="cursor-default text-brand-red">View room</span>
+          <span className="cursor-default text-brand-red">{t("View room")}</span>
           <button
             type="button"
             onClick={onToggleSaved}
             className="inline-flex items-center gap-1 transition-colors hover:text-brand-red-dark"
           >
             {saved && <Check className="h-3.5 w-3.5" />}
-            {saved ? "Saved" : "Save"}
+            {saved ? t("Saved") : t("Save")}
           </button>
           <button
             type="button"
@@ -62,7 +64,7 @@ export function RoomCard({ room, saved, onToggleSaved, comparing, onToggleCompar
             className="inline-flex items-center gap-1 transition-colors hover:text-brand-red-dark"
           >
             {comparing && <Check className="h-3.5 w-3.5" />}
-            {comparing ? "Comparing" : "Compare"}
+            {comparing ? t("Comparing") : t("Compare")}
           </button>
         </div>
       </div>

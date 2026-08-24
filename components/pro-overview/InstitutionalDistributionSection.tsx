@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface FeatureItem {
   title: string;
@@ -52,6 +53,7 @@ const sectorBadges: SectorBadge[] = [
 ];
 
 export default function InstitutionalDistributionSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full bg-white py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -60,17 +62,15 @@ export default function InstitutionalDistributionSection() {
           {/* Header Block */}
           <div className="space-y-3">
             <span className="text-xs font-mono font-bold tracking-widest text-[#DC2626] uppercase">
-              INSTITUTIONAL DISTRIBUTION
+              {t("Institutional Distribution")}
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-[27px] font-serif font-bold text-[#14213D] leading-tight">
-              Distribute approved supply without transferring hidden
-              responsibility.
+              {t("Distribute approved supply without transferring hidden responsibility.")}
             </h2>
             <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed">
-              Organization relationships define exact providers, rooms,
-              audience, criteria, funding, and service &mdash; provider
-              authority and participant rights are never absorbed into the
-              relationship.
+              {t(
+                "Organization relationships define exact providers, rooms, audience, criteria, funding, and service — provider authority and participant rights are never absorbed into the relationship."
+              )}
             </p>
           </div>
 
@@ -88,11 +88,11 @@ export default function InstitutionalDistributionSection() {
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#1A2E6E] shrink-0" />
                   <h3 className="text-sm font-bold text-[#14213D]">
-                    {item.title}
+                    {t(item.title)}
                   </h3>
                 </div>
                 <p className="text-xs text-[#555E68] leading-relaxed pl-3.5 font-normal">
-                  {item.description}
+                  {t(item.description)}
                 </p>
               </motion.div>
             ))}
@@ -104,7 +104,7 @@ export default function InstitutionalDistributionSection() {
               href="#explore-institutional"
               className="inline-block bg-transparent hover:bg-white text-[#14213D] text-xs font-semibold px-6 py-3 rounded-full border border-[#14213D] transition-colors shadow-xs"
             >
-              Explore Institutional Distribution
+              {t("Explore Institutional Distribution")}
             </a>
           </div>
         </div>
@@ -122,7 +122,7 @@ export default function InstitutionalDistributionSection() {
             <div className="relative w-full h-[360px] sm:h-[420px]">
               <Image
                 src="/images/pro-overview/image.png"
-                alt="Institutional Distribution Illustration"
+                alt={t("Institutional Distribution Illustration")}
                 fill
                 className="object-cover object-center"
                 priority
@@ -138,7 +138,7 @@ export default function InstitutionalDistributionSection() {
                     <span
                       className={`w-1.5 h-1.5 rounded-full ${badge.dotColor}`}
                     />
-                    {badge.label}
+                    {t(badge.label)}
                   </span>
                 ))}
               </div>
@@ -146,8 +146,7 @@ export default function InstitutionalDistributionSection() {
               {/* Caption Line */}
               <div className="absolute bottom-4 left-0 right-0 text-center z-10">
                 <span className="text-xs font-serif italic text-white/90 drop-shadow-sm">
-                  Provider authority and participant rights stay intact across
-                  every market
+                  {t("Provider authority and participant rights stay intact across every market")}
                 </span>
               </div>
 

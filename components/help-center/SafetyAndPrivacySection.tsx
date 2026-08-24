@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface SafetyRow {
   scenario: string;
@@ -10,6 +11,7 @@ interface SafetyRow {
 }
 
 export default function SafetyAndPrivacySection() {
+  const { t } = useLanguage();
   const safetyData: SafetyRow[] = [
     {
       scenario: "Payment redirection / unknown recipient",
@@ -55,7 +57,7 @@ export default function SafetyAndPrivacySection() {
         {/* Section Header */}
         <div className="flex flex-col items-start text-left space-y-3 w-full">
           <h2 className="text-2xl lg:text-[28px] font-serif font-bold text-[#14213D] leading-tight max-w-2xl">
-            Safety and privacy
+            {t("Safety and privacy")}
           </h2>
         </div>
 
@@ -71,13 +73,13 @@ export default function SafetyAndPrivacySection() {
             <thead>
               <tr className="border-b border-[#EAE6DF]">
                 <th className="py-3 px-2 text-[10px] font-bold tracking-wider text-[#7A838E] uppercase w-1/5">
-                  SCENARIO
+                  {t("SCENARIO")}
                 </th>
                 <th className="py-3 px-2 text-[10px] font-bold tracking-wider text-[#7A838E] uppercase w-2/5">
-                  IMMEDIATE ACTION
+                  {t("IMMEDIATE ACTION")}
                 </th>
                 <th className="py-3 px-2 text-[10px] font-bold tracking-wider text-[#7A838E] uppercase w-2/5">
-                  SUPPORT ROUTE
+                  {t("SUPPORT ROUTE")}
                 </th>
               </tr>
             </thead>
@@ -88,13 +90,13 @@ export default function SafetyAndPrivacySection() {
                   className="hover:bg-white/40 transition-colors duration-150"
                 >
                   <td className="py-4 px-2 text-xs sm:text-sm font-semibold text-[#14213D] align-top pr-4">
-                    {row.scenario}
+                    {t(row.scenario)}
                   </td>
                   <td className="py-4 px-2 text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed align-top pr-6">
-                    {row.immediateAction}
+                    {t(row.immediateAction)}
                   </td>
                   <td className="py-4 px-2 text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed align-top">
-                    {row.supportRoute}
+                    {t(row.supportRoute)}
                   </td>
                 </tr>
               ))}

@@ -1,11 +1,13 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface CostRow {
   item: string;
-  value: React.ReactNode;
+  value: string;
+  emphasis?: string;
+  rest?: string;
   isFooter?: boolean;
 }
 
@@ -22,12 +24,9 @@ const costTableRows: CostRow[] = [
   },
   {
     item: "Effective date",
-    value: (
-      <span>
-        <strong>Illustrative values effective August 1, 2026</strong> &mdash; a
-        later change must not silently rewrite an earlier accepted agreement
-      </span>
-    ),
+    value: "",
+    emphasis: "Illustrative values effective August 1, 2026",
+    rest: "a later change must not silently rewrite an earlier accepted agreement",
     isFooter: true,
   },
 ];
@@ -85,21 +84,23 @@ const featureCards: FeatureCard[] = [
 ];
 
 export default function CostsAndRestrictionsSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="w-full text-[#14213D] py-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header Block */}
         <div className="text-center space-y-3 max-w-3xl mx-auto">
           <span className="text-[11px] font-bold tracking-widest text-[#C8202C] uppercase block">
-            COSTS &amp; RESTRICTIONS
+            {t("Costs & Restrictions")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Complete cost before commitment.
+            {t("Complete cost before commitment.")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-xl mx-auto">
-            Rent, deposit, required fees, bills, taxes, discounts, participant
-            contribution, period and effective date are visible together &mdash;
-            not disclosed one at a time.
+            {t(
+              "Rent, deposit, required fees, bills, taxes, discounts, participant contribution, period and effective date are visible together — not disclosed one at a time.",
+            )}
           </p>
         </div>
 
@@ -113,8 +114,8 @@ export default function CostsAndRestrictionsSection() {
         >
           {/* Table Header */}
           <div className="bg-[#1C2C5E] text-white px-6 py-3.5 grid grid-cols-1 sm:grid-cols-12 gap-4 text-[11px] font-bold tracking-wider uppercase">
-            <div className="sm:col-span-4">COST ITEM</div>
-            <div className="sm:col-span-8">ILLUSTRATIVE CURRENT VALUE</div>
+            <div className="sm:col-span-4">{t("Cost Item")}</div>
+            <div className="sm:col-span-8">{t("Illustrative Current Value")}</div>
           </div>
 
           {/* Table Rows */}
@@ -129,9 +130,17 @@ export default function CostsAndRestrictionsSection() {
                 }`}
               >
                 <div className="sm:col-span-4 font-bold text-[#14213D]">
-                  {row.item}
+                  {t(row.item)}
                 </div>
-                <div className="sm:col-span-8">{row.value}</div>
+                <div className="sm:col-span-8">
+                  {row.isFooter ? (
+                    <span>
+                      <strong>{t(row.emphasis!)}</strong> &mdash; {t(row.rest!)}
+                    </span>
+                  ) : (
+                    t(row.value)
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -146,13 +155,12 @@ export default function CostsAndRestrictionsSection() {
           className="bg-white rounded-2xl p-6 sm:p-8 border border-[#EAE6DF] border-l-4 border-l-[#C8202C] shadow-xs space-y-2 max-w-6xl mx-auto"
         >
           <span className="text-[11px] font-bold tracking-widest text-[#C8202C] uppercase block">
-            EXAMPLE BOUNDARY
+            {t("Example Boundary")}
           </span>
           <p className="text-xs sm:text-sm text-[#555E68] leading-relaxed">
-            These USD values demonstrate complete-cost presentation and
-            effective dating. They are not Zoiko Rooms prices, market averages,
-            provider quotes, taxes, affordability guidance, investment advice,
-            or a guarantee of future cost.
+            {t(
+              "These USD values demonstrate complete-cost presentation and effective dating. They are not Zoiko Rooms prices, market averages, provider quotes, taxes, affordability guidance, investment advice, or a guarantee of future cost.",
+            )}
           </p>
         </motion.div>
 
@@ -181,10 +189,10 @@ export default function CostsAndRestrictionsSection() {
               {/* Title & Description */}
               <div className="space-y-1.5">
                 <h3 className="text-sm font-bold text-[#14213D]">
-                  {card.title}
+                  {t(card.title)}
                 </h3>
                 <p className="text-xs text-[#555E68] leading-relaxed">
-                  {card.description}
+                  {t(card.description)}
                 </p>
               </div>
             </motion.div>
@@ -197,7 +205,7 @@ export default function CostsAndRestrictionsSection() {
             type="button"
             className="hover:bg-[#E5D5C2] text-[#1B2A4A] text-xs font-bold py-3.5 px-7 rounded-full border border-[#1B2A4A] transition-all duration-200 cursor-pointer shadow-2xs active:scale-95"
           >
-            Review Cost Model
+            {t("Review Cost Model")}
           </button>
         </div>
       </div>

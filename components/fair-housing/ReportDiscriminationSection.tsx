@@ -13,6 +13,7 @@ import {
   reportGroundOptions,
   reportOutcomeOptions,
 } from "./data";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 type ReportForm = {
   where: string;
@@ -33,6 +34,7 @@ function RadioOptions({
   value: string;
   onChange: (value: string) => void;
 }) {
+  const { t } = useLanguage();
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
       {options.map((option) => {
@@ -53,7 +55,7 @@ function RadioOptions({
             >
               {isSelected && <span className="h-2 w-2 rounded-full bg-brand-red" />}
             </span>
-            {option}
+            {t(option)}
           </button>
         );
       })}
@@ -62,6 +64,7 @@ function RadioOptions({
 }
 
 export function ReportDiscriminationSection() {
+  const { t } = useLanguage();
   const [step, setStep] = useState(0);
   const [maxReached, setMaxReached] = useState(0);
   const [form, setForm] = useState<ReportForm>(EMPTY_FORM);
@@ -105,11 +108,12 @@ export function ReportDiscriminationSection() {
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Report Discrimination</Eyebrow>
-            <SectionTitle>Tell us what happened — we&apos;ll figure out the category.</SectionTitle>
+            <Eyebrow>{t("Report Discrimination")}</Eyebrow>
+            <SectionTitle>{t("Tell us what happened — we'll figure out the category.")}</SectionTitle>
             <Paragraph>
-              You never need to name a legal protected class to submit a report. We pre-fill
-              listing, message or transaction details when this opens from that context.
+              {t(
+                "You never need to name a legal protected class to submit a report. We pre-fill listing, message or transaction details when this opens from that context."
+              )}
             </Paragraph>
           </div>
 
@@ -127,17 +131,18 @@ export function ReportDiscriminationSection() {
                 >
                   <Check className="h-6 w-6" />
                 </motion.span>
-                <h3 className="font-heading text-lg font-medium text-brand-navy">Report received</h3>
+                <h3 className="font-heading text-lg font-medium text-brand-navy">{t("Report received")}</h3>
                 <p className="max-w-md text-sm leading-relaxed text-neutral-500">
-                  A trained specialist will review this on a need-to-know basis. If you flagged a
-                  threat or immediate danger, that part is escalated first.
+                  {t(
+                    "A trained specialist will review this on a need-to-know basis. If you flagged a threat or immediate danger, that part is escalated first."
+                  )}
                 </p>
                 <button
                   type="button"
                   onClick={handleReset}
                   className="mt-2 text-sm font-semibold text-brand-red hover:text-brand-red-dark"
                 >
-                  Submit another report
+                  {t("Submit another report")}
                 </button>
               </div>
             ) : (
@@ -160,7 +165,7 @@ export function ReportDiscriminationSection() {
                               : "text-neutral-300"
                         }`}
                       >
-                        {index + 1} · {label}
+                        {index + 1} · {t(label)}
                       </button>
                     );
                   })}
@@ -179,8 +184,8 @@ export function ReportDiscriminationSection() {
                       {step === 0 && (
                         <>
                           <div>
-                            <h3 className="font-heading text-base font-medium text-brand-navy">Where did this happen?</h3>
-                            <p className="text-xs text-neutral-400">Select one.</p>
+                            <h3 className="font-heading text-base font-medium text-brand-navy">{t("Where did this happen?")}</h3>
+                            <p className="text-xs text-neutral-400">{t("Select one.")}</p>
                           </div>
                           <RadioOptions options={reportWhereOptions} value={form.where} onChange={(v) => setForm({ ...form, where: v })} />
                         </>
@@ -189,8 +194,8 @@ export function ReportDiscriminationSection() {
                       {step === 1 && (
                         <>
                           <div>
-                            <h3 className="font-heading text-base font-medium text-brand-navy">What happened?</h3>
-                            <p className="text-xs text-neutral-400">Select the closest match — we&apos;ll route it correctly either way.</p>
+                            <h3 className="font-heading text-base font-medium text-brand-navy">{t("What happened?")}</h3>
+                            <p className="text-xs text-neutral-400">{t("Select the closest match — we'll route it correctly either way.")}</p>
                           </div>
                           <RadioOptions options={reportConductOptions} value={form.conduct} onChange={(v) => setForm({ ...form, conduct: v })} />
                         </>
@@ -199,8 +204,8 @@ export function ReportDiscriminationSection() {
                       {step === 2 && (
                         <>
                           <div>
-                            <h3 className="font-heading text-base font-medium text-brand-navy">What is this related to?</h3>
-                            <p className="text-xs text-neutral-400">Optional — &quot;I&apos;d rather not say&quot; is always fine.</p>
+                            <h3 className="font-heading text-base font-medium text-brand-navy">{t("What is this related to?")}</h3>
+                            <p className="text-xs text-neutral-400">{t("Optional — \"I'd rather not say\" is always fine.")}</p>
                           </div>
                           <RadioOptions options={reportGroundOptions} value={form.ground} onChange={(v) => setForm({ ...form, ground: v })} />
                         </>
@@ -209,14 +214,14 @@ export function ReportDiscriminationSection() {
                       {step === 3 && (
                         <>
                           <div>
-                            <h3 className="font-heading text-base font-medium text-brand-navy">Anything else we should know?</h3>
-                            <p className="text-xs text-neutral-400">Optional — dates, names, or what was said or shown.</p>
+                            <h3 className="font-heading text-base font-medium text-brand-navy">{t("Anything else we should know?")}</h3>
+                            <p className="text-xs text-neutral-400">{t("Optional — dates, names, or what was said or shown.")}</p>
                           </div>
                           <textarea
                             value={form.evidence}
                             onChange={(event) => setForm({ ...form, evidence: event.target.value })}
                             rows={5}
-                            placeholder="Describe what happened, in your own words…"
+                            placeholder={t("Describe what happened, in your own words…")}
                             className="w-full rounded-xl border border-[#E9E0D3] bg-[#FFFDF8] px-4 py-3 text-sm text-brand-ink outline-none placeholder:text-neutral-400 focus:border-brand-navy"
                           />
                         </>
@@ -225,8 +230,8 @@ export function ReportDiscriminationSection() {
                       {step === 4 && (
                         <>
                           <div>
-                            <h3 className="font-heading text-base font-medium text-brand-navy">What do you need from us?</h3>
-                            <p className="text-xs text-neutral-400">Select one.</p>
+                            <h3 className="font-heading text-base font-medium text-brand-navy">{t("What do you need from us?")}</h3>
+                            <p className="text-xs text-neutral-400">{t("Select one.")}</p>
                           </div>
                           <RadioOptions options={reportOutcomeOptions} value={form.outcome} onChange={(v) => setForm({ ...form, outcome: v })} />
                         </>
@@ -237,8 +242,9 @@ export function ReportDiscriminationSection() {
 
                 <div className="flex items-center justify-between gap-4 border-t border-[#E9E0D3] px-6 py-4">
                   <p className="max-w-sm text-xs text-neutral-400">
-                    Reporting is confidential to the extent possible. We disclose details only on
-                    a need-to-know basis to investigate and act.
+                    {t(
+                      "Reporting is confidential to the extent possible. We disclose details only on a need-to-know basis to investigate and act."
+                    )}
                   </p>
                   <div className="flex shrink-0 gap-2">
                     <button
@@ -247,7 +253,7 @@ export function ReportDiscriminationSection() {
                       disabled={step === 0}
                       className="rounded-full border border-[#E9E0D3] px-5 py-2.5 text-sm font-semibold text-brand-navy transition-colors hover:bg-brand-navy/5 disabled:opacity-40"
                     >
-                      Back
+                      {t("Back")}
                     </button>
                     <motion.button
                       type="button"
@@ -257,7 +263,7 @@ export function ReportDiscriminationSection() {
                       disabled={!canContinue}
                       className="rounded-full bg-brand-red px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-red-dark disabled:cursor-not-allowed disabled:opacity-40"
                     >
-                      {step === reportSteps.length - 1 ? "Submit report" : "Continue"}
+                      {step === reportSteps.length - 1 ? t("Submit report") : t("Continue")}
                     </motion.button>
                   </div>
                 </div>

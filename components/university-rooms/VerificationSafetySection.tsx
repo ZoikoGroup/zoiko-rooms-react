@@ -5,6 +5,7 @@ import { Container, Reveal } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
 import { Eyebrow, SectionTitle, BulletList, SectionDivider } from "./shared";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const points = [
   "Provider identity, listing authority, room evidence, availability, price, payment, and institution relationship remain separate statuses.",
@@ -14,13 +15,15 @@ const points = [
 ];
 
 export function VerificationSafetySection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Verification and Safety</Eyebrow>
-            <SectionTitle>Separate checks, not one universal badge</SectionTitle>
+            <Eyebrow>{t("Verification and Safety")}</Eyebrow>
+            <SectionTitle>{t("Separate checks, not one universal badge")}</SectionTitle>
           </div>
 
           <motion.div
@@ -31,11 +34,11 @@ export function VerificationSafetySection() {
           >
             <NaturalImage
               src="/images/university-rooms/verification-safety.png"
-              alt="A university support staff member available to help students on campus"
+              alt={t("A university support staff member available to help students on campus")}
             />
           </motion.div>
 
-          <BulletList items={points} />
+          <BulletList items={points.map((point) => t(point))} />
         </Reveal>
       </Container>
     </SectionDivider>

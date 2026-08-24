@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface ContributionRow {
   title: string;
@@ -43,20 +44,22 @@ const contributionRows: ContributionRow[] = [
 ];
 
 export default function InstitutionalContributionsSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-4xl mx-auto space-y-10 text-center">
         {/* Header Block */}
         <div className="space-y-3 mx-auto">
           <span className="text-xs font-mono font-bold tracking-widest text-[#DC2626] uppercase">
-            INSTITUTIONAL CONTRIBUTIONS
+            {t("INSTITUTIONAL CONTRIBUTIONS")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Subsidies and direct billing, fully disclosed
+            {t("Subsidies and direct billing, fully disclosed")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed">
-            Illustrative example only &mdash; every real transaction shows its
-            own current, sourced figures.
+            {t(
+              "Illustrative example only — every real transaction shows its own current, sourced figures.",
+            )}
           </p>
         </div>
 
@@ -74,10 +77,10 @@ export default function InstitutionalContributionsSection() {
               {/* Text Information */}
               <div className="space-y-0.5">
                 <h3 className="text-sm font-serif font-bold text-[#14213D] leading-snug">
-                  {row.title}
+                  {t(row.title)}
                 </h3>
                 <p className="text-xs text-[#736B62] leading-relaxed font-normal">
-                  {row.subtitle}
+                  {t(row.subtitle)}
                 </p>
               </div>
 
@@ -90,7 +93,9 @@ export default function InstitutionalContributionsSection() {
                     className={`w-1.5 h-1.5 rounded-full ${row.dotColor}`}
                   />
                 )}
-                {row.badgeText}
+                {row.badgeText === "In progress"
+                  ? t(row.badgeText)
+                  : row.badgeText}
               </span>
             </motion.div>
           ))}

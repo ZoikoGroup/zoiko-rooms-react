@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Search, Home, GraduationCap, Briefcase, Globe } from "lucide-react";
 import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp, easeOut } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
 
 const modules = [
@@ -45,16 +46,16 @@ const modules = [
 ];
 
 export function FeaturedModulesSection() {
+  const { t } = useLanguage();
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-12">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Featured Search Modules</Eyebrow>
-            <SectionTitle>Explore by destination, life situation, and move timing</SectionTitle>
+            <Eyebrow>{t("Featured Search Modules")}</Eyebrow>
+            <SectionTitle>{t("Explore by destination, life situation, and move timing")}</SectionTitle>
             <Paragraph>
-              Use real inventory-backed destinations. Coverage gaps are explained rather than
-              hidden.
+              {t("Use real inventory-backed destinations. Coverage gaps are explained rather than hidden.")}
             </Paragraph>
           </div>
 
@@ -70,10 +71,10 @@ export function FeaturedModulesSection() {
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-navy text-white">
                   <Icon className="h-5 w-5" />
                 </span>
-                <h3 className="font-heading text-lg font-medium text-brand-navy">{title}</h3>
-                <p className="flex-1 text-sm text-neutral-600">{description}</p>
+                <h3 className="font-heading text-lg font-medium text-brand-navy">{t(title)}</h3>
+                <p className="flex-1 text-sm text-neutral-600">{t(description)}</p>
                 <Button href={href} variant="outline" size="sm" className="w-full text-[12px]">
-                  {cta}
+                  {t(cta)}
                 </Button>
               </motion.div>
             ))}

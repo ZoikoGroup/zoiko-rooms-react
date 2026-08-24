@@ -1,4 +1,7 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, InfoTable, SectionDivider } from "./shared";
 
 const rows = [
@@ -11,16 +14,18 @@ const rows = [
 ];
 
 export function PublishManageSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Publish and Manage</Eyebrow>
-            <SectionTitle>Status, changes, pause, removal, and relist</SectionTitle>
+            <Eyebrow>{t("Publish and Manage")}</Eyebrow>
+            <SectionTitle>{t("Status, changes, pause, removal, and relist")}</SectionTitle>
           </div>
 
-          <InfoTable columns={["State", "Public / Action Effect"]} rows={rows} />
+          <InfoTable columns={[t("State"), t("Public / Action Effect")]} rows={rows.map((row) => row.map((cell) => t(cell)))} />
         </Reveal>
       </Container>
     </SectionDivider>

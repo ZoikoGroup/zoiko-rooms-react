@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Container, Reveal, EvidenceBadge } from "@/components/ui";
 import { fadeUp, easeOut } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
 
@@ -31,16 +32,16 @@ const rooms = [
 ];
 
 export function ConnectedSupplySection() {
+  const { t } = useLanguage();
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col items-center gap-10">
           <div className="flex max-w-2xl flex-col items-center gap-4 text-center">
-            <Eyebrow>Connected Supply</Eyebrow>
-            <SectionTitle>Rooms near your teams, evidence attached</SectionTitle>
+            <Eyebrow>{t("Connected Supply")}</Eyebrow>
+            <SectionTitle>{t("Rooms near your teams, evidence attached")}</SectionTitle>
             <Paragraph className="mx-auto">
-              Every listing carries provider authority, current availability, and complete costs
-              — labeled by exactly how it was verified.
+              {t("Every listing carries provider authority, current availability, and complete costs — labeled by exactly how it was verified.")}
             </Paragraph>
           </div>
 
@@ -55,13 +56,13 @@ export function ConnectedSupplySection() {
               >
                 <div className="overflow-hidden">
                   <div className="transition-transform duration-500 ease-out group-hover:scale-105">
-                    <NaturalImage src={image} alt={description} />
+                    <NaturalImage src={image} alt={t(description)} />
                   </div>
                 </div>
                 <div className="flex flex-col gap-2 p-5">
-                  <p className="font-heading text-lg font-semibold text-brand-navy">{price}</p>
-                  <p className="text-sm text-neutral-500">{description}</p>
-                  <EvidenceBadge label={badge} tone={tone} variant="outline" className="mt-1 w-fit" />
+                  <p className="font-heading text-lg font-semibold text-brand-navy">{t(price)}</p>
+                  <p className="text-sm text-neutral-500">{t(description)}</p>
+                  <EvidenceBadge label={t(badge)} tone={tone} variant="outline" className="mt-1 w-fit" />
                 </div>
               </motion.div>
             ))}

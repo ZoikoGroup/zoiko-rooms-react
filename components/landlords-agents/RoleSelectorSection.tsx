@@ -5,10 +5,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Container, Reveal } from "@/components/ui";
 import { easeOut } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow } from "./shared";
 import { roleOptions } from "./data";
 
 export function RoleSelectorSection() {
+  const { t } = useLanguage();
   const [selectedValue, setSelectedValue] = useState(roleOptions[3].value);
   const selected = roleOptions.find((role) => role.value === selectedValue) ?? roleOptions[0];
 
@@ -16,7 +18,7 @@ export function RoleSelectorSection() {
     <section className="border-b border-[#E9E0D3] py-16 sm:py-24">
       <Container>
         <Reveal className="flex flex-col gap-6">
-          <Eyebrow>Which role applies?</Eyebrow>
+          <Eyebrow>{t("Which role applies?")}</Eyebrow>
 
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {roleOptions.map((role) => {
@@ -33,7 +35,7 @@ export function RoleSelectorSection() {
                       : "border-[#E9E0D3] bg-white text-brand-navy hover:border-brand-navy/40"
                   }`}
                 >
-                  {role.label}
+                  {t(role.label)}
                 </motion.button>
               );
             })}
@@ -48,13 +50,13 @@ export function RoleSelectorSection() {
               transition={{ duration: 0.2, ease: easeOut }}
               className="flex flex-col gap-3 rounded-2xl border-l-4 border-brand-red bg-[#F6ECD4] p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6"
             >
-              <p className="text-sm leading-relaxed text-brand-navy">{selected.message}</p>
+              <p className="text-sm leading-relaxed text-brand-navy">{t(selected.message)}</p>
               {selected.linkHref && (
                 <a
                   href={selected.linkHref}
                   className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-brand-red transition-colors hover:text-brand-red-dark"
                 >
-                  {selected.linkLabel}
+                  {selected.linkLabel && t(selected.linkLabel)}
                   <ArrowRight className="h-3.5 w-3.5" />
                 </a>
               )}

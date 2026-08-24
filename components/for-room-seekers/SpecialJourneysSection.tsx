@@ -1,6 +1,7 @@
 "use client";
 
 import { Container, Reveal, Card } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, SectionDivider } from "./shared";
 
 const journeys = [
@@ -31,20 +32,22 @@ const journeys = [
 ];
 
 export function SpecialJourneysSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Special Journeys</Eyebrow>
-            <SectionTitle>Adapted for your situation</SectionTitle>
+            <Eyebrow>{t("Special Journeys")}</Eyebrow>
+            <SectionTitle>{t("Adapted for your situation")}</SectionTitle>
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {journeys.map(({ title, description }) => (
               <Card key={title} className="p-6">
-                <h3 className="font-heading text-base font-medium text-brand-navy">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{description}</p>
+                <h3 className="font-heading text-base font-medium text-brand-navy">{t(title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{t(description)}</p>
               </Card>
             ))}
           </div>

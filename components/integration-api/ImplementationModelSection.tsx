@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface ImplementationStage {
   title: string;
@@ -40,6 +41,7 @@ const stages: ImplementationStage[] = [
 ];
 
 export default function ImplementationModelSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full bg-[#EEDFC5] text-[#14213D] py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto space-y-12">
@@ -48,15 +50,16 @@ export default function ImplementationModelSection() {
           <div className="flex items-center gap-2">
             <span className="w-4 h-[2px] bg-[#1A2E6E]" />
             <span className="text-xs font-bold tracking-widest text-[#1A2E6E] uppercase">
-              IMPLEMENTATION MODEL
+              {t("IMPLEMENTATION MODEL")}
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-medium max-w-3xl text-[#14213D] leading-tight">
-            From first conversation to a governed, operating connection.
+            {t("From first conversation to a governed, operating connection.")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
-            Every integration moves through the same nine stages &mdash; nothing
-            skips discovery, and nothing launches without a tested exit.
+            {t(
+              "Every integration moves through the same nine stages — nothing skips discovery, and nothing launches without a tested exit.",
+            )}
           </p>
         </div>
 
@@ -86,10 +89,10 @@ export default function ImplementationModelSection() {
                 {/* Stage Title & Description */}
                 <div className="space-y-1">
                   <h3 className="text-xs sm:text-sm font-bold text-[#14213D]">
-                    {stage.title}
+                    {t(stage.title)}
                   </h3>
                   <p className="text-[11px] text-[#555E68] leading-relaxed font-normal">
-                    {stage.description}
+                    {t(stage.description)}
                   </p>
                 </div>
               </div>

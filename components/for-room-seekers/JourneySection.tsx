@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Container, Reveal, Card } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle } from "./shared";
 
 const stages = ["Search", "Compare", "Communicate", "View", "Apply or reserve", "Agree", "Pay and move", "Support"];
@@ -31,14 +32,15 @@ const steps = [
 
 export function JourneySection() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { t } = useLanguage();
 
   return (
     <section className="border-b border-[#E9E0D3] py-16 sm:py-24">
       <Container>
         <Reveal className="flex flex-col gap-10">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Your Journey</Eyebrow>
-            <SectionTitle>Every stage, in order</SectionTitle>
+            <Eyebrow>{t("Your Journey")}</Eyebrow>
+            <SectionTitle>{t("Every stage, in order")}</SectionTitle>
           </div>
 
           <div className="flex flex-wrap gap-2">
@@ -55,7 +57,7 @@ export function JourneySection() {
                       : "border-transparent bg-[#F1E7DA] text-[#A85A34] hover:bg-[#EADCC7]"
                   }`}
                 >
-                  {index + 1}. {stage}
+                  {index + 1}. {t(stage)}
                 </button>
               );
             })}
@@ -65,8 +67,8 @@ export function JourneySection() {
             {steps.map(({ number, title, description }) => (
               <Card key={number} className="flex flex-col gap-2">
                 <span className="font-heading text-3xl font-semibold text-brand-red/40">{number}</span>
-                <h3 className="font-heading text-lg font-medium text-brand-navy">{title}</h3>
-                <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
+                <h3 className="font-heading text-lg font-medium text-brand-navy">{t(title)}</h3>
+                <p className="text-sm leading-relaxed text-neutral-600">{t(description)}</p>
               </Card>
             ))}
           </div>

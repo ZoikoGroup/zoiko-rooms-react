@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface DistributionModelCard {
   title: string;
@@ -62,21 +63,22 @@ const models: DistributionModelCard[] = [
 ];
 
 export default function CanonicalDistributionModelsSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full text-[#14213D] py-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header Block */}
         <div className="text-center space-y-3 mx-auto">
           <span className="text-[11px] font-bold tracking-widest text-[#C8202C] uppercase block">
-            CANONICAL DISTRIBUTION MODELS
+            {t("CANONICAL DISTRIBUTION MODELS")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Choose the model, never blur the boundary
+            {t("Choose the model, never blur the boundary")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-xl mx-auto">
-            Every model carries its own institution role, participant
-            experience, and a required limitation shown alongside it. Click any
-            model for the full detail.
+            {t(
+              "Every model carries its own institution role, participant experience, and a required limitation shown alongside it. Click any model for the full detail.",
+            )}
           </p>
         </div>
 
@@ -94,21 +96,21 @@ export default function CanonicalDistributionModelsSection() {
               {/* Content Block */}
               <div className="space-y-4">
                 <h3 className="text-base font-serif font-bold text-[#14213D]">
-                  {card.title}
+                  {t(card.title)}
                 </h3>
 
                 <div className="space-y-2 text-xs leading-relaxed">
                   <p className="text-[#555E68]">
                     <span className="font-bold text-[#14213D]">
-                      Institution role:
+                      {t("Institution role:")}
                     </span>{" "}
-                    {card.institutionRole}
+                    {t(card.institutionRole)}
                   </p>
                   <p className="text-[#555E68]">
                     <span className="font-bold text-[#14213D]">
-                      Participant sees:
+                      {t("Participant sees:")}
                     </span>{" "}
-                    {card.participantSees}
+                    {t(card.participantSees)}
                   </p>
                 </div>
               </div>
@@ -119,7 +121,7 @@ export default function CanonicalDistributionModelsSection() {
                   ▲
                 </span>
                 <p className="text-[11px] font-medium text-[#8A6A24] leading-tight">
-                  {card.warningText}
+                  {t(card.warningText)}
                 </p>
               </div>
             </motion.div>

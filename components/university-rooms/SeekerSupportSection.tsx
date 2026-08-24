@@ -1,5 +1,8 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
 import { Eyebrow, SectionTitle, InfoTable, SectionDivider } from "./shared";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const rows = [
   ["Search, account, save, compare, report", "Zoiko Rooms Help Center", "Platform function only"],
@@ -10,16 +13,21 @@ const rows = [
 ];
 
 export function SeekerSupportSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>University and Seeker Support</Eyebrow>
-            <SectionTitle>Who&apos;s responsible for what</SectionTitle>
+            <Eyebrow>{t("University and Seeker Support")}</Eyebrow>
+            <SectionTitle>{t("Who's responsible for what")}</SectionTitle>
           </div>
 
-          <InfoTable columns={["Issue", "Primary Owner", "Boundary"]} rows={rows} />
+          <InfoTable
+            columns={[t("Issue"), t("Primary Owner"), t("Boundary")]}
+            rows={rows.map(([issue, owner, boundary]) => [t(issue), t(owner), t(boundary)])}
+          />
         </Reveal>
       </Container>
     </SectionDivider>

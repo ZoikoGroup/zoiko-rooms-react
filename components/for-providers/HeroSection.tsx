@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const paths = [
   "Live-in provider",
@@ -17,6 +18,7 @@ const paths = [
 
 export function HeroSection() {
   const [selected, setSelected] = useState<string | null>(null);
+  const { t } = useLanguage();
 
   return (
     <section className="border-b border-[#E9E0D3] py-10 sm:py-14">
@@ -27,32 +29,34 @@ export function HeroSection() {
               variants={fadeUp}
               className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-red"
             >
-              For Providers
+              {t("For Providers")}
             </motion.span>
             <motion.h1
               variants={fadeUp}
               className="font-heading text-4xl font-bold text-[#1B2438] sm:text-[34px]"
             >
-              Prepare, publish, and manage a room through clear authority, accurate facts,
-              complete costs, fair decisions, and accountable follow-through.
+              {t(
+                "Prepare, publish, and manage a room through clear authority, accurate facts, complete costs, fair decisions, and accountable follow-through.",
+              )}
             </motion.h1>
             <motion.p variants={fadeUp} className="max-w-lg text-[15px] leading-relaxed text-[#7A7266]">
-              Choose your provider path, understand the evidence and responsibilities required,
-              start a private draft, and see what happens after publication.
+              {t(
+                "Choose your provider path, understand the evidence and responsibilities required, start a private draft, and see what happens after publication.",
+              )}
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-col gap-3 sm:flex-row">
               <Button href="/list-a-room/start-a-listing" size="lg" variant="secondary">
-                Start a Listing
+                {t("Start a Listing")}
               </Button>
               <Button href="/list-a-room/requirements-pricing" size="lg" variant="outline">
-                View Requirements & Pricing
+                {t("View Requirements & Pricing")}
               </Button>
             </motion.div>
 
             <motion.div variants={fadeUp} className="flex flex-col gap-3">
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-navy">
-                Choose Your Provider Path
+                {t("Choose Your Provider Path")}
               </span>
               <div className="flex flex-wrap gap-2">
                 {paths.map((path) => {
@@ -68,7 +72,7 @@ export function HeroSection() {
                           : "border-[#E9E0D3] bg-white text-brand-ink hover:border-brand-navy/40"
                       }`}
                     >
-                      {path}
+                      {t(path)}
                     </button>
                   );
                 })}
@@ -84,7 +88,7 @@ export function HeroSection() {
           >
             <NaturalImage
               src="/images/for-providers/hero-key-handover.png"
-              alt="A provider handing over a house-key model to a couple"
+              alt={t("A provider handing over a house-key model to a couple")}
             />
           </motion.div>
         </Reveal>

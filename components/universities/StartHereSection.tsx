@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, GraduationCap, Briefcase, BookOpen, ClipboardList, Globe } from "lucide-react";
 import { Container, Reveal } from "@/components/ui";
 import { fadeUp, easeOut } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle } from "./shared";
 
 const needs = [
@@ -40,13 +41,14 @@ const needs = [
 ];
 
 export function StartHereSection() {
+  const { t } = useLanguage();
   return (
     <section className="border-b border-[#E9E0D3] py-16 sm:py-24">
       <Container>
         <Reveal className="flex flex-col items-center gap-10">
           <div className="flex max-w-2xl flex-col items-center gap-4 text-center">
-            <Eyebrow>Start Here</Eyebrow>
-            <SectionTitle>What does your university need?</SectionTitle>
+            <Eyebrow>{t("Start Here")}</Eyebrow>
+            <SectionTitle>{t("What does your university need?")}</SectionTitle>
           </div>
 
           <div className="grid w-full grid-cols-1 gap-4 text-left sm:grid-cols-2 lg:grid-cols-5">
@@ -61,13 +63,13 @@ export function StartHereSection() {
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#F1E7DA] text-[#A85A34]">
                   <Icon className="h-4 w-4" />
                 </span>
-                <h3 className="font-heading text-base font-medium text-brand-navy">{title}</h3>
-                <p className="flex-1 text-sm leading-relaxed text-neutral-600">{description}</p>
+                <h3 className="font-heading text-base font-medium text-brand-navy">{t(title)}</h3>
+                <p className="flex-1 text-sm leading-relaxed text-neutral-600">{t(description)}</p>
                 <a
                   href={href}
                   className="inline-flex items-center gap-1 text-sm font-semibold text-brand-red underline-offset-2 transition-colors hover:text-brand-red-dark hover:underline"
                 >
-                  Explore
+                  {t("Explore")}
                   <ArrowRight className="h-3.5 w-3.5" />
                 </a>
               </motion.div>

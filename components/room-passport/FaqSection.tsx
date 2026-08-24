@@ -5,6 +5,7 @@ import { Plus } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Container, Reveal } from "@/components/ui";
 import { easeOut } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow } from "./shared";
 
 const faqs = [
@@ -36,6 +37,7 @@ const faqs = [
 ];
 
 export function FaqSection() {
+  const { t } = useLanguage();
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
@@ -43,9 +45,9 @@ export function FaqSection() {
       <Container>
         <Reveal className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,280px)_1fr] lg:gap-16">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Common Questions</Eyebrow>
+            <Eyebrow>{t("Common Questions")}</Eyebrow>
             <h2 className="font-heading text-3xl font-medium text-brand-navy sm:text-4xl">
-              What Room Passport actually promises
+              {t("What Room Passport actually promises")}
             </h2>
           </div>
 
@@ -60,7 +62,7 @@ export function FaqSection() {
                     className="flex w-full items-center justify-between gap-4 py-5 text-left"
                   >
                     <span className="font-heading text-base font-medium text-brand-navy sm:text-lg">
-                      {faq.question}
+                      {t(faq.question)}
                     </span>
                     <motion.span
                       animate={{ rotate: isOpen ? 45 : 0 }}
@@ -79,7 +81,7 @@ export function FaqSection() {
                         transition={{ duration: 0.25, ease: easeOut }}
                         className="overflow-hidden"
                       >
-                        <p className="pb-5 text-sm text-neutral-600 sm:text-base">{faq.answer}</p>
+                        <p className="pb-5 text-sm text-neutral-600 sm:text-base">{t(faq.answer)}</p>
                       </motion.div>
                     )}
                   </AnimatePresence>

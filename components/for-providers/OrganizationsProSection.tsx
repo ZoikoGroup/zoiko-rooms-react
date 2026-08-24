@@ -1,4 +1,7 @@
+"use client";
+
 import { Container, Reveal, Button } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, InfoTable, SectionDivider } from "./shared";
 
 const rows = [
@@ -11,19 +14,21 @@ const rows = [
 ];
 
 export function OrganizationsProSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Organizations and Zoiko Rooms Pro</Eyebrow>
-            <SectionTitle>Route governed professional workflows correctly</SectionTitle>
+            <Eyebrow>{t("Organizations and Zoiko Rooms Pro")}</Eyebrow>
+            <SectionTitle>{t("Route governed professional workflows correctly")}</SectionTitle>
           </div>
 
-          <InfoTable columns={["Situation", "Route"]} rows={rows} />
+          <InfoTable columns={[t("Situation"), t("Route")]} rows={rows.map((row) => row.map((cell) => t(cell)))} />
 
           <Button href="/pro" variant="outline" size="md" className="w-fit">
-            Explore Zoiko Rooms Pro
+            {t("Explore Zoiko Rooms Pro")}
           </Button>
         </Reveal>
       </Container>

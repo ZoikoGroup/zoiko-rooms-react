@@ -4,8 +4,11 @@ import { motion } from "framer-motion";
 import { Container, Reveal } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export function ClaimEvidenceSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="border-b border-[#E9E0D3] py-16 sm:py-24">
       <Container>
@@ -18,7 +21,7 @@ export function ClaimEvidenceSection() {
           >
             <NaturalImage
               src="/images/room-passport/concierge-tablet.png"
-              alt="A hotel concierge showing evidence on a tablet to a guest"
+              alt={t("A hotel concierge showing evidence on a tablet to a guest")}
             />
           </motion.div>
 
@@ -27,25 +30,25 @@ export function ClaimEvidenceSection() {
               variants={fadeUp}
               className="font-heading text-2xl font-medium text-brand-navy sm:text-3xl"
             >
-              A listing is a claim. A Room Passport is the evidence behind it.
+              {t("A listing is a claim. A Room Passport is the evidence behind it.")}
             </motion.h2>
             <motion.p variants={fadeUp} className="text-[15px] leading-relaxed text-[#7A7266]">
-              Photos and a price are not enough to know whether a room exists, whether the person
-              offering it is entitled to, or whether what you&apos;re seeing is current. Room
-              Passport separates the two: what the provider says, and what&apos;s actually been
-              checked.
+              {t(
+                "Photos and a price are not enough to know whether a room exists, whether the person offering it is entitled to, or whether what you're seeing is current. Room Passport separates the two: what the provider says, and what's actually been checked."
+              )}
             </motion.p>
 
             <motion.blockquote
               variants={fadeUp}
               className="border-l-4 border-brand-red pl-5 font-heading text-lg leading-relaxed text-brand-navy sm:text-xl"
             >
-              &quot;Verified&quot; is not one word doing the work of ten different checks.
-              It&apos;s ten separate, dated, sourced answers.
+              {t(
+                "\"Verified\" is not one word doing the work of ten different checks. It's ten separate, dated, sourced answers."
+              )}
             </motion.blockquote>
 
             <motion.p variants={fadeUp} className="text-[15px] leading-relaxed text-[#7A7266]">
-              That&apos;s the whole idea. Not a badge. A record.
+              {t("That's the whole idea. Not a badge. A record.")}
             </motion.p>
           </div>
         </Reveal>

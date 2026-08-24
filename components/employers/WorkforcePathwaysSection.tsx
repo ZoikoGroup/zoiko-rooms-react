@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Container, Reveal, EvidenceBadge } from "@/components/ui";
 import { fadeUp, easeOut } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
 
@@ -52,16 +53,16 @@ const pathways = [
 ];
 
 export function WorkforcePathwaysSection() {
+  const { t } = useLanguage();
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col items-center gap-10">
           <div className="flex max-w-2xl flex-col items-center gap-4 text-center">
-            <Eyebrow>Workforce Pathways</Eyebrow>
-            <SectionTitle>Every workforce move needs a different plan</SectionTitle>
+            <Eyebrow>{t("Workforce Pathways")}</Eyebrow>
+            <SectionTitle>{t("Every workforce move needs a different plan")}</SectionTitle>
             <Paragraph className="mx-auto">
-              From a first day at a new job to a cross-border secondment, each pathway carries its
-              own dates, budget, and boundaries.
+              {t("From a first day at a new job to a cross-border secondment, each pathway carries its own dates, budget, and boundaries.")}
             </Paragraph>
           </div>
 
@@ -76,13 +77,13 @@ export function WorkforcePathwaysSection() {
               >
                 <div className="overflow-hidden">
                   <div className="transition-transform duration-500 ease-out group-hover:scale-105">
-                    <NaturalImage src={image} alt={title} />
+                    <NaturalImage src={image} alt={t(title)} />
                   </div>
                 </div>
                 <div className="flex flex-col gap-2 p-5">
-                  <h3 className="font-heading text-lg font-medium text-brand-navy">{title}</h3>
-                  <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
-                  <EvidenceBadge label={badge} tone={tone} variant="outline" className="mt-1 w-fit" />
+                  <h3 className="font-heading text-lg font-medium text-brand-navy">{t(title)}</h3>
+                  <p className="text-sm leading-relaxed text-neutral-600">{t(description)}</p>
+                  <EvidenceBadge label={t(badge)} tone={tone} variant="outline" className="mt-1 w-fit" />
                 </div>
               </motion.div>
             ))}

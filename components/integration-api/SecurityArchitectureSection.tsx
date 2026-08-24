@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface SecurityFeature {
   title: string;
@@ -43,13 +44,14 @@ const securityFeatures: SecurityFeature[] = [
 ];
 
 export default function SecurityArchitectureSection() {
+  const { t } = useLanguage();
   return (
     <section className="relative w-full bg-[#0F1722] text-white py-24 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased overflow-hidden">
       {/* Background Image Layer */}
       <div className="absolute inset-0 z-0 opacity-100 pointer-events-none select-none">
         <Image
           src="/images/integration/light.png"
-          alt="Security background"
+          alt={t("Security background")}
           fill
           className="object-cover object-center"
           priority
@@ -62,16 +64,16 @@ export default function SecurityArchitectureSection() {
           <div className="flex items-center gap-2">
             <span className="w-4 h-[2px] bg-[#E9A98C]" />
             <span className="text-xs font-mono font-bold tracking-widest text-[#E9A98C] uppercase">
-              SECURITY ARCHITECTURE
+              {t("SECURITY ARCHITECTURE")}
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-serif font-bold text-white leading-tight">
-            Every request and every event gets checked &mdash; server-side,
-            every time.
+            {t("Every request and every event gets checked — server-side, every time.")}
           </h2>
           <p className="text-xs sm:text-sm text-[#B9C6CB] font-normal leading-relaxed max-w-2xl">
-            Tenant, resource, field, action, and purpose are all verified on
-            every call. Nothing about that boundary is optional or client-side.
+            {t(
+              "Tenant, resource, field, action, and purpose are all verified on every call. Nothing about that boundary is optional or client-side.",
+            )}
           </p>
         </div>
 
@@ -98,10 +100,10 @@ export default function SecurityArchitectureSection() {
               }`}
             >
               <h3 className="text-sm font-bold text-white font-sans">
-                {feature.title}
+                {t(feature.title)}
               </h3>
               <p className="text-[13px] text-[#AEBBC0] leading-relaxed font-normal">
-                {feature.description}
+                {t(feature.description)}
               </p>
             </div>
           ))}

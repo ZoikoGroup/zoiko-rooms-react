@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 // Import all distribution & capability modal components
 import AllocationModal from "../popups/institutional-distribution/AllocationModal";
@@ -22,6 +23,7 @@ const filterTabs = [
 ];
 
 export default function GovernedRoomSupplySection() {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState("Audience-specific catalogs");
 
   // Modal active states covering all distribution and capability options
@@ -80,7 +82,7 @@ export default function GovernedRoomSupplySection() {
         {/* Background Image Layer */}
         <img
           src="/images/institutional-distribution/hero.png"
-          alt="Hero Background"
+          alt={t("Hero Background")}
           className="absolute inset-0 w-full h-full object-cover object-center z-0 opacity-60"
         />
 
@@ -111,18 +113,17 @@ export default function GovernedRoomSupplySection() {
 
               {/* Headline */}
               <h1 className="text-3xl lg:text-[44px] max-w-140 font-serif font-bold text-white leading-[1.18] tracking-tight">
-                Distribute governed room supply to the right audiences, with{" "}
+                {t("Distribute governed room supply to the right audiences, with")}{" "}
                 <span className="text-[#9EB3EE]">
-                  clear eligibility, allocation, funding, and control.
+                  {t("clear eligibility, allocation, funding, and control.")}
                 </span>
               </h1>
 
               {/* Subtext */}
               <p className="text-[15px] text-[#DCE0EA] font-normal leading-relaxed max-w-135">
-                Create program-specific catalogs and journeys for universities,
-                employers, healthcare organizations, relocation teams, and
-                public-sector programs &mdash; without duplicating canonical
-                room records or weakening participant agency.
+                {t(
+                  "Create program-specific catalogs and journeys for universities, employers, healthcare organizations, relocation teams, and public-sector programs — without duplicating canonical room records or weakening participant agency.",
+                )}
               </p>
 
               {/* Action Buttons */}
@@ -132,7 +133,7 @@ export default function GovernedRoomSupplySection() {
                   onClick={() => setActiveModal("allocation")}
                   className="bg-[#1A2E6E] hover:bg-[#153061] text-white text-xs sm:text-sm font-semibold py-3 px-6 rounded-full transition-all duration-200 cursor-pointer shadow-md active:scale-95"
                 >
-                  Explore Distribution Models
+                  {t("Explore Distribution Models")}
                 </button>
 
                 <button
@@ -140,7 +141,7 @@ export default function GovernedRoomSupplySection() {
                   onClick={() => setActiveModal("sampleFunding")}
                   className="hover:bg-[#1E293B] text-white text-xs sm:text-sm font-semibold py-3 px-6 rounded-full border border-white/15 transition-all duration-200 cursor-pointer backdrop-blur-md active:scale-95"
                 >
-                  Talk to Zoiko Rooms
+                  {t("Talk to Zoiko Rooms")}
                 </button>
               </div>
             </div>
@@ -154,7 +155,7 @@ export default function GovernedRoomSupplySection() {
           {/* Floating White Filter Card */}
           <div className="bg-white text-[#1E2022] rounded-2xl p-6 sm:p-8 shadow-xl border border-black/5 space-y-4">
             <span className="text-[10px] font-bold tracking-widest text-[#7A838E] uppercase block">
-              CHOOSE A DISTRIBUTION NEED
+              {t("CHOOSE A DISTRIBUTION NEED")}
             </span>
 
             <div className="flex flex-wrap gap-2.5 max-w-5xl">
@@ -171,7 +172,7 @@ export default function GovernedRoomSupplySection() {
                         : "text-[#555E68] hover:bg-[#EAE6DF] hover:text-[#14213D]"
                     }`}
                   >
-                    {tab}
+                    {t(tab)}
                   </button>
                 );
               })}
@@ -189,8 +190,9 @@ export default function GovernedRoomSupplySection() {
             {/* Left Headline */}
             <div className="md:col-span-5">
               <h2 className="text-2xl md:text-[30px] font-serif font-bold text-white leading-snug">
-                Institutional access never automatically means entitlement,
-                approval, allocation, or guaranteed supply.
+                {t(
+                  "Institutional access never automatically means entitlement, approval, allocation, or guaranteed supply.",
+                )}
               </h2>
             </div>
 
@@ -201,12 +203,13 @@ export default function GovernedRoomSupplySection() {
                 className="flex-1 space-y-1.5 cursor-pointer group"
               >
                 <span className="text-[10px] font-bold tracking-wider text-[#8FA3D9] group-hover:text-white transition-colors uppercase block">
-                  EVERY VIEW STAYS SCOPED &rarr;
+                  {t("EVERY VIEW STAYS SCOPED")} &rarr;
                 </span>
 
                 <p className="text-xs text-[#C6CCDE] leading-relaxed max-w-[260px]">
-                  Relationship, audience, criteria, and decision owner are shown
-                  at every step.
+                  {t(
+                    "Relationship, audience, criteria, and decision owner are shown at every step.",
+                  )}
                 </p>
               </div>
 
@@ -215,12 +218,13 @@ export default function GovernedRoomSupplySection() {
                 className="flex-1 space-y-1.5 cursor-pointer group"
               >
                 <span className="text-[10px] font-bold tracking-wider text-[#8FA3D9] group-hover:text-white transition-colors uppercase block">
-                  NO HIDDEN SURVEILLANCE &rarr;
+                  {t("NO HIDDEN SURVEILLANCE")} &rarr;
                 </span>
 
                 <p className="text-xs text-[#C6CCDE] leading-relaxed max-w-[260px]">
-                  Distribution never becomes participant profiling or behavior
-                  tracking.
+                  {t(
+                    "Distribution never becomes participant profiling or behavior tracking.",
+                  )}
                 </p>
               </div>
             </div>

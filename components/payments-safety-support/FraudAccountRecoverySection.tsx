@@ -1,4 +1,7 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, InfoTable, SectionDivider } from "./shared";
 
 const rows = [
@@ -10,16 +13,21 @@ const rows = [
 ];
 
 export function FraudAccountRecoverySection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Fraud and Account Recovery</Eyebrow>
-            <SectionTitle>Recognize it, stop it, recover from it</SectionTitle>
+            <Eyebrow>{t("Fraud and Account Recovery")}</Eyebrow>
+            <SectionTitle>{t("Recognize it, stop it, recover from it")}</SectionTitle>
           </div>
 
-          <InfoTable columns={["Risk", "Required Prevention / Response"]} rows={rows} />
+          <InfoTable
+            columns={[t("Risk"), t("Required Prevention / Response")]}
+            rows={rows.map(([risk, response]) => [t(risk), t(response)])}
+          />
         </Reveal>
       </Container>
     </SectionDivider>

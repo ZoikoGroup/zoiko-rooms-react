@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface MetricCard {
   label: string;
@@ -38,6 +39,7 @@ const metrics: MetricCard[] = [
 ];
 
 export default function ReliabilityAndObservabilitySection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full bg-[#FBF7EF] text-[#14213D] py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto space-y-12">
@@ -46,16 +48,16 @@ export default function ReliabilityAndObservabilitySection() {
           <div className="flex items-center gap-2">
             <span className="w-4 h-[2px] bg-[#1A2E6E]" />
             <span className="text-xs font-bold tracking-widest text-[#1A2E6E] uppercase">
-              RELIABILITY &amp; OBSERVABILITY
+              {t("RELIABILITY & OBSERVABILITY")}
             </span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            An honest picture of a connection&apos;s health &mdash; always current.
-          </h2>
+        <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
+  {t("An honest picture of a connection's health — always current.")}
+</h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
-            No integration hides its own bad day. Freshness, delivery, and
-            reconciliation state are visible before they become a support
-            ticket.
+            {t(
+              "No integration hides its own bad day. Freshness, delivery, and reconciliation state are visible before they become a support ticket.",
+            )}
           </p>
         </div>
 
@@ -82,17 +84,17 @@ export default function ReliabilityAndObservabilitySection() {
                 className="p-6 sm:p-7 space-y-3 flex flex-col justify-between"
               >
                 <span className="text-[10px] font-mono font-bold tracking-wider text-[#9CA3AF] uppercase">
-                  {item.label}
+                  {t(item.label)}
                 </span>
 
                 <div className="space-y-1">
                   <div
                     className={`text-2xl sm:text-3xl font-serif font-bold ${item.valueColor}`}
                   >
-                    {item.value}
+                    {t(item.value)}
                   </div>
                   <p className="text-[11px] font-mono text-[#9CA3AF]">
-                    {item.subtext}
+                    {t(item.subtext)}
                   </p>
                 </div>
               </div>

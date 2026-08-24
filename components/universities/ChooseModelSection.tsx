@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Container, Reveal } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, SectionDivider } from "./shared";
 
 const models = [
@@ -51,14 +52,15 @@ const models = [
 export function ChooseModelSection() {
   const [selectedKey, setSelectedKey] = useState(models[0].key);
   const selected = models.find((model) => model.key === selectedKey) ?? models[0];
+  const { t } = useLanguage();
 
   return (
     <SectionDivider className="bg-white" id="choose-your-model">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col items-center gap-4 text-center">
-            <Eyebrow>Choose Your Model</Eyebrow>
-            <SectionTitle>Choose the right university relationship</SectionTitle>
+            <Eyebrow>{t("Choose Your Model")}</Eyebrow>
+            <SectionTitle>{t("Choose the right university relationship")}</SectionTitle>
           </div>
 
           <div className="flex flex-wrap gap-2">
@@ -75,7 +77,7 @@ export function ChooseModelSection() {
                       : "border-[#E9E0D3] text-brand-navy hover:bg-brand-navy/5"
                   }`}
                 >
-                  {model.label}
+                  {t(model.label)}
                 </button>
               );
             })}
@@ -90,8 +92,8 @@ export function ChooseModelSection() {
               transition={{ duration: 0.2 }}
               className="rounded-2xl border border-[#E9E0D3] bg-white p-6"
             >
-              <h3 className="font-heading text-lg font-medium text-brand-navy">{selected.label}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-neutral-600">{selected.description}</p>
+              <h3 className="font-heading text-lg font-medium text-brand-navy">{t(selected.label)}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-neutral-600">{t(selected.description)}</p>
             </motion.div>
           </AnimatePresence>
         </Reveal>

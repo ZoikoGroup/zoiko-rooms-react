@@ -2,19 +2,21 @@
 
 import { useState } from "react";
 import { Container, Reveal } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
 import { lifecycleStages } from "./data";
 
 export function ListingLifecycleSection() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { t } = useLanguage();
 
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Listing Lifecycle</Eyebrow>
-            <SectionTitle>From private draft to a maintained listing</SectionTitle>
+            <Eyebrow>{t("Listing Lifecycle")}</Eyebrow>
+            <SectionTitle>{t("From private draft to a maintained listing")}</SectionTitle>
           </div>
 
           <div className="flex flex-wrap gap-2">
@@ -31,15 +33,16 @@ export function ListingLifecycleSection() {
                       : "border-transparent bg-[#F1E7DA] text-[#A85A34] hover:bg-[#EADCC7]"
                   }`}
                 >
-                  {stage}
+                  {t(stage)}
                 </button>
               );
             })}
           </div>
 
           <Paragraph>
-            If you move out, the listing pauses and must be reassessed under the correct provider
-            path before it can remain public.
+            {t(
+              "If you move out, the listing pauses and must be reassessed under the correct provider path before it can remain public.",
+            )}
           </Paragraph>
         </Reveal>
       </Container>

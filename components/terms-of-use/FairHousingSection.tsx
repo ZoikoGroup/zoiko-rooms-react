@@ -2,8 +2,10 @@
 
 import React from "react";
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function FairHousingSection() {
+  const { t } = useLanguage();
   return (
     <section
       id="fair-housing"
@@ -14,24 +16,23 @@ export default function FairHousingSection() {
         <span className="font-mono text-lg sm:text-xl text-[#C8202C] font-normal">
           12
         </span>
-        <span>Fair housing &amp; anti-discrimination</span>
+        <span>{t("Fair housing & anti-discrimination")}</span>
       </h2>
 
       {/* "In short" Highlight Box with custom styling */}
       <div className="bg-[#F2DED2] rounded-2xl px-4 py-3 mb-8">
         <p className="text-sm font-bold text-[#93321F] leading-relaxed">
-          In short: our Fair Housing policy is incorporated here in full, and
-          applies to every listing, search, and decision.
+          {t(
+            "In short: our Fair Housing policy is incorporated here in full, and applies to every listing, search, and decision.",
+          )}
         </p>
       </div>
 
       {/* Paragraph Content */}
       <p className="text-sm sm:text-base text-[#5C5B57] font-normal leading-relaxed mb-6">
-        Our Fair Housing &amp; Anti-Discrimination policy is incorporated into
-        these Terms by reference and applies to listings, search, messaging,
-        applications, screening, pricing and housing decisions. It prohibits
-        discrimination based on protected characteristics under applicable law
-        and platform policy, which may be broader than local statutory minimums.
+        {t(
+          "Our Fair Housing & Anti-Discrimination policy is incorporated into these Terms by reference and applies to listings, search, messaging, applications, screening, pricing and housing decisions. It prohibits discrimination based on protected characteristics under applicable law and platform policy, which may be broader than local statutory minimums.",
+        )}
       </p>
 
       {/* Action Link */}
@@ -40,7 +41,7 @@ export default function FairHousingSection() {
           href="#"
           className="inline-flex items-center gap-1.5 text-sm font-bold text-[#93321F] hover:underline"
         >
-          <span>Read the full Fair Housing policy</span>
+          <span>{t("Read the full Fair Housing policy")}</span>
           <ArrowRight className="w-4 h-4" />
         </a>
       </div>

@@ -3,8 +3,11 @@
 import { motion } from "framer-motion";
 import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export function FinalCtaSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="pb-16 sm:pb-24">
       <Container>
@@ -13,11 +16,12 @@ export function FinalCtaSection() {
             variants={fadeUp}
             className="font-heading text-3xl font-medium text-brand-navy sm:text-4xl"
           >
-            Use the right status before your next action
+            {t("Use the right status before your next action")}
           </motion.h2>
           <motion.p variants={fadeUp} className="max-w-md text-base text-neutral-600">
-            Continue to the room journey, provider journey, Room Passport, or Payments, Safety &
-            Support with the current scoped status in view.
+            {t(
+              "Continue to the room journey, provider journey, Room Passport, or Payments, Safety & Support with the current scoped status in view."
+            )}
           </motion.p>
           <motion.div variants={fadeUp} className="flex flex-col gap-3 sm:flex-row">
             <motion.a
@@ -27,16 +31,16 @@ export function FinalCtaSection() {
               transition={{ duration: 0.15 }}
               className="inline-flex items-center justify-center rounded-full bg-[#A85A34] px-7 py-3.5 text-base font-medium text-white transition-colors hover:bg-[#8f4a2b]"
             >
-              Find a Room
+              {t("Find a Room")}
             </motion.a>
             <Button href="/list-a-room" size="lg" variant="outline">
-              List a Room
+              {t("List a Room")}
             </Button>
             <Button href="/how-it-works/room-passport" size="lg" variant="outline">
-              Explore Room Passport
+              {t("Explore Room Passport")}
             </Button>
             <Button href="/resources" size="lg" variant="outline">
-              Get Support
+              {t("Get Support")}
             </Button>
           </motion.div>
         </Reveal>

@@ -1,5 +1,8 @@
+"use client";
+
 import { Briefcase, KeyRound, Users, ShieldCheck } from "lucide-react";
 import { Container, Reveal, Card } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
 
 const owners = [
@@ -26,16 +29,16 @@ const owners = [
 ];
 
 export function ResponsibilityMapSection() {
+  const { t } = useLanguage();
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col items-center gap-10">
           <div className="flex max-w-2xl flex-col items-center gap-4 text-center">
-            <Eyebrow>Responsibility Map</Eyebrow>
-            <SectionTitle>Who owns what, at every step</SectionTitle>
+            <Eyebrow>{t("Responsibility Map")}</Eyebrow>
+            <SectionTitle>{t("Who owns what, at every step")}</SectionTitle>
             <Paragraph className="mx-auto">
-              Employer, provider, worker, and Zoiko Rooms each carry distinct, named
-              responsibilities — nothing silently shifts between them.
+              {t("Employer, provider, worker, and Zoiko Rooms each carry distinct, named responsibilities — nothing silently shifts between them.")}
             </Paragraph>
           </div>
 
@@ -45,8 +48,8 @@ export function ResponsibilityMapSection() {
                 <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#F1E7DA] text-[#A85A34]">
                   <Icon className="h-5 w-5" />
                 </span>
-                <h3 className="font-heading text-base font-medium text-brand-navy">{title}</h3>
-                <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
+                <h3 className="font-heading text-base font-medium text-brand-navy">{t(title)}</h3>
+                <p className="text-sm leading-relaxed text-neutral-600">{t(description)}</p>
               </Card>
             ))}
           </div>

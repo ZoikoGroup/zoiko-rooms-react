@@ -5,6 +5,7 @@ import { Plus } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Container, Reveal } from "@/components/ui";
 import { easeOut } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle } from "./shared";
 
 const faqs = [
@@ -51,6 +52,7 @@ const faqs = [
 ];
 
 export function FaqSection() {
+  const { t } = useLanguage();
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
@@ -58,8 +60,8 @@ export function FaqSection() {
       <Container>
         <Reveal className="mx-auto flex max-w-3xl flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Frequently Asked Questions</Eyebrow>
-            <SectionTitle>Payments, Safety &amp; Support FAQ</SectionTitle>
+            <Eyebrow>{t("Frequently Asked Questions")}</Eyebrow>
+            <SectionTitle>{t("Payments, Safety & Support FAQ")}</SectionTitle>
           </div>
 
           <div className="flex flex-col divide-y divide-black/10">
@@ -73,7 +75,7 @@ export function FaqSection() {
                     className="flex w-full items-center justify-between gap-4 py-5 text-left"
                   >
                     <span className="font-heading text-base font-medium text-brand-navy sm:text-lg">
-                      {faq.question}
+                      {t(faq.question)}
                     </span>
                     <motion.span
                       animate={{ rotate: isOpen ? 45 : 0 }}
@@ -92,7 +94,7 @@ export function FaqSection() {
                         transition={{ duration: 0.25, ease: easeOut }}
                         className="overflow-hidden"
                       >
-                        <p className="pb-5 text-sm text-neutral-600 sm:text-base">{faq.answer}</p>
+                        <p className="pb-5 text-sm text-neutral-600 sm:text-base">{t(faq.answer)}</p>
                       </motion.div>
                     )}
                   </AnimatePresence>

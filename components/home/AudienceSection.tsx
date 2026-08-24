@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp, easeOut } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const audiences = [
   {
@@ -27,6 +28,7 @@ const audiences = [
 ];
 
 export function AudienceSection() {
+  const { t } = useLanguage();
   return (
     <section className="py-5 sm:py-5">
       <Container>
@@ -42,10 +44,10 @@ export function AudienceSection() {
               <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-neutral-100 text-brand-navy">
                 <ArrowUpRight className="h-4 w-4" />
               </span>
-              <h3 className="font-heading text-lg font-medium text-brand-navy">{title}</h3>
-              <p className="flex-1 text-sm text-neutral-600">{description}</p>
+              <h3 className="font-heading text-lg font-medium text-brand-navy">{t(title)}</h3>
+              <p className="flex-1 text-sm text-neutral-600">{t(description)}</p>
               <Button href={href} variant="outline" size="sm" className="w-fit">
-                {cta}
+                {t(cta)}
               </Button>
             </motion.div>
           ))}

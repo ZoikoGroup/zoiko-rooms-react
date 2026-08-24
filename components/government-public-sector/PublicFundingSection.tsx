@@ -5,6 +5,7 @@ import { Container, Reveal, Button, EvidenceBadge } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const breakdown = [
   {
@@ -40,16 +41,19 @@ const breakdown = [
 ];
 
 export function PublicFundingSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col items-center gap-10">
           <div className="flex max-w-2xl flex-col items-center gap-4 text-center">
-            <Eyebrow>Public Funding &amp; Billing</Eyebrow>
-            <SectionTitle>Complete costs before anyone commits</SectionTitle>
+            <Eyebrow>{t("Public Funding & Billing")}</Eyebrow>
+            <SectionTitle>{t("Complete costs before anyone commits")}</SectionTitle>
             <Paragraph className="mx-auto">
-              Public contribution and participant responsibility, always shown side by side —
-              nothing treated as covered until authorized.
+              {t(
+                "Public contribution and participant responsibility, always shown side by side — nothing treated as covered until authorized."
+              )}
             </Paragraph>
           </div>
 
@@ -62,7 +66,7 @@ export function PublicFundingSection() {
             >
               <NaturalImage
                 src="/images/government-public-sector/funding-public-trust-office.png"
-                alt="A public trust office building facade"
+                alt={t("A public trust office building facade")}
               />
             </motion.div>
 
@@ -74,15 +78,15 @@ export function PublicFundingSection() {
                   className="flex items-center justify-between gap-4 rounded-xl border border-[#E9E0D3] bg-white px-5 py-4 shadow-sm"
                 >
                   <span>
-                    <span className="block text-sm font-semibold text-brand-navy">{title}</span>
-                    <span className="block text-sm text-neutral-500">{subtitle}</span>
+                    <span className="block text-sm font-semibold text-brand-navy">{t(title)}</span>
+                    <span className="block text-sm text-neutral-500">{t(subtitle)}</span>
                   </span>
-                  <EvidenceBadge label={value} tone={tone} variant="outline" className="shrink-0" />
+                  <EvidenceBadge label={t(value)} tone={tone} variant="outline" className="shrink-0" />
                 </motion.div>
               ))}
 
               <Button href="/resources" variant="outline" size="md" className="mt-2 w-fit">
-                See a Sample Funding Breakdown
+                {t("See a Sample Funding Breakdown")}
               </Button>
             </div>
           </div>

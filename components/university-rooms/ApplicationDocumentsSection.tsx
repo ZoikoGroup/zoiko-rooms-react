@@ -1,5 +1,8 @@
+"use client";
+
 import { Container, Reveal, Card } from "@/components/ui";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const criteria = [
   {
@@ -29,27 +32,30 @@ const criteria = [
 ];
 
 export function ApplicationDocumentsSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Application and Document Readiness</Eyebrow>
-            <SectionTitle>Criteria and documents, explained before you submit</SectionTitle>
+            <Eyebrow>{t("Application and Document Readiness")}</Eyebrow>
+            <SectionTitle>{t("Criteria and documents, explained before you submit")}</SectionTitle>
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {criteria.map(({ title, description }) => (
               <Card key={title} className="p-6">
-                <h3 className="font-heading text-base font-medium text-brand-navy">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{description}</p>
+                <h3 className="font-heading text-base font-medium text-brand-navy">{t(title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{t(description)}</p>
               </Card>
             ))}
           </div>
 
           <Paragraph>
-            No sensitive document goes through public forms, email links without approved
-            security, URL parameters, or analytics.
+            {t(
+              "No sensitive document goes through public forms, email links without approved security, URL parameters, or analytics."
+            )}
           </Paragraph>
         </Reveal>
       </Container>

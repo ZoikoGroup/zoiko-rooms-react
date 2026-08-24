@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Container, Reveal, SectionHeading, Button, ImageFade } from "@/components/ui";
 import { fadeUp, easeOut } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const scenarios = [
   {
@@ -34,12 +35,13 @@ const cities = [
 ];
 
 export function RelocationSection() {
+  const { t } = useLanguage();
   return (
     <section className="bg-brand-cream py-16 sm:py-24">
       <Container>
         <Reveal className="flex flex-col gap-16 rounded-4xl bg-[#F1E7DA] p-6 sm:p-10 lg:p-12">
           <div className="flex flex-col gap-12">
-            <SectionHeading eyebrow="Find what suits you" title="Every relocation is different" />
+            <SectionHeading eyebrow={t("Find what suits you")} title={t("Every relocation is different")} />
             <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
               {scenarios.map(({ image, eyebrow, title, description }) => (
                 <motion.div
@@ -52,7 +54,7 @@ export function RelocationSection() {
                   <div className="relative aspect-5/3 w-full overflow-hidden">
                     <ImageFade
                       src={image}
-                      alt={title}
+                      alt={t(title)}
                       fill
                       sizes="(min-width: 640px) 33vw, 100vw"
                       className="object-cover"
@@ -60,12 +62,12 @@ export function RelocationSection() {
                   </div>
                   <div className="flex flex-1 flex-col gap-2 p-6">
                     <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-red">
-                      {eyebrow}
+                      {t(eyebrow)}
                     </span>
-                    <h3 className="font-heading text-lg font-medium text-brand-navy">{title}</h3>
-                    <p className="flex-1 text-sm text-neutral-600">{description}</p>
+                    <h3 className="font-heading text-lg font-medium text-brand-navy">{t(title)}</h3>
+                    <p className="flex-1 text-sm text-neutral-600">{t(description)}</p>
                     <Button href="/how-it-works" variant="outline" size="sm" className="mt-2 w-fit">
-                      Learn more
+                      {t("Learn more")}
                       <ArrowRight className="h-3.5 w-3.5" />
                     </Button>
                   </div>
@@ -77,16 +79,16 @@ export function RelocationSection() {
           <motion.div variants={fadeUp} className="flex flex-col gap-6">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <span className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-red">
-                Where we operate
+                {t("Where we operate")}
               </span>
               <div className="flex items-center gap-4 text-xs text-neutral-500">
                 <span className="inline-flex items-center gap-1.5">
                   <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                  Live market
+                  {t("Live market")}
                 </span>
                 <span className="inline-flex items-center gap-1.5">
                   <span className="h-2 w-2 rounded-full bg-neutral-400" />
-                  Announced
+                  {t("Announced")}
                 </span>
               </div>
             </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { budgetOptions, stayLengthOptions } from "./data";
 
 export type DraftFilters = {
@@ -18,6 +19,7 @@ type SearchFiltersBarProps = {
 };
 
 export function SearchFiltersBar({ draft, onDraftChange, onSubmit, locationInputRef }: SearchFiltersBarProps) {
+  const { t } = useLanguage();
   return (
     <motion.form
       initial={{ opacity: 0, y: 16 }}
@@ -30,34 +32,34 @@ export function SearchFiltersBar({ draft, onDraftChange, onSubmit, locationInput
       className="flex flex-col gap-4 rounded-2xl border border-[#D9C7B3] bg-white p-4 shadow-sm sm:flex-row sm:items-end sm:flex-wrap"
     >
       <div className="flex min-w-0 flex-1 flex-col gap-1">
-        <span className="px-1 text-xs font-medium uppercase tracking-wide text-neutral-500">Location</span>
+        <span className="px-1 text-xs font-medium uppercase tracking-wide text-neutral-500">{t("Location")}</span>
         <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
           <input
             ref={locationInputRef}
             type="text"
             value={draft.location}
             onChange={(event) => onDraftChange({ ...draft, location: event.target.value })}
-            placeholder="City, neighborhood, or building"
+            placeholder={t("City, neighborhood, or building")}
             className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none placeholder:text-neutral-400"
           />
         </div>
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col gap-1">
-        <span className="px-1 text-xs font-medium uppercase tracking-wide text-neutral-500">Move-in</span>
+        <span className="px-1 text-xs font-medium uppercase tracking-wide text-neutral-500">{t("Move-in")}</span>
         <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
           <input
             type="text"
             value={draft.moveIn}
             onChange={(event) => onDraftChange({ ...draft, moveIn: event.target.value })}
-            placeholder="Date or flexible"
+            placeholder={t("Date or flexible")}
             className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none placeholder:text-neutral-400"
           />
         </div>
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col gap-1">
-        <span className="px-1 text-xs font-medium uppercase tracking-wide text-neutral-500">Monthly Budget</span>
+        <span className="px-1 text-xs font-medium uppercase tracking-wide text-neutral-500">{t("Monthly Budget")}</span>
         <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
           <select
             value={draft.budgetKey}
@@ -66,7 +68,7 @@ export function SearchFiltersBar({ draft, onDraftChange, onSubmit, locationInput
           >
             {budgetOptions.map((option) => (
               <option key={option.key} value={option.key}>
-                {option.label}
+                {t(option.label)}
               </option>
             ))}
           </select>
@@ -74,7 +76,7 @@ export function SearchFiltersBar({ draft, onDraftChange, onSubmit, locationInput
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col gap-1">
-        <span className="px-1 text-xs font-medium uppercase tracking-wide text-neutral-500">Stay Length</span>
+        <span className="px-1 text-xs font-medium uppercase tracking-wide text-neutral-500">{t("Stay Length")}</span>
         <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
           <select
             value={draft.stayLengthKey}
@@ -83,7 +85,7 @@ export function SearchFiltersBar({ draft, onDraftChange, onSubmit, locationInput
           >
             {stayLengthOptions.map((option) => (
               <option key={option.key} value={option.key}>
-                {option.label}
+                {t(option.label)}
               </option>
             ))}
           </select>
@@ -97,7 +99,7 @@ export function SearchFiltersBar({ draft, onDraftChange, onSubmit, locationInput
         transition={{ duration: 0.15 }}
         className="h-10 shrink-0 rounded-lg bg-brand-navy px-6 text-sm font-semibold text-white transition-colors hover:bg-brand-navy-dark"
       >
-        Update Search
+        {t("Update Search")}
       </motion.button>
     </motion.form>
   );

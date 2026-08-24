@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const floatUpVariants: Variants = {
   hidden: {
@@ -27,6 +28,7 @@ const guideCategories = [
 ];
 
 export default function CityGuidesSection() {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState("guides");
 
   return (
@@ -42,7 +44,7 @@ export default function CityGuidesSection() {
             className="flex w-full flex-col items-start justify-start"
           >
             <span className="text-xs font-semibold uppercase leading-5 tracking-wide text-amber-700">
-              CITY GUIDES AND SEEKER GUIDANCE
+              {t("CITY GUIDES AND SEEKER GUIDANCE")}
             </span>
           </motion.div>
 
@@ -55,7 +57,7 @@ export default function CityGuidesSection() {
             className="flex w-full flex-col items-start justify-start pt-px"
           >
             <h2 className="font-['Fraunces',serif] text-2xl font-semibold leading-10 text-gray-800">
-              Practical resources, separate from inventory
+              {t("Practical resources, separate from inventory")}
             </h2>
           </motion.div>
 
@@ -70,7 +72,7 @@ export default function CityGuidesSection() {
           >
             <Image
               src="/images/rooms-by-city/Background (3).png"
-              alt="Practical city guidance and resources"
+              alt={t("Practical city guidance and resources")}
               width={1200}
               height={560}
               className="h-full w-full rounded-xl object-cover"
@@ -96,7 +98,7 @@ export default function CityGuidesSection() {
                     isActive ? "text-amber-700" : "text-stone-500 hover:text-amber-700/80"
                   }`}
                 >
-                  {category.label}
+                  {t(category.label)}
                   {isActive && (
                     <motion.div
                       layoutId="activeTabUnderline"

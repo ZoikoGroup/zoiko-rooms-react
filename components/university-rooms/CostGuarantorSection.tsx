@@ -1,5 +1,8 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
 import { Eyebrow, SectionTitle, Callout, InfoTable, SectionDivider } from "./shared";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const rows = [
   ["Monthly rent", "$1,050 per month"],
@@ -11,20 +14,26 @@ const rows = [
 ];
 
 export function CostGuarantorSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Cost and Guarantor Guidance</Eyebrow>
-            <SectionTitle>Total cost and guarantor terms before commitment</SectionTitle>
+            <Eyebrow>{t("Cost and Guarantor Guidance")}</Eyebrow>
+            <SectionTitle>{t("Total cost and guarantor terms before commitment")}</SectionTitle>
           </div>
 
-          <InfoTable columns={["Item", "Illustrative Display"]} rows={rows} />
+          <InfoTable
+            columns={[t("Item"), t("Illustrative Display")]}
+            rows={rows.map(([item, value]) => [t(item), t(value)])}
+          />
 
-          <Callout label="Example limitation">
-            This learning block demonstrates cost composition only. It is not a university, city,
-            or market average and must not be reused as pricing evidence.
+          <Callout label={t("Example limitation")}>
+            {t(
+              "This learning block demonstrates cost composition only. It is not a university, city, or market average and must not be reused as pricing evidence."
+            )}
           </Callout>
         </Reveal>
       </Container>

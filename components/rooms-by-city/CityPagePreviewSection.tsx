@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const floatUpVariants: Variants = {
   hidden: {
@@ -30,6 +31,7 @@ const previewFeatures = [
 ];
 
 export default function CityPagePreviewSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full border-t border-stone-200 bg-white px-6 py-12 font-['Inter',sans-serif] md:px-32">
       <div className="grid w-full grid-cols-1 items-center gap-8 lg:grid-cols-2">
@@ -44,7 +46,7 @@ export default function CityPagePreviewSection() {
         >
           <Image
             src="/images/rooms-by-city/Background (1).png"
-            alt="City page preview interface"
+            alt={t("City page preview interface")}
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="rounded-xl object-cover"
@@ -60,7 +62,7 @@ export default function CityPagePreviewSection() {
             className="w-full"
           >
             <span className="text-xs font-semibold uppercase leading-5 tracking-wide text-amber-700">
-              CITY-PAGE PREVIEW
+              {t("CITY-PAGE PREVIEW")}
             </span>
           </motion.div>
 
@@ -73,7 +75,7 @@ export default function CityPagePreviewSection() {
             className="w-full"
           >
             <h2 className="font-['Fraunces',serif] text-xl font-semibold leading-8 text-gray-800">
-              What an individual city page contains
+              {t("What an individual city page contains")}
             </h2>
           </motion.div>
 
@@ -97,7 +99,7 @@ export default function CityPagePreviewSection() {
                   <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-stone-200">
                     <div className="h-2 w-2 rounded-full bg-stone-500" />
                   </div>
-                  <span className="text-sm font-normal leading-5 text-gray-800">{item}</span>
+                  <span className="text-sm font-normal leading-5 text-gray-800">{t(item)}</span>
                 </motion.div>
               );
             })}

@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface AreaItem {
   title: string;
@@ -67,20 +68,22 @@ const operationalAreas: AreaItem[] = [
 ];
 
 export default function OperationalNeedsSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header Block */}
         <div className="text-center space-y-3 max-w-3xl mx-auto">
           <span className="text-xs font-mono font-bold tracking-widest text-[#DC2626] uppercase">
-            OPERATIONAL NEEDS
+            {t("OPERATIONAL NEEDS")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Eight areas, one connected record
+            {t("Eight areas, one connected record")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed">
-            Every area stays linked to the same underlying transaction &mdash;
-            nothing forks into a disconnected copy.
+            {t(
+              "Every area stays linked to the same underlying transaction — nothing forks into a disconnected copy.",
+            )}
           </p>
         </div>
 
@@ -100,7 +103,7 @@ export default function OperationalNeedsSection() {
                 <div className="relative w-4 h-4">
                   <Image
                     src={area.iconSrc}
-                    alt={area.alt}
+                    alt={t(area.alt)}
                     fill
                     className="object-contain object-center"
                   />
@@ -110,10 +113,10 @@ export default function OperationalNeedsSection() {
               {/* Text Group */}
               <div className="space-y-1">
                 <h3 className="text-sm font-serif font-bold text-[#14213D] leading-snug">
-                  {area.title}
+                  {t(area.title)}
                 </h3>
                 <p className="text-xs text-[#555E68] leading-relaxed font-normal">
-                  {area.description}
+                  {t(area.description)}
                 </p>
               </div>
             </motion.div>

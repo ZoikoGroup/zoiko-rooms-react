@@ -5,23 +5,26 @@ import { ShieldCheck, FileText, FileSignature, Wallet } from "lucide-react";
 import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
 import { passportFeatures } from "./data";
 
 const icons = { shield: ShieldCheck, file: FileText, signature: FileSignature, wallet: Wallet };
 
 export function RoomPassportSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col gap-10">
           <div className="mx-auto flex max-w-2xl flex-col items-center gap-4 text-center">
-            <Eyebrow>Shared Record</Eyebrow>
-            <SectionTitle>Room Passport keeps the work connected</SectionTitle>
+            <Eyebrow>{t("Shared Record")}</Eyebrow>
+            <SectionTitle>{t("Room Passport keeps the work connected")}</SectionTitle>
             <Paragraph className="mx-auto">
-              Current room facts, authority, evidence, availability, costs, viewings,
-              applications, agreements, payments, changes, disputes, and limitations remain
-              linked — without exposing unnecessary personal data.
+              {t(
+                "Current room facts, authority, evidence, availability, costs, viewings, applications, agreements, payments, changes, disputes, and limitations remain linked — without exposing unnecessary personal data.",
+              )}
             </Paragraph>
           </div>
 
@@ -29,7 +32,7 @@ export function RoomPassportSection() {
             <motion.div variants={fadeUp} className="w-full overflow-hidden rounded-3xl">
               <NaturalImage
                 src="/images/how-it-works-overview/room-passport-interior.png"
-                alt="A furnished room, representing the room a Room Passport describes"
+                alt={t("A furnished room, representing the room a Room Passport describes")}
               />
             </motion.div>
 
@@ -46,15 +49,15 @@ export function RoomPassportSection() {
                       <Icon className="h-4 w-4" />
                     </span>
                     <span>
-                      <span className="block text-sm font-semibold text-brand-navy">{title}</span>
-                      <span className="block text-sm text-neutral-500">{description}</span>
+                      <span className="block text-sm font-semibold text-brand-navy">{t(title)}</span>
+                      <span className="block text-sm text-neutral-500">{t(description)}</span>
                     </span>
                   </motion.div>
                 );
               })}
 
               <Button href="/how-it-works/room-passport" variant="secondary" size="md" className="mt-2 w-fit">
-                Explore Room Passport
+                {t("Explore Room Passport")}
               </Button>
             </div>
           </div>

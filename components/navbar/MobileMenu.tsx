@@ -5,23 +5,26 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, Search, X } from "lucide-react";
-import { navSections } from "@/lib/nav-data";
+import { navSections, languageOptions, currencyOptions } from "@/lib/nav-data";
 import { Button } from "@/components/ui";
 import { useSearchModal } from "@/components/search";
 import { useLockBodyScroll } from "@/lib/hooks/useLockBodyScroll";
 import { easeOut } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { NavPillDropdown } from "./NavPillDropdown";
 
 export function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [openKey, setOpenKey] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
   const { open: openSearch } = useSearchModal();
+  const { language, setLanguage, t } = useLanguage();
   useLockBodyScroll(isOpen);
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- set mounted after hydration
-    setMounted(true);
-  }, []);
+useEffect(() => {
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time mount flag to gate the createPortal call, not a render loop
+  setMounted(true);
+}, []);
 
   const menu = (
     <AnimatePresence>
@@ -43,7 +46,7 @@ export function MobileMenu() {
             className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col overflow-y-auto bg-brand-cream p-6"
           >
             <div className="flex items-center justify-between">
-              <span className="font-heading text-xl text-brand-navy">Menu</span>
+              <span className="font-heading text-xl text-brand-navy">{t("Menu")}</span>
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
@@ -62,7 +65,7 @@ export function MobileMenu() {
               }}
               className="mt-6 flex items-center gap-2 rounded-full border border-brand-navy/10 px-4 py-3 text-sm font-medium text-brand-navy"
             >
-              <Search className="h-4 w-4" /> Search rooms
+              <Search className="h-4 w-4" /> {t("Search rooms")}
             </button>
 
             <div className="mt-6 flex flex-col divide-y divide-brand-navy/10">
@@ -76,7 +79,7 @@ export function MobileMenu() {
                       aria-expanded={isSectionOpen}
                       className="flex w-full items-center justify-between py-2 text-left text-base font-medium text-brand-navy"
                     >
-                      {section.label}
+                      {t(section.label)}
                       <ChevronDown
                         className={`h-4 w-4 transition-transform ${
                           isSectionOpen ? "rotate-180" : ""
@@ -100,7 +103,7 @@ export function MobileMenu() {
                                 onClick={() => setIsOpen(false)}
                                 className="rounded-lg px-2 py-2 text-sm text-neutral-600 hover:bg-brand-navy/5"
                               >
-                                {item.label}
+                                {t(item.label)}
                               </Link>
                             ))}
                           </div>
@@ -112,13 +115,29 @@ export function MobileMenu() {
               })}
             </div>
 
+            <div className="mt-6 flex items-center justify-between border-t border-brand-navy/10 pt-4">
+              <span className="text-xs font-semibold uppercase tracking-wide text-neutral-400">
+                {t("Preferences")}
+              </span>
+              <div className="flex items-center gap-1.5">
+                <NavPillDropdown
+                  storageKey="zoiko-language"
+                  ariaLabel="Select language"
+                  options={languageOptions}
+                  value={language}
+                  onSelect={setLanguage}
+                />
+                <NavPillDropdown storageKey="zoiko-currency" ariaLabel="Select currency" options={currencyOptions} />
+              </div>
+            </div>
+
             <Button
               href="#"
               variant="secondary"
-              className="mt-6 w-full"
+              className="mt-4 w-full"
               onClick={() => setIsOpen(false)}
             >
-              Sign in
+              {t("Sign in")}
             </Button>
           </motion.div>
         </>

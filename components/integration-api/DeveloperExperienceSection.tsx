@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface ResourceLink {
   title: string;
@@ -20,6 +21,7 @@ const resourceLinks: ResourceLink[] = [
 ];
 
 export default function DeveloperExperienceSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full bg-[#FAF8F5] text-[#14213D] py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto space-y-10">
@@ -28,16 +30,16 @@ export default function DeveloperExperienceSection() {
           <div className="flex items-center gap-2">
             <span className="w-4 h-[2px] bg-[#1A2E6E]" />
             <span className="text-xs font-bold tracking-widest text-[#1A2E6E] uppercase">
-              DEVELOPER EXPERIENCE
+              {t("DEVELOPER EXPERIENCE")}
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Sandboxed, synthetic, and safe to copy.
+            {t("Sandboxed, synthetic, and safe to copy.")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
-            Every public example uses non-secret, synthetic data. No live
-            tenant, person, room, agreement, or payment record is ever
-            published.
+            {t(
+              "Every public example uses non-secret, synthetic data. No live tenant, person, room, agreement, or payment record is ever published.",
+            )}
           </p>
         </div>
 
@@ -53,7 +55,7 @@ export default function DeveloperExperienceSection() {
           <div className="lg:col-span-6 relative min-h-[280px] sm:min-h-[360px] lg:min-h-[420px] bg-[#D63045] flex items-center justify-center overflow-hidden">
             <Image
               src="/images/integration/left.png"
-              alt="Developer Experience Illustration"
+              alt={t("Developer Experience Illustration")}
               fill
               className="object-cover object-left"
               priority
@@ -61,11 +63,11 @@ export default function DeveloperExperienceSection() {
           </div>
 
 {/* Right Column: Code Snippet Block */}
-           <div className="lg:col-span-6 bg-[#16202B] p-6 sm:p-8 lg:p-10 flex flex-col justify-center font-mono text-xs sm:text-[13px] leading-relaxed text-[#A0AEC0] overflow-x-auto">
-             {/* Comment */}
-             <div className="text-[#526070] mb-4">
-               {/* sandbox &mdash; read current availability */}
-             </div>
+<div className="lg:col-span-6 bg-[#16202B] p-6 sm:p-8 lg:p-10 flex flex-col justify-center font-mono text-xs sm:text-[13px] leading-relaxed text-[#A0AEC0] overflow-x-auto">
+  {/* Comment */}
+  <div className="text-[#526070] mb-4">
+    {t("// sandbox — read current availability")}
+  </div>
 
             {/* Request */}
             <div className="text-[#E2E8F0] font-semibold mb-1">
@@ -126,7 +128,7 @@ export default function DeveloperExperienceSection() {
               className="bg-[#F6F2EC] hover:bg-[#EFE8DF] transition-colors rounded-xl p-4 sm:p-5 border border-[#EAE6DF] flex items-center justify-between group"
             >
               <span className="text-xs sm:text-sm font-bold text-[#14213D]">
-                {item.title}
+                {t(item.title)}
               </span>
               <ArrowRight className="w-4 h-4 text-[#14213D] transition-transform group-hover:translate-x-1" />
             </motion.a>

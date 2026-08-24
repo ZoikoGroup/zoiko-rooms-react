@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface FeatureItem {
   title: string;
@@ -61,6 +62,7 @@ const integrationRows: IntegrationRow[] = [
 ];
 
 export default function IntegrationsAndApiSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full bg-white py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -69,17 +71,15 @@ export default function IntegrationsAndApiSection() {
           {/* Header Block */}
           <div className="space-y-3">
             <span className="text-xs font-mono font-bold tracking-widest text-[#DC2626] uppercase">
-              INTEGRATIONS &amp; API
+              {t("Integrations & API")}
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-[27px] font-serif font-bold text-[#14213D] leading-tight">
-              Connect current systems without weakening source, security, or
-              operational control.
+              {t("Connect current systems without weakening source, security, or operational control.")}
             </h2>
             <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed">
-              Every integration has a named owner, minimum scopes, and explicit
-              source-of-truth rules. Consequential writes go through review,
-              idempotency, and audit &mdash; never silent system-of-record
-              changes.
+              {t(
+                "Every integration has a named owner, minimum scopes, and explicit source-of-truth rules. Consequential writes go through review, idempotency, and audit — never silent system-of-record changes."
+              )}
             </p>
           </div>
 
@@ -97,11 +97,11 @@ export default function IntegrationsAndApiSection() {
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#1A2E6E] shrink-0" />
                   <h3 className="text-sm font-bold text-[#14213D]">
-                    {item.title}
+                    {t(item.title)}
                   </h3>
                 </div>
                 <p className="text-xs text-[#555E68] leading-relaxed pl-3.5 font-normal">
-                  {item.description}
+                  {t(item.description)}
                 </p>
               </motion.div>
             ))}
@@ -113,7 +113,7 @@ export default function IntegrationsAndApiSection() {
               href="#explore-integrations"
               className="inline-block bg-transparent hover:bg-white text-[#14213D] text-xs font-semibold px-6 py-3 rounded-full border border-[#14213D] transition-colors shadow-xs"
             >
-              Explore Integrations &amp; API
+              {t("Explore Integrations & API")}
             </a>
           </div>
         </div>
@@ -128,7 +128,7 @@ export default function IntegrationsAndApiSection() {
             className="bg-white rounded-[2rem] p-6 sm:p-8 border border-[#EAE6DF] shadow-md space-y-6 mt-4 lg:mt-12"
           >
             <span className="text-[11px] font-mono text-[#736B62] block">
-              Sample integration status &middot; demonstration data
+              {t("Sample integration status · demonstration data")}
             </span>
 
             <div className="divide-y divide-[#F0ECE1]">
@@ -138,7 +138,7 @@ export default function IntegrationsAndApiSection() {
                   className="py-4 flex items-center justify-between gap-4 first:pt-2 last:pb-2"
                 >
                   <span className="text-xs font-medium text-[#555E68]">
-                    {row.label}
+                    {t(row.label)}
                   </span>
                   <span
                     className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium ${row.badgeStyle}`}
@@ -146,7 +146,7 @@ export default function IntegrationsAndApiSection() {
                     <span
                       className={`w-1.5 h-1.5 rounded-full ${row.dotColor}`}
                     />
-                    {row.badgeText}
+                    {t(row.badgeText)}
                   </span>
                 </div>
               ))}

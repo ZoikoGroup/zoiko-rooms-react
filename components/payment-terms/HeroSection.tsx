@@ -6,37 +6,38 @@ import { TriangleAlert } from "lucide-react";
 import { Container, Reveal } from "@/components/ui";
 import { fadeUp, easeOut } from "@/lib/motion";
 import { Eyebrow, Paragraph } from "./shared";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export function HeroSection() {
   const [open, setOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <section className="py-10 sm:py-14">
       <Container>
         <Reveal className="flex flex-col gap-5">
-          <Eyebrow>Legal</Eyebrow>
+          <Eyebrow>{t("Legal")}</Eyebrow>
           <motion.h1 variants={fadeUp} className="font-heading text-4xl font-medium text-brand-navy sm:text-5xl">
-            Payment Terms
+            {t("Payment Terms")}
           </motion.h1>
 
           <motion.div variants={fadeUp} className="flex flex-wrap gap-2">
             <span className="rounded-full border border-[#E9E0D3] bg-[#FFFDF8] px-3.5 py-1.5 text-xs font-medium text-brand-navy">
-              Effective 17 August 2026
+              {t("Effective 17 August 2026")}
             </span>
             <span className="rounded-full border border-brand-red/25 bg-[#FBE9E9] px-3.5 py-1.5 text-xs font-semibold text-brand-red">
-              Applies to: England, United Kingdom
+              {t("Applies to: England, United Kingdom")}
             </span>
             <span className="rounded-full border border-[#E9E0D3] bg-[#FFFDF8] px-3.5 py-1.5 text-xs font-medium text-brand-navy">
-              English (UK)
+              {t("English (UK)")}
             </span>
           </motion.div>
 
           <div className="border-t border-[#E9E0D3] pt-5">
             <Paragraph>
-              Payments on Zoiko Rooms are processed by an authorized payment services provider,
-              not held informally by Zoiko Rooms itself. These terms explain how rent, holding
-              deposits, and tenancy deposits are collected and protected, what fees apply, and
-              what happens if a payment fails, needs a refund, or is disputed.
+              {t(
+                "Payments on Zoiko Rooms are processed by an authorized payment services provider, not held informally by Zoiko Rooms itself. These terms explain how rent, holding deposits, and tenancy deposits are collected and protected, what fees apply, and what happens if a payment fails, needs a refund, or is disputed.",
+              )}
             </Paragraph>
           </div>
 
@@ -53,7 +54,7 @@ export function HeroSection() {
             >
               ▸
             </motion.span>
-            Who processes my payment?
+            {t("Who processes my payment?")}
           </motion.button>
 
           <AnimatePresence initial={false}>
@@ -66,13 +67,13 @@ export function HeroSection() {
                 className="overflow-hidden"
               >
                 <p className="max-w-3xl text-sm leading-relaxed text-[#5B5548]">
-                  Zoiko Payments Europe Ltd., our authorized payment services provider, processes
-                  and moves your payment. Zoiko Rooms operates the marketplace and is not the fund
-                  holder — see{" "}
+                  {t(
+                    "Zoiko Payments Europe Ltd., our authorized payment services provider, processes and moves your payment. Zoiko Rooms operates the marketplace and is not the fund holder — see",
+                  )}{" "}
                   <a href="#whos-involved" className="font-semibold text-brand-red hover:text-brand-red-dark">
-                    Who&apos;s involved in a payment
+                    {t("Who's involved in a payment")}
                   </a>{" "}
-                  below for the full breakdown.
+                  {t("below for the full breakdown.")}
                 </p>
               </motion.div>
             )}
@@ -84,9 +85,10 @@ export function HeroSection() {
           >
             <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0 text-[#8A6A24]" />
             <p className="text-sm leading-relaxed text-[#6B5518]">
-              <span className="font-semibold">England rule in effect:</span> since 1 May 2026, rent
-              must not be requested or accepted before your tenancy agreement is signed. Checkout
-              is blocked automatically if this isn&apos;t yet satisfied.
+              <span className="font-semibold">{t("England rule in effect:")}</span>{" "}
+              {t(
+                "since 1 May 2026, rent must not be requested or accepted before your tenancy agreement is signed. Checkout is blocked automatically if this isn't yet satisfied.",
+              )}
             </p>
           </motion.div>
         </Reveal>

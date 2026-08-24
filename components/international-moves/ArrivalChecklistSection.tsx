@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Container, Reveal } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
 import { Eyebrow, SectionTitle, SectionDivider } from "./shared";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const checklist = [
   {
@@ -29,20 +30,22 @@ const checklist = [
 ];
 
 export function ArrivalChecklistSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Arrival Checklist</Eyebrow>
-            <SectionTitle>Plan the handoff before you travel</SectionTitle>
+            <Eyebrow>{t("Arrival Checklist")}</Eyebrow>
+            <SectionTitle>{t("Plan the handoff before you travel")}</SectionTitle>
           </div>
 
           <ul className="flex flex-col divide-y divide-[#E9E0D3]">
             {checklist.map(({ title, description }) => (
               <motion.li key={title} variants={fadeUp} className="flex flex-col gap-1 py-5">
-                <span className="font-heading text-base font-medium text-brand-navy">{title}</span>
-                <span className="text-sm leading-relaxed text-neutral-600">{description}</span>
+                <span className="font-heading text-base font-medium text-brand-navy">{t(title)}</span>
+                <span className="text-sm leading-relaxed text-neutral-600">{t(description)}</span>
               </motion.li>
             ))}
           </ul>

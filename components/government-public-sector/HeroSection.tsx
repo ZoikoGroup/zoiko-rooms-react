@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Landmark } from "lucide-react";
 import { Container, Reveal, Button, ImageFade } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const programNeeds = ["Public workforce", "Education & training", "Housing access", "Temporary pathway", "Reception & resettlement"];
 const relationshipModels = ["Referral", "Eligibility assessment", "Nomination / allocation", "Subsidy / voucher", "Support-only"];
@@ -20,9 +21,11 @@ function PillGroup({
   selected: string;
   onSelect: (value: string) => void;
 }) {
+  const { t } = useLanguage();
+
   return (
     <div className="flex flex-col gap-3">
-      <span className="text-xs font-semibold uppercase tracking-wide text-neutral-400">{label}</span>
+      <span className="text-xs font-semibold uppercase tracking-wide text-neutral-400">{t(label)}</span>
       <div className="flex flex-wrap gap-2">
         {options.map((option) => {
           const isSelected = selected === option;
@@ -37,7 +40,7 @@ function PillGroup({
                   : "border-[#E9E0D3] text-brand-navy hover:bg-brand-navy/5"
               }`}
             >
-              {option}
+              {t(option)}
             </button>
           );
         })}
@@ -49,6 +52,7 @@ function PillGroup({
 export function HeroSection() {
   const [programNeed, setProgramNeed] = useState(programNeeds[0]);
   const [relationshipModel, setRelationshipModel] = useState(relationshipModels[1]);
+  const { t } = useLanguage();
 
   return (
     <>
@@ -56,7 +60,7 @@ export function HeroSection() {
         <div className="absolute inset-0">
           <ImageFade
             src="/images/government-public-sector/hero-public-office.webp"
-            alt="A public trust office building, representing accountable public-sector programs"
+            alt={t("A public trust office building, representing accountable public-sector programs")}
             fill
             sizes="100vw"
             className="object-cover"
@@ -72,22 +76,22 @@ export function HeroSection() {
               className="inline-flex w-fit items-center gap-1.5 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm"
             >
               <Landmark className="h-3.5 w-3.5" />
-              For government &amp; public-sector bodies
+              {t("For government & public-sector bodies")}
             </motion.span>
 
             <motion.h1 variants={fadeUp} className="font-heading text-4xl font-bold text-white sm:text-5xl">
-              Accountable room access, built on transparent authority.
+              {t("Accountable room access, built on transparent authority.")}
             </motion.h1>
 
             <motion.p variants={fadeUp} className="max-w-lg text-[15px] leading-relaxed text-white/75">
-              Coordinate public workforce moves, education placements, housing-access programs, and
-              reception or resettlement transitions — with every decision traceable to a named,
-              reviewable owner.
+              {t(
+                "Coordinate public workforce moves, education placements, housing-access programs, and reception or resettlement transitions — with every decision traceable to a named, reviewable owner."
+              )}
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-col gap-3 sm:flex-row">
               <Button href="/find-a-room" size="lg" variant="secondary" className="gap-2">
-                Find a Room
+                {t("Find a Room")}
                 <ArrowRight className="h-4 w-4" />
               </Button>
               <Button
@@ -96,7 +100,7 @@ export function HeroSection() {
                 variant="outline"
                 className="border-white/30 text-white hover:bg-white hover:text-brand-navy"
               >
-                Talk to Zoiko Rooms
+                {t("Talk to Zoiko Rooms")}
               </Button>
             </motion.div>
           </Reveal>

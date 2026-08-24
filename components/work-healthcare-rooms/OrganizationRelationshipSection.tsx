@@ -1,5 +1,8 @@
+"use client";
+
 import { Container, Reveal, Card } from "@/components/ui";
 import { Eyebrow, SectionTitle, SectionDivider } from "./shared";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const relationships = [
   {
@@ -29,20 +32,22 @@ const relationships = [
 ];
 
 export function OrganizationRelationshipSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Organization Relationship</Eyebrow>
-            <SectionTitle>A logo or benefit doesn&apos;t mean the organization owns or guarantees the room</SectionTitle>
+            <Eyebrow>{t("Organization Relationship")}</Eyebrow>
+            <SectionTitle>{t("A logo or benefit doesn't mean the organization owns or guarantees the room")}</SectionTitle>
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {relationships.map(({ title, description }) => (
               <Card key={title} className="p-6">
-                <h3 className="font-heading text-base font-medium text-brand-navy">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{description}</p>
+                <h3 className="font-heading text-base font-medium text-brand-navy">{t(title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{t(description)}</p>
               </Card>
             ))}
           </div>

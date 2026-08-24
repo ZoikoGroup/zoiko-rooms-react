@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface FAQItem {
   question: string;
@@ -47,6 +48,7 @@ const faqs: FAQItem[] = [
 ];
 
 export default function FAQSection() {
+  const { t } = useLanguage();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleFAQ = (index: number) => {
@@ -59,10 +61,10 @@ export default function FAQSection() {
         {/* Header Block */}
         <div className="text-center space-y-3 max-w-4xl mx-auto">
           <span className="text-xs font-mono font-bold tracking-widest text-[#DC2626] uppercase">
-            FREQUENTLY ASKED
+            {t("Frequently Asked")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-serif font-bold text-[#14213D] leading-tight">
-            Capability, authority, and payment questions
+            {t("Capability, authority, and payment questions")}
           </h2>
         </div>
 
@@ -79,7 +81,7 @@ export default function FAQSection() {
                   className="w-full flex items-center justify-between text-left focus:outline-hidden group"
                 >
                   <span className="text-base sm:text-lg font-serif font-bold text-[#14213D] group-hover:text-[#DC2626] transition-colors pr-4">
-                    {faq.question}
+                    {t(faq.question)}
                   </span>
                   <span className="text-lg font-mono font-bold text-[#DC2626] shrink-0">
                     {isOpen ? "\u00D7" : "+"}
@@ -96,7 +98,7 @@ export default function FAQSection() {
                       className="overflow-hidden"
                     >
                       <p className="pt-3 text-xs sm:text-sm text-[#555E68] leading-relaxed font-normal max-w-3xl">
-                        {faq.answer}
+                        {t(faq.answer)}
                       </p>
                     </motion.div>
                   )}

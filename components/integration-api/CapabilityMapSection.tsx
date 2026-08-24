@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import {
   Square,
   FileText,
@@ -101,6 +102,7 @@ const capabilityCards: CapabilityCard[] = [
 ];
 
 export default function CapabilityMapSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full bg-[#EEDFC5] text-[#14213D] py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto space-y-12">
@@ -109,17 +111,17 @@ export default function CapabilityMapSection() {
           <div className="flex items-center gap-2">
             <span className="w-4 h-[2px] bg-[#1A2E6E]" />
             <span className="text-[11px] font-bold tracking-widest text-[#1A2E6E] uppercase">
-              CAPABILITY MAP
+              {t("CAPABILITY MAP")}
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Nine domains, each with its own boundary.
+            {t("Nine domains, each with its own boundary.")}
           </h2>
-          <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
-            Every connection sits inside one of these domains. Statuses stay
-            separate even when a single integration touches more than one &mdash; an
-            availability sync can&apos;t quietly pick up payment authority.
-          </p>
+         <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
+  {t(
+    "Every connection sits inside one of these domains. Statuses stay separate even when a single integration touches more than one — an availability sync can't quietly pick up payment authority.",
+  )}
+</p>
         </div>
 
         {/* 9 Capability Cards Grid */}
@@ -144,10 +146,10 @@ export default function CapabilityMapSection() {
                 {/* Title & Description */}
                 <div className="space-y-2">
                   <h3 className="text-base font-serif font-bold text-[#14213D]">
-                    {card.title}
+                    {t(card.title)}
                   </h3>
                   <p className="text-xs text-[#555E68] leading-relaxed">
-                    {card.description}
+                    {t(card.description)}
                   </p>
                 </div>
               </div>
@@ -155,7 +157,7 @@ export default function CapabilityMapSection() {
               {/* Bottom Highlighted Callout Box */}
               <div className="bg-[#F2DED2] p-3 rounded-lg border border-[#F2E4D8]">
                 <p className="text-[11px] font-mono text-[#1A2E6E] leading-relaxed">
-                  {card.highlightText}
+                  {t(card.highlightText)}
                 </p>
               </div>
             </motion.div>

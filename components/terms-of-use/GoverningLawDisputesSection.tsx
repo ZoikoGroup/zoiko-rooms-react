@@ -1,8 +1,10 @@
 "use client";
 
 import React from "react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function GoverningLawDisputesSection() {
+  const { t } = useLanguage();
   return (
     <section
       id="law-disputes-and-rights"
@@ -13,64 +15,68 @@ export default function GoverningLawDisputesSection() {
         <span className="font-mono text-lg sm:text-xl text-[#C8202C] font-normal">
           18
         </span>
-        <span>Governing law, disputes &amp; mandatory rights</span>
+        <span>{t("Governing law, disputes & mandatory rights")}</span>
       </h2>
 
       {/* "In short" Highlight Box */}
       <div className="bg-[#F2DED2] rounded-2xl px-4 py-3 mb-8">
         <p className="text-sm font-bold text-[#93321F] leading-relaxed">
-          In short: the governing law and dispute route depend on your region,
-          and your mandatory local rights are preserved.
+          {t(
+            "In short: the governing law and dispute route depend on your region, and your mandatory local rights are preserved.",
+          )}
         </p>
       </div>
 
       {/* Regional Rules Container Card */}
       <div className="bg-[#FFFDF8] border border-[#EAE6DF] rounded-2xl p-6 sm:p-8">
         <h3 className="text-lg font-serif font-normal text-[#101C33] mb-6">
-          Regional rules &mdash; England
+          {t("Regional rules — England")}
         </h3>
 
         <div className="space-y-6">
           {/* Row 1: Governing Law */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 pb-6 border-b border-dashed border-[#EAE6DF]">
             <span className="font-bold text-sm text-[#101C33]">
-              Governing law
+              {t("Governing law")}
             </span>
             <span className="md:col-span-2 text-sm text-[#5C5B57] leading-relaxed">
-              The laws of England and Wales, without prejudice to any mandatory
-              consumer protections of your country of residence.
+              {t(
+                "The laws of England and Wales, without prejudice to any mandatory consumer protections of your country of residence.",
+              )}
             </span>
           </div>
 
           {/* Row 2: Courts */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 pb-6 border-b border-dashed border-[#EAE6DF]">
-            <span className="font-bold text-sm text-[#101C33]">Courts</span>
+            <span className="font-bold text-sm text-[#101C33]">{t("Courts")}</span>
             <span className="md:col-span-2 text-sm text-[#5C5B57] leading-relaxed">
-              The courts of England and Wales have jurisdiction, alongside any
-              mandatory right you have to bring proceedings in your own country
-              of residence.
+              {t(
+                "The courts of England and Wales have jurisdiction, alongside any mandatory right you have to bring proceedings in your own country of residence.",
+              )}
             </span>
           </div>
 
           {/* Row 3: Alternative dispute resolution */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 pb-6 border-b border-dashed border-[#EAE6DF]">
             <span className="font-bold text-sm text-[#101C33]">
-              Alternative dispute resolution
+              {t("Alternative dispute resolution")}
             </span>
             <span className="md:col-span-2 text-sm text-[#5C5B57] leading-relaxed">
-              Where a currently available, legally applicable ADR scheme exists
-              for your dispute, it&apos;s linked from our Regional Legal Notices.
-            </span>
+  {t(
+    "Where a currently available, legally applicable ADR scheme exists for your dispute, it's linked from our Regional Legal Notices.",
+  )}
+</span>
           </div>
 
           {/* Row 4: Class or jury waivers */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4">
             <span className="font-bold text-sm text-[#101C33]">
-              Class or jury waivers
+              {t("Class or jury waivers")}
             </span>
             <span className="md:col-span-2 text-sm text-[#5C5B57] leading-relaxed">
-              Not applied in England &mdash; only used elsewhere where
-              enforceable and specifically approved.
+              {t(
+                "Not applied in England — only used elsewhere where enforceable and specifically approved.",
+              )}
             </span>
           </div>
         </div>

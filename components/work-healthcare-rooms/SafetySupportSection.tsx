@@ -5,6 +5,7 @@ import { Container, Reveal } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
 import { Eyebrow, SectionTitle, BulletList, SectionDivider } from "./shared";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const points = [
   "Verify relationship and provider authority before treating an employer or hospital affiliation claim as real.",
@@ -14,13 +15,15 @@ const points = [
 ];
 
 export function SafetySupportSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Safety and Support</Eyebrow>
-            <SectionTitle>Late shifts and remote arrangements need extra care</SectionTitle>
+            <Eyebrow>{t("Safety and Support")}</Eyebrow>
+            <SectionTitle>{t("Late shifts and remote arrangements need extra care")}</SectionTitle>
           </div>
 
           <motion.div
@@ -31,11 +34,11 @@ export function SafetySupportSection() {
           >
             <NaturalImage
               src="/images/work-healthcare-rooms/safety-support.png"
-              alt="A clinician in a shared lounge space with colleagues nearby"
+              alt={t("A clinician in a shared lounge space with colleagues nearby")}
             />
           </motion.div>
 
-          <BulletList items={points} />
+          <BulletList items={points.map((point) => t(point))} />
         </Reveal>
       </Container>
     </SectionDivider>

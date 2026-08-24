@@ -1,4 +1,7 @@
+"use client";
+
 import { Container, Reveal } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
 
 const steps = [
@@ -9,16 +12,16 @@ const steps = [
 ];
 
 export function HowItWorksSection() {
+  const { t } = useLanguage();
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col items-center gap-10 text-center">
           <div className="flex max-w-2xl flex-col items-center gap-4">
-            <Eyebrow>How It Works</Eyebrow>
-            <SectionTitle>From workforce need to move-in</SectionTitle>
+            <Eyebrow>{t("How It Works")}</Eyebrow>
+            <SectionTitle>{t("From workforce need to move-in")}</SectionTitle>
             <Paragraph className="mx-auto">
-              A governed path from defining the need to supporting a worker through their stay —
-              closed out cleanly at exit.
+              {t("A governed path from defining the need to supporting a worker through their stay — closed out cleanly at exit.")}
             </Paragraph>
           </div>
 
@@ -26,8 +29,8 @@ export function HowItWorksSection() {
             {steps.map(({ number, title, description }) => (
               <div key={number} className="flex flex-col gap-1.5">
                 <span className="font-heading text-sm font-semibold text-brand-red">{number}</span>
-                <h3 className="font-heading text-base font-medium text-brand-navy">{title}</h3>
-                <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
+                <h3 className="font-heading text-base font-medium text-brand-navy">{t(title)}</h3>
+                <p className="text-sm leading-relaxed text-neutral-600">{t(description)}</p>
               </div>
             ))}
           </div>

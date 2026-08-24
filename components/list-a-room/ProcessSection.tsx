@@ -2,8 +2,10 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function ProcessSection() {
+  const { t } = useLanguage();
   const ctaHref = "#"; // Dynamic link for bottom button
 
   const steps = [
@@ -69,15 +71,15 @@ export default function ProcessSection() {
         {/* Section Header */}
         <div className="flex flex-col items-center text-center space-y-3 w-full">
           <span className="text-[11px] font-bold tracking-widest text-[#C0272D] uppercase block">
-            THE PROCESS
+            {t("THE PROCESS")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            From eligibility to an active listing.
+            {t("From eligibility to an active listing.")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] leading-relaxed max-w-140">
-            Six stages take you from a first check to a live, manageable
-            listing. Save your progress at any point and pick up where you left
-            off.
+            {t(
+              "Six stages take you from a first check to a live, manageable listing. Save your progress at any point and pick up where you left off.",
+            )}
           </p>
         </div>
 
@@ -91,7 +93,7 @@ export default function ProcessSection() {
         >
           <img
             src="/images/list-a-room/big.png"
-            alt="The listing process stages illustration"
+            alt={t("The listing process stages illustration")}
             className="w-full h-auto object-cover block"
           />
         </motion.div>
@@ -114,10 +116,10 @@ export default function ProcessSection() {
                 {step.stepNum}
               </span>
               <h3 className="text-sm font-bold text-[#14213D] leading-snug">
-                {step.title}
+                {t(step.title)}
               </h3>
               <p className="text-[11px] sm:text-xs text-[#555E68] leading-relaxed font-normal">
-                {step.description}
+                {t(step.description)}
               </p>
             </motion.div>
           ))}
@@ -129,7 +131,7 @@ export default function ProcessSection() {
             href={ctaHref}
             className="inline-flex items-center justify-center bg-[#1B2A4A] hover:bg-[#0D1629] text-white text-xs font-semibold px-12 py-4 rounded-full transition-all duration-200 shadow-sm active:scale-95"
           >
-            Start a Listing
+            {t("Start a Listing")}
           </a>
         </div>
       </div>

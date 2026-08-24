@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, type Variants } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const floatUpVariants: Variants = {
   hidden: {
@@ -26,6 +27,7 @@ interface BrowseByRegionProps {
 }
 
 export default function BrowseByRegionSection({ onSelectRegion }: BrowseByRegionProps) {
+  const { t } = useLanguage();
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
 
   const handleRegionClick = (region: string) => {
@@ -46,7 +48,7 @@ export default function BrowseByRegionSection({ onSelectRegion }: BrowseByRegion
             className="flex w-full flex-col items-start justify-start"
           >
             <span className="text-xs font-semibold uppercase leading-5 tracking-wide text-amber-700">
-              BROWSE BY REGION
+              {t("BROWSE BY REGION")}
             </span>
           </motion.div>
 
@@ -59,7 +61,7 @@ export default function BrowseByRegionSection({ onSelectRegion }: BrowseByRegion
             className="flex w-full flex-col items-start justify-start pt-px"
           >
             <h2 className="font-['Fraunces',serif] text-2xl font-semibold leading-10 text-gray-800">
-              Supported cities, organized geographically
+              {t("Supported cities, organized geographically")}
             </h2>
           </motion.div>
 
@@ -89,7 +91,7 @@ export default function BrowseByRegionSection({ onSelectRegion }: BrowseByRegion
                   }`}
                 >
                   <span className="text-center text-sm font-medium leading-5 text-gray-800">
-                    {region}
+                    {t(region)}
                   </span>
                 </motion.button>
               );

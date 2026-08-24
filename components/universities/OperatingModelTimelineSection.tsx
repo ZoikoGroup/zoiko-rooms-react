@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Container, Reveal } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, SectionDivider } from "./shared";
 
 const steps = [
@@ -17,13 +18,14 @@ const steps = [
 ];
 
 export function OperatingModelTimelineSection() {
+  const { t } = useLanguage();
   return (
     <SectionDivider className="bg-white">
       <Container>
         <Reveal className="mx-auto flex max-w-2xl flex-col gap-10">
           <div className="flex flex-col items-center gap-4 text-center">
-            <Eyebrow>The Operating Model</Eyebrow>
-            <SectionTitle>From university need to supported room journey</SectionTitle>
+            <Eyebrow>{t("The Operating Model")}</Eyebrow>
+            <SectionTitle>{t("From university need to supported room journey")}</SectionTitle>
           </div>
 
           <div className="relative flex flex-col gap-8">
@@ -34,8 +36,8 @@ export function OperatingModelTimelineSection() {
                   {index + 1}
                 </span>
                 <div>
-                  <h3 className="font-heading text-base font-medium text-brand-navy">{title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-neutral-600">{description}</p>
+                  <h3 className="font-heading text-base font-medium text-brand-navy">{t(title)}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-neutral-600">{t(description)}</p>
                 </div>
               </motion.div>
             ))}

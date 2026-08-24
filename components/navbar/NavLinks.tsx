@@ -7,6 +7,7 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import { navSections } from "@/lib/nav-data";
 import { easeOut } from "@/lib/motion";
 import { useOnClickOutside } from "@/lib/hooks/useOnClickOutside";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const panelVariants: Variants = {
   hidden: { opacity: 0, y: 10, scale: 0.98 },
@@ -49,6 +50,7 @@ export function NavLinks() {
   const [openKey, setOpenKey] = useState<string | null>(null);
   const navRef = useRef<HTMLElement>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { t } = useLanguage();
   useOnClickOutside(navRef, () => setOpenKey(null));
 
   const cancelClose = useCallback(() => {
@@ -86,7 +88,7 @@ export function NavLinks() {
               aria-expanded={isOpen}
               className="flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 text-sm font-medium text-brand-navy transition-colors hover:bg-brand-navy/5 xl:px-3"
             >
-              {section.label}
+              {t(section.label)}
               <ChevronDown
                 className={`h-3.5 w-3.5 shrink-0 transition-transform duration-200 ${
                   isOpen ? "rotate-180" : ""
@@ -103,7 +105,7 @@ export function NavLinks() {
                   exit="exit"
                   onMouseEnter={cancelClose}
                   onMouseLeave={scheduleClose}
-                  className="fixed left-1/2 top-16 z-40 mt-3 flex w-max max-w-[calc(100vw-2rem)] -translate-x-1/2 overflow-hidden rounded-3xl border border-black/5 bg-white shadow-2xl shadow-brand-navy/10 sm:top-10"
+                  className="fixed left-1/2 top-16 z-40 mt-3 flex w-max max-w-[calc(100vw-2rem)] -translate-x-1/2 overflow-hidden rounded-3xl border border-black/5 bg-white shadow-2xl shadow-brand-navy/10 sm:top-14"
                 >
                   <motion.div
                     variants={listVariants}
@@ -119,7 +121,7 @@ export function NavLinks() {
                         }`}
                       >
                         <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-neutral-400">
-                          {column.title}
+                          {t(column.title)}
                         </p>
                         <ul className="flex flex-col gap-0.5">
                           {column.items.map((item) => {
@@ -136,10 +138,10 @@ export function NavLinks() {
                                   </span>
                                   <span className="min-w-0">
                                     <span className="block whitespace-nowrap text-sm font-semibold text-[#1B2438] transition-colors duration-200 group-hover:text-brand-red">
-                                      {item.label}
+                                      {t(item.label)}
                                     </span>
                                     <span className="block text-xs text-neutral-500">
-                                      {item.description}
+                                      {t(item.description)}
                                     </span>
                                   </span>
                                 </Link>
@@ -161,13 +163,13 @@ export function NavLinks() {
                       variants={itemVariants}
                       className="mb-2 text-xs font-semibold uppercase tracking-wide text-[#C99A78]"
                     >
-                      Find Your Fit
+                      {t("Find Your Fit")}
                     </motion.p>
                     <motion.p
                       variants={itemVariants}
                       className="font-heading text-lg font-medium text-white"
                     >
-                      {section.fit.title}
+                      {t(section.fit.title)}
                     </motion.p>
                     <div className="mt-4 flex flex-col divide-y divide-white/10">
                       {section.fit.links.map((link) => (
@@ -177,7 +179,7 @@ export function NavLinks() {
                             onClick={() => setOpenKey(null)}
                             className="group flex items-center justify-between gap-2 py-3 text-sm text-white/85 transition-colors hover:text-white"
                           >
-                            {link.label}
+                            {t(link.label)}
                             <ArrowRight className="h-4 w-4 shrink-0 text-white/50 transition-all duration-200 group-hover:translate-x-1 group-hover:text-white" />
                           </Link>
                         </motion.div>

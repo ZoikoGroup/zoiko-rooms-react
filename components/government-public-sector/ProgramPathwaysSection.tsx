@@ -5,6 +5,7 @@ import { Container, Reveal, EvidenceBadge } from "@/components/ui";
 import { fadeUp, easeOut } from "@/lib/motion";
 import { Eyebrow, SectionTitle, Paragraph } from "./shared";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const pathways = [
   {
@@ -52,15 +53,18 @@ const pathways = [
 ];
 
 export function ProgramPathwaysSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="border-b border-[#E9E0D3] pb-16 pt-24 sm:pb-24 sm:pt-32">
       <Container>
         <Reveal className="flex flex-col items-center gap-4 text-center">
-          <Eyebrow>Program Pathways</Eyebrow>
-          <SectionTitle>Every public program moves differently</SectionTitle>
+          <Eyebrow>{t("Program Pathways")}</Eyebrow>
+          <SectionTitle>{t("Every public program moves differently")}</SectionTitle>
           <Paragraph className="mx-auto">
-            From a first public-service post to a resettlement transition, each pathway carries
-            its own authority, timing, and participant rights.
+            {t(
+              "From a first public-service post to a resettlement transition, each pathway carries its own authority, timing, and participant rights."
+            )}
           </Paragraph>
 
           <div className="mt-6 grid w-full grid-cols-1 gap-6 text-left sm:grid-cols-2 lg:grid-cols-3">
@@ -74,13 +78,13 @@ export function ProgramPathwaysSection() {
               >
                 <div className="overflow-hidden">
                   <div className="transition-transform duration-500 ease-out group-hover:scale-105">
-                    <NaturalImage src={image} alt={title} />
+                    <NaturalImage src={image} alt={t(title)} />
                   </div>
                 </div>
                 <div className="flex flex-col gap-2 p-5">
-                  <h3 className="font-heading text-lg font-medium text-brand-navy">{title}</h3>
-                  <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
-                  <EvidenceBadge label={badge} tone={tone} variant="outline" className="mt-1 w-fit" />
+                  <h3 className="font-heading text-lg font-medium text-brand-navy">{t(title)}</h3>
+                  <p className="text-sm leading-relaxed text-neutral-600">{t(description)}</p>
+                  <EvidenceBadge label={t(badge)} tone={tone} variant="outline" className="mt-1 w-fit" />
                 </div>
               </motion.div>
             ))}

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface SupportRow {
   domain: string;
@@ -10,6 +11,7 @@ interface SupportRow {
 }
 
 export default function OrganizationsProSupportSection() {
+  const { t } = useLanguage();
   const supportData: SupportRow[] = [
     {
       domain: "Universities",
@@ -51,7 +53,7 @@ export default function OrganizationsProSupportSection() {
         {/* Section Header */}
         <div className="flex flex-col items-start text-left space-y-3 w-full">
           <h2 className="text-2xl lg:text-[28px] font-serif font-bold text-[#14213D] leading-tight max-w-2xl">
-            Organizations and Zoiko Rooms Pro support
+            {t("Organizations and Zoiko Rooms Pro support")}
           </h2>
         </div>
 
@@ -67,13 +69,13 @@ export default function OrganizationsProSupportSection() {
             <thead>
               <tr className="border-b border-[#EAE6DF]">
                 <th className="py-3 px-2 text-[10px] font-bold tracking-wider text-[#7A838E] uppercase w-1/5">
-                  DOMAIN
+                  {t("DOMAIN")}
                 </th>
                 <th className="py-3 px-2 text-[10px] font-bold tracking-wider text-[#7A838E] uppercase w-2/5">
-                  COMMON ISSUES
+                  {t("COMMON ISSUES")}
                 </th>
                 <th className="py-3 px-2 text-[10px] font-bold tracking-wider text-[#7A838E] uppercase w-2/5">
-                  ROUTE
+                  {t("ROUTE")}
                 </th>
               </tr>
             </thead>
@@ -84,13 +86,13 @@ export default function OrganizationsProSupportSection() {
                   className="hover:bg-white/40 transition-colors duration-150"
                 >
                   <td className="py-4 px-2 text-xs sm:text-sm font-semibold text-[#14213D] align-top pr-4">
-                    {row.domain}
+                    {t(row.domain)}
                   </td>
                   <td className="py-4 px-2 text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed align-top pr-6">
-                    {row.commonIssues}
+                    {t(row.commonIssues)}
                   </td>
                   <td className="py-4 px-2 text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed align-top">
-                    {row.route}
+                    {t(row.route)}
                   </td>
                 </tr>
               ))}

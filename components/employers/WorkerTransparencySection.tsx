@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { CircleHelp, Mail, ShieldOff, Minus, LifeBuoy } from "lucide-react";
 import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
 
@@ -16,16 +17,16 @@ const points = [
 ];
 
 export function WorkerTransparencySection() {
+  const { t } = useLanguage();
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col items-center gap-10">
           <div className="flex max-w-2xl flex-col items-center gap-4 text-center">
-            <Eyebrow>Worker Transparency</Eyebrow>
-            <SectionTitle>Workers can see the whole picture</SectionTitle>
+            <Eyebrow>{t("Worker Transparency")}</Eyebrow>
+            <SectionTitle>{t("Workers can see the whole picture")}</SectionTitle>
             <Paragraph className="mx-auto">
-              Why they&apos;re seeing this, whether it&apos;s optional, who pays, and who supports
-              them — answered plainly, not buried in legal copy.
+              {t("Why they're seeing this, whether it's optional, who pays, and who supports them — answered plainly, not buried in legal copy.")}
             </Paragraph>
           </div>
 
@@ -38,7 +39,7 @@ export function WorkerTransparencySection() {
             >
               <NaturalImage
                 src="/images/employers/transparency-meeting-room.png"
-                alt="Colleagues discussing a workforce housing program"
+                alt={t("Colleagues discussing a workforce housing program")}
               />
             </motion.div>
 
@@ -55,14 +56,14 @@ export function WorkerTransparencySection() {
                     <Icon className="h-4 w-4" />
                   </span>
                   <span>
-                    <span className="block text-sm font-semibold text-brand-navy">{title}</span>
-                    <span className="block text-sm text-neutral-500">{description}</span>
+                    <span className="block text-sm font-semibold text-brand-navy">{t(title)}</span>
+                    <span className="block text-sm text-neutral-500">{t(description)}</span>
                   </span>
                 </motion.div>
               ))}
 
               <Button href="/resources" variant="outline" size="md" className="mt-2 w-fit">
-                Review the Transparency Panel
+                {t("Review the Transparency Panel")}
               </Button>
             </div>
           </div>

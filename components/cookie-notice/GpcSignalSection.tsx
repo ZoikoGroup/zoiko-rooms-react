@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Container, Reveal } from "@/components/ui";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { Eyebrow, SectionTitle, Paragraph, SectionDivider } from "./shared";
 
 declare global {
@@ -12,6 +13,7 @@ declare global {
 }
 
 export function GpcSignalSection() {
+  const { t } = useLanguage();
   const [gpcDetected, setGpcDetected] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -24,12 +26,12 @@ export function GpcSignalSection() {
       <Container>
         <Reveal className="flex flex-col gap-6 rounded-3xl border border-[#E9E0D3] bg-[#FFFDF8] p-6 sm:p-10">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Global Privacy Control &amp; Preference Signals</Eyebrow>
-            <SectionTitle>We honor recognized browser signals automatically.</SectionTitle>
+            <Eyebrow>{t("Global Privacy Control & Preference Signals")}</Eyebrow>
+            <SectionTitle>{t("We honor recognized browser signals automatically.")}</SectionTitle>
             <Paragraph>
-              Cookie consent and statutory privacy opt-outs are related but distinct — a
-              recognized signal is treated as a binding opt-out for the purposes it covers,
-              without needing you to visit Cookie Preferences separately.
+              {t(
+                "Cookie consent and statutory privacy opt-outs are related but distinct — a recognized signal is treated as a binding opt-out for the purposes it covers, without needing you to visit Cookie Preferences separately.",
+              )}
             </Paragraph>
           </div>
 
@@ -43,14 +45,14 @@ export function GpcSignalSection() {
               <span className={`h-2 w-2 shrink-0 rounded-full ${gpcDetected ? "bg-emerald-500" : "bg-neutral-400"}`} />
               <span className={gpcDetected ? "text-emerald-700" : "text-neutral-500"}>
                 {gpcDetected === null
-                  ? "Checking your browser for a Global Privacy Control signal…"
+                  ? t("Checking your browser for a Global Privacy Control signal…")
                   : gpcDetected
-                    ? "This browser is currently sending a Global Privacy Control signal"
-                    : "This browser is not currently sending a Global Privacy Control signal"}
+                    ? t("This browser is currently sending a Global Privacy Control signal")
+                    : t("This browser is not currently sending a Global Privacy Control signal")}
               </span>
             </span>
             <a href="/legal/your-privacy-choices" className="text-sm font-semibold text-brand-red hover:text-brand-red-dark">
-              See how it&apos;s applied →
+              {t("See how it's applied →")}
             </a>
           </motion.div>
         </Reveal>

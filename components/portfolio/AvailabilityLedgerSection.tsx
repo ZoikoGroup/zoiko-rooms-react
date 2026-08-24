@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface LedgerCard {
   title: string;
@@ -78,22 +79,22 @@ const participantBadges: StatusBadge[] = [
 ];
 
 export default function AvailabilityLedgerSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full bg-[#EFE1D0] text-[#14213D] py-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header Block */}
         <div className="text-center space-y-3 mx-auto">
           <span className="text-[11px] font-bold tracking-widest text-[#C8202C] uppercase block">
-            AVAILABILITY LEDGER
+            {t("Availability Ledger")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-bold text-[#14213D] leading-tight">
-            Availability is a ledger, not a single toggle.
+            {t("Availability is a ledger, not a single toggle.")}
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-xl mx-auto">
-            Available capacity for a room and date range equals current
-            authorized capacity minus overlapping agreements, active
-            reservations, accepted allocations, unexpired holds, maintenance
-            blocks, owner use, and channel commitments.
+            {t(
+              "Available capacity for a room and date range equals current authorized capacity minus overlapping agreements, active reservations, accepted allocations, unexpired holds, maintenance blocks, owner use, and channel commitments.",
+            )}
           </p>
         </div>
 
@@ -109,10 +110,10 @@ export default function AvailabilityLedgerSection() {
               className="bg-white rounded-2xl p-6 border border-[#EAE6DF] shadow-xs space-y-2 flex flex-col justify-start"
             >
               <h3 className="text-sm font-serif font-bold text-[#14213D]">
-                {card.title}
+                {t(card.title)}
               </h3>
               <p className="text-xs text-[#555E68] leading-relaxed">
-                {card.description}
+                {t(card.description)}
               </p>
             </motion.div>
           ))}
@@ -127,8 +128,9 @@ export default function AvailabilityLedgerSection() {
           className="bg-white rounded-2xl p-6 sm:p-8 border border-[#EAE6DF] shadow-xs space-y-4 max-w-6xl mx-auto"
         >
           <p className="text-xs sm:text-sm font-bold text-[#14213D]">
-            Availability status shown to participants &mdash; always with dates
-            and conditions, never a bare label:
+            {t(
+              "Availability status shown to participants — always with dates and conditions, never a bare label:",
+            )}
           </p>
 
           <div className="flex flex-wrap gap-2.5 pt-1">
@@ -138,7 +140,7 @@ export default function AvailabilityLedgerSection() {
                 className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${badge.style}`}
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-current" />
-                {badge.label}
+                {t(badge.label)}
               </span>
             ))}
           </div>
@@ -153,12 +155,12 @@ export default function AvailabilityLedgerSection() {
           className="bg-white rounded-2xl p-6 sm:p-8 border border-[#EAE6DF] border-l-4 border-l-[#C8202C] shadow-xs space-y-2 max-w-6xl mx-auto"
         >
           <span className="text-[11px] font-bold tracking-widest text-[#C8202C] uppercase block">
-            NO OVERBOOKING PROMISE
+            {t("No Overbooking Promise")}
           </span>
           <p className="text-xs sm:text-sm text-[#555E68] leading-relaxed">
-            The design uses a date-based commitment ledger, capacity and overlap
-            checks, concurrency controls, source reconciliation, and Action
-            Review. It must not promise that overbooking is impossible.
+            {t(
+              "The design uses a date-based commitment ledger, capacity and overlap checks, concurrency controls, source reconciliation, and Action Review. It must not promise that overbooking is impossible.",
+            )}
           </p>
         </motion.div>
 
@@ -168,7 +170,7 @@ export default function AvailabilityLedgerSection() {
             type="button"
             className="bg-[#EFE1D0] hover:bg-[#E5D5C2] text-[#14213D] text-xs font-bold py-3.5 px-7 rounded-full border border-[#1B2A4A] transition-all duration-200 cursor-pointer shadow-2xs active:scale-95"
           >
-            Explore Availability
+            {t("Explore Availability")}
           </button>
         </div>
       </div>

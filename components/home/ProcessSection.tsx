@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Container, Reveal, SectionHeading, ImageFade } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const steps = [
   {
@@ -28,14 +29,17 @@ const steps = [
 ];
 
 export function ProcessSection() {
+  const { t } = useLanguage();
   return (
     <section className="bg-[#FAF6F0] py-16 sm:py-24">
       <Container>
         <Reveal className="flex flex-col gap-12">
           <SectionHeading
-            eyebrow="The process"
-            title="A streamlined path from search to move-in"
-            subtitle="Search live listings, review evidence, apply securely, then manage everything from one place."
+            eyebrow={t("The process")}
+            title={t("A streamlined path from search to move-in")}
+            subtitle={t(
+              "Search live listings, review evidence, apply securely, then manage everything from one place.",
+            )}
           />
 
           <motion.div
@@ -44,14 +48,14 @@ export function ProcessSection() {
           >
             <ImageFade
               src="/images/home/process.webp"
-              alt="Bright living room representing the rental process"
+              alt={t("Bright living room representing the rental process")}
               fill
               sizes="100vw"
               className="object-cover"
             />
             <div className="absolute" />
             <p className="relative px-6 text-center font-heading text-lg font-medium text-white sm:text-2xl">
-              Search · passport · agreement · support — product screens
+              {t("Search · passport · agreement · support — product screens")}
             </p>
           </motion.div>
 
@@ -59,8 +63,8 @@ export function ProcessSection() {
             {steps.map((step) => (
               <motion.div key={step.number} variants={fadeUp} className="flex flex-col gap-2">
                 <span className="text-sm font-semibold text-brand-red">{step.number}</span>
-                <h3 className="font-heading text-lg font-medium text-brand-navy">{step.title}</h3>
-                <p className="text-[13px] text-neutral-600">{step.description}</p>
+                <h3 className="font-heading text-lg font-medium text-brand-navy">{t(step.title)}</h3>
+                <p className="text-[13px] text-neutral-600">{t(step.description)}</p>
               </motion.div>
             ))}
           </div>

@@ -5,6 +5,7 @@ import { Container, Reveal, EvidenceBadge } from "@/components/ui";
 import { fadeUp, easeOut } from "@/lib/motion";
 import { Eyebrow, SectionTitle, SectionDivider } from "./shared";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const rooms = [
   {
@@ -34,13 +35,15 @@ const rooms = [
 ];
 
 export function CurrentRoomsSection() {
+  const { t } = useLanguage();
+
   return (
     <SectionDivider>
       <Container>
         <Reveal className="flex flex-col gap-10">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Current Rooms</Eyebrow>
-            <SectionTitle>Travel estimate, total cost, and authority — not one universal badge</SectionTitle>
+            <Eyebrow>{t("Current Rooms")}</Eyebrow>
+            <SectionTitle>{t("Travel estimate, total cost, and authority — not one universal badge")}</SectionTitle>
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -54,14 +57,14 @@ export function CurrentRoomsSection() {
               >
                 <div className="overflow-hidden">
                   <div className="transition-transform duration-500 ease-out group-hover:scale-105">
-                    <NaturalImage src={image} alt={description} />
+                    <NaturalImage src={image} alt={t(description)} />
                   </div>
                 </div>
                 <div className="flex flex-col gap-2 p-5">
                   <p className="font-heading text-lg font-semibold text-brand-navy">{price}</p>
-                  <p className="text-sm text-neutral-500">{description}</p>
-                  <p className="text-xs text-neutral-400">{travelNote}</p>
-                  <EvidenceBadge label={availability} tone={tone} variant="outline" className="mt-1" />
+                  <p className="text-sm text-neutral-500">{t(description)}</p>
+                  <p className="text-xs text-neutral-400">{t(travelNote)}</p>
+                  <EvidenceBadge label={t(availability)} tone={tone} variant="outline" className="mt-1" />
                 </div>
               </motion.div>
             ))}

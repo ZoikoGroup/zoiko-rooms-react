@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import type { Room } from "./data";
 
 // Deterministic pseudo-placement so pins land in different spots per room
@@ -20,6 +21,7 @@ type MapViewProps = {
 };
 
 export function MapView({ roomsToShow, hoveredId, onHover }: MapViewProps) {
+  const { t } = useLanguage();
   return (
     <div className="relative h-[420px] w-full overflow-hidden rounded-2xl border border-[#E9E0D3] bg-[#EFEAE0]">
       <div
@@ -31,7 +33,7 @@ export function MapView({ roomsToShow, hoveredId, onHover }: MapViewProps) {
         }}
       />
       <p className="absolute left-4 top-4 text-xs font-medium uppercase tracking-wide text-neutral-500">
-        Map view · illustrative pin placement, not geolocated
+        {t("Map view · illustrative pin placement, not geolocated")}
       </p>
 
       {roomsToShow.map((room) => {
@@ -65,7 +67,7 @@ export function MapView({ roomsToShow, hoveredId, onHover }: MapViewProps) {
             />
             {isHovered && (
               <span className="mt-2 w-40 rounded-lg border border-[#E9E0D3] bg-white p-2 text-left text-xs text-neutral-600 shadow-md">
-                {room.title}
+                {t(room.title)}
               </span>
             )}
           </motion.button>

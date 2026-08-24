@@ -10,6 +10,7 @@ import {
   Plug,
   MessageSquare,
 } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface CapabilityCard {
   icon: React.ElementType;
@@ -59,16 +60,17 @@ const capabilities: CapabilityCard[] = [
 ];
 
 export default function FiveCapabilitiesSection() {
+  const { t } = useLanguage();
   return (
     <section className="w-full bg-white py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header Block */}
         <div className="text-center space-y-3 max-w-3xl mx-auto">
           <span className="text-xs font-mono font-bold tracking-widest text-[#D91414] uppercase">
-            FIVE CAPABILITIES, ONE GOVERNED MODEL
+            {t("Five Capabilities, One Governed Model")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-serif font-bold text-[#1B2539] leading-tight">
-            Route to the capability that matches your responsibility
+            {t("Route to the capability that matches your responsibility")}
           </h2>
         </div>
 
@@ -96,10 +98,10 @@ export default function FiveCapabilitiesSection() {
                     {/* Content */}
                     <div className="space-y-2.5">
                       <h3 className="text-lg font-serif font-bold text-white leading-snug">
-                        {item.title}
+                        {t(item.title)}
                       </h3>
                       <p className="text-xs text-[#9CA3AF] leading-relaxed font-normal">
-                        {item.description}
+                        {t(item.description)}
                       </p>
                     </div>
                   </div>
@@ -125,10 +127,10 @@ export default function FiveCapabilitiesSection() {
                   {/* Content */}
                   <div className="space-y-2.5">
                     <h3 className="text-lg font-serif font-bold text-[#14213D] leading-snug">
-                      {item.title}
+                      {t(item.title)}
                     </h3>
                     <p className="text-xs text-[#555E68] leading-relaxed font-normal">
-                      {item.description}
+                      {t(item.description)}
                     </p>
                   </div>
                 </div>

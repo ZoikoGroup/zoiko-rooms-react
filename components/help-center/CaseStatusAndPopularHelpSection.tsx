@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface HelpTopic {
   id: string;
@@ -12,6 +13,7 @@ interface HelpTopic {
 }
 
 export default function CaseStatusAndPopularHelpSection() {
+  const { t } = useLanguage();
   const [caseReference, setCaseReference] = useState("");
 
   const popularTopics: HelpTopic[] = [
@@ -56,7 +58,7 @@ export default function CaseStatusAndPopularHelpSection() {
         {/* Top Block: Check Case Status */}
         <div className="space-y-6">
           <h2 className="text-2xl sm:text-[28px] font-serif font-bold text-[#14213D] leading-tight">
-            Check case status
+            {t("Check case status")}
           </h2>
 
           <form onSubmit={handleStatusCheck} className="w-full">
@@ -65,14 +67,14 @@ export default function CaseStatusAndPopularHelpSection() {
                 type="text"
                 value={caseReference}
                 onChange={(e) => setCaseReference(e.target.value)}
-                placeholder="Case reference, e.g. ZR-482913"
+                placeholder={t("Case reference, e.g. ZR-482913")}
                 className="w-full bg-white border border-[#EAE6DF] text-[#14213D] placeholder-[#A0AEC0] text-xs sm:text-sm font-medium rounded-xl py-3.5 px-5 focus:outline-none focus:ring-2 focus:ring-[#1A2E6E] transition-all"
               />
               <button
                 type="submit"
                 className="inline-flex items-center justify-center bg-[#142550] hover:bg-[#0D1629] text-white text-xs sm:text-sm font-bold py-3.5 px-8 rounded-full transition-all duration-200 shadow-xs active:scale-95 whitespace-nowrap cursor-pointer"
               >
-                Check Status
+                {t("Check Status")}
               </button>
             </div>
           </form>
@@ -81,7 +83,7 @@ export default function CaseStatusAndPopularHelpSection() {
         {/* Bottom Block: Popular Help Right Now */}
         <div className="space-y-6">
           <h2 className="text-2xl sm:text-[28px] font-serif font-bold text-[#14213D] leading-tight">
-            Popular help right now
+            {t("Popular help right now")}
           </h2>
 
           <motion.div
@@ -99,21 +101,21 @@ export default function CaseStatusAndPopularHelpSection() {
               >
                 <div className="space-y-1 pr-4">
                   <h3 className="text-sm sm:text-base font-bold text-[#14213D] group-hover:text-[#1A2E6E] transition-colors duration-150">
-                    {topic.question}
+                    {t(topic.question)}
                   </h3>
                   <p className="text-xs text-[#7A838E] font-normal">
-                    {topic.category}
+                    {t(topic.category)}
                   </p>
                 </div>
 
                 <div className="flex-shrink-0 ml-4">
                   {topic.badgeVariant === "green" ? (
                     <span className="inline-block bg-[#E8F3EE] text-[#1D6042] text-[11px] font-semibold py-1 px-3.5 rounded-full">
-                      {topic.badgeText}
+                      {t(topic.badgeText)}
                     </span>
                   ) : (
                     <span className="inline-block bg-[#F5EFEB] text-[#8C6D46] text-[11px] font-semibold py-1 px-3.5 rounded-full">
-                      {topic.badgeText}
+                      {t(topic.badgeText)}
                     </span>
                   )}
                 </div>
