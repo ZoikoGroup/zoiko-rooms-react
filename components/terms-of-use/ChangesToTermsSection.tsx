@@ -29,8 +29,8 @@ export default function ChangesToTermsSection() {
         We may update these Terms. Material changes are published with a clear
         change summary and a future effective date, and we notify affected users
         appropriate to the change and your region. Where re-acceptance is
-        legally required, you'll see a clear review step before the change
-        applies to you; if you don't agree, you may need to stop using the
+        legally required, you&apos;ll see a clear review step before the change
+        applies to you; if you don&apos;t agree, you may need to stop using the
         affected service. Prior versions remain archived, and a transaction
         snapshot from an earlier version is never silently rewritten by a later
         one.

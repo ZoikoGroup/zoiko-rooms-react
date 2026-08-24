@@ -18,7 +18,10 @@ export function MobileMenu() {
   const { open: openSearch } = useSearchModal();
   useLockBodyScroll(isOpen);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- set mounted after hydration
+    setMounted(true);
+  }, []);
 
   const menu = (
     <AnimatePresence>

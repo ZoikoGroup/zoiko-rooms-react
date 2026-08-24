@@ -28,7 +28,7 @@ export default function SuspensionTerminationSection() {
         We may restrict, suspend, or close an account where these Terms, our
         Community Standards, or applicable law require it, using notice where
         appropriate and immediate action where safety or legal risk requires it.
-        Closing your account doesn't erase existing obligations &mdash; such as
+        Closing your account doesn&apos;t erase existing obligations &mdash; such as
         an outstanding payment or agreement &mdash; that arose before closure.
         You can appeal a decision through the process described in our Community
         Standards.

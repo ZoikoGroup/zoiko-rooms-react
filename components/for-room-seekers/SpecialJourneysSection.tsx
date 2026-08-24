@@ -1,3 +1,5 @@
+"use client";
+
 import { Container, Reveal, Card } from "@/components/ui";
 import { Eyebrow, SectionTitle, SectionDivider } from "./shared";
 

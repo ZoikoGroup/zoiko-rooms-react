@@ -84,7 +84,7 @@ export default function ArchitecturePatternsSection() {
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
             Most connections are one of these seven shapes. Each comes with the
-            controls it requires and the limitation it doesn't outgrow.
+            controls it requires and the limitation it doesn&apos;t outgrow.
           </p>
         </div>
 

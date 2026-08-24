@@ -28,7 +28,7 @@ export default function ThirdPartyServicesSection() {
       <p className="text-sm sm:text-base text-[#5C5B57] font-normal leading-relaxed">
         Zoiko Rooms integrates third-party services &mdash; payment processors,
         identity verification providers, maps, messaging tools &mdash; that
-        operate under their own terms. We're responsible for our own platform
+        operate under their own terms. We&apos;re responsible for our own platform
         conduct; third-party providers are responsible for theirs, within the
         boundary disclosed at the point of use.
       </p>

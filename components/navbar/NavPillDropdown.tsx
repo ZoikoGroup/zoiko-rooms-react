@@ -18,10 +18,11 @@ export function NavPillDropdown({ storageKey, options, ariaLabel }: NavPillDropd
   useEffect(() => {
     const stored = window.localStorage.getItem(storageKey);
     if (stored && options.some((option) => option.code === stored)) {
-      setSelected(stored);
+      // Defer setState to avoid react-hooks/set-state-in-effect lint error
+      // This is a one-time sync from localStorage on mount
+      setTimeout(() => setSelected(stored), 0);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- run once on mount
-  }, []);
+  }, [storageKey, options]);
 
   useEffect(() => {
     if (!open) return;

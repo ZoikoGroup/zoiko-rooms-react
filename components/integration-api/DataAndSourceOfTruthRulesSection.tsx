@@ -89,7 +89,7 @@ export default function DataAndSourceOfTruthRulesSection() {
             Every field knows where it comes from.
           </h2>
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed max-w-2xl">
-            Sync isn't a black box. Each field carries a direction, an
+            Sync isn&apos;t a black box. Each field carries a direction, an
             authority, a freshness threshold, and a rule for what happens when
             two sources disagree.
           </p>

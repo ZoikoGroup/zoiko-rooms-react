@@ -20,7 +20,7 @@ export default function EligibilityAccountsSection() {
       <div className="bg-[#F2DED2] rounded-2xl px-4 py-3 mb-8">
         <p className="text-sm font-bold text-[#93321F] leading-relaxed">
           In short: you must meet the minimum age and give us accurate
-          information, and you're responsible for your account.
+          information, and you&apos;re responsible for your account.
         </p>
       </div>
 
@@ -44,7 +44,7 @@ export default function EligibilityAccountsSection() {
           <strong className="font-bold text-[#101C33]">
             Account security.
           </strong>{" "}
-          You're responsible for activity under your account and must keep your
+          You&apos;re responsible for activity under your account and must keep your
           credentials secure; tell us promptly about unauthorized use.
         </li>
         <li>
@@ -58,7 +58,7 @@ export default function EligibilityAccountsSection() {
           <strong className="font-bold text-[#101C33]">
             Identity and authority checks.
           </strong>{" "}
-          We may verify your identity, or a provider's authority to list a room,
+          We may verify your identity, or a provider&apos;s authority to list a room,
           appropriate to the risk and market involved.
         </li>
         <li>

@@ -59,7 +59,7 @@ export default function GoverningLawDisputesSection() {
             </span>
             <span className="md:col-span-2 text-sm text-[#5C5B57] leading-relaxed">
               Where a currently available, legally applicable ADR scheme exists
-              for your dispute, it's linked from our Regional Legal Notices.
+              for your dispute, it&apos;s linked from our Regional Legal Notices.
             </span>
           </div>
 

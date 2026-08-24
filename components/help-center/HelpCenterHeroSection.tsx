@@ -26,7 +26,7 @@ export default function HelpCenterHeroSection() {
 
   const quickPills = [
     "I may be at risk or seeing a scam",
-    "I can't access my account",
+    "I can&apos;t access my account",
     "I need help with a room or listing",
     "I need help with an application or agreement",
     "I have a payment, refund, or deposit issue",
@@ -134,7 +134,7 @@ export default function HelpCenterHeroSection() {
 
           {/* Subtext */}
           <p className="text-sm text-[#FFFFFFCC] leading-relaxed max-w-180 mx-auto font-normal">
-            Search current help, choose what you're trying to do, or start with
+            Search current help, choose what you&apos;re trying to do, or start with
             the issue affecting your room, listing, application, agreement,
             payment, organization, or Pro workspace.
           </p>

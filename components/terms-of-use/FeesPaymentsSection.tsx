@@ -31,7 +31,7 @@ export default function FeesPaymentsSection() {
         payouts are governed in detail by our Payment Terms, which are
         incorporated into these Terms by reference. The version of Payment Terms
         in effect at the time of a transaction applies to that transaction; we
-        don't duplicate or re-charge amounts already correctly processed.
+        don&apos;t duplicate or re-charge amounts already correctly processed.
       </p>
 
       {/* Action Link */}

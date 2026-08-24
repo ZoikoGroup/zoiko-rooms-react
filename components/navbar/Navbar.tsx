@@ -1,3 +1,5 @@
+"use client";
+
 import { Container } from "@/components/ui";
 import { NavLogo } from "./NavLogo";
 import { NavLinks } from "./NavLinks";
