@@ -10,7 +10,7 @@ import { NaturalImage } from "./NaturalImage";
 const links = [
   { label: "How It Works", href: "/how-it-works" },
   { label: "Verification & Authority", href: "/how-it-works/verification-authority" },
-  { label: "Safety & Scam Prevention", href: "/resources" },
+  { label: "Safety & Scam Prevention", href: "/resources/safety-scam-prevention" },
 ];
 
 export function AccountabilitySection() {

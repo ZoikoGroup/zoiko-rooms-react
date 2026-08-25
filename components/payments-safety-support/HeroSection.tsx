@@ -49,7 +49,7 @@ export function HeroSection() {
               <Button href="#before-paying" size="lg" variant="secondary">
                 {t("Review Payment Steps")}
               </Button>
-              <Button href="/resources" size="lg" variant="outline">
+              <Button href="/resources/help-center" size="lg" variant="outline">
                 {t("Get Help Now")}
               </Button>
             </motion.div>

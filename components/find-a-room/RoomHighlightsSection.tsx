@@ -47,7 +47,7 @@ export function RoomHighlightsSection() {
               <SectionTitle>{t("Useful inventory patterns, not paid ranking")}</SectionTitle>
             </div>
             <a
-              href="/find-a-room"
+              href="/find-a-room/search-rooms"
               className="inline-flex w-fit shrink-0 items-center gap-1.5 text-sm font-medium text-brand-red transition-colors hover:text-brand-red-dark"
             >
               {t("Search all rooms")}

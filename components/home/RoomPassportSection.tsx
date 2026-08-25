@@ -58,7 +58,7 @@ export function RoomPassportSection() {
                   </div>
                 ))}
               </div>
-              <Button href="/how-it-works" variant="subtle" className="w-fit">
+              <Button href="/how-it-works/room-passport" variant="subtle" className="w-fit">
                 {t("See a sample room passport")}
               </Button>
             </motion.div>

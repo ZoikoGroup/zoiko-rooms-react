@@ -32,11 +32,11 @@ const pathways = [
 ];
 
 const links = [
-  { label: "Universities", href: "/organizations" },
-  { label: "Employers", href: "/organizations" },
-  { label: "Healthcare", href: "/organizations" },
-  { label: "Relocation & Mobility", href: "/organizations" },
-  { label: "Government", href: "/organizations" },
+  { label: "Universities", href: "/find-a-room/university-rooms" },
+  { label: "Employers", href: "/organizations/employers" },
+  { label: "Healthcare", href: "/organizations/healthcare" },
+  { label: "Relocation & Mobility", href: "/organizations/relocation-mobility" },
+  { label: "Government", href: "/organizations/government-public-sector" },
 ];
 
 export function OrganizationPathwaysSection() {

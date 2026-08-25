@@ -67,7 +67,7 @@ export function RoomsByCitySection() {
           </div>
 
           <motion.div variants={fadeUp}>
-            <Button href="/find-a-room" variant="outline" size="md" className="w-fit">
+            <Button href="/rooms-by-city" variant="outline" size="md" className="w-fit">
               {t("Explore Rooms by City")}
             </Button>
           </motion.div>

@@ -7,7 +7,7 @@ import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function RoomPassportSection() {
   const { t } = useLanguage();
-  const ctaHref = "#"; // Dynamic link for button
+  const ctaHref = "/how-it-works/room-passport"; // Dynamic link for button
 
   const passportRows = [
     {

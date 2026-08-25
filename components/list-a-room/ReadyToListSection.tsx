@@ -7,9 +7,9 @@ import { useLanguage } from "@/lib/i18n/LanguageProvider";
 export default function ReadyToListSection() {
   const { t } = useLanguage();
   // Dynamic links for buttons/text CTA
-  const startListingHref = "#";
-  const checkRequirementsHref = "#";
-  const zoikoProHref = "#";
+  const startListingHref = "/list-a-room/start-a-listing";
+  const checkRequirementsHref = "/list-a-room/requirements-pricing";
+  const zoikoProHref = "/pro/overview";
 
   return (
     <section className="w-full bg-[#EFE1D0] text-[#1E2022] py-20 px-4 sm:px-8 font-sans antialiased">

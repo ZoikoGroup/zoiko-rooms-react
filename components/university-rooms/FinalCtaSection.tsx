@@ -22,7 +22,7 @@ export function FinalCtaSection() {
             {t("Continue your search, save an alert, or list a room if you're a provider.")}
           </motion.p>
           <motion.div variants={fadeUp} className="flex flex-col gap-3 sm:flex-row">
-            <Button href="/find-a-room" size="lg" variant="secondary">
+            <Button href="#hero" size="lg" variant="secondary">
               {t("Search University Rooms")}
             </Button>
             <Button href="/list-a-room" size="lg" variant="outline">

@@ -15,7 +15,7 @@ const rows = [
     description:
       "Search by institution, term dates and budget, with guarantor and deposit needs explained clearly. Zoiko Rooms does not imply university endorsement unless formally authorized.",
     cta: "Explore University Rooms",
-    href: "/find-a-room",
+    href: "/find-a-room/university-rooms",
     reverse: false,
   },
   {
@@ -25,7 +25,7 @@ const rows = [
     description:
       "Shift-aware timing, commute context and flexible-stay signals, without requesting diagnosis, treatment or unrelated employment details.",
     cta: "Explore Work & Healthcare Rooms",
-    href: "/find-a-room",
+    href: "/find-a-room/work-healthcare-rooms",
     reverse: true,
   },
   {
@@ -35,7 +35,7 @@ const rows = [
     description:
       "Original-currency pricing, timing, documents, payments, arrival and support guidance. Zoiko Rooms does not provide immigration, tax or legal advice.",
     cta: "Explore International Moves",
-    href: "/find-a-room",
+    href: "/find-a-room/international-moves",
     reverse: false,
   },
 ];

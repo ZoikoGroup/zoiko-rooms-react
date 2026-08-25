@@ -21,6 +21,7 @@ const floatUpVariants: Variants = {
 
 interface CityCardProps {
   name: string;
+  category: string; // Added category property
   roomsCount?: string;
   badgeText?: string;
   priceRange: string;
@@ -31,50 +32,51 @@ interface CityCardProps {
 const cityData: CityCardProps[] = [
   {
     name: "Chicago, IL",
+    category: "Work & Healthcare Hubs",
     roomsCount: "41 current rooms",
     priceRange: "$800-$1,500/month displayed range",
     reviewedDate: "Reviewed Jul 2026",
-    imageUrl:
-"/images/rooms-by-city/Background (4).png " },
+    imageUrl: "/images/rooms-by-city/Background (4).png",
+  },
   {
     name: "Seattle, WA",
+    category: "Work & Healthcare Hubs",
     roomsCount: "18 current rooms",
     priceRange: "$1,050-$1,850/month displayed range",
     reviewedDate: "Reviewed Jul 2026",
-    imageUrl:
-      "/images/rooms-by-city/Background3.png",
+    imageUrl: "/images/rooms-by-city/Background3.png",
   },
   {
     name: "Philadelphia, PA",
+    category: "University Cities",
     roomsCount: "12 current rooms",
     priceRange: "$750-$1,400/month displayed range",
     reviewedDate: "Reviewed Jul 2026",
-    imageUrl:
-      "/images/rooms-by-city/Background5.png",
+    imageUrl: "/images/rooms-by-city/Background5.png",
   },
   {
     name: "Austin, TX",
+    category: "International Destinations",
     roomsCount: "9 current rooms",
     priceRange: "$850-$1,550/month displayed range",
     reviewedDate: "Reviewed Jul 2026",
-    imageUrl:
-      "/images/rooms-by-city/Background2.png",
+    imageUrl: "/images/rooms-by-city/Background2.png",
   },
   {
     name: "Denver, CO",
+    category: "Work & Healthcare Hubs",
     badgeText: "Availability limited",
     priceRange: "$900-$1,600/month displayed range",
     reviewedDate: "Reviewed Jul 2026",
-    imageUrl:
-      "/images/rooms-by-city/Background4.png",
+    imageUrl: "/images/rooms-by-city/Background4.png",
   },
   {
     name: "Boston, MA",
+    category: "University Cities",
     roomsCount: "24 current rooms",
     priceRange: "$950-$1,650/month displayed range",
     reviewedDate: "Reviewed Jul 2026",
-    imageUrl:
-      "/images/rooms-by-city/Background6.png",
+    imageUrl: "/images/rooms-by-city/Background6.png",
   },
 ];
 
@@ -88,8 +90,13 @@ const categories = [
 export default function FeaturedCitiesSection() {
   const [activeCategory, setActiveCategory] = useState("All Cities");
 
+  // Dynamic filtering logic
+  const filteredCities = cityData.filter((city) =>
+    activeCategory === "All Cities" ? true : city.category === activeCategory,
+  );
+
   return (
-    <section className="w-full border-t border-stone-200 bg-white px-6 py-12 font-['Inter',sans-serif] md:px-24">
+    <section id="cities" className="w-full border-t border-stone-200 bg-white px-6 py-12 font-['Inter',sans-serif] md:px-24">
       <div className="w-full max-w-7xl md:px-8">
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
@@ -146,19 +153,26 @@ export default function FeaturedCitiesSection() {
           </motion.div>
 
           <div className="grid grid-cols-1 gap-4 pt-2 md:grid-cols-2 lg:grid-cols-4">
-            {cityData.map((city, index) => (
+            {filteredCities.map((city, index) => (
               <motion.div
                 key={city.name}
+                layout // Smooth transition when grid items shift/change
                 initial="hidden"
-                whileInView="visible"
+                animate="visible"
                 viewport={{ once: true, amount: 0.1 }}
-                custom={0.25 + index * 0.08}
+                custom={index * 0.05}
                 variants={floatUpVariants}
               >
                 <CityCard city={city} />
               </motion.div>
             ))}
           </div>
+
+          {filteredCities.length === 0 && (
+            <div className="py-12 text-center text-sm text-stone-500">
+              No cities found for this category.
+            </div>
+          )}
         </div>
       </div>
     </section>
