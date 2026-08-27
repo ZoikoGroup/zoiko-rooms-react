@@ -129,7 +129,7 @@ export function HeroSection() {
           <div className="relative z-10 flex flex-col gap-6 p-8 sm:p-10 lg:max-w-[810px] lg:p-12">
             <motion.span
               variants={fadeUp}
-              className="inline-flex w-fit items-center gap-2 rounded-full bg-[#F6ECD4] px-4 py-1.5 text-sm font-medium text-[#8A4626]"
+              className="inline-flex w-fit items-center gap-2 rounded-full bg-[#F6ECD4] px-4 py-2.5 text-xs md:text-sm font-medium text-[#8A4626]"
             >
               <ShieldCheck className="h-4 w-4" />
               {t("Verified rooms. Clearer rental journeys.")}
@@ -160,13 +160,13 @@ export function HeroSection() {
                 <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
                   <input
                     type="text"
-                    placeholder={t("City, neighborhood, or address")}
+                    placeholder={t("City, neighborhood, university, or landmark")}
                     className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none placeholder:text-neutral-400"
                   />
                 </div>
               </div>
               <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-                <span className="px-1 text-xs font-medium text-neutral-600">{t("Move-in date")}</span>
+                <span className="px-1 text-[11px] font-medium text-neutral-600">{t("When do you want to move in?")}</span>
                 <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
                   <input
                     type="date"
@@ -175,7 +175,7 @@ export function HeroSection() {
                 </div>
               </div>
               <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-                <span className="px-1 text-xs font-medium text-neutral-600">{t("Stay length")}</span>
+                <span className="px-1 text-[11.5px] font-medium text-neutral-600">{t("How long do you plan to stay?")}</span>
                 <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
                   <select className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none">
                     <option>{t("1+ month")}</option>

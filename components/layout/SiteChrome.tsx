@@ -18,7 +18,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
       <Navbar />
-      <main className="flex-1 w-full max-w-full">{children}</main>
+      <main className="flex-1 w-full max-w-full pt-16 sm:pt-20">{children}</main>
       <Footer />
       <NewsSideBadge />
       <ChatLauncher />
