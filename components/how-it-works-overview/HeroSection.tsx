@@ -14,9 +14,9 @@ export function HeroSection() {
   return (
     <section className="border-b border-[#E9E0D3] py-12 sm:py-16">
       <Container>
-        <Reveal className="mx-auto flex max-w-3xl flex-col items-center gap-5 text-center">
+        <Reveal className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
           <Eyebrow>{t("How It Works")}</Eyebrow>
-          <motion.h1 variants={fadeUp} className="font-heading text-3xl font-medium text-brand-navy sm:text-[42px] sm:leading-[1.15]">
+          <motion.h1 variants={fadeUp} className="font-heading text-3xl font-medium text-brand-navy sm:text-[36px] sm:leading-[1.15]">
             {t(
               "Understand the complete room journey — from first search or draft to agreement, payment, move-in, and support.",
             )}
@@ -28,10 +28,10 @@ export function HeroSection() {
           </Paragraph>
 
           <motion.div variants={fadeUp} className="flex flex-col gap-3 sm:flex-row">
-            <Button href="/how-it-works/for-room-seekers" size="lg" variant="secondary">
+            <Button href="/how-it-works/for-room-seekers" size="sm" variant="secondary">
               {t("I Need a Room")}
             </Button>
-            <Button href="/how-it-works/for-providers" size="lg" variant="outline-red">
+            <Button href="/how-it-works/for-providers" size="sm" variant="outline-red">
               {t("I Provide a Room")}
             </Button>
           </motion.div>

@@ -1,0 +1,9 @@
+export { default as HeroSection } from "./HeroSection";
+export { default as ResultSection } from "./ResultSection";
+export { default as HierarchySection } from "./HierarchySection";
+export { default as AvailabilitySection } from "./AvailabilitySection";
+export { default as BulkOperationsSection } from "./BulkOperationsSection";
+export { default as TeamRolesSection } from "./TeamRolesSection";
+export { default as MigrationSection } from "./MigrationSection";
+export { default as OtherPathsSection } from "./OtherPathsSection";
+export { default as FaqSection } from "./FaqSection";
