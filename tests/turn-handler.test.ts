@@ -39,6 +39,21 @@ describe("Intent Router", () => {
     expect(result.intent).toBe("COMPLIANCE");
   });
 
+  it("should classify non-personalized compliance queries about deposit protection", () => {
+    expect(classifyIntent("Rule on tenancy deposit protection in England", renterPrincipal).intent).toBe("COMPLIANCE");
+    expect(classifyIntent("The deposit protection rules in England", renterPrincipal).intent).toBe("COMPLIANCE");
+  });
+
+  it("should classify non-personalized gas safety compliance queries", () => {
+    const result = classifyIntent("Gas safety certificate requirements for landlords", renterPrincipal);
+    expect(result.intent).toBe("COMPLIANCE");
+  });
+
+  it("should classify non-personalized right to rent questions regardless of person framing", () => {
+    const result = classifyIntent("Right to rent checks before tenancy begins", anonymousPrincipal);
+    expect(result.intent).toBe("COMPLIANCE");
+  });
+
   it("should classify navigation queries", () => {
     const result = classifyIntent("How do I go to the help center?", anonymousPrincipal);
     expect(result.intent).toBe("NAVIGATION");

@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { ChatLauncher, ChatShell } from "@/components/assistant";
@@ -15,14 +16,17 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
     return <main className="flex-1">{children}</main>;
   }
 
+  const isChatPage = pathname === "/chat";
+
   return (
     <>
       <Navbar />
       <main className="flex-1">{children}</main>
-      <Footer />
-      <NewsSideBadge />
-      <ChatLauncher />
-      <ChatShell />
+
+      {!isChatPage && <Footer />}
+      {!isChatPage && <NewsSideBadge />}
+      {!isChatPage && <ChatLauncher />}
+      {!isChatPage && <ChatShell />}
     </>
   );
 }
