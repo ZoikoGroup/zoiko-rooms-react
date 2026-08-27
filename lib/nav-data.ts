@@ -352,7 +352,7 @@ export const navSections: NavSection[] = [
       links: [
         { label: "I manage multiple rooms", href: "/pro" },
         { label: "I need compliance tooling", href: "/pro" },
-        { label: "I need to integrate systems", href: "/pro" },
+        { label: "I need to integrate systems", href: "/pro/integration-api" },
       ],
     },
   },
@@ -380,7 +380,7 @@ export const navSections: NavSection[] = [
             icon: FileText,
             label: "Guides",
             description: "Seeker and provider education",
-            href: "/resources",
+            href: "/resources/guides",
           },
         ],
       },
@@ -411,9 +411,9 @@ export const navSections: NavSection[] = [
     fit: {
       title: "What do you need right now?",
       links: [
-        { label: "I need help now", href: "/resources" },
+        { label: "I need help now", href: "/resources/help-center" },
         { label: "I want to learn the process", href: "/resources" },
-        { label: "I'm worried about a scam", href: "/resources" },
+        { label: "I'm worried about a scam", href: "/resources/safety-scam-prevention" },
       ],
     },
   },

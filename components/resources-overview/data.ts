@@ -34,7 +34,7 @@ export const destinations: Destination[] = [
     tags: ["Review an agreement", "Confirm a payment", "Set up a Room Passport"],
     boundary: "Stable, general journeys — not city-specific or case-specific decisions.",
     cta: "Browse Guides",
-    href: "/resources",
+    href: "/resources/guides",
     status: "current",
     image: "/images/resources-overview/destination-guides.png",
   },
