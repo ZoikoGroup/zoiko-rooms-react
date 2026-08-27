@@ -6,7 +6,7 @@ import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function ProviderAuthoritySection() {
   const { t } = useLanguage();
-  const ctaHref = "#"; // Dynamic link for bottom button
+  const ctaHref = "/how-it-works/verification-authority"; // Dynamic link for bottom button
 
   const sequenceSteps = [
     { label: "Provider", isHighlighted: false },

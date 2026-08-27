@@ -6,7 +6,7 @@ import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function ProcessSection() {
   const { t } = useLanguage();
-  const ctaHref = "#"; // Dynamic link for bottom button
+  const ctaHref = "/list-a-room/start-a-listing"; // Dynamic link for bottom button
 
   const steps = [
     {

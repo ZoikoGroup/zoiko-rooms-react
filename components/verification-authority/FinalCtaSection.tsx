@@ -39,7 +39,7 @@ export function FinalCtaSection() {
             <Button href="/how-it-works/room-passport" size="lg" variant="outline">
               {t("Explore Room Passport")}
             </Button>
-            <Button href="/resources" size="lg" variant="outline">
+            <Button href="/resources/help-center" size="lg" variant="outline">
               {t("Get Support")}
             </Button>
           </motion.div>

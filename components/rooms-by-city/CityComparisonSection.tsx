@@ -3,6 +3,7 @@
 import React from "react";
 import { motion, type Variants } from "framer-motion";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { useRouter } from "next/navigation";
 
 const floatUpVariants: Variants = {
   hidden: {
@@ -32,6 +33,7 @@ export default function CityComparisonSection({
   onSearchRooms,
 }: CityComparisonProps) {
   const { t } = useLanguage();
+  const router = useRouter();
   return (
     <section className="w-full border-t border-stone-200 bg-white px-6 pb-20 pt-12 font-['Inter',sans-serif] md:px-24">
       <div className="w-full max-w-[1240px] md:px-8">
@@ -121,7 +123,7 @@ export default function CityComparisonSection({
                 boxShadow: "0 8px 20px -4px rgba(12, 74, 110, 0.3)",
               }}
               whileTap={{ scale: 0.98 }}
-              onClick={onSearchRooms}
+              onClick={()=>router.push("/find-a-room/search-rooms")}
               className="flex cursor-pointer items-center justify-center rounded-full bg-sky-900 px-7 py-3.5 text-base font-semibold text-white transition-all duration-200"
             >
               {t("Search Rooms")}
