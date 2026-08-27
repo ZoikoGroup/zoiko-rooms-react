@@ -38,7 +38,7 @@ export default function CommunityStandardsSection() {
       {/* Action Link */}
       <div>
         <a
-          href="#"
+          href="/legal/community-standards"
           className="inline-flex items-center gap-1.5 text-sm font-bold text-[#93321F] hover:underline"
         >
           <span>{t("Read the full Community Standards")}</span>

@@ -70,7 +70,7 @@ export default function WhoYouContractWithSection() {
             {t("Full regional detail")}
           </span>
           <a
-            href="#"
+            href="/legal/regional-notice"
             className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#8C2C1D] hover:underline"
           >
             <span>{t("Regional Legal Notices")}</span>

@@ -7,7 +7,7 @@ import { useLanguage } from "@/lib/i18n/LanguageProvider";
 const links = [
   { label: "Explore International Moves", href: "/find-a-room/international-moves" },
   { label: "Search with Flexible Arrival", href: "/find-a-room" },
-  { label: "Review Payment Safety", href: "/resources" },
+  { label: "Review Payment Safety", href: "/how-it-works/payments-safety-support" },
 ];
 
 export function InternationalArrivalSupportSection() {

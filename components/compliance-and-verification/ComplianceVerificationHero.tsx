@@ -2,8 +2,10 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export default function ComplianceVerificationHero() {
+  const router = useRouter();
   return (
     <section className="w-full text-[#1E2022] py-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
       <div className="max-w-4xl mx-auto text-center space-y-6">
@@ -48,6 +50,7 @@ export default function ComplianceVerificationHero() {
           className="flex flex-wrap items-center justify-center gap-3 pt-4"
         >
           <button
+          onClick={()=>router.push("/how-it-works/verification-authority")}
             type="button"
             className="bg-[#1B2A4A] hover:bg-[#0D1629] text-white text-xs font-bold py-3.5 px-7 rounded-full transition-all duration-200 shadow-xs active:scale-95 cursor-pointer"
           >

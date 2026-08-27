@@ -35,7 +35,7 @@ export default function ContactLegalNoticesSection() {
       {/* Contact Button */}
       <div>
         <a
-          href="#"
+          href="/resources/help-center"
           className="inline-block px-5 py-2.5 rounded-full border border-[#101C33] text-sm font-bold text-[#101C33] transition-colors hover:bg-[#101C33] hover:text-white"
         >
           {t("Contact Legal / Get help")}
