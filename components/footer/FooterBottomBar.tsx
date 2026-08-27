@@ -24,13 +24,6 @@ export function FooterBottomBar() {
           "Verification confirms only the evidence and checks expressly identified on the platform. It is not a guarantee of safety, legality, suitability, property condition, or future conduct.",
         )}
       </p>
-      <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-1">
-        {legalLinks.map((link) => (
-          <Link key={link.label} href={link.href} className="transition-colors hover:text-white">
-            {t(link.label)}
-          </Link>
-        ))}
-      </nav>
     </div>
   );
 }
