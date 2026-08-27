@@ -13,20 +13,23 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   if (NO_CHROME_ROUTES.includes(pathname)) {
-    return <main className="flex-1">{children}</main>;
+    return <main className="flex-1 min-h-screen w-full overflow-x-hidden">{children}</main>;
   }
 
   const isChatPage = pathname === "/chat";
 
-  return (
-    <>
+   return (
+    <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
       <Navbar />
-      <main className="flex-1">{children}</main>
+
+      <main className="flex-1 w-full max-w-full pt-16 sm:pt-20">
+        {children}
+      </main>
 
       {!isChatPage && <Footer />}
       {!isChatPage && <NewsSideBadge />}
       {!isChatPage && <ChatLauncher />}
       {!isChatPage && <ChatShell />}
-    </>
+    </div>
   );
 }
