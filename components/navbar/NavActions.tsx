@@ -26,7 +26,7 @@ export function NavActions() {
         {t("Sign in")}
       </Button>
 
-      <div className="hidden items-center gap-1 2xl:flex">
+      <div className="hidden items-center gap-1 xl:flex">
         <NavPillDropdown
           storageKey="zoiko-language"
           ariaLabel="Select language"

@@ -146,7 +146,7 @@ useEffect(() => {
   );
 
   return (
-    <div className="2xl:hidden">
+    <div className="xl:hidden">
       <button
         type="button"
         onClick={() => setIsOpen(true)}
