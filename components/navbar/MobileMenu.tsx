@@ -146,7 +146,7 @@ useEffect(() => {
   );
 
   return (
-    <div className="xl:hidden">
+    <div className="min-[1180px]:hidden">
       <button
         type="button"
         onClick={() => setIsOpen(true)}
