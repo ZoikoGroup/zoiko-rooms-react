@@ -68,7 +68,7 @@ export function NavLinks() {
   useEffect(() => cancelClose, [cancelClose]);
 
   return (
-    <nav ref={navRef} className="hidden items-center xl:flex">
+    <nav ref={navRef} className="hidden items-center 2xl:flex">
       {navSections.map((section) => {
         const isOpen = openKey === section.key;
 
@@ -86,7 +86,7 @@ export function NavLinks() {
               type="button"
               onClick={() => setOpenKey(isOpen ? null : section.key)}
               aria-expanded={isOpen}
-              className="flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 text-sm font-medium text-brand-navy transition-colors hover:bg-brand-navy/5 xl:px-3"
+              className="flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-2 text-sm font-medium text-brand-navy transition-colors hover:bg-brand-navy/5"
             >
               {t(section.label)}
               <ChevronDown
