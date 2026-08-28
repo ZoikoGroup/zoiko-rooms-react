@@ -6,6 +6,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { ChatLauncher, ChatShell } from "@/components/assistant";
 import { NewsSideBadge } from "./NewsSideBadge";
+import { AssistantSideButton } from "./AssistantSideButton";
 
 const NO_CHROME_ROUTES = ["/login", "/register", "/reset-password"];
 
@@ -28,6 +29,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
 
       {!isChatPage && <Footer />}
       {!isChatPage && <NewsSideBadge />}
+      {!isChatPage && <AssistantSideButton />}
       {!isChatPage && <ChatLauncher />}
       {!isChatPage && <ChatShell />}
     </div>
