@@ -9,10 +9,12 @@ import { MobileMenu } from "./MobileMenu";
 export function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 w-full border-b border-black/5 bg-brand-cream/90 backdrop-blur-sm">
-      <Container className="flex h-16 w-full items-center justify-between gap-4 sm:h-20">
-        <NavLogo />
+      <Container className="grid h-16 w-full grid-cols-[1fr_auto_1fr] items-center gap-4 sm:h-20">
+        <div className="flex items-center justify-start">
+          <NavLogo />
+        </div>
         <NavLinks />
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-end gap-2">
           <NavActions />
           <MobileMenu />
         </div>
