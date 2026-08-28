@@ -68,7 +68,7 @@ export function NavLinks() {
   useEffect(() => cancelClose, [cancelClose]);
 
   return (
-    <nav ref={navRef} className="hidden min-w-0 items-center justify-center overflow-x-auto 2xl:flex">
+    <nav ref={navRef} className="hidden items-center 2xl:flex">
       {navSections.map((section) => {
         const isOpen = openKey === section.key;
 
