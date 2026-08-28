@@ -1,8 +1,12 @@
 export { ChatProvider, useChatContext } from "./ChatProvider";
-export type { ChatMessage, ChatState } from "./ChatProvider";
+export type { ChatMessage, ChatState, ArchivedSession } from "./ChatProvider";
 export { ChatLauncher } from "./ChatLauncher";
 export { ChatShell } from "./ChatShell";
 export { ChatPanel } from "./ChatPanel";
 export { AnswerCard } from "./AnswerCard";
+export { ContactCard } from "./ContactCard";
 export { Citation } from "./Citation";
 export { MenuDropdown } from "./MenuDropdown";
+export { HistoryPanel } from "./HistoryPanel";
+export { useVoiceInput } from "./use-voice-input";
+export { speakText, stopTts, onTtsState, ttsAvailable } from "./tts";

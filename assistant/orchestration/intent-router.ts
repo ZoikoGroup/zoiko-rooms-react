@@ -37,7 +37,6 @@ const INTENT_PATTERNS: Array<{
     risk: "LOW",
     agency: "A0",
     domain: "compliance",
-    requirePersonal: true,
   },
   {
     patterns: [/\b(payment|charge|invoice|billing|rent payment)\b/i],

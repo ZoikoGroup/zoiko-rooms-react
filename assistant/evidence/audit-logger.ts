@@ -46,6 +46,27 @@ export function logAuditEvent(entry: Omit<AuditEntry, "id" | "created_at">): Aud
 
   auditLog.push(record);
 
+  // Persist to the real audit table (best-effort; DB may not be available in tests).
+  try {
+    // Defer so the synchronous audit path never blocks turn processing.
+    void import("../db/repositories").then((repo) =>
+      repo.insertAudit({
+        id: record.id,
+        trace_id: record.trace_id,
+        request_id: record.request_id,
+        conversation_id: record.conversation_id,
+        turn_id: record.turn_id,
+        event_type: record.event_type,
+        principal_id: record.principal_id,
+        principal_role: record.principal_role,
+        market_code: record.market_code,
+        payload: record.payload,
+      })
+    );
+  } catch {
+    // ignore persistence errors; in-memory record stands
+  }
+
   if (process.env.NODE_ENV !== "production") {
     console.log(
       `[AUDIT] ${record.event_type} | trace=${record.trace_id} | turn=${record.turn_id || "n/a"} | ${JSON.stringify(record.payload).slice(0, 200)}`

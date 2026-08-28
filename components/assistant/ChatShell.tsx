@@ -1,21 +1,23 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { X, Plus, Sun, Moon, Menu } from "lucide-react";
+import { Mail, History, Pencil, X } from "lucide-react";
 import { useChatContext } from "./ChatProvider";
 import { ChatPanel } from "./ChatPanel";
-import { MenuDropdown } from "./MenuDropdown";
+import { HistoryPanel } from "./HistoryPanel";
+
+const ICON_BUTTON_STYLE: React.CSSProperties = {
+  color: "var(--color-gray-500)",
+  backgroundColor: "transparent",
+};
 
 export function ChatShell() {
-  const { isOpen, closeChat, resolvedTheme, setTheme, newConversation } = useChatContext();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuTriggerRef = useRef<HTMLButtonElement>(null);
+  const { isOpen, closeChat, newConversation, resolvedTheme, openContact } = useChatContext();
+  const [historyOpen, setHistoryOpen] = useState(false);
   const widgetRootRef = useRef<HTMLDivElement>(null);
 
-  const toggleTheme = () => {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
-  };
-
+  // Apply light/dark theme variables on the widget root (see globals.css
+  // `.zoiko-assistant-root[data-theme=...]`).
   useEffect(() => {
     if (widgetRootRef.current) {
       widgetRootRef.current.setAttribute("data-theme", resolvedTheme);
@@ -23,6 +25,12 @@ export function ChatShell() {
   }, [resolvedTheme]);
 
   if (!isOpen) return null;
+
+  const handleNewChat = () => {
+    // Feature D: start a fresh session while preserving the previous one in
+    // history (newConversation finalizes/archives the current session first).
+    newConversation();
+  };
 
   return (
     <>
@@ -37,28 +45,36 @@ export function ChatShell() {
         className="zoiko-assistant-root fixed inset-0 z-50 flex flex-col bg-white max-md:p-0 md:bottom-6 md:left-auto md:right-6 md:top-auto md:h-[600px] md:w-[448px] md:rounded-2xl md:shadow-2xl md:border"
         style={{ borderColor: "var(--color-header-border)" }}
       >
-        <div className="flex items-center justify-between border-b px-4 py-3"
+        {/* Top bar */}
+        <div
+          className="flex items-center justify-between border-b px-3 py-3"
           style={{ borderColor: "var(--color-header-border)" }}
         >
-          <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-navy text-xs font-bold text-white">
-              ZR
+          <div className="flex min-w-0 items-center gap-2.5">
+            <div className="h-9 w-9 shrink-0 overflow-hidden rounded-full bg-brand-navy">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/zoikorooms-icon-png.png"
+                alt="Zoiko Rooms assistant"
+                className="h-full w-full object-cover"
+                draggable={false}
+              />
             </div>
-            <div>
-              <h2 className="text-sm font-semibold text-brand-ink">Zoiko Assistant</h2>
-              <p className="text-xs" style={{ color: "var(--color-gray-500)" }}>Ask me anything about Zoiko Rooms</p>
+            <div className="min-w-0">
+              <h2 className="truncate text-sm font-semibold text-brand-ink">Zoiko Assistant</h2>
+              <p className="truncate text-xs" style={{ color: "var(--color-gray-500)" }}>
+                Read-only · answers about Zoiko Rooms
+              </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-1">
+          <div className="flex shrink-0 items-center gap-1">
             <button
-              onClick={newConversation}
-              aria-label="New conversation"
+              onClick={openContact}
+              aria-label="Contact support"
+              title="Contact support"
               className="flex h-8 w-8 items-center justify-center rounded-full transition-colors"
-              style={{
-                color: "var(--color-gray-500)",
-                backgroundColor: "transparent",
-              }}
+              style={ICON_BUTTON_STYLE}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = "var(--color-hover-overlay)";
                 e.currentTarget.style.color = "var(--color-gray-700)";
@@ -68,17 +84,15 @@ export function ChatShell() {
                 e.currentTarget.style.color = "var(--color-gray-500)";
               }}
             >
-              <Plus className="h-4 w-4" />
+              <Mail className="h-4 w-4" />
             </button>
 
             <button
-              onClick={toggleTheme}
-              aria-label={resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              onClick={() => setHistoryOpen(true)}
+              aria-label="View chat history"
+              title="Chat history"
               className="flex h-8 w-8 items-center justify-center rounded-full transition-colors"
-              style={{
-                color: "var(--color-gray-500)",
-                backgroundColor: "transparent",
-              }}
+              style={ICON_BUTTON_STYLE}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = "var(--color-hover-overlay)";
                 e.currentTarget.style.color = "var(--color-gray-700)";
@@ -88,24 +102,15 @@ export function ChatShell() {
                 e.currentTarget.style.color = "var(--color-gray-500)";
               }}
             >
-              {resolvedTheme === "dark" ? (
-                <Sun className="h-4 w-4" />
-              ) : (
-                <Moon className="h-4 w-4" />
-              )}
+              <History className="h-4 w-4" />
             </button>
 
             <button
-              ref={menuTriggerRef}
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Open menu"
-              aria-expanded={menuOpen}
-              aria-haspopup="menu"
+              onClick={handleNewChat}
+              aria-label="New chat"
+              title="New chat"
               className="flex h-8 w-8 items-center justify-center rounded-full transition-colors"
-              style={{
-                color: "var(--color-gray-500)",
-                backgroundColor: "transparent",
-              }}
+              style={ICON_BUTTON_STYLE}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = "var(--color-hover-overlay)";
                 e.currentTarget.style.color = "var(--color-gray-700)";
@@ -115,17 +120,15 @@ export function ChatShell() {
                 e.currentTarget.style.color = "var(--color-gray-500)";
               }}
             >
-              <Menu className="h-4 w-4" />
+              <Pencil className="h-4 w-4" />
             </button>
 
             <button
               onClick={closeChat}
               aria-label="Close assistant"
+              title="Close assistant"
               className="flex h-8 w-8 items-center justify-center rounded-full transition-colors"
-              style={{
-                color: "var(--color-gray-400)",
-                backgroundColor: "transparent",
-              }}
+              style={{ ...ICON_BUTTON_STYLE, color: "var(--color-gray-400)" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = "var(--color-hover-overlay)";
                 e.currentTarget.style.color = "var(--color-gray-600)";
@@ -140,13 +143,11 @@ export function ChatShell() {
           </div>
         </div>
 
-        <MenuDropdown
-          isOpen={menuOpen}
-          onClose={() => setMenuOpen(false)}
-          triggerRef={menuTriggerRef}
-        />
-
-        <ChatPanel />
+        <div className="relative flex min-h-0 flex-1 flex-col">
+          <ChatPanel />
+          {/* Mic / speaker overlays render inside this positioned box */}
+          <HistoryPanel open={historyOpen} onClose={() => setHistoryOpen(false)} />
+        </div>
       </div>
     </>
   );

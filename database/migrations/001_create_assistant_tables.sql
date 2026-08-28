@@ -1,16 +1,22 @@
 -- Zoiko Rooms AI Assistant - Database Schema (PostgreSQL 18)
--- Phase 1 (P0) Tables Only
+-- P0 Tables (corrected to be runnable; TEXT PKs match app-generated string IDs)
 -- Requires: pgvector extension for vector similarity search
 
 -- Enable pgvector
 CREATE EXTENSION IF NOT EXISTS vector;
+
+-- Schemas
+CREATE SCHEMA IF NOT EXISTS ai_core;
+CREATE SCHEMA IF NOT EXISTS ai_rag;
+CREATE SCHEMA IF NOT EXISTS ai_governance;
+CREATE SCHEMA IF NOT EXISTS ai_action;
 
 -- =============================================
 -- Schema: ai_core
 -- =============================================
 
 CREATE TABLE IF NOT EXISTS ai_core.ai_conversation (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    id TEXT PRIMARY KEY,
     cell_id VARCHAR(64),
     subject_scope_type VARCHAR(32) NOT NULL DEFAULT 'PERSONAL',
     subject_scope_id VARCHAR(255),
@@ -26,8 +32,8 @@ CREATE TABLE IF NOT EXISTS ai_core.ai_conversation (
 );
 
 CREATE TABLE IF NOT EXISTS ai_core.ai_participant_binding (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    conversation_id UUID NOT NULL REFERENCES ai_core.ai_conversation(id),
+    id TEXT PRIMARY KEY,
+    conversation_id TEXT NOT NULL REFERENCES ai_core.ai_conversation(id),
     principal_id VARCHAR(255) NOT NULL,
     role VARCHAR(32) NOT NULL,
     tenant_id VARCHAR(255),
@@ -36,8 +42,8 @@ CREATE TABLE IF NOT EXISTS ai_core.ai_participant_binding (
 );
 
 CREATE TABLE IF NOT EXISTS ai_core.ai_turn (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    conversation_id UUID NOT NULL REFERENCES ai_core.ai_conversation(id),
+    id TEXT PRIMARY KEY,
+    conversation_id TEXT NOT NULL REFERENCES ai_core.ai_conversation(id),
     sequence_no INTEGER NOT NULL,
     request_id VARCHAR(64) NOT NULL,
     intent_code VARCHAR(64) NOT NULL DEFAULT 'GENERAL',
@@ -52,9 +58,9 @@ CREATE TABLE IF NOT EXISTS ai_core.ai_turn (
 );
 
 CREATE TABLE IF NOT EXISTS ai_core.ai_message (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    turn_id UUID NOT NULL REFERENCES ai_core.ai_turn(id),
-    conversation_id UUID NOT NULL REFERENCES ai_core.ai_conversation(id),
+    id TEXT PRIMARY KEY,
+    turn_id TEXT NOT NULL REFERENCES ai_core.ai_turn(id),
+    conversation_id TEXT NOT NULL REFERENCES ai_core.ai_conversation(id),
     role VARCHAR(16) NOT NULL,
     content_type VARCHAR(16) NOT NULL DEFAULT 'text',
     content TEXT NOT NULL,
@@ -65,8 +71,8 @@ CREATE TABLE IF NOT EXISTS ai_core.ai_message (
 );
 
 CREATE TABLE IF NOT EXISTS ai_core.ai_context_snapshot (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    turn_id UUID NOT NULL REFERENCES ai_core.ai_turn(id),
+    id TEXT PRIMARY KEY,
+    turn_id TEXT NOT NULL REFERENCES ai_core.ai_turn(id),
     principal_id VARCHAR(255),
     role VARCHAR(32),
     market_code VARCHAR(8),
@@ -77,8 +83,8 @@ CREATE TABLE IF NOT EXISTS ai_core.ai_context_snapshot (
 );
 
 CREATE TABLE IF NOT EXISTS ai_core.ai_domain_reference (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    turn_id UUID NOT NULL REFERENCES ai_core.ai_turn(id),
+    id TEXT PRIMARY KEY,
+    turn_id TEXT NOT NULL REFERENCES ai_core.ai_turn(id),
     target_domain VARCHAR(64) NOT NULL,
     target_resource_type VARCHAR(64) NOT NULL,
     target_resource_id VARCHAR(255) NOT NULL,
@@ -87,9 +93,9 @@ CREATE TABLE IF NOT EXISTS ai_core.ai_domain_reference (
 );
 
 CREATE TABLE IF NOT EXISTS ai_core.ai_citation (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    turn_id UUID NOT NULL REFERENCES ai_core.ai_turn(id),
-    message_id UUID REFERENCES ai_core.ai_message(id),
+    id TEXT PRIMARY KEY,
+    turn_id TEXT NOT NULL REFERENCES ai_core.ai_turn(id),
+    message_id TEXT REFERENCES ai_core.ai_message(id),
     citation_id VARCHAR(64) NOT NULL,
     source_type VARCHAR(32) NOT NULL,
     source_id VARCHAR(255) NOT NULL,
@@ -107,9 +113,29 @@ CREATE TABLE IF NOT EXISTS ai_core.ai_citation (
 -- Schema: ai_rag
 -- =============================================
 
+-- Knowledge base chunks with embeddings (pgvector)
+CREATE TABLE IF NOT EXISTS ai_rag.ai_knowledge_chunk (
+    chunk_id VARCHAR(255) PRIMARY KEY,
+    title VARCHAR(512),
+    content TEXT NOT NULL,
+    embedding vector(1536),
+    source_type VARCHAR(32),
+    source_id VARCHAR(255),
+    source_version VARCHAR(64),
+    section VARCHAR(255),
+    url TEXT,
+    market_code VARCHAR(8),
+    access_class VARCHAR(16) NOT NULL DEFAULT 'K0',
+    release_state VARCHAR(16) NOT NULL DEFAULT 'ACTIVE',
+    effective_at TIMESTAMPTZ,
+    release_id VARCHAR(64),
+    content_hash VARCHAR(128),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
 CREATE TABLE IF NOT EXISTS ai_rag.ai_retrieval_run (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    turn_id UUID NOT NULL REFERENCES ai_core.ai_turn(id),
+    id TEXT PRIMARY KEY,
+    turn_id TEXT NOT NULL REFERENCES ai_core.ai_turn(id),
     strategy VARCHAR(32) NOT NULL DEFAULT 'hybrid',
     query_text TEXT NOT NULL,
     query_embedding vector(1536),
@@ -119,8 +145,8 @@ CREATE TABLE IF NOT EXISTS ai_rag.ai_retrieval_run (
 );
 
 CREATE TABLE IF NOT EXISTS ai_rag.ai_retrieval_hit (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    retrieval_run_id UUID NOT NULL REFERENCES ai_rag.ai_retrieval_run(id),
+    id TEXT PRIMARY KEY,
+    retrieval_run_id TEXT NOT NULL REFERENCES ai_rag.ai_retrieval_run(id),
     chunk_id VARCHAR(255) NOT NULL,
     score REAL NOT NULL DEFAULT 0,
     rank INTEGER NOT NULL DEFAULT 0,
@@ -137,8 +163,8 @@ CREATE TABLE IF NOT EXISTS ai_rag.ai_retrieval_hit (
 -- =============================================
 
 CREATE TABLE IF NOT EXISTS ai_governance.ai_policy_decision (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    turn_id UUID NOT NULL REFERENCES ai_core.ai_turn(id),
+    id TEXT PRIMARY KEY,
+    turn_id TEXT NOT NULL REFERENCES ai_core.ai_turn(id),
     decision_type VARCHAR(64) NOT NULL,
     effect VARCHAR(16) NOT NULL,
     principal_role VARCHAR(32),
@@ -150,8 +176,8 @@ CREATE TABLE IF NOT EXISTS ai_governance.ai_policy_decision (
 );
 
 CREATE TABLE IF NOT EXISTS ai_governance.ai_model_invocation (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    turn_id UUID NOT NULL REFERENCES ai_core.ai_turn(id),
+    id TEXT PRIMARY KEY,
+    turn_id TEXT NOT NULL REFERENCES ai_core.ai_turn(id),
     provider VARCHAR(32) NOT NULL,
     model_id VARCHAR(128) NOT NULL,
     prompt_tokens INTEGER DEFAULT 0,
@@ -164,9 +190,9 @@ CREATE TABLE IF NOT EXISTS ai_governance.ai_model_invocation (
 );
 
 CREATE TABLE IF NOT EXISTS ai_governance.ai_handoff (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    conversation_id UUID NOT NULL REFERENCES ai_core.ai_conversation(id),
-    turn_id UUID NOT NULL REFERENCES ai_core.ai_turn(id),
+    id TEXT PRIMARY KEY,
+    conversation_id TEXT NOT NULL REFERENCES ai_core.ai_conversation(id),
+    turn_id TEXT NOT NULL REFERENCES ai_core.ai_turn(id),
     principal_id VARCHAR(255),
     principal_role VARCHAR(32),
     reason TEXT NOT NULL,
@@ -181,9 +207,9 @@ CREATE TABLE IF NOT EXISTS ai_governance.ai_handoff (
 );
 
 CREATE TABLE IF NOT EXISTS ai_governance.ai_feedback (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    message_id UUID NOT NULL,
-    conversation_id UUID NOT NULL REFERENCES ai_core.ai_conversation(id),
+    id TEXT PRIMARY KEY,
+    message_id TEXT NOT NULL,
+    conversation_id TEXT NOT NULL REFERENCES ai_core.ai_conversation(id),
     principal_id VARCHAR(255),
     rating INTEGER CHECK (rating >= 1 AND rating <= 5),
     category VARCHAR(32),
@@ -193,13 +219,28 @@ CREATE TABLE IF NOT EXISTS ai_governance.ai_feedback (
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+-- Generic audit / evidence log
+CREATE TABLE IF NOT EXISTS ai_governance.ai_audit_log (
+    id TEXT PRIMARY KEY,
+    trace_id VARCHAR(64),
+    request_id VARCHAR(64),
+    conversation_id TEXT,
+    turn_id TEXT,
+    event_type VARCHAR(64) NOT NULL,
+    principal_id VARCHAR(255),
+    principal_role VARCHAR(32),
+    market_code VARCHAR(8),
+    payload JSONB,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
 -- =============================================
--- Schema: ai_action (infrastructure ready, P0 stubs)
+-- Schema: ai_action
 -- =============================================
 
 CREATE TABLE IF NOT EXISTS ai_action.ai_action_intent (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    turn_id UUID NOT NULL REFERENCES ai_core.ai_turn(id),
+    id TEXT PRIMARY KEY,
+    turn_id TEXT NOT NULL REFERENCES ai_core.ai_turn(id),
     action_type VARCHAR(128) NOT NULL,
     agency_tier VARCHAR(8) NOT NULL DEFAULT 'A2',
     target_domain VARCHAR(64) NOT NULL,
@@ -215,8 +256,8 @@ CREATE TABLE IF NOT EXISTS ai_action.ai_action_intent (
 );
 
 CREATE TABLE IF NOT EXISTS ai_action.ai_action_confirmation (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    action_intent_id UUID NOT NULL REFERENCES ai_action.ai_action_intent(id),
+    id TEXT PRIMARY KEY,
+    action_intent_id TEXT NOT NULL REFERENCES ai_action.ai_action_intent(id),
     principal_id VARCHAR(255) NOT NULL,
     confirmation_method VARCHAR(32) NOT NULL,
     bound_parameter_hash VARCHAR(128) NOT NULL,
@@ -229,9 +270,9 @@ CREATE TABLE IF NOT EXISTS ai_action.ai_action_confirmation (
 );
 
 CREATE TABLE IF NOT EXISTS ai_action.ai_action_execution (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    action_intent_id UUID NOT NULL REFERENCES ai_action.ai_action_intent(id),
-    confirmation_id UUID REFERENCES ai_action.ai_action_confirmation(id),
+    id TEXT PRIMARY KEY,
+    action_intent_id TEXT NOT NULL REFERENCES ai_action.ai_action_intent(id),
+    confirmation_id TEXT REFERENCES ai_action.ai_action_confirmation(id),
     idempotency_key VARCHAR(128) NOT NULL,
     attempt_no INTEGER NOT NULL DEFAULT 1,
     authz_decision_id VARCHAR(255),

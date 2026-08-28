@@ -22,6 +22,10 @@ export function NavActions() {
         <Search className="h-5 w-5" />
       </button>
 
+      <Button href="/chat" variant="secondary" size="sm" className="hidden sm:inline-flex">
+        Assistant
+      </Button>
+
       <Button href="/login" variant="secondary" size="sm" className="hidden sm:inline-flex">
         {t("Sign in")}
       </Button>

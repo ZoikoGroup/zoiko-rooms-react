@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Send, Trash2 } from "lucide-react";
+import { Send, Trash2, Mic, MicOff } from "lucide-react";
 import Markdown from "react-markdown";
 import { useChatContext } from "./ChatProvider";
 import { AnswerCard } from "./AnswerCard";
+import { ContactCard } from "./ContactCard";
+import { useVoiceInput } from "./use-voice-input";
 
 const WELCOME_MESSAGE = "Hello! I'm the Zoiko Rooms assistant. I can help you with:\n\n- **Finding a room** — search, filtering, and application guidance\n- **Listing a room** — how to list and manage your property\n- **Payments & payouts** — understanding how payments work\n- **Compliance** — England housing requirements\n- **Account help** — navigating your dashboard\n\nHow can I help you today?";
 
@@ -43,10 +45,52 @@ function SystemMessage({ content }: { content: string }) {
 }
 
 export function ChatPanel() {
-  const { messages, isLoading, error, sendMessage, clearMessages } = useChatContext();
+  const { messages, isLoading, error, sendMessage, clearMessages, contact } = useChatContext();
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const voice = useVoiceInput();
+  const [voiceNotice, setVoiceNotice] = useState<string | null>(null);
+
+  // When voice recognition finalizes, send the spoken text immediately so the
+  // user doesn't have to stop the mic / press send. The mic turns off by itself.
+  useEffect(() => {
+    if (voice.committed) {
+      sendMessage(voice.committed);
+      voice.clearCommitted();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [voice.committed]);
+
+  // Surface validation/permission/error states as visible, non-silent feedback.
+  useEffect(() => {
+    switch (voice.status) {
+      case "denied":
+        setVoiceNotice(
+          "Microphone access is blocked. Enable the mic in your browser (lock icon by the address bar) and try again."
+        );
+        break;
+      case "no-speech":
+        setVoiceNotice("No speech detected — please try speaking again or type your message.");
+        break;
+      case "error":
+        setVoiceNotice("Speech recognition ran into a problem. You can still type your message.");
+        break;
+      default:
+        setVoiceNotice(null);
+    }
+  }, [voice.status]);
+
+  const toggleMic = () => {
+    setVoiceNotice(null);
+    if (voice.listening) {
+      voice.stop();
+    } else {
+      voice.start();
+    }
+  };
+
+  const micSupported = voice.supported;
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -152,17 +196,49 @@ export function ChatPanel() {
           </div>
         )}
 
+        {contact && <ContactCard contact={contact} />}
+
         <div ref={messagesEndRef} />
       </div>
 
       <div className="p-3" style={{ borderTopColor: "var(--color-header-border)", borderTopWidth: "1px", borderTopStyle: "solid" }}>
+        {voiceNotice && (
+          <div className="mb-2 rounded-lg px-3 py-2 text-xs" role="alert" style={{ backgroundColor: "var(--color-error-bg)", color: "var(--color-error-text)" }}>
+            {voiceNotice}
+          </div>
+        )}
+        {voice.listening && (
+          <div className="mb-2 flex items-center gap-2 rounded-lg px-3 py-2 text-xs" style={{ backgroundColor: "var(--color-welcome-bg)", color: "var(--color-welcome-text)" }}>
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
+            </span>
+            <span className="truncate">
+              {voice.liveTranscript ? `Listening… "${voice.liveTranscript}"` : "Listening… speak now — it will send automatically."}
+            </span>
+          </div>
+        )}
         <div className="flex items-end gap-2">
+          {micSupported && (
+            <button
+              onClick={toggleMic}
+              aria-label={voice.listening ? "Stop listening" : "Start voice input"}
+              title={voice.listening ? "Stop listening" : "Voice input"}
+              className="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-xl transition-colors"
+              style={{
+                backgroundColor: voice.listening ? "var(--color-brand-navy)" : "var(--color-hover-overlay)",
+                color: voice.listening ? "#fff" : "var(--color-gray-500)",
+              }}
+            >
+              {voice.listening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+            </button>
+          )}
           <textarea
             ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask me anything..."
+            placeholder={voice.listening ? "Listening…" : "Ask me anything..."}
             rows={1}
             className="flex-1 resize-none rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-1"
             style={{

@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { ExternalLink, ChevronDown, ChevronUp } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ExternalLink, ChevronDown, ChevronUp, Volume2, VolumeX } from "lucide-react";
 import Markdown from "react-markdown";
 import type { ChatMessage } from "./ChatProvider";
 import { Citation } from "./Citation";
+import { onTtsState, isSpeakingId, speakText, stopTts, ttsAvailable } from "./tts";
 
 interface AnswerCardProps {
   message: ChatMessage;
@@ -13,6 +14,21 @@ interface AnswerCardProps {
 
 export function AnswerCard({ message, onSuggestionClick }: AnswerCardProps) {
   const [showSources, setShowSources] = useState(false);
+  const [speakingThis, setSpeakingThis] = useState(() => isSpeakingId(message.id));
+  const canSpeak = ttsAvailable();
+
+  useEffect(() => {
+    const unsubscribe = onTtsState(() => setSpeakingThis(isSpeakingId(message.id)));
+    return unsubscribe;
+  }, [message.id]);
+
+  const toggleSpeak = () => {
+    if (speakingThis) {
+      stopTts();
+    } else {
+      speakText(message.content, message.id);
+    }
+  };
 
   const answerLabel = getAnswerLabel(message.answer_type);
   const { badgeBg, badgeText, badgeBorder } = getAnswerBadgeColors(message.answer_type);
@@ -41,9 +57,30 @@ export function AnswerCard({ message, onSuggestionClick }: AnswerCardProps) {
           <Markdown>{message.content}</Markdown>
         </div>
 
-        <span className="mt-1 block text-[10px] px-1" style={{ color: "var(--color-gray-400)" }}>
-          {formatTime(message.created_at)}
-        </span>
+        <div className="mt-1 flex items-center gap-1 px-1">
+          {canSpeak && message.content.trim() && (
+            <button
+              onClick={toggleSpeak}
+              aria-label={speakingThis ? "Stop reading aloud" : "Read response aloud"}
+              title={speakingThis ? "Stop reading aloud" : "Read response aloud"}
+              className="flex h-5 w-5 items-center justify-center rounded-full transition-colors"
+              style={{ color: speakingThis ? "var(--color-brand-navy)" : "var(--color-gray-400)" }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "var(--color-hover-overlay)";
+                e.currentTarget.style.color = "var(--color-gray-700)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "transparent";
+                e.currentTarget.style.color = speakingThis ? "var(--color-brand-navy)" : "var(--color-gray-400)";
+              }}
+            >
+              {speakingThis ? <VolumeX className="h-3.5 w-3.5" /> : <Volume2 className="h-3.5 w-3.5" />}
+            </button>
+          )}
+          <span className="text-[10px]" style={{ color: "var(--color-gray-400)" }}>
+            {formatTime(message.created_at)}
+          </span>
+        </div>
 
         {message.citations && message.citations.length > 0 && (
           <div className="mt-2">

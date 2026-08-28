@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useCallback } from "react";
-import { Sun, Moon, Plus, Trash2, Clock } from "lucide-react";
+import { Sun, Moon, Plus, Trash2 } from "lucide-react";
 import { useChatContext } from "./ChatProvider";
 
 interface MenuDropdownProps {
@@ -151,24 +151,6 @@ export function MenuDropdown({ isOpen, onClose, triggerRef }: MenuDropdownProps)
             <Moon className="h-4 w-4 flex-shrink-0" style={{ color: "var(--color-brand-navy)" }} />
           )}
           <span>{resolvedTheme === "dark" ? "Light mode" : "Dark mode"}</span>
-        </button>
-
-        <div
-          className="border-t px-3 py-1"
-          style={{ borderColor: "var(--color-menu-border)" }}
-        />
-
-        <button
-          disabled
-          className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-left opacity-50 cursor-not-allowed"
-          style={{
-            color: "var(--color-menu-item-text)",
-          }}
-          role="menuitem"
-          aria-disabled="true"
-        >
-          <Clock className="h-4 w-4 flex-shrink-0" style={{ color: "var(--color-gray-400)" }} />
-          <span>Conversation history</span>
         </button>
       </div>
     </div>
