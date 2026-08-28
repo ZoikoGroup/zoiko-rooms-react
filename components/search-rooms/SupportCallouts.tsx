@@ -63,10 +63,10 @@ export function SupportCallouts({ onEditSearch, onSaveSearch }: SupportCalloutsP
           <a href="/how-it-works/verification-authority" className="transition-colors hover:text-brand-red-dark">
             {t("Verification & Authority")}
           </a>
-          <a href="/resources" className="transition-colors hover:text-brand-red-dark">
+          <a href="/resources/safety-scam-prevention" className="transition-colors hover:text-brand-red-dark">
             {t("Safety & Scam Prevention")}
           </a>
-          <a href="/resources" className="transition-colors hover:text-brand-red-dark">
+          <a href="/resources/help-center" className="transition-colors hover:text-brand-red-dark">
             {t("Get Support")}
           </a>
         </div>

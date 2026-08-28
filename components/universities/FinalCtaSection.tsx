@@ -26,10 +26,10 @@ export function FinalCtaSection() {
             <Button href="#choose-your-model" size="lg" variant="outline">
               Explore University Models
             </Button>
-            <Button href="/pro" size="lg" variant="outline">
+            <Button href="/pro/overview" size="lg" variant="outline">
               Explore Zoiko Rooms Pro
             </Button>
-            <Button href="/resources" size="lg" variant="outline">
+            <Button href="/resources/" size="lg" variant="outline">
               Talk to Zoiko Rooms
             </Button>
           </motion.div>

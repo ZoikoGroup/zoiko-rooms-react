@@ -20,7 +20,7 @@ const modules = [
     title: "Rooms by City",
     description: "Explore city context, cost patterns, transport, and availability.",
     cta: "Explore Rooms by City",
-    href: "/find-a-room/rooms-by-city",
+    href: "/rooms-by-city",
   },
   {
     icon: GraduationCap,

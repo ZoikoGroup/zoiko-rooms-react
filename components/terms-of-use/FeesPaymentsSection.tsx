@@ -36,7 +36,7 @@ export default function FeesPaymentsSection() {
       {/* Action Link */}
       <div>
         <a
-          href="#"
+          href="/legal/payment-terms"
           className="inline-flex items-center gap-1.5 text-sm font-bold text-[#93321F] hover:underline"
         >
           <span>{t("Read the full Payment Terms")}</span>

@@ -27,7 +27,7 @@ export function InstitutionalScaleSection() {
             ))}
           </div>
 
-          <Button href="/pro" size="lg" variant="secondary">
+          <Button href="/pro/overview" size="lg" variant="secondary">
             Explore Zoiko Rooms Pro
           </Button>
         </Reveal>
