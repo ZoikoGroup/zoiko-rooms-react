@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Check, X } from "lucide-react";
 import { fadeUp } from "@/lib/motion";
 
 export function Eyebrow({ children, className = "" }: { children: React.ReactNode; className?: string }) {
@@ -69,56 +70,36 @@ export function BulletList({ items, className = "" }: { items: string[]; classNa
   );
 }
 
+export function CheckList({ items, className = "" }: { items: string[]; className?: string }) {
+  return (
+    <ul className={`flex flex-col gap-2.5 ${className}`}>
+      {items.map((item) => (
+        <motion.li key={item} variants={fadeUp} className="flex items-start gap-2.5 text-sm leading-relaxed text-[#5B5548]">
+          <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
+          <span>{item}</span>
+        </motion.li>
+      ))}
+    </ul>
+  );
+}
+
+export function CrossList({ items, className = "" }: { items: string[]; className?: string }) {
+  return (
+    <ul className={`flex flex-col gap-2.5 ${className}`}>
+      {items.map((item) => (
+        <motion.li key={item} variants={fadeUp} className="flex items-start gap-2.5 text-sm leading-relaxed text-[#5B5548]">
+          <X className="mt-0.5 h-4 w-4 shrink-0 text-brand-red" />
+          <span>{item}</span>
+        </motion.li>
+      ))}
+    </ul>
+  );
+}
+
 export function Card({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <motion.div variants={fadeUp} className={`rounded-2xl border border-[#E9E0D3] bg-white p-6 ${className}`}>
       {children}
-    </motion.div>
-  );
-}
-
-type CalloutTone = "tan" | "dark";
-
-const calloutToneClasses: Record<CalloutTone, string> = {
-  tan: "border-[#E3C583] bg-[#FBF1DD] text-[#6B5518]",
-  dark: "border-white/10 bg-brand-navy text-[#C6CCDE]",
-};
-
-export function Callout({
-  label,
-  children,
-  tone = "tan",
-  className = "",
-}: {
-  label?: string;
-  children: React.ReactNode;
-  tone?: CalloutTone;
-  className?: string;
-}) {
-  return (
-    <motion.div variants={fadeUp} className={`rounded-2xl border p-5 sm:p-6 ${calloutToneClasses[tone]} ${className}`}>
-      {label && <p className="text-sm font-semibold">{label}</p>}
-      <p className={`text-sm leading-relaxed ${label ? "mt-1" : ""}`}>{children}</p>
-    </motion.div>
-  );
-}
-
-export type TableRow = {
-  label: string;
-  description: string;
-};
-
-export function KeyValueTable({ rows, className = "" }: { rows: TableRow[]; className?: string }) {
-  return (
-    <motion.div variants={fadeUp} className={`overflow-hidden rounded-2xl border border-[#E9E0D3] bg-white ${className}`}>
-      <div className="flex flex-col divide-y divide-[#E9E0D3]">
-        {rows.map((row) => (
-          <div key={row.label} className="grid grid-cols-1 gap-1 px-5 py-3.5 sm:grid-cols-[1fr_2fr] sm:items-baseline sm:gap-4">
-            <span className="text-sm font-semibold text-brand-navy">{row.label}</span>
-            <span className="text-sm leading-relaxed text-neutral-500">{row.description}</span>
-          </div>
-        ))}
-      </div>
     </motion.div>
   );
 }

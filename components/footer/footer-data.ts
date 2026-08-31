@@ -71,7 +71,7 @@ export const footerColumns: FooterColumnData[] = [
       { label: "Cookie Notice", href: "/legal/cookie-notice" },
       { label: "Cookie Preferences", href: "/legal/cookie-preferences" },
       { label: "Fair Housing & Anti-Discrimination", href: "/legal/fair-housing-anti-discrimination" },
-      { label: "Community Standards", href: "#" },
+      { label: "Community Standards", href: "/legal/community-standards" },
       { label: "Payment Terms", href: "/legal/payment-terms" },
       { label: "Regional Legal Notices", href: "/legal/regional-notice" },
       { label: "Your Privacy Choices", href: "/legal/your-privacy-choices" },
