@@ -1,4 +1,5 @@
 
+export { default as RoomsByCityView } from "./RoomsByCityView";
 export { default as RoomsByCitySection } from "./RoomsByCitySection";
 export { default as CoverageAssuranceSection } from "./CoverageAssuranceSection";
 export { default as FeaturedCitiesSection } from "./FeaturedCitiesSection";

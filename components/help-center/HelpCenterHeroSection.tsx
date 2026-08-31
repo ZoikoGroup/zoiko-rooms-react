@@ -22,7 +22,11 @@ interface HelpCategory {
   lastReviewed: string;
 }
 
-export default function HelpCenterHeroSection() {
+interface HelpCenterHeroSectionProps {
+  onSelectCategory?: (category: string) => void;
+}
+
+export default function HelpCenterHeroSection({ onSelectCategory }: HelpCenterHeroSectionProps) {
   const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -228,7 +232,8 @@ export default function HelpCenterHeroSection() {
                     {t(cat.lastReviewed)}
                   </span>
                   <a
-                    href="#"
+                    href="#support-request"
+                    onClick={() => onSelectCategory?.(cat.title)}
                     className="inline-flex underline items-center text-xs font-bold text-[#A85A34] hover:underline space-x-1 group"
                   >
                     <span>{t("Open help pathway")}</span>

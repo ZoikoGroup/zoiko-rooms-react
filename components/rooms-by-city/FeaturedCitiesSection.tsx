@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Check } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
+import { cityData, type CityCardProps } from "./data";
 
 const floatUpVariants: Variants = {
   hidden: {
@@ -19,67 +21,6 @@ const floatUpVariants: Variants = {
   }),
 };
 
-interface CityCardProps {
-  name: string;
-  category: string; // Added category property
-  roomsCount?: string;
-  badgeText?: string;
-  priceRange: string;
-  reviewedDate: string;
-  imageUrl: string;
-}
-
-const cityData: CityCardProps[] = [
-  {
-    name: "Chicago, IL",
-    category: "Work & Healthcare Hubs",
-    roomsCount: "41 current rooms",
-    priceRange: "$800-$1,500/month displayed range",
-    reviewedDate: "Reviewed Jul 2026",
-    imageUrl: "/images/rooms-by-city/Background (4).png",
-  },
-  {
-    name: "Seattle, WA",
-    category: "Work & Healthcare Hubs",
-    roomsCount: "18 current rooms",
-    priceRange: "$1,050-$1,850/month displayed range",
-    reviewedDate: "Reviewed Jul 2026",
-    imageUrl: "/images/rooms-by-city/Background3.png",
-  },
-  {
-    name: "Philadelphia, PA",
-    category: "University Cities",
-    roomsCount: "12 current rooms",
-    priceRange: "$750-$1,400/month displayed range",
-    reviewedDate: "Reviewed Jul 2026",
-    imageUrl: "/images/rooms-by-city/Background5.png",
-  },
-  {
-    name: "Austin, TX",
-    category: "International Destinations",
-    roomsCount: "9 current rooms",
-    priceRange: "$850-$1,550/month displayed range",
-    reviewedDate: "Reviewed Jul 2026",
-    imageUrl: "/images/rooms-by-city/Background2.png",
-  },
-  {
-    name: "Denver, CO",
-    category: "Work & Healthcare Hubs",
-    badgeText: "Availability limited",
-    priceRange: "$900-$1,600/month displayed range",
-    reviewedDate: "Reviewed Jul 2026",
-    imageUrl: "/images/rooms-by-city/Background4.png",
-  },
-  {
-    name: "Boston, MA",
-    category: "University Cities",
-    roomsCount: "24 current rooms",
-    priceRange: "$950-$1,650/month displayed range",
-    reviewedDate: "Reviewed Jul 2026",
-    imageUrl: "/images/rooms-by-city/Background6.png",
-  },
-];
-
 const categories = [
   "All Cities",
   "University Cities",
@@ -87,7 +28,12 @@ const categories = [
   "International Destinations",
 ];
 
-export default function FeaturedCitiesSection() {
+interface FeaturedCitiesSectionProps {
+  selectedCities: string[];
+  onToggleCompare: (name: string) => void;
+}
+
+export default function FeaturedCitiesSection({ selectedCities, onToggleCompare }: FeaturedCitiesSectionProps) {
   const [activeCategory, setActiveCategory] = useState("All Cities");
 
   // Dynamic filtering logic
@@ -163,7 +109,11 @@ export default function FeaturedCitiesSection() {
                 custom={index * 0.05}
                 variants={floatUpVariants}
               >
-                <CityCard city={city} />
+                <CityCard
+                  city={city}
+                  compared={selectedCities.includes(city.name)}
+                  onToggleCompare={() => onToggleCompare(city.name)}
+                />
               </motion.div>
             ))}
           </div>
@@ -179,8 +129,30 @@ export default function FeaturedCitiesSection() {
   );
 }
 
-function CityCard({ city }: { city: CityCardProps }) {
-  const [compared, setCompared] = useState(false);
+interface CityCardComponentProps {
+  city: CityCardProps;
+  compared: boolean;
+  onToggleCompare: () => void;
+}
+
+function CityCard({ city, compared, onToggleCompare }: CityCardComponentProps) {
+  const [alertSaved, setAlertSaved] = useState(false);
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem(`zoiko-city-alert:${city.name}`) === "1";
+    if (saved) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time sync from localStorage on mount, not a render loop
+      setAlertSaved(true);
+    }
+  }, [city.name]);
+
+  function toggleAlert() {
+    setAlertSaved((prev) => {
+      const next = !prev;
+      window.localStorage.setItem(`zoiko-city-alert:${city.name}`, next ? "1" : "0");
+      return next;
+    });
+  }
 
   return (
     <motion.div
@@ -192,7 +164,7 @@ function CityCard({ city }: { city: CityCardProps }) {
         <input
           type="checkbox"
           checked={compared}
-          onChange={(e) => setCompared(e.target.checked)}
+          onChange={onToggleCompare}
           className="h-3.5 w-3.5 cursor-pointer rounded border-neutral-400 accent-sky-900"
         />
         <span>Compare</span>
@@ -238,8 +210,16 @@ function CityCard({ city }: { city: CityCardProps }) {
           <button className="text-xs font-semibold text-sky-900 transition-colors hover:underline hover:text-sky-950">
             Explore Rooms
           </button>
-          <button className="text-xs font-semibold text-stone-500 transition-colors hover:text-stone-800">
-            Save alert
+          <button
+            type="button"
+            onClick={toggleAlert}
+            aria-pressed={alertSaved}
+            className={`flex items-center gap-1 text-xs font-semibold transition-colors ${
+              alertSaved ? "text-emerald-700" : "text-stone-500 hover:text-stone-800"
+            }`}
+          >
+            {alertSaved && <Check className="h-3.5 w-3.5" />}
+            {alertSaved ? "Alert saved" : "Save alert"}
           </button>
         </div>
       </div>

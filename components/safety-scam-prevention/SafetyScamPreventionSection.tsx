@@ -47,7 +47,7 @@ export default function SafetyScamPreventionSection() {
 
           {/* Right Button (Transparent) */}
           <a
-            href={reportIssueHref}
+            href="/contact-us"
             className="w-full sm:w-auto inline-flex items-center justify-center bg-transparent hover:bg-white/10 text-white border border-white/30 hover:border-white text-xs font-semibold px-8 py-3.5 rounded-full transition-all duration-200 active:scale-95"
           >
             Report a Safety Issue

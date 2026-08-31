@@ -5,10 +5,20 @@ import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
-export default function SmallestAccountableRequestSection() {
+interface SmallestAccountableRequestSectionProps {
+  issueCategory: string;
+  onIssueCategoryChange: (value: string) => void;
+  yourRole: string;
+  onYourRoleChange: (value: string) => void;
+}
+
+export default function SmallestAccountableRequestSection({
+  issueCategory,
+  onIssueCategoryChange,
+  yourRole,
+  onYourRoleChange,
+}: SmallestAccountableRequestSectionProps) {
   const { t } = useLanguage();
-  const [issueCategory, setIssueCategory] = useState("Account & Identity");
-  const [yourRole, setYourRole] = useState("Room Seeker");
   const [currentImpact, setCurrentImpact] = useState("Cannot access");
   const [urgency, setUrgency] = useState("Standard");
   const [description, setDescription] = useState("");
@@ -20,7 +30,7 @@ export default function SmallestAccountableRequestSection() {
   };
 
   return (
-    <section className="w-full text-[#1E2022] pb-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
+    <section id="support-request" className="w-full scroll-mt-24 text-[#1E2022] pb-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Section Header */}
         <div className="flex flex-col items-start text-left space-y-3 w-full">
@@ -51,7 +61,7 @@ export default function SmallestAccountableRequestSection() {
                 <div className="relative">
                   <select
                     value={issueCategory}
-                    onChange={(e) => setIssueCategory(e.target.value)}
+                    onChange={(e) => onIssueCategoryChange(e.target.value)}
                     className="w-full bg-[#EFEFEF] border border-[#E9E0D3] text-[#14213D] text-xs sm:text-sm font-medium rounded-xl py-3.5 pl-4 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#1A2E6E]"
                   >
                     <option value="Account & Identity">
@@ -79,7 +89,7 @@ export default function SmallestAccountableRequestSection() {
                 <div className="relative">
                   <select
                     value={yourRole}
-                    onChange={(e) => setYourRole(e.target.value)}
+                    onChange={(e) => onYourRoleChange(e.target.value)}
                     className="w-full bg-[#EFEFEF] border border-[#E9E0D3] text-[#14213D] text-xs sm:text-sm font-medium rounded-xl py-3.5 pl-4 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#1A2E6E]"
                   >
                     <option value="Room Seeker">{t("Room Seeker")}</option>

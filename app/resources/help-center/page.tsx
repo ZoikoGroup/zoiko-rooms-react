@@ -1,15 +1,6 @@
 import type { Metadata } from "next";
 
-import {
-  HelpCenterHeroSection,
-  HelpAnswerExampleSection,
-  SmallestAccountableRequestSection,
-  CaseStatusAndPopularHelpSection,
-  SafetyAndPrivacySection,
-  OrganizationsProSupportSection,
-  FAQSection,
-  NextStepsCalloutSection,
-} from "@/components/help-center";
+import { HelpCenterView } from "@/components/help-center";
 
 export const metadata: Metadata = {
   title: "Help Center for Rooms and Listings | Zoiko Rooms",
@@ -18,16 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function HelpCenterPage() {
-  return (
-    <main>
-      <HelpCenterHeroSection />
-      <HelpAnswerExampleSection />
-      <SmallestAccountableRequestSection />
-      <CaseStatusAndPopularHelpSection />
-      <SafetyAndPrivacySection />
-      <OrganizationsProSupportSection />
-      <FAQSection />
-      <NextStepsCalloutSection />
-    </main>
-  );
+  return <HelpCenterView />;
 }

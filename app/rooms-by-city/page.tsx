@@ -1,19 +1,6 @@
 import type { Metadata } from "next";
 
-import {
-  BrowseMethodsSection,
-  BrowseByRegionSection,
-  CityComparisonSection,
-  CityPagePreviewSection,
-  CityGuidesSection,
-  CoverageAssuranceSection,
-  FeaturedCitiesSection,
-  FinalCtaSection,
-  LowInventorySection,
-  RoomsByCitySection,
-  RoomsByCityFaqSection,
-  TrustSafetySection,
-} from "@/components/rooms-by-city";
+import { RoomsByCityView } from "@/components/rooms-by-city";
 
 export const metadata: Metadata = {
   title: "Find Affordable Rooms by City | Zoiko Rooms",
@@ -22,20 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return (
-    <main>
-      <RoomsByCitySection />
-      <CoverageAssuranceSection />
-      <FeaturedCitiesSection />
-      <BrowseMethodsSection />
-      <CityComparisonSection />
-      <BrowseByRegionSection />
-      <CityPagePreviewSection />
-      <LowInventorySection />
-      <TrustSafetySection />
-      <CityGuidesSection />
-      <RoomsByCityFaqSection />
-      <FinalCtaSection />
-    </main>
-  );
+  return <RoomsByCityView />;
 }

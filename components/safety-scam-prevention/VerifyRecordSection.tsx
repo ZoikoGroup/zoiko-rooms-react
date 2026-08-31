@@ -99,7 +99,7 @@ export default function VerifyRecordSection() {
         {/* Bottom CTA Button */}
         <div className="">
           <a
-            href={ctaHref}
+            href="/how-it-works/room-passport"
             className="inline-flex items-center justify-center bg-[#1A2E6E] hover:bg-[#0D1629] text-white text-xs sm:text-sm font-bold py-3.5 px-8 rounded-full transition-all duration-200 shadow-sm active:scale-95 text-center whitespace-nowrap"
           >
             Check Room Passport

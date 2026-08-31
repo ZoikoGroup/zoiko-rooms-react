@@ -80,7 +80,10 @@ export default function RecoveryPlaybooksSection() {
   };
 
   return (
-    <section className="w-full text-[#1E2022] pb-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
+    <section
+      id="recovery-playbooks"
+      className="w-full text-[#1E2022] pb-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased"
+    >
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Section Header */}
         <div className="flex flex-col items-start text-left space-y-3 w-full">
