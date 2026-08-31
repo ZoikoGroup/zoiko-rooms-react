@@ -1,248 +1,205 @@
-import type { PillTone } from "./shared";
+import type { LucideIcon } from "lucide-react";
+import { Globe, Settings, Info, Compass, Accessibility, ShieldCheck } from "lucide-react";
 
-export type RegionKey = "england" | "california" | "germany" | "other";
-
-export type RegionOption = { key: RegionKey; label: string };
-
-export const regionOptions: RegionOption[] = [
-  { key: "england", label: "England" },
-  { key: "california", label: "United States — California" },
-  { key: "germany", label: "Germany" },
-  { key: "other", label: "Other / Global baseline" },
+export const tocItems = [
+  { id: "commitment", label: "Our Fair Housing Commitment" },
+  { id: "discrimination-look-like", label: "What Discrimination Can Look Like" },
+  { id: "listings-advertising", label: "Listings & Advertising" },
+  { id: "viewings-applications", label: "Viewings & Applications" },
+  { id: "screening-rental-terms", label: "Screening & Rental Terms" },
+  { id: "accessibility", label: "Accessibility & Accommodations" },
+  { id: "shared-homes", label: "Shared Homes & Roommate Preferences" },
+  { id: "report-discrimination", label: "Report Discrimination" },
+  { id: "review-reports", label: "How We Review Reports" },
+  { id: "enforcement-reviews", label: "Enforcement & Reviews" },
+  { id: "local-requirements", label: "Local Requirements" },
+  { id: "faqs", label: "Frequently Asked Questions" },
 ];
 
-export type RegionalRuleRow = { label: string; value: React.ReactNode };
-
-export type RegionProfile = {
-  effectiveDate: string;
-  eyebrow: string;
+export type CommitmentCard = {
+  icon: LucideIcon;
   title: string;
-  intro: string;
-  rows: { label: string; value: string }[];
-  externalLinks: { label: string; href: string }[];
-  notice: string;
+  description: string;
 };
 
-export const regionProfiles: Record<RegionKey, RegionProfile> = {
-  england: {
-    effectiveDate: "17 Aug 2026",
-    eyebrow: "Regional Rules · England",
-    title: "Equality Act protections, alongside Right to Rent.",
-    intro:
-      "The England profile combines Equality Act 2010 premises protections with the Right to Rent regime, without letting identity or immigration checks become a proxy for race or nationality discrimination.",
-    rows: [
-      { label: "Legal basis", value: "Equality Act 2010, Part 4 — disposal and management of premises." },
-      { label: "Race", value: "Includes colour, nationality/citizenship, and ethnic or national origins." },
-      { label: "Disability", value: "Reasonable adjustment duties apply; accessibility support route required." },
-      { label: "Right to Rent", value: "Required checks follow the approved Home Office workflow, applied consistently — never chosen by appearance, accent, or name." },
-      { label: "\"No DSS\" / benefits", value: "Blanket exclusion of benefit recipients is prohibited platform policy." },
-      { label: "Shared-home exceptions", value: "Coded narrowly; Zoiko Rooms may still apply a stricter platform standard." },
-    ],
-    externalLinks: [
-      { label: "GOV.UK guidance", href: "https://www.gov.uk/housing-local-and-community/renting-and-leasing" },
-      { label: "Equality and Human Rights Commission", href: "https://www.equalityhumanrights.com/" },
-    ],
-    notice:
-      "Updated Home Office Right to Rent codes published 30 June 2026 take effect 1 October 2026 — this page will update on that date, not before.",
-  },
-  california: {
-    effectiveDate: "17 Aug 2026",
-    eyebrow: "Regional Rules · United States — California",
-    title: "FEHA protections, alongside source-of-income rules.",
-    intro:
-      "The California profile applies the Fair Employment and Housing Act's housing protections together with the state's source-of-income rules, which prohibit refusing an applicant for using a housing voucher or other lawful income.",
-    rows: [
-      { label: "Legal basis", value: "Fair Employment and Housing Act (FEHA), Government Code § 12955." },
-      { label: "Race", value: "Includes color, ancestry, and national origin, per FEHA and the federal Fair Housing Act." },
-      { label: "Disability", value: "Reasonable accommodation and modification duties apply; no diagnosis required to request." },
-      { label: "Source of income", value: "Refusing a Section 8 voucher or other lawful income source is prohibited statewide." },
-      { label: "\"No DSS\" / benefits", value: "Blanket exclusion of benefit or voucher recipients is prohibited platform policy." },
-      { label: "Shared-home exceptions", value: "Coded narrowly; Zoiko Rooms may still apply a stricter platform standard." },
-    ],
-    externalLinks: [
-      { label: "CA Civil Rights Department", href: "https://calcivilrights.ca.gov/" },
-      { label: "HUD Fair Housing", href: "https://www.hud.gov/fairhousing" },
-    ],
-    notice:
-      "This profile reflects FEHA as currently in force. Local rent-control and just-cause ordinances are tracked separately and don't change this discrimination baseline.",
-  },
-  germany: {
-    effectiveDate: "17 Aug 2026",
-    eyebrow: "Regional Rules · Germany",
-    title: "AGG protections in private rentals.",
-    intro:
-      "The Germany profile applies the Allgemeines Gleichbehandlungsgesetz (AGG) to private rental listings, with narrower statutory exceptions for genuinely shared, owner-occupied housing than for larger portfolios.",
-    rows: [
-      { label: "Legal basis", value: "Allgemeines Gleichbehandlungsgesetz (AGG), §§ 19–21." },
-      { label: "Race / ethnic origin", value: "Protected under AGG §1; no inference from name, accent, or Stadtteil (district)." },
-      { label: "Disability", value: "Reasonable adjustment expectations apply; assistance-animal rules override ordinary pet rules." },
-      { label: "Small-landlord exception", value: "A narrower AGG exception exists for very small, owner-occupied buildings — coded tightly, never a general opt-out." },
-      { label: "\"No DSS\" / benefits", value: "Blanket exclusion of Bürgergeld or housing-benefit recipients is prohibited platform policy." },
-      { label: "Shared-home exceptions", value: "Coded narrowly; Zoiko Rooms may still apply a stricter platform standard." },
-    ],
-    externalLinks: [
-      { label: "Antidiskriminierungsstelle des Bundes", href: "https://www.antidiskriminierungsstelle.de/" },
-      { label: "AGG full text", href: "https://www.gesetze-im-internet.de/agg/" },
-    ],
-    notice:
-      "State-level (Land) tenant-protection rules vary and are layered on top of this federal AGG baseline — they never narrow it.",
-  },
-  other: {
-    effectiveDate: "17 Aug 2026",
-    eyebrow: "Regional Rules · Other / Global Baseline",
-    title: "The platform baseline, before local law is layered on.",
-    intro:
-      "Where a specific regional profile hasn't been published yet, this global platform baseline still applies in full — it's the floor, not a placeholder, and local law may only add protections on top of it.",
-    rows: [
-      { label: "Legal basis", value: "Zoiko Rooms platform policy, applied globally regardless of local statute." },
-      { label: "Protected grounds", value: "The full protected-grounds table above applies, platform-wide, by default." },
-      { label: "Disability", value: "Reasonable-adjustment request routing is available regardless of local legal requirement." },
-      { label: "\"No DSS\" / benefits", value: "Blanket exclusion of lawful-income or benefit recipients is prohibited platform policy." },
-      { label: "Shared-home exceptions", value: "None published for this region yet; standard protections apply without exception." },
-    ],
-    externalLinks: [{ label: "Contact our fair housing team", href: "/resources" }],
-    notice:
-      "A dedicated regional profile is added once local statutory detail has been reviewed and published — until then, this baseline governs.",
-  },
-};
-
-export const protectedGrounds: { ground: string; treatment: string; tone: PillTone; notes: string }[] = [
-  { ground: "Race, colour, ethnicity, ancestry, caste or descent", treatment: "Protected", tone: "green", notes: "No inference from name, photo, language, location or cultural markers." },
-  { ground: "National origin, nationality or citizenship", treatment: "Protected, with checks", tone: "amber", notes: "Eligibility checks only through the approved uniform workflow." },
-  { ground: "Religion, belief or non-belief", treatment: "Protected", tone: "green", notes: "No coded \"preferred faith\" language." },
-  { ground: "Sex", treatment: "Protected", tone: "green", notes: "Shared-facility exceptions need structured, market-approved criteria." },
-  { ground: "Sexual orientation", treatment: "Protected", tone: "green", notes: "Platform-wide, regardless of narrower local law." },
-  { ground: "Gender identity or expression", treatment: "Protected", tone: "green", notes: "Includes misgendering or identity-based exclusion." },
-  { ground: "Pregnancy, maternity or reproductive status", treatment: "Protected", tone: "green", notes: "No exclusion or disadvantage due to pregnancy or parental status." },
-  { ground: "Family, familial or parental status", treatment: "Protected", tone: "green", notes: "\"No children\" requires a lawful, market-specific basis." },
-  { ground: "Disability, health condition or neurodivergence", treatment: "Protected", tone: "green", notes: "Includes accommodation and assistance-animal rules." },
-  { ground: "Age", treatment: "Protected, with lawful limits", tone: "amber", notes: "Age-restricted or adult-only housing needs a structured legal basis." },
-  { ground: "Marital, civil-partnership or relationship status", treatment: "Protected", tone: "green", notes: "No exclusion based on single, married or divorced status." },
-  { ground: "Source of lawful income / benefits", treatment: "Protected as policy", tone: "amber", notes: "Affordability may be assessed on amount and reliability, not stigma." },
-  { ground: "Military or veteran status", treatment: "Protected as policy", tone: "amber", notes: "Some markets add explicit statutory duties." },
-  { ground: "Immigration status", treatment: "Protected against bias", tone: "amber", notes: "Eligibility checks preserved; never conflated with nationality or race." },
-  { ground: "Other locally protected status", treatment: "Where market applies", tone: "gray", notes: "Local rules can add state, provincial or city-level grounds." },
-];
-
-export const prohibitedConduct = [
-  { title: "Refusal or exclusion", description: "Refusing to consider, rent to, communicate with, or progress someone because of a protected ground." },
-  { title: "Different terms", description: "Different rent, deposit, fees, stay length, access or house rules based on protected status." },
-  { title: "Steering", description: "Directing users toward or away from rooms or areas because of a protected attribute." },
-  { title: "Discriminatory advertising", description: "Listing text, photos, or off-platform links that signal a prohibited preference." },
-  { title: "Discriminatory screening", description: "Different income thresholds, documentation demands or response times for different groups." },
-  { title: "Proxy discrimination", description: "Using names, schools, postcodes or social profiles to reproduce excluded outcomes." },
-  { title: "Selective availability", description: "Claiming a room is unavailable to one person while offering it to another." },
-  { title: "Retaliation", description: "Punishing someone for reporting discrimination or requesting an accommodation." },
-  { title: "Off-platform circumvention", description: "Moving discriminatory screening to WhatsApp, phone or external forms to dodge controls." },
-];
-
-export const legitimateCriteria: { criterion: string; posture: string; guardrail: string }[] = [
-  { criterion: "Affordability / income", posture: "Assess ability to pay with consistent criteria.", guardrail: "Accept lawful income sources; no source-based stigma." },
-  { criterion: "Identity verification", posture: "Verify identity where necessary.", guardrail: "Same workflow for every comparable applicant." },
-  { criterion: "Credit / tenancy history", posture: "Use where lawful and disclosed.", guardrail: "No protected-status proxies in scoring." },
-  { criterion: "References", posture: "Request neutral references where lawful.", guardrail: "Don't demand culturally narrow reference types." },
-  { criterion: "Occupancy limits", posture: "Enforce lawful, objective capacity limits.", guardrail: "Never a pretext to exclude families." },
-  { criterion: "Smoking / substance rules", posture: "Set lawful property conduct rules.", guardrail: "Apply to conduct, not disability or medical status." },
-  { criterion: "Pets", posture: "Set pet rules.", guardrail: "Assistance-animal requirements override ordinary pet rules." },
-  { criterion: "Legal rental eligibility", posture: "Conduct required eligibility checks.", guardrail: "Only through the approved uniform process — no nationality shortcuts." },
-];
-
-export const accessibilityCards = [
+export const commitmentCards: CommitmentCard[] = [
   {
-    title: "Request accessibility support",
-    description: "Tell us what you need and we'll route it to a trained specialist. Accommodation requests tied to a live housing transaction are prioritised.",
-    points: [
-      "Accessible form, plus chat, email or phone where supported",
-      "Alternative communication formats on request",
-      "Health and accessibility details kept separate from your general profile",
-    ],
+    icon: Globe,
+    title: "Equal Access",
+    description: "Housing opportunities should not be hidden, withheld, or made materially harder to access because of a protected or policy-protected characteristic.",
   },
   {
-    title: "What listings should tell you",
-    description: "Structured accessibility features — step-free routes, lift access, doorway widths, bathroom features — with a verification status where a host has confirmed them.",
-    points: [
-      "Qualifying assistance animals are never treated as ordinary pets",
-      "Accommodation requests against neutral house rules aren't auto-denied",
-      "A denial comes with reasoning and, where appropriate, an alternative",
-    ],
+    icon: Settings,
+    title: "Consistent Criteria",
+    description: "Providers should apply legitimate eligibility criteria consistently to similarly situated applicants.",
+  },
+  {
+    icon: Info,
+    title: "Accurate Information",
+    description: "Availability, pricing, requirements, and property information should be communicated accurately and consistently.",
+  },
+  {
+    icon: Compass,
+    title: "No Steering",
+    description: "Do not direct, discourage, or channel people toward or away from particular housing opportunities for discriminatory reasons.",
+  },
+  {
+    icon: Accessibility,
+    title: "Accessibility",
+    description: "Users should have a clear way to request reasonable accommodations or adjustments where applicable.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Accountability",
+    description: "Discrimination reports are reviewed under applicable policy, evidence, and law, with proportionate action where warranted.",
   },
 ];
 
-export const harassmentRouting = [
-  { what: "A discriminatory message, slur, or exclusion", where: "Discrimination queue" },
-  { what: "A threat or immediate danger", where: "Safety escalation first" },
-  { what: "A retaliatory cancellation or eviction threat", where: "High-priority transaction review" },
-  { what: "Harassment in shared accommodation", where: "Safety + discrimination, dual track" },
-  { what: "Retaliation after an accommodation request", where: "Accommodation specialist" },
-  { what: "Reporting on behalf of someone else", where: "Third-party report, with consent check" },
+export const protectedCategoriesText =
+  "Zoiko Rooms does not allow discrimination based on race, color, ethnicity, nationality or national origin, religion or belief, sex, sexual orientation, gender identity or expression, disability, age, pregnancy or maternity, marital or civil partnership status, family or familial status, lawful source of income or receipt of benefits where protected, or any other characteristic protected by applicable law. Local rules and lawful exceptions may differ.";
+
+export const prohibitedConductExamples = [
+  "Refusing to provide property information, a viewing, or an application opportunity for a discriminatory reason.",
+  "Falsely stating that a room is unavailable to discourage a person because of a protected characteristic.",
+  "Applying different deposits, fees, rent, rules, screening thresholds, or tenancy terms for discriminatory reasons.",
+  "Using coded language or proxies to exclude protected groups.",
+  "Harassing or retaliating against someone for asserting fair housing rights or reporting discrimination.",
+  "Deliberately steering people toward or away from locations based on protected characteristics.",
+  "Ignoring a legally required accommodation or adjustment process.",
 ];
 
-export const enforcementLevels = [
-  { title: "Policy reminder & guidance", description: "First-time, lower-severity wording or conduct issues.", tone: "bg-emerald-400" },
-  { title: "Listing or message correction", description: "Discriminatory wording removed or edited before republishing.", tone: "bg-emerald-500" },
-  { title: "Feature restriction", description: "Listing publication or messaging limited pending review.", tone: "bg-amber-500" },
-  { title: "Temporary suspension", description: "Repeated or serious discriminatory conduct, or an open investigation.", tone: "bg-brand-red" },
-  { title: "Permanent removal", description: "Egregious or repeated discrimination, subject to governed human review.", tone: "bg-red-900" },
+export const listingsTableRows = [
+  { label: "Listing title", description: "Block explicit discriminatory exclusions and coded preference language." },
+  { label: "Description", description: "Detect and route potentially discriminatory statements; show contextual rewrite guidance." },
+  { label: "House rules", description: "Cannot override applicable anti-discrimination or accessibility obligations." },
+  { label: "Eligibility fields", description: "Only expose jurisdiction-approved questions and options." },
+  { label: "Images/captions", description: "Do not communicate discriminatory preference or exclusion." },
+  { label: "Outbound messages", description: "Apply the same policy controls to communications." },
+  { label: "Imported inventory", description: "Third-party feeds must pass the same controls." },
 ];
 
-export const reportSteps = ["Where", "What happened", "Related to", "Evidence", "What you need"];
+export const viewingsTableRows = [
+  { label: "Property info", description: "Provide detailed room features, rent breakdown, availability dates, and rule boundaries consistently to all seekers." },
+  { label: "Viewings", description: "Do not deny or delay viewings for discriminatory reasons. Apply consistent scheduling processes." },
+  { label: "Applications", description: "Use consistent, documented criteria for evaluating applications. Do not request prohibited information." },
+  { label: "Referencing/screening", description: "Collect only lawful, necessary, and relevant reference data in a consistent manner." },
+  { label: "Decision reasons", description: "Use factual eligibility criteria. State non-discriminatory reasons for application decline." },
+  { label: "Rent, deposit, fees", description: "Do not vary deposit sizes, rental amounts, or service charges for discriminatory reasons." },
+  { label: "Agreement terms", description: "Do not impose different lease lengths or material covenants based on protected status." },
+  { label: "Post-move-in", description: "Anti-discrimination expectations continue through maintenance requests, service access, and renewals." },
+];
 
-export const reportWhereOptions = ["Listing", "Message", "Application / decision", "Stay / tenancy", "Other"];
+export const screeningTableRows = [
+  { label: "Credit & background checks", description: "Apply the same check types and providers to similarly situated applicants." },
+  { label: "Income verification", description: "Use a consistent, documented income-to-rent threshold rather than an ad-hoc judgment." },
+  { label: "Guarantor requirements", description: "Request a guarantor only under consistent, disclosed criteria — never as a proxy for a protected characteristic." },
+  { label: "Rent-setting", description: "Base rent on disclosed, market-consistent factors, not on an applicant's protected status." },
+  { label: "Deposit calculation", description: "Calculate deposits the same way for similarly situated applicants and tenancy terms." },
+  { label: "Lease term & renewal", description: "Offer comparable lease lengths and renewal treatment to similarly situated tenants." },
+];
 
-export const reportConductOptions = [
-  "Refusal or exclusion",
-  "Different terms",
-  "Steering",
-  "Discriminatory advertising or screening",
-  "Selective availability",
+export const accessibilitySteps = [
+  { title: "Select Context", description: "Choose the specific listing, application, transaction, or account process you need support with." },
+  { title: "Choose Support Type", description: "Select from predefined accessibility categories or describe custom communication needs." },
+  { title: "Describe Changes", description: "Detail the requested accommodation clearly without requiring deep diagnostic details." },
+  { title: "Supporting Info", description: "Upload minimal verifying information only if permitted, relevant, and strictly necessary." },
+  { title: "System Routing", description: "Your request is securely routed to the verified provider or internal legal compliance team." },
+  { title: "Track Progress", description: "A secure, shared dashboard allows tracking and real-time messaging on accommodation setup." },
+];
+
+export const sharedHomesRequiredContext = [
+  { label: "Property type and occupancy model:", detail: "Explicit category definition (e.g. individual room in co-living, apartment share)." },
+  { label: "Whether the provider/owner occupies the dwelling:", detail: "Status of live-in versus absent landlords or primary tenants." },
+  { label: "Whether living areas are genuinely shared:", detail: "Confirmation that tenants share bathrooms, kitchens, or living rooms." },
+  { label: "Which spaces are shared:", detail: "Granular checklist of communal areas within the property." },
+  { label: "Jurisdiction and applicable market pack:", detail: "Local governing regulations applied based on address verification." },
+  { label: "Relevant lawful-exception code:", detail: "Documented legal grounds mapped to statutory local exceptions." },
+  { label: "Effective date and policy version:", detail: "Full audit trail mapping compliance checks to the current standard." },
+];
+
+export const sharedHomesGuardrails = [
+  { title: "Don't ask providers to interpret the law", description: "Providers configure their property attributes natively; our compliance engine determines legal options in the background." },
+  { title: "Explain narrowly why a field exists", description: "Contextual tips explain exactly which local fair housing regulations require or allow specific fields." },
+  { title: "Hide the field where context doesn't support it", description: "If the property is a self-contained entire apartment, gender or identity preference fields are automatically suppressed." },
+  { title: "Never reuse preferences for unrelated ranking", description: "Shared-living preferences are strictly used for filtering compatibility and are never fed into search visibility algorithms." },
+];
+
+export const reportCategories = [
+  "Discriminatory listing or house rule",
+  "Denied or restricted property information",
+  "Viewing discrimination",
+  "Application or screening discrimination",
+  "Different rent, deposit, fee, or rental term",
+  "Harassment or discriminatory communication",
+  "Accessibility/accommodation issue",
   "Retaliation",
-  "Harassment",
-  "A threat or immediate danger",
-  "Other",
+  "Search or platform visibility concern",
+  "Other housing discrimination concern",
 ];
 
-export const reportGroundOptions = [
-  "Race, ethnicity, or national origin",
-  "Religion or belief",
-  "Sex, sexual orientation, or gender identity",
-  "Pregnancy or family status",
-  "Disability or health condition",
-  "Age",
-  "Source of income or immigration status",
-  "I'd rather not say",
+export type ReviewFactor = {
+  title: string;
+  description: string;
+};
+
+export const reviewFactors: ReviewFactor[] = [
+  { title: "Severity and immediacy of harm", description: "Evaluating whether the reported act places users in immediate housing insecurity or physical vulnerability." },
+  { title: "Available evidence and provenance", description: "Assessing the reliability and audit trail of provided screenshots, messages, and transactional logs." },
+  { title: "Whether conduct affected access to housing opportunity", description: "Determining if the seeker was directly prevented from viewing, applying, or securing the room." },
+  { title: "Intent where relevant", description: "Analyzing patterns of interaction to identify structural bias versus systemic errors." },
+  { title: "Repeated or prior relevant violations", description: "Querying historical account logs to see if the provider is a repeat offender." },
+  { title: "Potential for remediation", description: "Deciding if the infraction can be corrected through education or content updates." },
+  { title: "Applicable market rules and legal obligations", description: "Reviewing local regional statutes mapped directly to the local market pack." },
+  { title: "Risk of retaliation or ongoing harm", description: "Mitigating further negative impact on the reporting user through proactive protective blocks." },
 ];
 
-export const reportOutcomeOptions = [
-  "I just want this reported and reviewed",
-  "I need a specific accommodation or adjustment",
-  "I need urgent safety help",
-  "I'd like someone to contact me directly",
+export type EnforcementAction = {
+  title: string;
+  description: string;
+};
+
+export const enforcementActions: EnforcementAction[] = [
+  { title: "Education / correction", description: "Clarify policy requirements or require mandatory listing/content updates before republication." },
+  { title: "Content restriction", description: "Remove, suppress, or prevent publication of noncompliant room descriptions and rules." },
+  { title: "Feature restriction", description: "Temporarily or permanently limit private messaging, listing creations, or applications." },
+  { title: "Transaction intervention", description: "Pause active room agreements or restrict ongoing payment workflows pending investigation." },
+  { title: "Warning", description: "Issue a formal written notice regarding specific conduct or repeated minor policy breaches." },
+  { title: "Suspension", description: "Implement a temporary account block to freeze all platform activity for a specified period." },
+  { title: "Removal", description: "Permanently disable the user account and associated listings for severe or repeated violations." },
+  { title: "Legal / safety escalation", description: "Initiate reporting to regulatory authorities or local law enforcement as required by statute." },
 ];
 
-export const faqs = [
-  {
-    question: "Can a host say \"no children\" or \"no pets\"?",
-    answer:
-      "\"No pets\" can be a lawful house rule, but assistance animals are never treated as ordinary pets. \"No children\" is treated as family-status discrimination unless a specific market pack recognizes a narrow, lawful exception for that listing type.",
-  },
-  {
-    question: "Is a Right to Rent check discriminatory?",
-    answer:
-      "Not when it's the required, uniform check applied to every applicant through the approved workflow. It becomes discriminatory the moment it's applied selectively — for example, only to applicants who look or sound like they might not be citizens.",
-  },
-  {
-    question: "Can I be excluded for receiving housing benefit?",
-    answer:
-      "No. Blanket \"no DSS\" or no-benefits exclusions are prohibited platform policy, regardless of whether local law treats source of income as a protected ground.",
-  },
-  {
-    question: "What happens after I submit a discrimination report?",
-    answer:
-      "Your report is routed based on what happened — straight to safety escalation for a threat, to the discrimination queue for other conduct — and reviewed by a trained specialist, with confidentiality maintained on a need-to-know basis.",
-  },
-  {
-    question: "Will reporting discrimination affect my account?",
-    answer:
-      "No. Retaliation against anyone for reporting discrimination or requesting an accommodation is itself prohibited conduct, and is tracked separately if it occurs.",
-  },
+export const localRequirementsRows = [
+  { label: "Protected grounds", description: "Local laws extend protections to specific groups (e.g. military status, receipt of public assistance)." },
+  { label: "Shared-living rules", description: "Variations in how gender and occupancy preferences are permitted in shared apartments." },
+  { label: "Advertising", description: "Stricter pre-publication scans for local housing authority compliance." },
+  { label: "Screening", description: "Bans on specific financial or background screening checks in select cities." },
+  { label: "Accommodation", description: "Differing statutory definitions of what constitutes a 'reasonable' process adjustment." },
+  { label: "Reporting", description: "Statutory requirements to route specific discrimination reports directly to local civil rights commissions." },
+  { label: "Enforcement", description: "Varying warning periods and fine structures mandated by municipal housing codes." },
+  { label: "Retention", description: "Local data privacy guidelines determining how long compliance logs must be archived." },
+  { label: "Localization", description: "Applying regional translations and terminology matches for compliance readability." },
 ];
+
+export type FairHousingFaq = {
+  question: string;
+  answer: string;
+};
+
+export const faqs: FairHousingFaq[] = [
+  { question: "What is Zoiko Rooms' fair housing policy?", answer: "Zoiko Rooms prohibits discrimination that unlawfully or unfairly restricts access to housing opportunities on the platform." },
+  { question: "What housing discrimination is prohibited on Zoiko Rooms?", answer: "Discrimination based on race, color, ethnicity, nationality, religion, sex, sexual orientation, gender identity, disability, pregnancy, marital status, family status, source of income, or other protected characteristic." },
+  { question: "Can a room listing state a roommate preference?", answer: "Only through structured, jurisdiction-approved fields where legally permitted, not through free-text exclusions." },
+  { question: "How do I report housing discrimination on Zoiko Rooms?", answer: "Use the Report Discrimination option from the listing, profile, message, application, or support pathway." },
+  { question: "How do I request an accommodation?", answer: "Use the Request an Accommodation button or contact Accessibility Support." },
+  { question: "Can a provider use different screening criteria for different applicants?", answer: "Providers should apply consistent, documented criteria to similarly situated applicants." },
+  { question: "What happens after a discrimination report?", answer: "Zoiko Rooms reviews relevant information and determines whether action is appropriate." },
+  { question: "Do fair housing rules differ by country or state?", answer: "Yes. Local housing and anti-discrimination requirements vary. Zoiko Rooms applies jurisdiction-specific rules where relevant." },
+];
+
+export const documentMeta = {
+  title: "Fair Housing & Anti-Discrimination Policy",
+  version: "2.0",
+  effective: "August 28, 2026",
+  lastUpdated: "August 28, 2026",
+};

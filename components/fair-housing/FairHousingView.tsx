@@ -1,31 +1,48 @@
-"use client";
-
-import { useState } from "react";
+import { Container } from "@/components/ui";
 import { HeroSection } from "./HeroSection";
-import { ProtectedGroundsSection } from "./ProtectedGroundsSection";
-import { LegitimateCriteriaSection } from "./LegitimateCriteriaSection";
-import { DisabilityAccessibilitySection } from "./DisabilityAccessibilitySection";
-import { HarassmentRetaliationSafetySection } from "./HarassmentRetaliationSafetySection";
-import { PlatformEnforcementSection } from "./PlatformEnforcementSection";
+import { TableOfContentsSidebar } from "./TableOfContentsSidebar";
+import { CommitmentSection } from "./CommitmentSection";
+import { DiscriminationLookLikeSection } from "./DiscriminationLookLikeSection";
+import { ListingsAdvertisingSection } from "./ListingsAdvertisingSection";
+import { ViewingsApplicationsSection } from "./ViewingsApplicationsSection";
+import { ScreeningRentalTermsSection } from "./ScreeningRentalTermsSection";
+import { AccessibilitySection } from "./AccessibilitySection";
+import { SharedHomesSection } from "./SharedHomesSection";
 import { ReportDiscriminationSection } from "./ReportDiscriminationSection";
-import { RegionalRulesSection } from "./RegionalRulesSection";
+import { ReviewReportsSection } from "./ReviewReportsSection";
+import { EnforcementReviewsSection } from "./EnforcementReviewsSection";
+import { LocalRequirementsSection } from "./LocalRequirementsSection";
 import { FaqSection } from "./FaqSection";
-import type { RegionKey } from "./data";
+import { FinalCtaSection } from "./FinalCtaSection";
+import { DocMetaFooterSection } from "./DocMetaFooterSection";
 
 export function FairHousingView() {
-  const [region, setRegion] = useState<RegionKey>("england");
-
   return (
     <>
-      <HeroSection region={region} onRegionChange={setRegion} />
-      <ProtectedGroundsSection />
-      <LegitimateCriteriaSection />
-      <DisabilityAccessibilitySection />
-      <HarassmentRetaliationSafetySection />
-      <PlatformEnforcementSection />
-      <ReportDiscriminationSection />
-      <RegionalRulesSection region={region} />
+      <HeroSection />
+      <Container className="pb-10 pt-10">
+        <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-16">
+          <TableOfContentsSidebar />
+          <div className="min-w-0 flex-1">
+            <CommitmentSection />
+            <DiscriminationLookLikeSection />
+            <ListingsAdvertisingSection />
+            <ViewingsApplicationsSection />
+            <ScreeningRentalTermsSection />
+          </div>
+        </div>
+      </Container>
+      <Container className="pb-20">
+        <AccessibilitySection />
+        <SharedHomesSection />
+        <ReportDiscriminationSection />
+        <ReviewReportsSection />
+        <EnforcementReviewsSection />
+        <LocalRequirementsSection />
+      </Container>
       <FaqSection />
+      <FinalCtaSection />
+      <DocMetaFooterSection />
     </>
   );
 }

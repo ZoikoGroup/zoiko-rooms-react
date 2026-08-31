@@ -1,87 +1,75 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
-import { Container, Reveal } from "@/components/ui";
-import { fadeUp } from "@/lib/motion";
-import { useOnClickOutside } from "@/lib/hooks/useOnClickOutside";
-import { Paragraph, Callout } from "./shared";
-import { regionOptions, regionProfiles, type RegionKey } from "./data";
+import { ShieldCheck } from "lucide-react";
+import { Container, Reveal, ImageFade, Button } from "@/components/ui";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { Eyebrow, Paragraph } from "./shared";
 
-type HeroSectionProps = {
-  region: RegionKey;
-  onRegionChange: (region: RegionKey) => void;
-};
-
-export function HeroSection({ region, onRegionChange }: HeroSectionProps) {
-  const [open, setOpen] = useState(false);
-  const rootRef = useRef<HTMLDivElement>(null);
-  useOnClickOutside(rootRef, () => setOpen(false));
+export function HeroSection() {
   const { t } = useLanguage();
-
-  const activeLabel = regionOptions.find((option) => option.key === region)?.label ?? regionOptions[0].label;
-  const effectiveDate = regionProfiles[region].effectiveDate;
 
   return (
     <section className="py-10 sm:py-14">
       <Container>
-        <Reveal className="flex flex-col gap-5">
-          <motion.span variants={fadeUp} className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-red">
-            — {t("Legal · Fair Housing & Anti-Discrimination")}
-          </motion.span>
-          <motion.h1 variants={fadeUp} className="font-heading text-4xl font-medium text-brand-navy sm:text-5xl">
-            {t("Everyone deserves a fair chance to find a home.")}
-          </motion.h1>
-          <Paragraph>
+        <Reveal className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
+          <div className="flex flex-col gap-5">
+            <Eyebrow>{t("Fair Access")}</Eyebrow>
+            <h1 className="font-heading text-4xl font-medium text-brand-navy sm:text-5xl">
+              {t("Fair Housing & Anti-Discrimination")}
+            </h1>
+            <Paragraph>
+              {t("Everyone should be able to explore housing opportunities on Zoiko Rooms without unlawful discrimination.")}
+            </Paragraph>
+            <Paragraph className="text-sm text-neutral-500">
+              {t(
+                "We prohibit discriminatory conduct in housing-related listings, communications, access, screening, terms, and platform activity, subject to applicable law and legitimate jurisdiction-specific exceptions.",
+              )}
+            </Paragraph>
+
+            <div className="flex items-start gap-3 rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8] p-4">
+              <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand-red" />
+              <p className="text-sm leading-relaxed text-neutral-600">
+                <span className="font-semibold text-brand-navy">{t("Trust Note:")}</span>{" "}
+                {t("Local housing and anti-discrimination rules vary. Zoiko Rooms applies jurisdiction-specific requirements where relevant.")}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <Button href="#report-discrimination" variant="secondary" size="md">
+                {t("Report Discrimination")}
+              </Button>
+              <Button href="#accessibility" variant="outline" size="md">
+                {t("Request an Accommodation")}
+              </Button>
+              <a
+                href="/legal/community-standards"
+                className="text-sm font-semibold text-brand-navy underline underline-offset-2 hover:text-brand-red"
+              >
+                {t("Read Community Standards")} →
+              </a>
+            </div>
+          </div>
+
+          <div className="relative h-[320px] w-full overflow-hidden rounded-[32px] sm:h-[380px]">
+            <ImageFade
+              src="/images/fair-housing/hero-living-room.png"
+              alt={t("A bright, comfortable living room")}
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+        </Reveal>
+
+        <Reveal className="mt-10 rounded-2xl border border-[#E9E0D3] bg-white p-6 sm:p-8">
+          <h2 className="font-heading text-xl font-medium text-brand-navy">
+            {t("What is Zoiko Rooms' Fair Housing & Anti-Discrimination policy?")}
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#5B5548]">
             {t(
-              "Zoiko Rooms prohibits discrimination in listings, searches, messages, applications, screening, pricing, payments and housing decisions based on protected characteristics or other statuses covered by our policy."
+              "Zoiko Rooms prohibits discrimination that unlawfully or unfairly restricts access to housing opportunities on the platform. The policy applies to listings, communications, viewings, applications, screening, rental terms, accessibility, and other housing-related activity, with local legal requirements applied through jurisdiction-specific rules.",
             )}
-          </Paragraph>
-          <motion.p variants={fadeUp} className="text-xs text-neutral-400">
-            {t("Applies globally. Local legal rules and permitted exceptions vary.")}
-          </motion.p>
-
-          <motion.div variants={fadeUp} ref={rootRef} className="relative flex flex-wrap items-center gap-4">
-            <button
-              type="button"
-              onClick={() => setOpen((v) => !v)}
-              aria-haspopup="listbox"
-              aria-expanded={open}
-              className="flex items-center gap-2 rounded-full border border-[#E9E0D3] bg-[#FFFDF8] px-4 py-2 text-sm font-semibold text-brand-navy"
-            >
-              {t("Your region:")} {t(activeLabel)}
-              <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
-            </button>
-            <span className="text-xs text-neutral-400">{t("Effective:")} {effectiveDate}</span>
-
-            {open && (
-              <div className="absolute left-0 top-full z-20 mt-2 w-64 overflow-hidden rounded-xl border border-[#E9E0D3] bg-[#FFFDF8] shadow-lg">
-                {regionOptions.map((option) => (
-                  <button
-                    key={option.key}
-                    type="button"
-                    onClick={() => {
-                      onRegionChange(option.key);
-                      setOpen(false);
-                    }}
-                    className={`flex w-full items-center justify-between px-4 py-2.5 text-left text-sm transition-colors hover:bg-brand-cream ${
-                      option.key === region ? "font-semibold text-brand-red" : "text-brand-navy"
-                    }`}
-                  >
-                    {t(option.label)}
-                  </button>
-                ))}
-              </div>
-            )}
-          </motion.div>
-
-          <Callout label={t("Important distinction")} className="max-w-3xl">
-            {t(
-              "\"Protected by Zoiko Rooms policy\" is not the same statement as \"protected by every local statute.\" Our platform baseline is deliberately broader than many local laws — regional rules may add protections; they never quietly narrow this one."
-            )}
-          </Callout>
+          </p>
         </Reveal>
       </Container>
     </section>
