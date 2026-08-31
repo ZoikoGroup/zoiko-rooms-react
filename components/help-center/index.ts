@@ -1,3 +1,4 @@
+export { default as HelpCenterView } from "./HelpCenterView";
 export { default as HelpCenterHeroSection } from "./HelpCenterHeroSection";
 export { default as HelpAnswerExampleSection } from "./HelpAnswerExampleSection";
 export { default as SmallestAccountableRequestSection } from "./SmallestAccountableRequestSection";

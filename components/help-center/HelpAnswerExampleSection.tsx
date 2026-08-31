@@ -1,12 +1,19 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
-export default function HelpAnswerExampleSection() {
+interface HelpAnswerExampleSectionProps {
+  selectedPersona: string;
+  onSelectPersona: (persona: string) => void;
+}
+
+export default function HelpAnswerExampleSection({
+  selectedPersona,
+  onSelectPersona,
+}: HelpAnswerExampleSectionProps) {
   const { t } = useLanguage();
-  const [selectedPersona, setSelectedPersona] = useState("Room Seeker");
 
   const personas = [
     "Room Seeker",
@@ -29,10 +36,10 @@ export default function HelpAnswerExampleSection() {
             {personas.map((persona) => {
               const isActive = selectedPersona === persona;
               return (
-                <button
+                <a
                   key={persona}
-                  type="button"
-                  onClick={() => setSelectedPersona(persona)}
+                  href="#support-request"
+                  onClick={() => onSelectPersona(persona)}
                   className={`text-xs font-semibold py-2 px-4 rounded-full border transition-all duration-200 cursor-pointer ${
                     isActive
                       ? "bg-[#1A2E6E] text-white border-[#1A2E6E] shadow-xs"
@@ -40,7 +47,7 @@ export default function HelpAnswerExampleSection() {
                   }`}
                 >
                   {t(persona)}
-                </button>
+                </a>
               );
             })}
           </div>

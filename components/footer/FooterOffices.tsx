@@ -1,15 +1,16 @@
 "use client";
 
 import { footerOffices } from "./footer-data";
-import { LinkedinIcon, YoutubeIcon, XIcon, InstagramIcon, FacebookIcon } from "./SocialIcons";
+import { LinkedinIcon, YoutubeIcon, XIcon, InstagramIcon, FacebookIcon, PinterestIcon } from "./SocialIcons";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const socialLinks = [
-  { label: "LinkedIn", href: "#", Icon: LinkedinIcon },
-  { label: "YouTube", href: "#", Icon: YoutubeIcon },
-  { label: "X", href: "#", Icon: XIcon },
-  { label: "Instagram", href: "#", Icon: InstagramIcon },
-  { label: "Facebook", href: "#", Icon: FacebookIcon },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/zoiko-rooms", Icon: LinkedinIcon },
+  { label: "YouTube", href: "https://www.youtube.com/@ZoikoRooms", Icon: YoutubeIcon },
+  { label: "X", href: "https://x.com/ZoikoRoom", Icon: XIcon },
+  { label: "Instagram", href: "https://www.instagram.com/zoikorooms/", Icon: InstagramIcon },
+  { label: "Facebook", href: "https://www.facebook.com/zoikorooms/", Icon: FacebookIcon },
+  { label: "Pinterest", href: "https://www.pinterest.com/zoikorooms/", Icon: PinterestIcon },
 ];
 
 export function FooterOffices() {
@@ -30,6 +31,8 @@ export function FooterOffices() {
           <a
             key={label}
             href={href}
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label={label}
             className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/[0.08] text-white/80 transition-colors hover:bg-white/[0.14] hover:text-white"
           >

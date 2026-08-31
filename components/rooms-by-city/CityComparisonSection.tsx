@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion, type Variants } from "framer-motion";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { useRouter } from "next/navigation";
+import type { CityCardProps } from "./data";
 
 const floatUpVariants: Variants = {
   hidden: {
@@ -22,18 +23,14 @@ const floatUpVariants: Variants = {
 };
 
 interface CityComparisonProps {
-  selectedCount?: number;
-  onCompare?: () => void;
-  onSearchRooms?: () => void;
+  selectedCities: CityCardProps[];
 }
 
-export default function CityComparisonSection({
-  selectedCount = 0,
-  onCompare,
-  onSearchRooms,
-}: CityComparisonProps) {
+export default function CityComparisonSection({ selectedCities }: CityComparisonProps) {
   const { t } = useLanguage();
   const router = useRouter();
+  const [showComparison, setShowComparison] = useState(false);
+  const selectedCount = selectedCities.length;
   return (
     <section className="w-full border-t border-stone-200 bg-white px-6 pb-20 pt-12 font-['Inter',sans-serif] md:px-24">
       <div className="w-full max-w-[1240px] md:px-8">
@@ -110,7 +107,7 @@ export default function CityComparisonSection({
             <motion.button
               whileHover={{ scale: 1.02, backgroundColor: "#f5f5f4", borderColor: "#a8a29e" }}
               whileTap={{ scale: 0.98 }}
-              onClick={onCompare}
+              onClick={() => setShowComparison((prev) => !prev)}
               className="flex cursor-pointer items-center justify-center rounded-full border border-stone-200 bg-white px-7 py-3.5 text-base font-semibold text-gray-800 transition-colors duration-200"
             >
               {t("Compare Selected Cities")}
@@ -129,6 +126,59 @@ export default function CityComparisonSection({
               {t("Search Rooms")}
             </motion.button>
           </motion.div>
+
+          {showComparison && (
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="w-full pb-2"
+            >
+              {selectedCount === 0 ? (
+                <p className="rounded-2xl border border-stone-200 bg-stone-50 px-6 py-5 text-sm text-stone-500">
+                  {t('No cities selected yet. Check "Compare" on any city card above, then come back here.')}
+                </p>
+              ) : (
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {selectedCities.map((city) => (
+                    <div
+                      key={city.name}
+                      className="flex flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white"
+                    >
+                      <div className="relative h-32 w-full overflow-hidden p-3.5">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={city.imageUrl}
+                          alt={city.name}
+                          className="h-full w-full rounded-t-xl object-cover"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1 p-4">
+                        <h3 className="font-['Fraunces',serif] text-base font-semibold leading-7 text-gray-800">
+                          {city.name}
+                        </h3>
+                        {city.badgeText ? (
+                          <span className="w-fit rounded-full border border-yellow-800/30 bg-orange-100 px-2.5 py-0.5 text-xs font-semibold text-yellow-800">
+                            {t(city.badgeText)}
+                          </span>
+                        ) : (
+                          <span className="text-xs text-stone-500">{city.roomsCount}</span>
+                        )}
+                        <div className="mt-2 flex items-center justify-between border-t border-stone-100 pt-2.5 text-xs">
+                          <span className="text-stone-500">{t("Displayed rent signal")}</span>
+                          <span className="font-semibold text-gray-800">{city.priceRange}</span>
+                        </div>
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-stone-500">{t("Review date")}</span>
+                          <span className="font-medium text-gray-800">{city.reviewedDate}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          )}
 
           <motion.div
             initial="hidden"

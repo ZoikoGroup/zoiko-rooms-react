@@ -92,7 +92,7 @@ export const trustBadges: TrustBadge[] = [
     icon: ShieldCheck,
     title: "Evidence-Specific Verification",
     description: "See exactly which identity, authority, property, or regulatory checks have been completed.",
-    href: "/how-it-works",
+    href: "/resources/guides",
     tone: "red",
   },
   {
@@ -106,7 +106,7 @@ export const trustBadges: TrustBadge[] = [
     icon: Lock,
     title: "Security and Privacy",
     description: "Platform security, privacy controls, and responsible data practices.",
-    href: "#",
+    href: "/legal/privacy-notice",
     tone: "blue",
   },
   {

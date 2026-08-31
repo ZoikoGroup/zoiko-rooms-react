@@ -41,9 +41,11 @@ export const article = {
     "long term room for rent near me",
   ],
   socials: [
-    { label: "ZoikoRoom", href: "#" },
-    { label: "zoikorooms", href: "#" },
-    { label: "zoikoroom", href: "#" },
-    { label: "company/zoiko-rooms", href: "#" },
+    { label: "X", href: "https://x.com/ZoikoRoom" },
+    { label: "Instagram", href: "https://www.instagram.com/zoikorooms/" },
+    { label: "Facebook", href: "https://www.facebook.com/zoikorooms/" },
+    { label: "YouTube", href: "https://www.youtube.com/@ZoikoRooms" },
+    { label: "Pinterest", href: "https://www.pinterest.com/zoikorooms/" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/zoiko-rooms" },
   ],
 };
