@@ -20,7 +20,7 @@ export function FairHousingView() {
   return (
     <>
       <HeroSection />
-      <Container className="pb-20 pt-10">
+      <Container className="pb-10 pt-10">
         <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-16">
           <TableOfContentsSidebar />
           <div className="min-w-0 flex-1">
@@ -29,14 +29,16 @@ export function FairHousingView() {
             <ListingsAdvertisingSection />
             <ViewingsApplicationsSection />
             <ScreeningRentalTermsSection />
-            <AccessibilitySection />
-            <SharedHomesSection />
-            <ReportDiscriminationSection />
-            <ReviewReportsSection />
-            <EnforcementReviewsSection />
-            <LocalRequirementsSection />
           </div>
         </div>
+      </Container>
+      <Container className="pb-20">
+        <AccessibilitySection />
+        <SharedHomesSection />
+        <ReportDiscriminationSection />
+        <ReviewReportsSection />
+        <EnforcementReviewsSection />
+        <LocalRequirementsSection />
       </Container>
       <FaqSection />
       <FinalCtaSection />
