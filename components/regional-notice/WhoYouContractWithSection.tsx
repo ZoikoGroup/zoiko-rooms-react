@@ -113,7 +113,7 @@ export default function WhoYouContractWithSection() {
         {/* Terms Link */}
         <div className="pt-1">
           <a
-            href="/terms-of-use"
+            href="/legal/terms-of-use"
             className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#93321F] hover:underline"
           >
             <span>View Terms of Use</span>

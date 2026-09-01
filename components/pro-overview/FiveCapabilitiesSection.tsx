@@ -62,7 +62,7 @@ const capabilities: CapabilityCard[] = [
 export default function FiveCapabilitiesSection() {
   const { t } = useLanguage();
   return (
-    <section className="w-full bg-white py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
+    <section id="capabilities" className="w-full scroll-mt-24 bg-white py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header Block */}
         <div className="text-center space-y-3 max-w-3xl mx-auto">

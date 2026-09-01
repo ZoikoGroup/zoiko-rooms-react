@@ -39,7 +39,7 @@ export function HeroSection() {
               <Button href="#pathways" size="lg" variant="secondary">
                 {t("Explore Organization Pathways")}
               </Button>
-              <Button href="/resources" size="lg" variant="outline">
+              <Button href="/contact-us" size="lg" variant="outline">
                 {t("Talk to Zoiko Rooms")}
               </Button>
             </motion.div>

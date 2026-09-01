@@ -284,12 +284,12 @@ export default function HumanDecisionWorkflowSection() {
 
             {/* CTA Button */}
             <div className="pt-2">
-              <button
-                type="button"
-                className="bg-transparent hover:bg-[#FAF6F0] text-[#14213D] text-xs font-bold py-3.5 px-6 rounded-full border border-[#14213D] transition-all duration-200 cursor-pointer shadow-xs active:scale-95"
+              <a
+                href="/contact-us"
+                className="inline-flex items-center justify-center bg-transparent hover:bg-[#FAF6F0] text-[#14213D] text-xs font-bold py-3.5 px-6 rounded-full border border-[#14213D] transition-all duration-200 cursor-pointer shadow-xs active:scale-95"
               >
                 See What&apos;s Inside a Reviewer Decision Pocket
-              </button>
+              </a>
             </div>
           </div>
         </div>

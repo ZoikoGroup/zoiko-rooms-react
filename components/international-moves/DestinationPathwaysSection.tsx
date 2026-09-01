@@ -1,13 +1,23 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { Check } from "lucide-react";
 import { Container, Reveal } from "@/components/ui";
 import { fadeUp, easeOut } from "@/lib/motion";
 import { Eyebrow, SectionTitle, SectionDivider } from "./shared";
 import { NaturalImage } from "@/components/find-a-room/NaturalImage";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
-const destinations = [
+interface Destination {
+  city: string;
+  description: string;
+  priceRange: string;
+  reviewedDate: string;
+  image: string;
+}
+
+const destinations: Destination[] = [
   {
     city: "New York City, United States",
     description: "Independent and organization-referred inventory",
@@ -44,44 +54,74 @@ export function DestinationPathwaysSection() {
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {destinations.map(({ city, description, priceRange, reviewedDate, image }) => (
-              <motion.div
-                key={city}
-                variants={fadeUp}
-                whileHover={{ y: -8, boxShadow: "0 20px 40px -12px rgba(14,47,115,0.25)" }}
-                transition={{ duration: 0.25, ease: easeOut }}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm"
-              >
-                <div className="overflow-hidden">
-                  <div className="transition-transform duration-500 ease-out group-hover:scale-105">
-                    <NaturalImage src={image} alt={city} />
-                  </div>
-                </div>
-                <div className="flex flex-col gap-1.5 p-5">
-                  <h3 className="font-heading text-lg font-medium text-brand-navy">{city}</h3>
-                  <p className="text-sm text-neutral-500">{t(description)}</p>
-                  <p className="mt-1 text-sm font-semibold text-brand-navy">{priceRange}</p>
-                  <p className="text-xs text-neutral-400">{t(reviewedDate)}</p>
-                  <div className="mt-3 flex items-center justify-between border-t border-[#E9E0D3] pt-3">
-                    <a
-                      href="/find-a-room"
-                      className="text-xs font-semibold text-brand-red transition-colors hover:text-brand-red-dark"
-                    >
-                      {t("Explore Rooms")}
-                    </a>
-                    <button
-                      type="button"
-                      className="text-xs font-semibold text-neutral-500 transition-colors hover:text-brand-navy"
-                    >
-                      {t("Save alert")}
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
+            {destinations.map((destination) => (
+              <DestinationCard key={destination.city} destination={destination} />
             ))}
           </div>
         </Reveal>
       </Container>
     </SectionDivider>
+  );
+}
+
+function DestinationCard({ destination }: { destination: Destination }) {
+  const { t } = useLanguage();
+  const { city, description, priceRange, reviewedDate, image } = destination;
+  const [alertSaved, setAlertSaved] = useState(false);
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem(`zoiko-destination-alert:${city}`) === "1";
+    if (saved) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time sync from localStorage on mount, not a render loop
+      setAlertSaved(true);
+    }
+  }, [city]);
+
+  function toggleAlert() {
+    setAlertSaved((prev) => {
+      const next = !prev;
+      window.localStorage.setItem(`zoiko-destination-alert:${city}`, next ? "1" : "0");
+      return next;
+    });
+  }
+
+  return (
+    <motion.div
+      variants={fadeUp}
+      whileHover={{ y: -8, boxShadow: "0 20px 40px -12px rgba(14,47,115,0.25)" }}
+      transition={{ duration: 0.25, ease: easeOut }}
+      className="group flex flex-col overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm"
+    >
+      <div className="overflow-hidden">
+        <div className="transition-transform duration-500 ease-out group-hover:scale-105">
+          <NaturalImage src={image} alt={city} />
+        </div>
+      </div>
+      <div className="flex flex-col gap-1.5 p-5">
+        <h3 className="font-heading text-lg font-medium text-brand-navy">{city}</h3>
+        <p className="text-sm text-neutral-500">{t(description)}</p>
+        <p className="mt-1 text-sm font-semibold text-brand-navy">{priceRange}</p>
+        <p className="text-xs text-neutral-400">{t(reviewedDate)}</p>
+        <div className="mt-3 flex items-center justify-between border-t border-[#E9E0D3] pt-3">
+          <a
+            href="/find-a-room"
+            className="text-xs font-semibold text-brand-red transition-colors hover:text-brand-red-dark"
+          >
+            {t("Explore Rooms")}
+          </a>
+          <button
+            type="button"
+            onClick={toggleAlert}
+            aria-pressed={alertSaved}
+            className={`flex items-center gap-1 text-xs font-semibold transition-colors ${
+              alertSaved ? "text-emerald-700" : "text-neutral-500 hover:text-brand-navy"
+            }`}
+          >
+            {alertSaved && <Check className="h-3.5 w-3.5" />}
+            {alertSaved ? t("Alert saved") : t("Save alert")}
+          </button>
+        </div>
+      </div>
+    </motion.div>
   );
 }

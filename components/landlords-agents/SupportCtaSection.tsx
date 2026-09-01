@@ -27,7 +27,7 @@ export function SupportCtaSection() {
               )}
             </motion.p>
             <motion.div variants={fadeUp}>
-              <Button href="/resources" size="lg" variant="outline">
+              <Button href="/contact-us" size="lg" variant="outline">
                 {t("Contact Provider Help")}
               </Button>
             </motion.div>
@@ -52,7 +52,7 @@ export function SupportCtaSection() {
               <Button href="/pro" size="lg" variant="outline">
                 {t("Explore Zoiko Rooms Pro")}
               </Button>
-              <Button href="/resources" size="lg" variant="outline">
+              <Button href="/contact-us" size="lg" variant="outline">
                 {t("Provider Help")}
               </Button>
             </motion.div>

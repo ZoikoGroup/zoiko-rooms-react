@@ -118,7 +118,7 @@ const scopeCategories: ScopeCategory[] = [
 export default function AuthorizationAndEnvironmentsSection() {
   const { t } = useLanguage();
   return (
-    <section className="w-full bg-[#FAF8F5] text-[#14213D] py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
+    <section id="authorization" className="w-full scroll-mt-24 bg-[#FAF8F5] text-[#14213D] py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto space-y-14">
         {/* Header Block */}
         <div className="space-y-3 max-w-3xl">

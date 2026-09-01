@@ -35,18 +35,18 @@ export default function ComplianceHeroSection() {
 
             {/* Action Buttons */}
             <div className="flex flex-wrap items-center gap-3">
-              <button
-                type="button"
+              <a
+                href="/pro/compliance-and-verification"
                 className="px-6 py-3 rounded-full bg-[#0E2F73] text-white hover:bg-[#0f1a40] text-xs sm:text-sm font-semibold transition-colors"
               >
                 See the Compliance Operating Model
-              </button>
-              <button
-                type="button"
+              </a>
+              <a
+                href="/contact-us"
                 className="px-6 py-3 rounded-full border border-[#111827] backdrop-blur-xs text-[#111827] hover:bg-white text-xs sm:text-sm font-semibold transition-colors"
               >
                 Talk to Zoiko Rooms
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -55,11 +55,11 @@ export default function ComplianceHeroSection() {
         <div className="mt-10 sm:mt-12 flex flex-col items-center text-center px-4 max-w-3xl">
           <p className="text-sm sm:text-base font-serif text-[#374151] leading-relaxed mb-2">
             <span className="font-bold text-[#162456]">
-              "Compliance &amp; Verification
+              &ldquo;Compliance &amp; Verification
             </span>{" "}
             is usually the right starting point when you need evidence-backed
             identity, authority, requirement, expiry, dispute, or restriction
-            controls."
+            controls.&rdquo;
           </p>
           <span className="text-[10px] sm:text-[11px] font-bold tracking-widest text-[#9CA3AF] uppercase">
             THE IMMEDIATE FIT STATEMENT

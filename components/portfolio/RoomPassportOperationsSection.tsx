@@ -319,12 +319,12 @@ export default function RoomPassportOperationsSection() {
 
         {/* Bottom Outline Button */}
         <div className="flex justify-center pt-2">
-          <button
-            type="button"
-            className="hover:bg-white/10 text-[#1B2A4A] text-xs font-bold py-3.5 px-8 rounded-full border border-[#1B2A4A] transition-all duration-200 cursor-pointer active:scale-95"
+          <a
+            href="/how-it-works/room-passport"
+            className="hover:bg-white/10 text-[#1B2A4A] text-xs font-bold py-3.5 px-8 rounded-full border border-[#1B2A4A] transition-all duration-200 cursor-pointer active:scale-95 inline-flex items-center justify-center"
           >
             Explore Room Passports
-          </button>
+          </a>
         </div>
       </div>
     </section>

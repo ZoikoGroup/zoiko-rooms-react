@@ -133,8 +133,8 @@ export const appealPoints = [
 ];
 
 export const relatedControls = [
-  { label: "Cookie Preferences", href: "#" },
+  { label: "Cookie Preferences", href: "/legal/cookie-preferences" },
   { label: "Privacy Notice", href: "/legal/privacy-notice" },
   { label: "Marketing preferences", href: "#" },
-  { label: "Regional Legal Notices", href: "#" },
+  { label: "Regional Legal Notices", href: "/legal/regional-notice" },
 ];

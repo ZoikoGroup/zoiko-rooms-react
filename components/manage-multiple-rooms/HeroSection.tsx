@@ -57,13 +57,13 @@ export default function HeroSection() {
           {/* CTA Buttons */}
           <div className="flex flex-wrap items-center gap-4 mb-10">
             <a
-              href="#"
+              href="/pro/portfolio"
               className="px-6 py-3.5 bg-[#0E2F73] hover:bg-[#0C2456] text-white font-semibold text-sm rounded-full shadow-sm transition-all duration-200"
             >
               See the Portfolio Operating Model
             </a>
             <a
-              href="#"
+              href="/contact-us"
               className="px-6 py-3.5 bg-transparent hover:bg-black/5 text-[#1B2539] font-semibold text-sm rounded-full border border-[#1E293B] transition-all duration-200"
             >
               Talk to Zoiko Rooms

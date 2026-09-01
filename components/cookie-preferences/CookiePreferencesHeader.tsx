@@ -45,7 +45,7 @@ export default function CookiePreferencesHeader() {
             </span>
           </div>
           <a
-            href="#"
+            href="/legal/cookie-notice"
             className="text-xs font-bold text-[#8C2C1D] hover:underline flex-shrink-0"
           >
             {t("What this means")}

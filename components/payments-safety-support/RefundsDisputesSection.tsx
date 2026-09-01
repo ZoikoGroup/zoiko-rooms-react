@@ -23,7 +23,7 @@ export function RefundsDisputesSection() {
   const { t } = useLanguage();
 
   return (
-    <SectionDivider>
+    <SectionDivider id="refunds-disputes" className="scroll-mt-24">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">

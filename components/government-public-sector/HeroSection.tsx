@@ -95,7 +95,7 @@ export function HeroSection() {
                 <ArrowRight className="h-4 w-4" />
               </Button>
               <Button
-                href="/resources"
+                href="/contact-us"
                 size="lg"
                 variant="outline"
                 className="border-white/30 text-white hover:bg-white hover:text-brand-navy"

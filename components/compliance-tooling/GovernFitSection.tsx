@@ -113,18 +113,18 @@ export default function GovernFitSection() {
 
         {/* Action Buttons */}
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <button
-            type="button"
+          <a
+            href="/pro/compliance-and-verification"
             className="px-6 py-3 rounded-full bg-[#0E2F73] text-white hover:bg-[#0f1a40] text-xs sm:text-sm font-semibold transition-colors"
           >
             Explore Compliance &amp; Verification
-          </button>
-          <button
-            type="button"
+          </a>
+          <a
+            href="/contact-us"
             className="px-6 py-3 rounded-full border border-[#111827] bg-transparent text-[#111827] hover:bg-black/5 text-xs sm:text-sm font-semibold transition-colors"
           >
             Talk to Zoiko Rooms
-          </button>
+          </a>
         </div>
       </div>
     </div>

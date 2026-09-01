@@ -38,7 +38,7 @@ export function SupportCallouts({ onEditSearch, onSaveSearch }: SupportCalloutsP
           <a href="/rooms-by-city" className="transition-colors hover:text-brand-red-dark">
             {t("View Nearby Areas")}
           </a>
-          <a href="/resources" className="transition-colors hover:text-brand-red-dark">
+          <a href="/resources/help-center" className="transition-colors hover:text-brand-red-dark">
             {t("Get Help")}
           </a>
         </div>

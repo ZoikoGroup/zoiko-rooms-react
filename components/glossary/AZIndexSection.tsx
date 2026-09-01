@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 
 interface TermItem {
@@ -268,14 +268,56 @@ const termsList: TermItem[] = [
 
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#".split("");
 
-export default function AZIndexSection() {
+// Related-term pills that name something outside the current glossary list —
+// point straight at the real page that covers it instead of a dead-end pill.
+const externalTermLinks: Record<string, string> = {
+  "Room Passport": "/how-it-works/room-passport",
+  Provider: "/list-a-room",
+};
+
+// Related-journey pills describe a guided task, not a glossary entry, so they
+// route to the real page that walks through that task.
+const relatedJourneyLinks: Record<string, string> = {
+  "Open accessibility guidance": "/legal/fair-housing-anti-discrimination#accessibility",
+  "Review room agreement": "/agreement-review-signing",
+  "Submit room application": "/find-a-room/search-rooms",
+  "Verify sublet authority": "/list-a-room/authorized-sublets",
+  "Calculate total room cost": "/how-it-works/payments-safety-support",
+  "Manage organization billing": "/organizations",
+  "Check program eligibility": "/organizations",
+  "Pay holding deposit": "/how-it-works/payments-safety-support",
+  "Verify provider authority": "/how-it-works/verification-authority",
+  "Accept organization allocation": "/organizations",
+  "View payment schedule": "/how-it-works/payments-safety-support",
+};
+
+interface AZIndexSectionProps {
+  activeCategory?: string | null;
+  onClearCategory?: () => void;
+  jumpToTermId?: string | null;
+  onJumpHandled?: () => void;
+}
+
+export default function AZIndexSection({
+  activeCategory,
+  onClearCategory,
+  jumpToTermId,
+  onJumpHandled,
+}: AZIndexSectionProps) {
   const [selectedLetter, setSelectedLetter] = useState("A");
   const [selectedTermId, setSelectedTermId] = useState("accessibility-feature");
+
+  // Terms in scope for the alphabet/letter picker — narrowed to the active
+  // category, if one was chosen from "Browse by Topic".
+  const categoryTerms = useMemo(() => {
+    if (!activeCategory) return termsList;
+    return termsList.filter((term) => term.category === activeCategory);
+  }, [activeCategory]);
 
   // Dynamically compute which letters actually have terms available
   const availableLetters = useMemo(() => {
     const lettersSet = new Set<string>();
-    termsList.forEach((term) => {
+    categoryTerms.forEach((term) => {
       const firstLetter = term.title.charAt(0).toUpperCase();
       if (/[A-Z]/.test(firstLetter)) {
         lettersSet.add(firstLetter);
@@ -284,23 +326,23 @@ export default function AZIndexSection() {
       }
     });
     return lettersSet;
-  }, []);
+  }, [categoryTerms]);
 
-  // Filter terms according to selected letter
+  // Filter terms according to selected letter (within the active category, if any)
   const filteredTerms = useMemo(() => {
-    return termsList.filter((term) => {
+    return categoryTerms.filter((term) => {
       const firstLetter = term.title.charAt(0).toUpperCase();
       if (selectedLetter === "#") {
         return !/[A-Z]/.test(firstLetter);
       }
       return firstLetter === selectedLetter;
     });
-  }, [selectedLetter]);
+  }, [categoryTerms, selectedLetter]);
 
   // Handle clicking a letter button
   const handleLetterClick = (letter: string) => {
     setSelectedLetter(letter);
-    const matchingTerms = termsList.filter((term) => {
+    const matchingTerms = categoryTerms.filter((term) => {
       const firstChar = term.title.charAt(0).toUpperCase();
       return letter === "#" ? !/[A-Z]/.test(firstChar) : firstChar === letter;
     });
@@ -310,11 +352,44 @@ export default function AZIndexSection() {
     }
   };
 
+  // Jump to the first letter with a term whenever the active category changes
+  useEffect(() => {
+    if (!activeCategory) return;
+    const firstLetterWithTerm = alphabet.find((letter) => availableLetters.has(letter));
+    if (firstLetterWithTerm) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- re-anchoring the letter/term picker to a newly chosen category, not a render loop
+      setSelectedLetter(firstLetterWithTerm);
+      const firstTerm = categoryTerms.find((term) => {
+        const firstChar = term.title.charAt(0).toUpperCase();
+        return firstLetterWithTerm === "#" ? !/[A-Z]/.test(firstChar) : firstChar === firstLetterWithTerm;
+      });
+      if (firstTerm) {
+        setSelectedTermId(firstTerm.id);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only re-run when the category itself changes, not on every filteredTerms recompute
+  }, [activeCategory]);
+
+  // Jump to a specific term (e.g. from a "Popular questions" link) on request
+  useEffect(() => {
+    if (!jumpToTermId) return;
+    const target = termsList.find((term) => term.id === jumpToTermId);
+    if (target) {
+      onClearCategory?.();
+      const firstChar = target.title.charAt(0).toUpperCase();
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- responding to an external "jump to this term" request, not a render loop
+      setSelectedLetter(/[A-Z]/.test(firstChar) ? firstChar : "#");
+      setSelectedTermId(target.id);
+    }
+    onJumpHandled?.();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only re-run when a new jump is requested
+  }, [jumpToTermId]);
+
   const currentTerm =
     termsList.find((t) => t.id === selectedTermId) || filteredTerms[0] || termsList[0];
 
   return (
-    <section className="w-full pb-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased text-[#1E2022]">
+    <section id="az-index" className="w-full scroll-mt-24 pb-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased text-[#1E2022]">
       <div className="max-w-6xl mx-auto space-y-10">
         
         {/* Section Header */}
@@ -328,6 +403,16 @@ export default function AZIndexSection() {
           <p className="text-xs sm:text-sm text-[#555E68] font-normal leading-relaxed">
             Letters without a current canonical term stay visible but disabled &mdash; nothing pretends to have more coverage than it does.
           </p>
+          {activeCategory && (
+            <button
+              type="button"
+              onClick={onClearCategory}
+              className="inline-flex items-center gap-1.5 bg-[#F5F2ED] hover:bg-[#EAE6DF] text-[#14213D] text-xs font-semibold py-1.5 px-3.5 rounded-full transition-colors cursor-pointer"
+            >
+              Filtering by: {activeCategory}
+              <span aria-hidden="true">&times;</span>
+            </button>
+          )}
         </div>
 
         {/* Alphabet Navigation Row */}
@@ -363,7 +448,7 @@ export default function AZIndexSection() {
           <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center justify-between px-1">
               <span className="text-[10px] font-bold tracking-wider text-[#7A838E] uppercase block">
-                {filteredTerms.length} OF {termsList.length} TERMS ({selectedLetter})
+                {filteredTerms.length} OF {categoryTerms.length} TERMS ({selectedLetter})
               </span>
             </div>
 
@@ -452,12 +537,12 @@ export default function AZIndexSection() {
                     <p className="text-xs text-[#1D6042] font-medium flex items-center gap-2">
                       <span>🗺️</span> {currentTerm.calloutText}
                     </p>
-                    <button
-                      type="button"
+                    <a
+                      href="/login"
                       className="bg-[#142550] hover:bg-[#0D1629] text-white text-xs font-bold py-2 px-5 rounded-full transition-all duration-150 whitespace-nowrap cursor-pointer shrink-0"
                     >
                       Open &rarr;
-                    </button>
+                    </a>
                   </div>
                 )}
               </div>
@@ -523,13 +608,13 @@ export default function AZIndexSection() {
                     </span>
                     <div className="flex flex-wrap gap-2">
                       {currentTerm.relatedJourneys.map((journey) => (
-                        <button
+                        <a
                           key={journey}
-                          type="button"
+                          href={relatedJourneyLinks[journey] || "/contact-us"}
                           className="bg-[#FAF8F5] hover:bg-[#F2EADF] border border-[#EAE6DF] text-[#14213D] text-xs font-semibold py-2 px-4 rounded-full transition-colors cursor-pointer"
                         >
                           {journey}
-                        </button>
+                        </a>
                       ))}
                     </div>
                   </div>
@@ -544,15 +629,28 @@ export default function AZIndexSection() {
                       RELATED TERMS
                     </span>
                     <div className="flex flex-wrap gap-2">
-                      {currentTerm.relatedTerms.map((term) => (
-                        <button
-                          key={term}
-                          type="button"
-                          className="bg-white hover:bg-[#FAF8F5] border border-[#EAE6DF] text-[#14213D] text-xs font-semibold py-2 px-4 rounded-full transition-colors cursor-pointer"
-                        >
-                          {term}
-                        </button>
-                      ))}
+                      {currentTerm.relatedTerms.map((term) => {
+                        const match = termsList.find((t) => t.title === term);
+                        const className =
+                          "bg-white hover:bg-[#FAF8F5] border border-[#EAE6DF] text-[#14213D] text-xs font-semibold py-2 px-4 rounded-full transition-colors cursor-pointer";
+                        if (match) {
+                          return (
+                            <button
+                              key={term}
+                              type="button"
+                              onClick={() => setSelectedTermId(match.id)}
+                              className={className}
+                            >
+                              {term}
+                            </button>
+                          );
+                        }
+                        return (
+                          <a key={term} href={externalTermLinks[term] || "/contact-us"} className={className}>
+                            {term}
+                          </a>
+                        );
+                      })}
                     </div>
                   </div>
                 </>
@@ -565,12 +663,12 @@ export default function AZIndexSection() {
                 <div className="text-[11px] text-[#7A838E]">
                   Source/owner: {currentTerm.sourceOwner} &middot; {currentTerm.reviewedDate}
                 </div>
-                <button
-                  type="button"
+                <a
+                  href="/contact-us"
                   className="hover:bg-[#F2EADF] border border-[#EAE6DF] text-[#14213D] text-xs font-bold py-2.5 px-5 rounded-full transition-colors cursor-pointer whitespace-nowrap"
                 >
                   Report unclear or outdated
-                </button>
+                </a>
               </div>
 
             </motion.div>

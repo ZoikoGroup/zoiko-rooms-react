@@ -77,7 +77,7 @@ const forbiddenFlows: ForbiddenFlowItem[] = [
 export default function DataAndSourceOfTruthRulesSection() {
   const { t } = useLanguage();
   return (
-    <section className="w-full bg-[#EEDFC5] text-[#14213D] py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
+    <section id="data-events" className="w-full scroll-mt-24 bg-[#EEDFC5] text-[#14213D] py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased border-t border-[#EAE6DF]">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header Block */}
         <div className="space-y-3 max-w-3xl">

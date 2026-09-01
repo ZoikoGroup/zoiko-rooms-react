@@ -81,7 +81,7 @@ export default function FinalStepSection() {
             {/* CTA Button */}
             <div className="pt-2">
               <a
-                href="#contact"
+                href="/contact-us"
                 className="inline-block bg-[#1E3A8A] hover:bg-[#2563EB] text-white text-xs font-semibold px-6 py-3 rounded-full transition-colors shadow-md"
               >
                 {t("Talk to Zoiko Rooms")}

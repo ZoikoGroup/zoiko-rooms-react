@@ -208,12 +208,12 @@ export default function PortfolioAvailabilityDashboardSection() {
 
         {/* Bottom Outline Button */}
         <div className="flex justify-center pt-2">
-          <button
-            type="button"
-            className="bg-transparent hover:bg-white/10 text-white text-xs font-bold py-3.5 px-8 rounded-full border border-white/20 transition-all duration-200 cursor-pointer active:scale-95"
+          <a
+            href="/contact-us"
+            className="bg-transparent hover:bg-white/10 text-white text-xs font-bold py-3.5 px-8 rounded-full border border-white/20 transition-all duration-200 cursor-pointer active:scale-95 inline-flex items-center justify-center"
           >
             Review Dashboard
-          </button>
+          </a>
         </div>
       </div>
     </section>

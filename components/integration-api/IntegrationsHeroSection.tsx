@@ -52,18 +52,18 @@ export default function IntegrationsHeroSection() {
 
           {/* Action Buttons */}
           <div className="flex flex-wrap items-center gap-3.5 pt-2">
-            <button
-              type="button"
+            <a
+              href="#patterns"
               className="bg-[#1A2E6E] hover:bg-[#1E3166] text-white text-xs font-semibold py-3.5 px-6 rounded-full transition-all duration-200 cursor-pointer shadow-xs active:scale-95"
             >
               {t("Explore integration patterns")}
-            </button>
-            <button
-              type="button"
+            </a>
+            <a
+              href="/contact-us"
               className="bg-[#FFFFFF0F] hover:bg-white/10 text-white text-xs font-semibold py-3.5 px-6 rounded-full border border-white/30 transition-all duration-200 cursor-pointer active:scale-95"
             >
               {t("Talk to Zoiko Rooms")}
-            </button>
+            </a>
           </div>
         </motion.div>
       </div>

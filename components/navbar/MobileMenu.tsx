@@ -132,7 +132,7 @@ useEffect(() => {
             </div>
 
             <Button
-              href="#"
+              href="/login"
               variant="secondary"
               className="mt-4 w-full"
               onClick={() => setIsOpen(false)}

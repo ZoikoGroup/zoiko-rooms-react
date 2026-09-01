@@ -130,12 +130,12 @@ export default function EntityBoundariesSection() {
 
           {/* Action CTA */}
           <div className="pt-8">
-            <button
-              type="button"
-              className="bg-transparent hover:bg-[#FAF6F0] text-[#14213D] text-xs font-bold py-3.5 px-6 rounded-full border border-[#14213D] transition-all duration-200 cursor-pointer shadow-xs active:scale-95"
+            <a
+              href="/contact-us"
+              className="inline-flex items-center justify-center bg-transparent hover:bg-[#FAF6F0] text-[#14213D] text-xs font-bold py-3.5 px-6 rounded-full border border-[#14213D] transition-all duration-200 cursor-pointer shadow-xs active:scale-95"
             >
               See the Full Verification Taxonomy
-            </button>
+            </a>
           </div>
         </div>
       </div>

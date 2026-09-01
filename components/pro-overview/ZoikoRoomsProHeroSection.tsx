@@ -53,7 +53,7 @@ export default function ZoikoRoomsProHeroSection() {
                   {t("Explore Pro Capabilities")}
                 </a>
                 <a
-                  href="#contact"
+                  href="/contact-us"
                   className="bg-transparent hover:bg-[#FAF8F5] text-[#14213D] text-xs font-semibold px-6 py-3 rounded-full border border-[#14213D] transition-colors"
                 >
                   {t("Talk to Zoiko Rooms")}

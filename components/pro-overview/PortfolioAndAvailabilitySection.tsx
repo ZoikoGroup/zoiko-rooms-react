@@ -117,7 +117,7 @@ export default function PortfolioAndAvailabilitySection() {
           {/* CTA Button */}
           <div className="pt-2">
             <a
-              href="#explore-portfolio"
+              href="/pro/portfolio"
               className="inline-block bg-transparent hover:bg-white text-[#14213D] text-xs font-semibold px-6 py-3 rounded-full border border-[#14213D] transition-colors shadow-xs"
             >
               {t("Explore Portfolio & Availability")}

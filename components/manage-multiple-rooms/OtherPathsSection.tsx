@@ -9,21 +9,21 @@ export default function OtherPathsSection() {
       description:
         "If you're listing a single room, List a Room is usually simpler than operating a full portfolio.",
       buttonText: "List a Room",
-      href: "#",
+      href: "/list-a-room",
     },
     {
       title: "Compliance-first need?",
       description:
         "If verification and authority review is your main concern, start with Compliance & Verification.",
       buttonText: "Compliance & Verification",
-      href: "#",
+      href: "/pro/compliance-and-verification",
     },
     {
       title: "System-connection-first?",
       description:
         "If you need to connect an existing system before anything else, start with Integrations & API.",
       buttonText: "Integrations & API",
-      href: "#",
+      href: "/pro/integration-api",
     },
   ] as const;
 

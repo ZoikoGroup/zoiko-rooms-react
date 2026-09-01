@@ -58,7 +58,7 @@ export default function ComplianceToolingSection() {
       <div className="max-w-5xl w-full flex flex-col items-center">
         {/* Top Tagline */}
         <span className="text-[11px] sm:text-xs font-extrabold tracking-widest text-[#D91414] uppercase mb-3 text-center">
-          WHAT "COMPLIANCE TOOLING" MEANS HERE
+          WHAT &quot;COMPLIANCE TOOLING&quot; MEANS HERE
         </span>
 
         {/* Main Heading */}
@@ -69,7 +69,7 @@ export default function ComplianceToolingSection() {
         {/* Subtitle */}
         <p className="text-xs sm:text-sm text-[#6B675F] text-center max-w-xl leading-relaxed mb-12 sm:mb-16">
           Every term below has a bounded meaning — and an explicit limit on what
-          it doesn't mean.
+          it doesn&apos;t mean.
         </p>
 
         {/* Table Structure */}

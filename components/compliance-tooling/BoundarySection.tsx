@@ -22,7 +22,7 @@ export default function BoundarySection() {
 
         {/* Main Heading */}
         <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-serif font-bold text-[#111827] tracking-tight leading-snug mb-3">
-          A verification result is not a certification, and it isn't legal
+          A verification result is not a certification, and it isn&apos;t legal
           advice.
         </h2>
 

@@ -84,12 +84,12 @@ export default function ListARoomHero() {
 
               {/* Submit CTA */}
               <div className="sm:col-span-3">
-                <button
-                  type="button"
-                  className="w-full bg-[#1A2E6E] hover:bg-[#122250] text-white font-medium text-xs py-2.5 px-3 rounded-full transition-all duration-200 shadow-sm whitespace-nowrap active:scale-[0.98]"
+                <a
+                  href="/list-a-room/start-a-listing"
+                  className="flex w-full items-center justify-center bg-[#1A2E6E] hover:bg-[#122250] text-white font-medium text-xs py-2.5 px-3 rounded-full transition-all duration-200 shadow-sm whitespace-nowrap active:scale-[0.98]"
                 >
                   {t("Start a Listing")}
-                </button>
+                </a>
               </div>
             </div>
           </motion.div>

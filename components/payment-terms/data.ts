@@ -14,7 +14,14 @@ export const tocItems: TocItem[] = [
   { id: "changes-hierarchy", label: "Changes & hierarchy" },
 ];
 
-export const helpLinks = ["Get payment help", "Dispute a transaction", "Report suspected fraud", "Payment complaints route"];
+export type HelpLink = { label: string; href: string };
+
+export const helpLinks: HelpLink[] = [
+  { label: "Get payment help", href: "/resources/help-center" },
+  { label: "Dispute a transaction", href: "#refunds-disputes" },
+  { label: "Report suspected fraud", href: "/resources/safety-scam-prevention" },
+  { label: "Payment complaints route", href: "/contact-us" },
+];
 
 export const partyRoles = [
   { tag: "Payer", title: "Renter", description: "The person authorizing and sending the payment." },

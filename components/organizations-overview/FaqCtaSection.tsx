@@ -71,7 +71,7 @@ export function FaqCtaSection() {
               <Button href="#pathways" size="lg" variant="secondary">
                 {t("Explore Organization Pathways")}
               </Button>
-              <Button href="/resources" size="lg" variant="outline-red">
+              <Button href="/contact-us" size="lg" variant="outline-red">
                 {t("Talk to Zoiko Rooms")}
               </Button>
             </motion.div>

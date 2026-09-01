@@ -18,9 +18,9 @@ export function CorrectionsSection() {
         </Callout>
 
         <div className="flex flex-wrap gap-3">
-          <button type="button" className="rounded-full border border-[#E9E0D3] bg-white px-5 py-2.5 text-sm font-semibold text-brand-navy transition-colors hover:bg-brand-navy/5">
+          <a href="/contact-us" className="rounded-full border border-[#E9E0D3] bg-white px-5 py-2.5 text-sm font-semibold text-brand-navy transition-colors hover:bg-brand-navy/5">
             Contact Support
-          </button>
+          </a>
           <button type="button" className="rounded-full border border-[#E9E0D3] bg-white px-5 py-2.5 text-sm font-semibold text-brand-navy transition-colors hover:bg-brand-navy/5">
             Request a correction
           </button>

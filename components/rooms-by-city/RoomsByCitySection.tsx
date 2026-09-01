@@ -119,9 +119,12 @@ export default function RoomsByCitySection() {
                 <button className="text-xs font-normal leading-5 text-stone-500 underline transition hover:text-stone-900">
                   Use current location
                 </button>
-                <button className="text-xs font-normal leading-5 text-stone-500 underline transition hover:text-stone-900">
+                <a
+                  href="#cities"
+                  className="text-xs font-normal leading-5 text-stone-500 underline transition hover:text-stone-900"
+                >
                   Browse all supported cities
-                </button>
+                </a>
               </div>
       </div>
     </section>

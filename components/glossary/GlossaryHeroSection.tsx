@@ -5,7 +5,21 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 
-export default function GlossaryHeroSection() {
+interface GlossaryHeroSectionProps {
+  onSelectQuestionTerm: (termId: string) => void;
+}
+
+// Maps each popular question to the glossary term it answers, so clicking it
+// jumps straight to that term in the A–Z index below instead of going nowhere.
+const popularQuestionTermIds: Record<string, string> = {
+  "What is a Room Passport?": "__external:/how-it-works/room-passport",
+  "What is the difference between rent and a deposit?": "rent",
+  'What does "bills included" mean?': "bills-included",
+  "What is an authorized sublet?": "authorized-sublet",
+  "What is direct billing?": "direct-billing",
+};
+
+export default function GlossaryHeroSection({ onSelectQuestionTerm }: GlossaryHeroSectionProps) {
   const [searchQuery, setSearchQuery] = useState("");
 
   const popularQuestions = [
@@ -62,18 +76,18 @@ export default function GlossaryHeroSection() {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap items-center gap-3 pt-2">
-              <button
-                type="button"
+              <a
+                href="#az-index"
                 className="bg-[#1A2E6E] hover:bg-[#0D1629] text-white text-xs font-bold py-3 px-7 rounded-full transition-all duration-200 shadow-xs active:scale-95 cursor-pointer"
               >
                 Browse A&ndash;Z
-              </button>
-              <button
-                type="button"
+              </a>
+              <a
+                href="#browse-by-topic"
                 className="bg-transparent hover:bg-[#EAE2D7] text-[#14213D] text-xs font-bold py-3 px-6 rounded-full border border-[#E6DFD3] transition-all duration-200 cursor-pointer"
               >
                 Browse by topic
-              </button>
+              </a>
             </div>
           </div>
 
@@ -103,15 +117,22 @@ export default function GlossaryHeroSection() {
                 </span>
 
                 <div className="divide-y divide-[#E2E8F0]/60">
-                  {popularQuestions.map((question) => (
-                    <a
-                      key={question}
-                      href="#"
-                      className="block py-3 text-[12px] font-extrabold text-[#1E293B] hover:text-[#1A2E6E] transition-colors leading-snug first:pt-0 last:pb-0"
-                    >
-                      {question}
-                    </a>
-                  ))}
+                  {popularQuestions.map((question) => {
+                    const mapped = popularQuestionTermIds[question];
+                    const isExternal = mapped?.startsWith("__external:");
+                    return (
+                      <a
+                        key={question}
+                        href={isExternal ? mapped.replace("__external:", "") : "#az-index"}
+                        onClick={() => {
+                          if (mapped && !isExternal) onSelectQuestionTerm(mapped);
+                        }}
+                        className="block py-3 text-[12px] font-extrabold text-[#1E293B] hover:text-[#1A2E6E] transition-colors leading-snug first:pt-0 last:pb-0"
+                      >
+                        {question}
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             </motion.div>

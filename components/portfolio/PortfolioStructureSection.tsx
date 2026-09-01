@@ -108,16 +108,15 @@ export default function PortfolioStructureSection() {
           <div className="flex flex-wrap items-center justify-between gap-2 overflow-x-auto pb-2">
             {hierarchySteps.map((step, idx) => (
               <React.Fragment key={step.label}>
-                <button
-                  type="button"
-                  className={`px-6 py-2.5 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer active:scale-95 ${
+                <div
+                  className={`px-6 py-2.5 rounded-xl text-xs font-bold transition-all shrink-0 ${
                     step.isHighlighted
-                      ? "bg-[#1B2A4A] border border-[#1B2A4A] text-white shadow-xs hover:bg-[#14213D]"
-                      : "bg-[#F8F2E8] border border-[#ECDFC9] text-[#14213D] hover:border-[#14213D]/40"
+                      ? "bg-[#1B2A4A] border border-[#1B2A4A] text-white shadow-xs"
+                      : "bg-[#F8F2E8] border border-[#ECDFC9] text-[#14213D]"
                   }`}
                 >
                   {step.label}
-                </button>
+                </div>
 
                 {idx < hierarchySteps.length - 1 && (
                   <span className="text-[#A59D93] text-xs font-serif shrink-0 px-0.5">

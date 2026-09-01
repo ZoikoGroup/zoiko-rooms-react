@@ -46,7 +46,7 @@ const securityFeatures: SecurityFeature[] = [
 export default function SecurityArchitectureSection() {
   const { t } = useLanguage();
   return (
-    <section className="relative w-full bg-[#0F1722] text-white py-24 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased overflow-hidden">
+    <section id="security" className="relative w-full scroll-mt-24 bg-[#0F1722] text-white py-24 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased overflow-hidden">
       {/* Background Image Layer */}
       <div className="absolute inset-0 z-0 opacity-100 pointer-events-none select-none">
         <Image

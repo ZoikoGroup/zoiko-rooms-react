@@ -57,6 +57,7 @@ export default function ComplianceVerificationHero() {
             Explore the Verification Model
           </button>
           <button
+            onClick={() => router.push("/contact-us")}
             type="button"
             className="bg-transparent hover:bg-[#FAF6F0] text-[#14213D] text-xs font-bold py-3.5 px-6 rounded-full border border-[#101C33] transition-all duration-200 cursor-pointer"
           >
