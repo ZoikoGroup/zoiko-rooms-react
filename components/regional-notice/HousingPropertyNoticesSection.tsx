@@ -11,19 +11,19 @@ interface ResourceLink {
 const resourceLinks: ResourceLink[] = [
   {
     title: "Official England private-renting guidance",
-    href: "#",
+    href: "https://www.gov.uk/private-renting",
   },
   {
     title: "Right to Rent — eligibility & checking notice",
-    href: "#",
+    href: "https://www.gov.uk/check-tenant-right-to-rent-documents",
   },
   {
     title: "Local authority & HMO licensing finder",
-    href: "#",
+    href: "https://www.gov.uk/house-in-multiple-occupation-licence",
   },
   {
     title: "Deposits, holding payments & rent in advance",
-    href: "#",
+    href: "https://www.gov.uk/tenancy-deposit-protection",
   },
 ];
 
@@ -86,6 +86,8 @@ export default function HousingPropertyNoticesSection() {
                   <a
                     key={index}
                     href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="group py-3.5 flex items-center justify-between gap-4 transition-colors hover:text-[#C8202C]"
                   >
                     <span className="text-xs sm:text-sm font-bold text-[#101C33] group-hover:text-[#C8202C] transition-colors">
