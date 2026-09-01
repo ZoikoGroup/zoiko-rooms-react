@@ -22,7 +22,7 @@ export function NavActions() {
         <Search className="h-5 w-5" />
       </button>
 
-      <Button href="/login" variant="secondary" size="sm" className="hidden sm:inline-flex">
+      <Button href="https://app.zoikorooms.com/account/login" variant="secondary" size="sm" className="hidden sm:inline-flex">
         {t("Sign in")}
       </Button>
 
