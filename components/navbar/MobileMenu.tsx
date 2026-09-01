@@ -132,7 +132,7 @@ useEffect(() => {
             </div>
 
             <Button
-              href="/login"
+              href="https://app.zoikorooms.com/account/login"
               variant="secondary"
               className="mt-4 w-full"
               onClick={() => setIsOpen(false)}
