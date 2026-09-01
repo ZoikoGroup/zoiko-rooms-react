@@ -102,7 +102,7 @@ export default function TransactionLifecycleSection() {
               {t("Explore the Transaction Lifecycle")}
             </a>
             <a
-              href="#talk-to-zoiko"
+              href="/contact-us"
               className="bg-transparent hover:bg-white text-[#DC2626] text-xs font-semibold px-6 py-3 rounded-full border border-[#DC2626] transition-colors shadow-xs"
             >
               {t("Talk to Zoiko Rooms")}
@@ -112,11 +112,12 @@ export default function TransactionLifecycleSection() {
 
         {/* Process Lifecycle Bar */}
         <motion.div
+          id="explore-lifecycle"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
-          className="bg-white rounded-3xl p-6 sm:p-8 border border-[#EAE6DF] shadow-xs"
+          className="scroll-mt-24 bg-white rounded-3xl p-6 sm:p-8 border border-[#EAE6DF] shadow-xs"
         >
           <div className="relative flex flex-col md:flex-row items-center justify-between gap-6 md:gap-2">
             {/* Connecting Horizontal Line (Desktop) */}

@@ -42,7 +42,7 @@ export function RelatedControlsSection() {
             <span>Policy version 1.0 · Effective 17 August 2026</span>
             <span>
               Prefer phone or mail?{" "}
-              <a href="/resources" className="font-semibold text-brand-red hover:text-brand-red-dark">
+              <a href="/contact-us" className="font-semibold text-brand-red hover:text-brand-red-dark">
                 Contact our privacy team →
               </a>
             </span>

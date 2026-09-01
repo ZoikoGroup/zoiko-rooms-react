@@ -23,14 +23,14 @@ const cardsData: NoticeCard[] = [
     description:
       "In some markets, platform operators are required to collect, verify and report information about hosts or rental income to tax authorities. This does not determine your personal tax liability.",
     linkText: "View Payment Terms",
-    href: "#",
+    href: "/legal/payment-terms",
   },
   {
     title: "Privacy & online platform",
     description:
       "Local controller and supervisory-authority details, plus links to the rights and choices workflow — handled on their own dedicated pages, not duplicated here.",
     linkText: "Privacy Notice · Your Privacy Choices",
-    href: "#",
+    href: "/legal/privacy-notice",
   },
 ];
 

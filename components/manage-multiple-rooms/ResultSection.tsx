@@ -129,13 +129,13 @@ export default function ResultSection() {
           className="flex flex-wrap items-center gap-4"
         >
           <a
-            href="#"
+            href="/pro/portfolio"
             className="px-6 py-3.5 bg-[#0F2D6B] hover:bg-[#0C2456] text-white font-semibold text-sm rounded-full shadow-sm transition-all duration-200"
           >
             Explore Portfolio &amp; Availability
           </a>
           <a
-            href="#"
+            href="/contact-us"
             className="px-6 py-3.5 bg-white hover:bg-gray-50 text-[#1E293B] font-semibold text-sm rounded-full border border-[#D1D5DB] shadow-sm transition-all duration-200"
           >
             Talk to Zoiko Rooms

@@ -27,13 +27,13 @@ export function FinalCtaSection() {
             <Button href="#before-paying" size="lg" variant="secondary">
               {t("Payment Guidance")}
             </Button>
-            <Button href="/resources" size="lg" variant="outline">
+            <Button href="/resources/safety-scam-prevention" size="lg" variant="outline">
               {t("Report a Concern")}
             </Button>
-            <Button href="/resources" size="lg" variant="outline">
+            <Button href="#refunds-disputes" size="lg" variant="outline">
               {t("Refund or Dispute")}
             </Button>
-            <Button href="/resources" size="lg" variant="outline">
+            <Button href="/contact-us" size="lg" variant="outline">
               {t("Contact Support")}
             </Button>
           </motion.div>

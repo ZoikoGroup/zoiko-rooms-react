@@ -41,7 +41,7 @@ export function HeroSection() {
                   {t("Explore International Moves")}
                 </Button>
                 <Button
-                  href="/resources"
+                  href="/contact-us"
                   size="lg"
                   variant="outline"
                   className="border-brand-navy/30 bg-white/40 text-brand-navy hover:bg-white"

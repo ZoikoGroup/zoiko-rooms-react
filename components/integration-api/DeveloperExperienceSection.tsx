@@ -12,12 +12,12 @@ interface ResourceLink {
 }
 
 const resourceLinks: ResourceLink[] = [
-  { title: "Getting started", href: "#getting-started" },
-  { title: "API reference", href: "#api-reference" },
-  { title: "Webhook reference", href: "#webhook-reference" },
-  { title: "Security guide", href: "#security-guide" },
-  { title: "Data & mapping guide", href: "#data-mapping-guide" },
-  { title: "Change log", href: "#change-log" },
+  { title: "Getting started", href: "/contact-us" },
+  { title: "API reference", href: "/contact-us" },
+  { title: "Webhook reference", href: "/contact-us" },
+  { title: "Security guide", href: "#security" },
+  { title: "Data & mapping guide", href: "#data-events" },
+  { title: "Change log", href: "/contact-us" },
 ];
 
 export default function DeveloperExperienceSection() {

@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
 
-import {
-  GlossaryHeroSection,
-  BrowseByTopicSection,
-  AZIndexSection,
-  CompleteCostExampleSection,
-  ActionCalloutSection,
-} from "@/components/glossary";
+import { GlossaryView } from "@/components/glossary";
 
 export const metadata: Metadata = {
   title: "Property Glossary and Housing Terms | Zoiko Rooms",
@@ -15,13 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function GlossaryPage() {
-  return (
-    <main>
-      <GlossaryHeroSection />
-      <BrowseByTopicSection />
-      <AZIndexSection />
-      <CompleteCostExampleSection />
-      <ActionCalloutSection />
-    </main>
-  );
+  return <GlossaryView />;
 }

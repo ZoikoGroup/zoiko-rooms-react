@@ -106,12 +106,12 @@ export default function PublishingAndDistributionSection() {
 
         {/* Bottom CTA Button */}
         <div className="flex justify-center pt-2">
-          <button
-            type="button"
-            className="hover:bg-[#E5D5C2] text-[#1B2A4A] text-xs font-bold py-3.5 px-7 rounded-full border border-[#1B2A4A] transition-all duration-200 cursor-pointer shadow-2xs active:scale-95"
+          <a
+            href="/contact-us"
+            className="hover:bg-[#E5D5C2] text-[#1B2A4A] text-xs font-bold py-3.5 px-7 rounded-full border border-[#1B2A4A] transition-all duration-200 cursor-pointer shadow-2xs active:scale-95 inline-flex items-center justify-center"
           >
             Review Publishing Readiness
-          </button>
+          </a>
         </div>
       </div>
     </section>

@@ -56,7 +56,7 @@ export function SupportIncidentLifecycleSection() {
             )}
           </Paragraph>
 
-          <Button href="/resources" variant="outline" size="md" className="w-fit">
+          <Button href="/contact-us" variant="outline" size="md" className="w-fit">
             {t("Contact Support")}
           </Button>
         </Reveal>

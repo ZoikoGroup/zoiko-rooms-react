@@ -26,7 +26,7 @@ export const tocItems: TocItem[] = [
 export const sidebarLinks = [
   { label: "Manage privacy choices", href: "/legal/your-privacy-choices" },
   { label: "Your Privacy Choices page", href: "/legal/your-privacy-choices" },
-  { label: "Cookie Preferences", href: "#" },
+  { label: "Cookie Preferences", href: "/legal/cookie-preferences" },
 ];
 
 export const controllerRows = [
@@ -128,11 +128,11 @@ export const contactRows: { label: string; value: string; href?: string }[] = [
 
 export const relatedNotices = [
   { label: "Cookie Notice", href: "/legal/cookie-notice" },
-  { label: "Cookie Preferences", href: "#" },
+  { label: "Cookie Preferences", href: "/legal/cookie-preferences" },
   { label: "Your Privacy Choices", href: "/legal/your-privacy-choices" },
-  { label: "Terms of Use", href: "#" },
+  { label: "Terms of Use", href: "/legal/terms-of-use" },
   { label: "Payment Terms", href: "/legal/payment-terms" },
   { label: "Fair Housing & Anti-Discrimination", href: "/legal/fair-housing-anti-discrimination" },
-  { label: "Community Standards", href: "#" },
-  { label: "Regional Legal Notices", href: "#" },
+  { label: "Community Standards", href: "/legal/community-standards" },
+  { label: "Regional Legal Notices", href: "/legal/regional-notice" },
 ];

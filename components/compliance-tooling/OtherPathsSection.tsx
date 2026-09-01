@@ -9,18 +9,21 @@ export default function OtherPathsSection() {
       description:
         "If your main need is portfolio structure and bulk operations, start with Portfolio & Availability instead.",
       buttonText: "Portfolio & Availability",
+      href: "/pro/portfolio",
     },
     {
       title: "Need a legal conclusion?",
       description:
         "Compliance & Verification doesn't provide legal advice — we can point you to appropriate professional resources.",
       buttonText: "Get legal resources",
+      href: "/resources",
     },
     {
       title: "System-connection-first need?",
       description:
         "If connecting an external registry or source is your first priority, start with Integrations & API.",
       buttonText: "Integrations & API",
+      href: "/pro/integration-api",
     },
   ] as const;
 
@@ -56,12 +59,12 @@ export default function OtherPathsSection() {
 
               {/* Action Button */}
               <div className="shrink-0">
-                <button
-                  type="button"
+                <a
+                  href={path.href}
                   className="px-5 py-2.5 rounded-full border border-[#111827] bg-transparent text-[#111827] hover:bg-black/5 text-xs sm:text-sm font-medium transition-colors"
                 >
                   {path.buttonText}
-                </button>
+                </a>
               </div>
             </div>
           ))}

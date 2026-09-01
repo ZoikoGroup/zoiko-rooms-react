@@ -61,15 +61,15 @@ export default function TermsOfUseHeader() {
           <p className="text-xs text-[#5C574E] font-normal leading-relaxed">
             <strong className="font-bold text-[#101C33]">{t("Applies with:")}</strong>{" "}
             {t("Regional Schedule (England)")} +{" "}
-            <a href="#" className="font-bold text-[#93321F] hover:underline">
+            <a href="/legal/payment-terms" className="font-bold text-[#93321F] hover:underline">
               {t("Payment Terms")}
             </a>{" "}
             +{" "}
-            <a href="#" className="font-bold text-[#93321F] hover:underline">
+            <a href="/legal/community-standards" className="font-bold text-[#93321F] hover:underline">
               {t("Community Standards")}
             </a>{" "}
             +{" "}
-            <a href="#" className="font-bold text-[#93321F] hover:underline">
+            <a href="/legal/fair-housing-anti-discrimination" className="font-bold text-[#93321F] hover:underline">
               {t("Fair Housing & Anti-Discrimination")}
             </a>{" "}
             + {t("incorporated policies. Country or region:")}{" "}

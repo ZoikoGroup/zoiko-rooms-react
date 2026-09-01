@@ -94,7 +94,7 @@ export default function ApplicationsAgreementsPaymentsSection() {
           {/* CTA Button */}
           <div className="pt-2">
             <a
-              href="#explore-workflow"
+              href="/pro/applications"
               className="inline-block bg-transparent hover:bg-white text-[#14213D] text-xs font-semibold px-6 py-3 rounded-full border border-[#14213D] transition-colors shadow-xs"
             >
               {t("Explore this workflow")}

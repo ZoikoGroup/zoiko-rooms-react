@@ -56,7 +56,7 @@ export function HeroSection() {
                 <Button href="/find-a-room/work-healthcare-rooms" size="lg" variant="secondary">
                   {t("Search Healthcare Rooms")}
                 </Button>
-                <Button href="/resources" size="lg" variant="outline">
+                <Button href="/contact-us" size="lg" variant="outline">
                   {t("Talk to Zoiko Rooms")}
                 </Button>
               </motion.div>

@@ -207,9 +207,12 @@ function CityCard({ city, compared, onToggleCompare }: CityCardComponentProps) {
         </div>
 
         <div className="mt-2 flex items-center justify-between border-t border-stone-100 pt-3.5">
-          <button className="text-xs font-semibold text-sky-900 transition-colors hover:underline hover:text-sky-950">
+          <a
+            href="/find-a-room/search-rooms"
+            className="text-xs font-semibold text-sky-900 transition-colors hover:underline hover:text-sky-950"
+          >
             Explore Rooms
-          </button>
+          </a>
           <button
             type="button"
             onClick={toggleAlert}

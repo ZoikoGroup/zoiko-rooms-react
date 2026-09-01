@@ -1,3 +1,4 @@
+export { default as GlossaryView } from "./GlossaryView";
 export { default as GlossaryHeroSection } from "./GlossaryHeroSection";
 export { default as BrowseByTopicSection } from "./BrowseByTopicSection";
 export { default as AZIndexSection } from "./AZIndexSection";

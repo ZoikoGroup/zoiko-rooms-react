@@ -101,7 +101,7 @@ export function FaqCtaSection() {
               <Button href="/find-a-room/international-moves" size="lg" variant="secondary">
                 {t("Explore International Moves")}
               </Button>
-              <Button href="/resources" size="lg" variant="outline-red">
+              <Button href="/contact-us" size="lg" variant="outline-red">
                 {t("Talk to Zoiko Rooms")}
               </Button>
             </motion.div>

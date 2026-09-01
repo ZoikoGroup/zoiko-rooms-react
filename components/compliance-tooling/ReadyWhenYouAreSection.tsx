@@ -24,19 +24,19 @@ export default function ReadyWhenYouAreSection() {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full sm:w-auto">
-          <button
-            type="button"
-            className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#0E2F73] text-white hover:bg-[#0B2252] text-xs sm:text-sm font-semibold transition-colors cursor-pointer"
+          <a
+            href="/pro/compliance-and-verification"
+            className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 rounded-full bg-[#0E2F73] text-white hover:bg-[#0B2252] text-xs sm:text-sm font-semibold transition-colors cursor-pointer"
           >
             Explore Compliance &amp; Verification
-          </button>
+          </a>
 
-          <button
-            type="button"
-            className="w-full sm:w-auto px-6 py-3 rounded-full border border-[#111827] bg-transparent text-[#111827] hover:bg-black/5 text-xs sm:text-sm font-semibold transition-colors cursor-pointer"
+          <a
+            href="/contact-us"
+            className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 rounded-full border border-[#111827] bg-transparent text-[#111827] hover:bg-black/5 text-xs sm:text-sm font-semibold transition-colors cursor-pointer"
           >
             Talk to Zoiko Rooms
-          </button>
+          </a>
         </div>
       </div>
     </div>

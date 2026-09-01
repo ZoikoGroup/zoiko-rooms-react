@@ -72,7 +72,7 @@ export default function HierarchySection() {
         {/* Subtitle */}
         <p className="text-sm sm:text-base text-[#6B675F] text-center max-w-2xl leading-relaxed mb-12 sm:mb-16">
           Every layer keeps its own source-of-truth boundary — nothing here
-          invents authority it doesn't have.
+          invents authority it doesn&apos;t have.
         </p>
 
         {/* Hierarchy Rows List */}

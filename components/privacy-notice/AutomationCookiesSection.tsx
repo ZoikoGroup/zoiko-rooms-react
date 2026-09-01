@@ -33,7 +33,7 @@ export function AutomationCookiesSection() {
               <a href="/legal/cookie-notice" className="text-sm font-semibold text-brand-red hover:text-brand-red-dark">
                 Cookie Notice →
               </a>
-              <a href="#" className="text-sm font-semibold text-brand-red hover:text-brand-red-dark">
+              <a href="/legal/cookie-preferences" className="text-sm font-semibold text-brand-red hover:text-brand-red-dark">
                 Cookie Preferences →
               </a>
             </div>

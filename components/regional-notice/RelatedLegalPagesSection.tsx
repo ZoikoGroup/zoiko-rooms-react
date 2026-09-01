@@ -9,14 +9,14 @@ interface LegalLink {
 }
 
 const legalLinks: LegalLink[] = [
-  { title: "Terms of Use", href: "/terms-of-use" },
-  { title: "Privacy Notice", href: "/privacy-notice" },
-  { title: "Cookie Notice", href: "/cookie-notice" },
-  { title: "Cookie Preferences", href: "#" },
-  { title: "Fair Housing & Anti-Discrimination", href: "/fair-housing" },
-  { title: "Community Standards", href: "/community-standards" },
-  { title: "Payment Terms", href: "/payment-terms" },
-  { title: "Your Privacy Choices", href: "/privacy-choices" },
+  { title: "Terms of Use", href: "/legal/terms-of-use" },
+  { title: "Privacy Notice", href: "/legal/privacy-notice" },
+  { title: "Cookie Notice", href: "/legal/cookie-notice" },
+  { title: "Cookie Preferences", href: "/legal/cookie-preferences" },
+  { title: "Fair Housing & Anti-Discrimination", href: "/legal/fair-housing-anti-discrimination" },
+  { title: "Community Standards", href: "/legal/community-standards" },
+  { title: "Payment Terms", href: "/legal/payment-terms" },
+  { title: "Your Privacy Choices", href: "/legal/your-privacy-choices" },
 ];
 
 export default function RelatedLegalPagesSection() {

@@ -75,10 +75,10 @@ export function TableOfContentsSidebar() {
             {t("Help & escalation")}
           </span>
           <div className="flex flex-col divide-y divide-[#E9E0D3]">
-            {helpLinks.map((label) => (
+            {helpLinks.map(({ label, href }) => (
               <a
                 key={label}
-                href="/resources"
+                href={href}
                 className="py-2.5 text-sm font-medium text-brand-navy transition-colors first:pt-0 last:pb-0 hover:text-brand-red"
               >
                 {t(label)} →

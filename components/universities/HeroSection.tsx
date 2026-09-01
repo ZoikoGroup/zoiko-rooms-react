@@ -41,7 +41,7 @@ export function HeroSection() {
               <Button href="#choose-your-model" size="lg" variant="secondary">
                 {t("Explore University Models")}
               </Button>
-              <Button href="/resources" size="lg" variant="outline">
+              <Button href="/contact-us" size="lg" variant="outline">
                 {t("Talk to Zoiko Rooms")}
               </Button>
             </motion.div>

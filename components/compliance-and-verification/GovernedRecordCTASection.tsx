@@ -32,19 +32,19 @@ export default function GovernedRecordCTASection() {
           transition={{ duration: 0.4, delay: 0.1 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2"
         >
-          <button
-            type="button"
-            className="w-full sm:w-auto bg-[#14213D] hover:bg-[#1d2d52] text-white text-xs sm:text-sm font-semibold py-3.5 px-7 rounded-full transition-all duration-200 cursor-pointer shadow-xs active:scale-95"
+          <a
+            href="/contact-us"
+            className="inline-flex items-center justify-center w-full sm:w-auto bg-[#14213D] hover:bg-[#1d2d52] text-white text-xs sm:text-sm font-semibold py-3.5 px-7 rounded-full transition-all duration-200 cursor-pointer shadow-xs active:scale-95"
           >
             Talk to Zoiko Rooms
-          </button>
+          </a>
 
-          <button
-            type="button"
-            className="w-full sm:w-auto bg-transparent hover:bg-black/5 text-[#14213D] text-xs sm:text-sm font-semibold py-3.5 px-7 rounded-full border border-[#14213D] transition-all duration-200 cursor-pointer shadow-xs active:scale-95"
+          <a
+            href="/contact-us"
+            className="inline-flex items-center justify-center w-full sm:w-auto bg-transparent hover:bg-black/5 text-[#14213D] text-xs sm:text-sm font-semibold py-3.5 px-7 rounded-full border border-[#14213D] transition-all duration-200 cursor-pointer shadow-xs active:scale-95"
           >
             Explore the Verification Model
-          </button>
+          </a>
         </motion.div>
       </div>
     </section>

@@ -39,7 +39,7 @@ export default function CallToActionSection() {
               {t("Explore the Transaction Lifecycle")}
             </a>
             <a
-              href="#talk-to-zoiko"
+              href="/contact-us"
               className="bg-transparent hover:bg-white/10 text-white text-xs font-semibold px-6 py-3 rounded-full border border-white/30 transition-colors shadow-xs"
             >
               {t("Talk to Zoiko Rooms")}

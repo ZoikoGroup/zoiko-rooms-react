@@ -78,7 +78,7 @@ export default function IntegrationTrustBoundarySection() {
             {/* Link */}
             <div>
               <a
-                href="#authorization-model"
+                href="#authorization"
                 className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#1A2E6E] hover:text-[#C8202C] transition-colors group"
               >
                 <span>{t("Review the authorization model")}</span>

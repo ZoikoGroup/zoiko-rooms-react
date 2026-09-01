@@ -10,7 +10,6 @@ interface CategoryCardProps {
   title: string;
   description: string;
   linkText: string;
-  linkHref?: string;
 }
 
 const categories: CategoryCardProps[] = [
@@ -21,7 +20,6 @@ const categories: CategoryCardProps[] = [
     description:
       "Room, private room, shared room, whole property, household, live-in arrangement.",
     linkText: "Browse room terms \u2192",
-    linkHref: "#",
   },
   {
     iconPath: "/icons/card.png",
@@ -30,7 +28,6 @@ const categories: CategoryCardProps[] = [
     description:
       "Rent, deposit, fees, bills, upfront total, refund, chargeback, direct billing.",
     linkText: "Browse money terms \u2192",
-    linkHref: "#",
   },
   {
     iconPath: "/icons/notes.png",
@@ -39,7 +36,6 @@ const categories: CategoryCardProps[] = [
     description:
       "Application, decision, hold, reservation, allocation, agreement, notice, renewal.",
     linkText: "Browse transaction terms \u2192",
-    linkHref: "#",
   },
   {
     iconPath: "/icons/key.png",
@@ -48,7 +44,6 @@ const categories: CategoryCardProps[] = [
     description:
       "Provider, landlord, agent, authorized sublet, listing authority, verification.",
     linkText: "Browse authority terms \u2192",
-    linkHref: "#",
   },
   {
     iconPath: "/icons/building.png",
@@ -57,7 +52,6 @@ const categories: CategoryCardProps[] = [
     description:
       "Referral, distribution, eligibility, nomination, allocation, subsidy, allowance.",
     linkText: "Browse program terms \u2192",
-    linkHref: "#",
   },
   {
     iconPath: "/icons/shield.png",
@@ -66,13 +60,16 @@ const categories: CategoryCardProps[] = [
     description:
       "Scam signal, safe contact, reporter protection, accessibility feature, audit record.",
     linkText: "Browse trust terms \u2192",
-    linkHref: "#",
   },
 ];
 
-export default function BrowseByTopicSection() {
+interface BrowseByTopicSectionProps {
+  onSelectCategory: (category: string) => void;
+}
+
+export default function BrowseByTopicSection({ onSelectCategory }: BrowseByTopicSectionProps) {
   return (
-    <section className="w-full text-[#1E2022] py-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
+    <section id="browse-by-topic" className="w-full scroll-mt-24 text-[#1E2022] py-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
       <div className="max-w-6xl mx-auto space-y-10">
         {/* Header Block */}
         <div className="flex flex-col items-center text-center space-y-3 w-full mx-auto">
@@ -120,7 +117,8 @@ export default function BrowseByTopicSection() {
                     {cat.description}
                   </p>
                   <a
-                    href={cat.linkHref || "#"}
+                    href="#az-index"
+                    onClick={() => onSelectCategory(cat.title)}
                     className="inline-block text-xs font-bold text-[#C8202C] hover:underline"
                   >
                     {cat.linkText}
