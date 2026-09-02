@@ -56,13 +56,18 @@ export default function ListARoomHero() {
                   <option value="" disabled>
                     {t("Select relationship")}
                   </option>
-                  <option value="I live in the home">
-                    {t("I live in the home")}
+                  <option value="I own and live here">
+                    {t("I own and live here")}
                   </option>
-                  <option value="I own the property">
-                    {t("I own the property")}
+                  <option value="I own but live elsewhere">
+                    {t("I own but live elsewhere")}
                   </option>
-                  <option value="I am an agent">{t("I am an agent")}</option>
+                  <option value="I rent and have permission">
+                    {t("I rent and have permission")}
+                  </option>
+                  <option value="I manage or represent the property">
+                    {t("I manage or represent the property")}
+                  </option>
                 </select>
                 <ChevronDown className="w-4 h-4 text-gray-500 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
@@ -101,7 +106,7 @@ export default function ListARoomHero() {
         <div className="lg:col-span-6 relative flex justify-center lg:justify-end">
           <div className="relative w-full max-w-[500px] aspect-[4/3] lg:max-w-none lg:aspect-auto lg:h-full lg:min-h-[420px] rounded-3xl overflow-hidden shadow-md">
             <Image
-              src="/images/list-a-room/hero.png"
+              src="/images/list-a-room/hero-1.webp"
               alt={t("Cozy well-lit room for rent")}
               fill
               className="object-cover"
