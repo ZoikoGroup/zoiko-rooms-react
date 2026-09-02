@@ -55,7 +55,9 @@ export function HeroSection() {
                   <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
                     <input
                       type="text"
-                      placeholder={t("City, neighborhood, university, or landmark")}
+                      placeholder={t(
+                        "City, neighborhood, university, or landmark",
+                      )}
                       className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none placeholder:text-neutral-400"
                     />
                   </div>
@@ -66,26 +68,30 @@ export function HeroSection() {
                   <span className="px-1 text-[11px] font-medium text-neutral-600">
                     {t("When do you want to move in?")}
                   </span>
+
                   <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
                     <input
-                      type="date"
+                      type="text"
+                      name="moveInDate"
+                      placeholder={t("Date or flexible")}
                       className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none placeholder:text-neutral-400"
                     />
                   </div>
                 </div>
-
+                
                 {/* Field 3 */}
                 <div className="flex min-w-0 flex-col gap-1">
                   <span className="px-1 text-[11.5px] font-medium text-neutral-600">
-                    {t("How long do you plan to stay?")}
+                    {t("What’s your monthly budget?")}
                   </span>
+
                   <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
-                    <select className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none cursor-pointer">
-                      <option value="1+ month">{t("1+ month")}</option>
-                      <option value="3+ months">{t("3+ months")}</option>
-                      <option value="6+ months">{t("6+ months")}</option>
-                      <option value="12+ months">{t("12+ months")}</option>
-                    </select>
+                    <input
+                      type="text"
+                      name="monthlyBudget"
+                      placeholder={t("Min – Max")}
+                      className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none placeholder:text-neutral-400"
+                    />
                   </div>
                 </div>
               </div>
