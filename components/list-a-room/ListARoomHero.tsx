@@ -3,12 +3,12 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ShieldCheck } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function ListARoomHero() {
   const { t } = useLanguage();
-  const [offeringType, setOfferingType] = useState("I live in the home");
+  const [offeringType, setOfferingType] = useState("");
   const [location, setLocation] = useState("");
 
   return (
@@ -17,23 +17,21 @@ export default function ListARoomHero() {
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
         {/* Left Column: Typography & Quick Input Card */}
         <div className="lg:col-span-6 flex flex-col justify-center space-y-5">
-          {/* Eyebrow Label */}
-          <div className="inline-flex items-center space-x-2">
-            <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#C0272D]">
-              {t("List a private room • 30+ nights")}
-            </span>
+          {/* Eyebrow Badge */}
+          <div className="inline-flex w-fit items-center gap-1.5 rounded-full bg-[#F1E7DA] px-3 py-1.5 text-[11px] font-semibold text-[#8C6D46]">
+            <ShieldCheck className="h-3.5 w-3.5" />
+            {t("Verified listings. High-intent renters.")}
           </div>
 
           {/* Main Headline */}
           <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-serif font-bold text-[#14213D] leading-[1.15] tracking-tight">
-            {t("List a room for rent")} <br className="hidden sm:inline" />
-            {t("with confidence.")}
+            {t("List your room on Zoiko Rooms.")}
           </h1>
 
           {/* Subtitle / Description */}
           <p className="text-sm sm:text-base text-[#555E68] font-normal leading-relaxed max-w-lg">
             {t(
-              "Offer an eligible private room, show why you're authorized to offer it, build a Room Passport and manage the rental journey through one connected platform.",
+              "Join the platform where verified rooms attract quality tenants. Start your listing in minutes — no upfront costs, no commitments.",
             )}
           </p>
 
@@ -48,7 +46,7 @@ export default function ListARoomHero() {
               {/* Offering Select */}
               <div className="sm:col-span-5 flex flex-col space-y-1.5">
                 <label className="text-[11px] font-semibold text-[#1A2E6E] tracking-wide">
-                  {t("I am offering this room as")}
+                  {t("Your relationship to the property")}
                 </label>
                 <div className="relative">
                   <select
@@ -56,6 +54,9 @@ export default function ListARoomHero() {
                     onChange={(e) => setOfferingType(e.target.value)}
                     className="w-full appearance-none bg-[#FDFBF7] border border-[#E5E2DC] rounded-xl py-2.5 pl-3 pr-8 text-xs font-medium text-[#2B364B] focus:outline-none focus:ring-2 focus:ring-[#14213D]/20 transition-all cursor-pointer truncate"
                   >
+                    <option value="" disabled>
+                      {t("Select relationship")}
+                    </option>
                     <option value="I live in the home">
                       {t("I live in the home")}
                     </option>
@@ -75,7 +76,7 @@ export default function ListARoomHero() {
                 </label>
                 <input
                   type="text"
-                  placeholder={t("City, postcode, or addr")}
+                  placeholder={t("City, neighborhood, postal code, or address")}
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   className="w-full bg-[#FDFBF7] border border-[#E5E2DC] rounded-xl py-2.5 px-3 text-xs font-medium text-[#2B364B] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#14213D]/20 transition-all"
@@ -88,7 +89,7 @@ export default function ListARoomHero() {
                   href="/list-a-room/start-a-listing"
                   className="flex w-full items-center justify-center bg-[#1A2E6E] hover:bg-[#122250] text-white font-medium text-xs py-2.5 px-3 rounded-full transition-all duration-200 shadow-sm whitespace-nowrap active:scale-[0.98]"
                 >
-                  {t("Start a Listing")}
+                  {t("Start a listing")}
                 </a>
               </div>
             </div>
@@ -96,15 +97,12 @@ export default function ListARoomHero() {
 
           {/* Sub-text note */}
           <p className="text-xs text-[#7A838E] font-normal">
-            {t(
-              "No account, ID or payment details needed to see whether your room qualifies.",
-            )}
+            {t("No account, ID, or payment details needed to get started.")}
           </p>
         </div>
 
-        {/* Right Column: Hero Image with Floating Room Passport Badge */}
+        {/* Right Column: Hero Image */}
         <div className="lg:col-span-6 relative flex justify-center lg:justify-end">
-          {/* Main Hero Image Frame */}
           <div className="relative w-full max-w-[500px] lg:max-w-none aspect-[4/3] rounded-3xl overflow-hidden shadow-md">
             <Image
               src="/images/list-a-room/hero.png"
@@ -114,53 +112,6 @@ export default function ListARoomHero() {
               priority
             />
           </div>
-
-          {/* Floating "ROOM PASSPORT" Overlay Card */}
-          <motion.div
-            initial={{ opacity: 0, x: -20, y: 20 }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="absolute left-2 sm:left-[-12px] md:left-[-25px] bottom-[-16px] sm:bottom-[-10px] bg-white rounded-2xl p-3.5 sm:p-4 shadow-xl border border-gray-100/80 w-[220px] sm:w-[245px] space-y-2.5 z-10"
-          >
-            <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#C0272D] block">
-              ROOM PASSPORT
-            </span>
-
-            <div className="space-y-1.5 text-xs">
-              {/* Row 1 */}
-              <div className="flex items-center justify-between border-b border-gray-100 pb-1.5">
-                <span className="text-[#555E68] font-normal text-[11px]">
-                  {t("Address")}
-                </span>
-                <span className="inline-flex items-center space-x-1.5 bg-[#EAF7EE] text-[#1E7A44] px-2 py-0.5 rounded-full text-[10px] font-medium border border-[#D3EED9]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#1E7A44]"></span>
-                  <span>{t("Regulatory")}</span>
-                </span>
-              </div>
-
-              {/* Row 2 */}
-              <div className="flex items-center justify-between border-b border-gray-100 pb-1.5">
-                <span className="text-[#555E68] font-normal text-[11px]">
-                  {t("Room size")}
-                </span>
-                <span className="inline-flex items-center space-x-1.5 bg-[#FFF7E6] text-[#A0610D] px-2 py-0.5 rounded-full text-[10px] font-medium border border-[#FFE7BA]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#A0610D]"></span>
-                  <span>{t("Document")}</span>
-                </span>
-              </div>
-
-              {/* Row 3 */}
-              <div className="flex items-center justify-between pt-0.5">
-                <span className="text-[#555E68] font-normal text-[11px]">
-                  {t("Lockability")}
-                </span>
-                <span className="inline-flex items-center space-x-1.5 bg-[#EAF7EE] text-[#1E7A44] px-2 py-0.5 rounded-full text-[10px] font-medium border border-[#D3EED9]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#1E7A44]"></span>
-                  <span>{t("Inspected")}</span>
-                </span>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>
