@@ -56,13 +56,18 @@ export default function ListARoomHero() {
                   <option value="" disabled>
                     {t("Select relationship")}
                   </option>
-                  <option value="I live in the home">
-                    {t("I live in the home")}
+                  <option value="I own and live here">
+                    {t("I own and live here")}
                   </option>
-                  <option value="I own the property">
-                    {t("I own the property")}
+                  <option value="I own but live elsewhere">
+                    {t("I own but live elsewhere")}
                   </option>
-                  <option value="I am an agent">{t("I am an agent")}</option>
+                  <option value="I rent and have permission">
+                    {t("I rent and have permission")}
+                  </option>
+                  <option value="I manage or represent the property">
+                    {t("I manage or represent the property")}
+                  </option>
                 </select>
                 <ChevronDown className="w-4 h-4 text-gray-500 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
