@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
@@ -22,14 +21,13 @@ const floatUpVariants: Variants = {
 };
 
 const guideCategories = [
-  { id: "guides", label: "City Guides" },
-  { id: "safety", label: "Safety & Scam Prevention" },
-  { id: "verification", label: "Verification & Authority" },
+  { id: "guides", label: "City Guides", href: "/resources/guides" },
+  { id: "safety", label: "Safety & Scam Prevention", href: "/resources/safety-scam-prevention" },
+  { id: "verification", label: "Verification & Authority", href: "/how-it-works/verification-authority" },
 ];
 
 export default function CityGuidesSection() {
   const { t } = useLanguage();
-  const [activeTab, setActiveTab] = useState("guides");
 
   return (
     <section className="w-full border-t border-stone-200 px-6 py-12 font-['Inter',sans-serif] md:px-24">
@@ -87,28 +85,16 @@ export default function CityGuidesSection() {
             variants={floatUpVariants}
             className="flex w-full flex-wrap items-center gap-6 border-b border-stone-200 pt-2 md:gap-8"
           >
-            {guideCategories.map((category) => {
-              const isActive = activeTab === category.id;
-
-              return (
-                <button
-                  key={category.id}
-                  onClick={() => setActiveTab(category.id)}
-                  className={`relative cursor-pointer pb-3 text-base font-semibold transition-all duration-200 ${
-                    isActive ? "text-amber-700" : "text-stone-500 hover:text-amber-700/80"
-                  }`}
-                >
-                  {t(category.label)}
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeTabUnderline"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-amber-700"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                </button>
-              );
-            })}
+            {guideCategories.map((category) => (
+              <a
+                key={category.id}
+                href={category.href}
+                className="group relative pb-3 text-base font-semibold text-stone-500 transition-all duration-200 hover:text-amber-700"
+              >
+                {t(category.label)}
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 scale-x-0 rounded-full bg-amber-700 transition-transform duration-200 group-hover:scale-x-100" />
+              </a>
+            ))}
           </motion.div>
         </div>
       </div>

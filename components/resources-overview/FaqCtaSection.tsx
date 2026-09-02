@@ -72,7 +72,7 @@ export function FaqCtaSection() {
                 {t("Search Resources")}
               </Button>
               <Button
-                href="/resources"
+                href="#destinations"
                 size="lg"
                 variant="outline"
                 className="!border-white/40 !text-white hover:!bg-white hover:!text-brand-navy"
@@ -80,7 +80,10 @@ export function FaqCtaSection() {
                 {t("Browse by Need")}
               </Button>
               <Button
-                href="#faq"
+                onClick={() => {
+                  setOpenIndex(2);
+                  document.getElementById("faq")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                }}
                 size="lg"
                 variant="outline"
                 className="!border-white/40 !text-white hover:!bg-white hover:!text-brand-navy"

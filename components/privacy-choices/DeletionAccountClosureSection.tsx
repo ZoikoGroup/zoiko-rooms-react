@@ -31,7 +31,12 @@ export function DeletionAccountClosureSection() {
               >
                 <h3 className="font-heading text-base font-medium text-brand-navy">{title}</h3>
                 <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
-                <p className="border-t border-black/5 pt-3 text-xs text-neutral-500">{caption}</p>
+                <div className="flex flex-col gap-3 border-t border-black/5 pt-3">
+                  <p className="text-xs text-neutral-500">{caption}</p>
+                  <a href="/contact-us" className="text-sm font-semibold text-brand-red hover:text-brand-red-dark">
+                    Start this request →
+                  </a>
+                </div>
               </motion.div>
             ))}
           </div>

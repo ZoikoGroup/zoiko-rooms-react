@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
@@ -8,17 +7,16 @@ import { NaturalImage } from "@/components/find-a-room/NaturalImage";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const needs = [
-  "Before paying",
-  "Viewing or communication safety",
-  "Payment failed or changed",
-  "Refund or cancellation",
-  "Report fraud, harassment, or discrimination",
-  "Access urgent or general support",
+  { label: "Before paying", href: "#before-paying" },
+  { label: "Viewing or communication safety", href: "#safer-communication" },
+  { label: "Payment failed or changed", href: "#payment-lifecycle" },
+  { label: "Refund or cancellation", href: "#refunds-disputes" },
+  { label: "Report fraud, harassment, or discrimination", href: "#fraud-account-recovery" },
+  { label: "Access urgent or general support", href: "#support-incident-lifecycle" },
 ];
 
 export function HeroSection() {
   const { t } = useLanguage();
-  const [selected, setSelected] = useState<string | null>(null);
 
   return (
     <section className="border-b border-[#E9E0D3] py-10 sm:py-14">
@@ -59,23 +57,15 @@ export function HeroSection() {
                 {t("Choose a Need")}
               </span>
               <div className="flex flex-wrap gap-2">
-                {needs.map((need) => {
-                  const isSelected = selected === need;
-                  return (
-                    <button
-                      key={need}
-                      type="button"
-                      onClick={() => setSelected(isSelected ? null : need)}
-                      className={`rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors ${
-                        isSelected
-                          ? "border-brand-navy bg-brand-navy text-white"
-                          : "border-[#E9E0D3] bg-white text-brand-ink hover:border-brand-navy/40"
-                      }`}
-                    >
-                      {t(need)}
-                    </button>
-                  );
-                })}
+                {needs.map((need) => (
+                  <a
+                    key={need.label}
+                    href={need.href}
+                    className="rounded-xl border border-[#E9E0D3] bg-white px-4 py-2.5 text-sm font-medium text-brand-ink transition-colors hover:border-brand-navy/40"
+                  >
+                    {t(need.label)}
+                  </a>
+                ))}
               </div>
             </motion.div>
           </div>

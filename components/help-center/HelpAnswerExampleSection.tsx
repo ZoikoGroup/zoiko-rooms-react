@@ -137,12 +137,12 @@ export default function HelpAnswerExampleSection({
 
             {/* Links / Footer Actions */}
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-xs sm:text-sm font-bold">
-              <a href="#" className="text-[#A05E2B] hover:underline">
+              <a href="/login" className="text-[#A05E2B] hover:underline">
                 {t("Open my payment record")}
               </a>
-              <span className="text-[#A05E2B]">
+              <a href="/how-it-works/payments-safety-support" className="text-[#A05E2B] hover:underline">
                 {t("Related: Payments, Safety & Support")}
-              </span>
+              </a>
             </div>
           </motion.div>
         </div>

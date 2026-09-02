@@ -48,7 +48,7 @@ export function QuickPrivacyChoicesSection() {
           </div>
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            {toggleChoices.map(({ key, title, description, scope, onLabel, offLabel }) => {
+            {toggleChoices.map(({ key, title, description, scope, onLabel, offLabel, learnMoreHref }) => {
               const isOn = toggles[key];
               return (
                 <motion.div key={key} variants={fadeUp} className="flex flex-col gap-4 rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8] p-6">
@@ -78,7 +78,9 @@ export function QuickPrivacyChoicesSection() {
                     <span className={`text-sm font-semibold ${isOn ? "text-brand-red" : "text-neutral-500"}`}>
                       {isOn ? onLabel : offLabel}
                     </span>
-                    <span className="text-sm font-semibold text-brand-red">What does this mean?</span>
+                    <a href={learnMoreHref} className="text-sm font-semibold text-brand-red hover:text-brand-red-dark">
+                      What does this mean?
+                    </a>
                   </div>
                 </motion.div>
               );

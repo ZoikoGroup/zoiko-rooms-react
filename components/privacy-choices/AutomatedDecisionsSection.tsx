@@ -36,7 +36,9 @@ export function AutomatedDecisionsSection() {
                     <span className={row.humanReview === "Yes" ? "font-medium text-emerald-600" : "text-neutral-500"}>
                       {row.humanReview}
                     </span>
-                    <span className="font-medium text-brand-red">{row.available}</span>
+                    <a href="/contact-us" className="font-medium text-brand-red hover:text-brand-red-dark">
+                      {row.available}
+                    </a>
                   </div>
                 ))}
               </div>

@@ -14,7 +14,6 @@ export function HeroSection() {
   const { t } = useLanguage();
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
-  const [selectedRole, setSelectedRole] = useState(roleOptions[0]);
   const boxRef = useRef<HTMLDivElement>(null);
 
   useOnClickOutside(boxRef, () => setFocused(false));
@@ -100,23 +99,15 @@ export function HeroSection() {
           </motion.div>
 
           <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-2">
-            {roleOptions.map((role) => {
-              const isSelected = selectedRole === role;
-              return (
-                <button
-                  key={role}
-                  type="button"
-                  onClick={() => setSelectedRole(role)}
-                  className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
-                    isSelected
-                      ? "border-brand-navy bg-brand-navy text-white"
-                      : "border-[#E9E0D3] bg-white text-brand-navy hover:bg-brand-navy/5"
-                  }`}
-                >
-                  {t(role)}
-                </button>
-              );
-            })}
+            {roleOptions.map((role) => (
+              <a
+                key={role}
+                href="#destinations"
+                className="rounded-full border border-[#E9E0D3] bg-white px-4 py-2 text-sm font-medium text-brand-navy transition-colors hover:border-brand-navy hover:bg-brand-navy/5"
+              >
+                {t(role)}
+              </a>
+            ))}
           </motion.div>
         </Reveal>
       </Container>

@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const floatUpVariants: Variants = {
   hidden: { opacity: 0, y: 32 },
@@ -38,6 +40,30 @@ function Field({
 }
 
 export default function RoomsByCitySection() {
+  const router = useRouter();
+  const [locating, setLocating] = useState(false);
+
+  function handleUseCurrentLocation() {
+    if (typeof navigator === "undefined" || !navigator.geolocation) {
+      router.push("/find-a-room/search-rooms");
+      return;
+    }
+    setLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      () => {
+        // We don't reverse-geocode coordinates to a supported city yet, so
+        // hand off to search with location access granted rather than
+        // guessing or leaving the button inert.
+        setLocating(false);
+        router.push("/find-a-room/search-rooms");
+      },
+      () => {
+        setLocating(false);
+        router.push("/find-a-room/search-rooms");
+      },
+    );
+  }
+
   return (
     <section className="w-full max-w-[1176px] mx-auto px-4 sm:px-6 lg:px-18 pt-14 pb-14 font-['Inter',sans-serif]">
       <div className="grid gap-6 lg:grid-cols-[1.02fr_.98fr] lg:items-stretch">
@@ -80,13 +106,14 @@ export default function RoomsByCitySection() {
             </div>
 
             <div className="mt-5 flex flex-wrap items-center gap-4">
-              <motion.button
+              <motion.a
+                href="#cities"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center justify-center rounded-full bg-sky-900 px-7 py-3.5 text-base font-semibold text-white transition-colors duration-200 hover:bg-sky-950"
               >
                 Explore Cities
-              </motion.button>
+              </motion.a>
 
               
             </div>
@@ -116,8 +143,13 @@ export default function RoomsByCitySection() {
           
         </motion.div>
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                <button className="text-xs font-normal leading-5 text-stone-500 underline transition hover:text-stone-900">
-                  Use current location
+                <button
+                  type="button"
+                  onClick={handleUseCurrentLocation}
+                  disabled={locating}
+                  className="text-xs font-normal leading-5 text-stone-500 underline transition hover:text-stone-900 disabled:opacity-60"
+                >
+                  {locating ? "Locating…" : "Use current location"}
                 </button>
                 <a
                   href="#cities"

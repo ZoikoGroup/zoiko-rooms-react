@@ -16,7 +16,7 @@ const cardsData: NoticeCard[] = [
     description:
       "Hosts are shown as either a private individual or a trader — never presented as one when they're the other. Pricing and pre-contract information follow UK consumer-protection pricing controls.",
     linkText: "View consumer notice",
-    href: "/legal/terms-of-use",
+    href: "/legal/terms-of-use#user-types",
   },
   {
     title: "Payments & tax reporting",
