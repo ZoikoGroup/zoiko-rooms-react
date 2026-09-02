@@ -15,7 +15,7 @@ export function SaferCommunicationSection() {
   const { t } = useLanguage();
 
   return (
-    <SectionDivider>
+    <SectionDivider id="safer-communication" className="scroll-mt-24">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">

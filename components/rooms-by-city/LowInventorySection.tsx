@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Check } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
 import { useRouter } from "next/navigation";
 
@@ -20,18 +21,25 @@ const floatUpVariants: Variants = {
   }),
 };
 
-interface LowInventorySectionProps {
-  onSearchRooms?: () => void;
-  onSaveAlert?: () => void;
-  onGetHelp?: () => void;
-}
-
-export default function LowInventorySection({
-  onSearchRooms,
-  onSaveAlert,
-  onGetHelp,
-}: LowInventorySectionProps) {
+export default function LowInventorySection() {
   const router = useRouter();
+  const [alertSaved, setAlertSaved] = useState(false);
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem("zoiko-low-inventory-alert") === "1";
+    if (saved) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time sync from localStorage on mount, not a render loop
+      setAlertSaved(true);
+    }
+  }, []);
+
+  function toggleAlert() {
+    setAlertSaved((prev) => {
+      const next = !prev;
+      window.localStorage.setItem("zoiko-low-inventory-alert", next ? "1" : "0");
+      return next;
+    });
+  }
   return (
     <section className="w-full border-t border-stone-200 px-6 py-12 font-['Inter',sans-serif] md:px-24">
       <div className="w-full max-w-[1240px] md:px-8">
@@ -95,7 +103,6 @@ export default function LowInventorySection({
                 boxShadow: "0 8px 20px -4px rgba(180, 83, 9, 0.3)",
               }}
               whileTap={{ scale: 0.98 }}
-              // onClick={onSearchRooms}
               onClick={()=>router.push("/find-a-room/search-rooms")}
               className="flex cursor-pointer items-center justify-center rounded-full bg-amber-700 px-7 py-3.5 text-base font-semibold text-white transition-all duration-200"
             >
@@ -105,16 +112,21 @@ export default function LowInventorySection({
             <motion.button
               whileHover={{ scale: 1.02, backgroundColor: "#f5f5f4", borderColor: "#a8a29e" }}
               whileTap={{ scale: 0.98 }}
-              onClick={onSaveAlert}
-              className="flex cursor-pointer items-center justify-center rounded-full border border-stone-200 bg-white px-7 py-3.5 text-base font-semibold text-gray-800 transition-colors duration-200"
+              onClick={toggleAlert}
+              aria-pressed={alertSaved}
+              className={`flex cursor-pointer items-center justify-center gap-1.5 rounded-full border px-7 py-3.5 text-base font-semibold transition-colors duration-200 ${
+                alertSaved
+                  ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+                  : "border-stone-200 bg-white text-gray-800"
+              }`}
             >
-              Save City Alert
+              {alertSaved && <Check className="h-4 w-4" />}
+              {alertSaved ? "City Alert Saved" : "Save City Alert"}
             </motion.button>
 
             <motion.button
               whileHover={{ scale: 1.02, backgroundColor: "#f5f5f4", borderColor: "#a8a29e" }}
               whileTap={{ scale: 0.98 }}
-              // onClick={onGetHelp}
               onClick={()=>router.push("/resources/help-center")}
               className="flex cursor-pointer items-center justify-center rounded-full border border-stone-200 bg-white px-7 py-3.5 text-base font-semibold text-gray-800 transition-colors duration-200"
             >

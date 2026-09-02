@@ -16,7 +16,7 @@ export function FraudAccountRecoverySection() {
   const { t } = useLanguage();
 
   return (
-    <SectionDivider className="bg-white">
+    <SectionDivider id="fraud-account-recovery" className="scroll-mt-24 bg-white">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">

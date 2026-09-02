@@ -22,7 +22,7 @@ export function SupportIncidentLifecycleSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <SectionDivider className="bg-white">
+    <SectionDivider id="support-incident-lifecycle" className="scroll-mt-24 bg-white">
       <Container>
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">

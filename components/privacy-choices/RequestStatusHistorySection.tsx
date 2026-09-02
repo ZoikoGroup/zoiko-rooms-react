@@ -38,7 +38,9 @@ export function RequestStatusHistorySection() {
                     <span className="text-neutral-500">{row.submitted}</span>
                     <span className="text-neutral-500">{row.due}</span>
                     <EvidenceBadge label={row.status} tone={row.tone === "green" ? "green" : "amber"} variant="outline" className="w-fit" />
-                    <span className="font-semibold text-brand-red">{row.actionLabel} →</span>
+                    <a href="/contact-us" className="font-semibold text-brand-red hover:text-brand-red-dark">
+                      {row.actionLabel} →
+                    </a>
                   </div>
                 ))}
               </div>

@@ -16,6 +16,7 @@ export type ToggleChoice = {
   scope: string;
   onLabel: string;
   offLabel: string;
+  learnMoreHref: string;
 };
 
 export const toggleChoices: ToggleChoice[] = [
@@ -26,6 +27,7 @@ export const toggleChoices: ToggleChoice[] = [
     scope: "Applies to: this browser",
     onLabel: "Opt-out request honored",
     offLabel: "Not opted out",
+    learnMoreHref: "/legal/privacy-notice#cookies-advertising",
   },
   {
     key: "targetedAds",
@@ -34,6 +36,7 @@ export const toggleChoices: ToggleChoice[] = [
     scope: "Applies to: this browser · your account",
     onLabel: "Opt-out request honored",
     offLabel: "Not opted out",
+    learnMoreHref: "/legal/privacy-notice#cookies-advertising",
   },
   {
     key: "sensitiveData",
@@ -42,6 +45,7 @@ export const toggleChoices: ToggleChoice[] = [
     scope: "Applies to: your account",
     onLabel: "Limited",
     offLabel: "Not limited",
+    learnMoreHref: "/legal/privacy-notice#information-collected",
   },
   {
     key: "directMarketing",
@@ -50,6 +54,7 @@ export const toggleChoices: ToggleChoice[] = [
     scope: "Applies to: your account",
     onLabel: "Marketing off",
     offLabel: "Marketing on",
+    learnMoreHref: "/legal/privacy-notice#cookies-advertising",
   },
 ];
 
@@ -135,6 +140,6 @@ export const appealPoints = [
 export const relatedControls = [
   { label: "Cookie Preferences", href: "/legal/cookie-preferences" },
   { label: "Privacy Notice", href: "/legal/privacy-notice" },
-  { label: "Marketing preferences", href: "#" },
+  { label: "Marketing preferences", href: "#quick-privacy-choices" },
   { label: "Regional Legal Notices", href: "/legal/regional-notice" },
 ];

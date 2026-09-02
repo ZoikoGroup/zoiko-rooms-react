@@ -11,7 +11,7 @@ export function DestinationsSection() {
   const { t } = useLanguage();
 
   return (
-    <SectionDivider className="bg-white">
+    <SectionDivider id="destinations" className="scroll-mt-24 bg-white">
       <Container>
         <Reveal className="flex flex-col items-center gap-10">
           <div className="flex max-w-2xl flex-col items-center gap-4 text-center">

@@ -16,6 +16,7 @@ const popularQuestionTermIds: Record<string, string> = {
   "What is the difference between rent and a deposit?": "rent",
   'What does "bills included" mean?': "bills-included",
   "What is an authorized sublet?": "authorized-sublet",
+  "What is a reservation or hold?": "holding-deposit",
   "What is direct billing?": "direct-billing",
 };
 

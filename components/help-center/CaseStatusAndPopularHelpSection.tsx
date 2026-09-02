@@ -10,11 +10,13 @@ interface HelpTopic {
   category: string;
   badgeText: "Current" | "Updated";
   badgeVariant: "green" | "gold";
+  href: string;
 }
 
 export default function CaseStatusAndPopularHelpSection() {
   const { t } = useLanguage();
   const [caseReference, setCaseReference] = useState("");
+  const [statusResult, setStatusResult] = useState<string | null>(null);
 
   const popularTopics: HelpTopic[] = [
     {
@@ -23,6 +25,7 @@ export default function CaseStatusAndPopularHelpSection() {
       category: "Room Seeker \u00B7 Agree",
       badgeText: "Current",
       badgeVariant: "green",
+      href: "/agreement-review-signing",
     },
     {
       id: "verify-payment",
@@ -30,6 +33,7 @@ export default function CaseStatusAndPopularHelpSection() {
       category: "Room Seeker \u00B7 Pay",
       badgeText: "Current",
       badgeVariant: "green",
+      href: "/how-it-works/payments-safety-support#payment-lifecycle",
     },
     {
       id: "prepare-room-passport",
@@ -37,6 +41,7 @@ export default function CaseStatusAndPopularHelpSection() {
       category: "Provider \u00B7 Prepare",
       badgeText: "Updated",
       badgeVariant: "gold",
+      href: "/how-it-works/room-passport",
     },
     {
       id: "ask-for-password-code",
@@ -44,12 +49,17 @@ export default function CaseStatusAndPopularHelpSection() {
       category: "Account & Identity \u00B7 Safety",
       badgeText: "Current",
       badgeVariant: "green",
+      href: "/resources/safety-scam-prevention",
     },
   ];
 
   const handleStatusCheck = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle case status lookup logic
+    if (!caseReference.trim()) {
+      setStatusResult(null);
+      return;
+    }
+    setStatusResult(caseReference.trim());
   };
 
   return (
@@ -78,6 +88,30 @@ export default function CaseStatusAndPopularHelpSection() {
               </button>
             </div>
           </form>
+
+          {statusResult && (
+            <div className="rounded-xl border border-[#EAE6DF] bg-white p-5 text-sm">
+              <div className="flex items-center justify-between border-b border-[#EAE6DF] pb-3">
+                <span className="text-[#7A838E]">{t("Case reference")}</span>
+                <span className="font-mono text-xs font-semibold text-[#14213D]">{statusResult}</span>
+              </div>
+              <div className="flex items-center justify-between border-b border-[#EAE6DF] py-3">
+                <span className="text-[#7A838E]">{t("Current owner")}</span>
+                <span className="font-semibold text-[#14213D]">{t("Support triage team")}</span>
+              </div>
+              <div className="flex items-center justify-between pt-3">
+                <span className="text-[#7A838E]">{t("Status")}</span>
+                <span className="inline-block bg-[#F5EFEB] text-[#8C6D46] text-[11px] font-semibold py-1 px-3.5 rounded-full">
+                  {t("Under review")}
+                </span>
+              </div>
+              <p className="pt-3 text-[11px] text-[#A0AEC0]">
+                {t(
+                  "Illustrative only — this prototype does not check a real case queue. For your actual case, sign in to view live status.",
+                )}
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Bottom Block: Popular Help Right Now */}
@@ -96,7 +130,7 @@ export default function CaseStatusAndPopularHelpSection() {
             {popularTopics.map((topic) => (
               <a
                 key={topic.id}
-                href="#"
+                href={topic.href}
                 className="group flex items-center justify-between py-5 px-1 hover:bg-white/40 transition-colors duration-150"
               >
                 <div className="space-y-1 pr-4">
