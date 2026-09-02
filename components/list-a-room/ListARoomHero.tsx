@@ -106,7 +106,7 @@ export default function ListARoomHero() {
         <div className="lg:col-span-6 relative flex justify-center lg:justify-end">
           <div className="relative w-full max-w-[500px] aspect-[4/3] lg:max-w-none lg:aspect-auto lg:h-full lg:min-h-[420px] rounded-3xl overflow-hidden shadow-md">
             <Image
-              src="/images/list-a-room/hero.png"
+              src="/images/list-a-room/hero-1.webp"
               alt={t("Cozy well-lit room for rent")}
               fill
               className="object-cover"
