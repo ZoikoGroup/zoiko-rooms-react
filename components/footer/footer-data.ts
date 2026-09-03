@@ -1,10 +1,17 @@
 import type { LucideIcon } from "lucide-react";
 import { ShieldCheck, Scale, Lock, MessageCircle } from "lucide-react";
-import type { NavLink } from "@/lib/nav-data";
+
+// Footer links may name a page that isn't built yet — href is left out
+// rather than pointing somewhere fake, and the column renders that label
+// as plain, non-clickable text.
+export type FooterLink = {
+  label: string;
+  href?: string;
+};
 
 export type FooterColumnData = {
   title: string;
-  links: NavLink[];
+  links: FooterLink[];
 };
 
 export const footerColumns: FooterColumnData[] = [
@@ -61,6 +68,17 @@ export const footerColumns: FooterColumnData[] = [
       { label: "Resources", href: "/resources/" },
       { label: "Help Center", href: "/resources/help-center" },
       { label: "Safety & Scam Prevention", href: "/resources/safety-scam-prevention" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About Zoiko Rooms", href: "/about-us" },
+      { label: "Leadership & Governance" },
+      { label: "Newsroom", href: "/news" },
+      { label: "Careers" },
+      { label: "Partnerships" },
+      { label: "Contact", href: "/contact-us" },
     ],
   },
   {

@@ -16,7 +16,7 @@ export function Footer() {
 
   return (
     <footer className="mt-auto bg-[#1B2438]">
-      <Container className="flex flex-col gap-10 py-14">
+      <Container wide className="flex flex-col gap-10 py-14">
         <Reveal className="flex flex-col gap-10">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
             <FooterBrand />
@@ -38,7 +38,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 border-t border-white/10 pt-10 sm:grid-cols-3 xl:grid-cols-6">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-t border-white/10 pt-10 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-7 2xl:gap-x-4">
             {footerColumns.map((column) => (
               <FooterColumn key={column.title} title={column.title} links={column.links} />
             ))}
