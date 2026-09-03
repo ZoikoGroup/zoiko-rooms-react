@@ -39,7 +39,7 @@ export function ZoikoRoomsProSection() {
                 {t("If your organization operates inventory directly, needs system-to-system integration, or manages bulk distribution, Zoiko Rooms Pro is the governed operating layer built for that responsibility.")}
               </p>
               <Button
-                href="/pro"
+                href="/pro/overview"
                 size="lg"
                 variant="outline"
                 className="mt-2 w-fit !border-white/40 !text-white hover:!bg-white hover:!text-brand-navy"

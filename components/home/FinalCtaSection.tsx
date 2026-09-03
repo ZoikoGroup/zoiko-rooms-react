@@ -21,7 +21,7 @@ export function FinalCtaSection() {
             <Button href="/find-a-room/search-rooms" size="lg" variant="secondary">
               {t("Search verified rooms")}
             </Button>
-            <Button href="/list-a-room" size="lg" variant="outline-red">
+            <Button href="/find-a-room/search-rooms" size="lg" variant="outline-red">
               {t("Create a free alert")}
             </Button>
           </motion.div>

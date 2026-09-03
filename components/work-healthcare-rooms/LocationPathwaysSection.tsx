@@ -114,7 +114,7 @@ function LocationCard({ location }: { location: Location }) {
         <p className="text-xs text-neutral-400">{t(reviewedDate)}</p>
         <div className="mt-3 flex items-center justify-between border-t border-[#E9E0D3] pt-3">
           <a
-            href="/find-a-room/work-healthcare-rooms"
+            href="/find-a-room/search-rooms"
             className="text-xs font-semibold text-brand-red transition-colors hover:text-brand-red-dark"
           >
             {t("Explore Location")}

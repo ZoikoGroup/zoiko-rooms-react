@@ -35,7 +35,7 @@ export function ProRoutingSection() {
             </div>
           </div>
 
-          <Button href="/pro" size="lg" variant="outline" className="w-fit">
+          <Button href="/pro/overview" size="lg" variant="outline" className="w-fit">
             {t("Explore Zoiko Rooms Pro")}
           </Button>
         </Reveal>

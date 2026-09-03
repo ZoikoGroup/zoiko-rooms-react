@@ -298,7 +298,7 @@ export const navSections: NavSection[] = [
   {
     key: "pro",
     label: "Zoiko Rooms Pro",
-    href: "/pro",
+    href: "/pro/overview",
     columns: [
       {
         title: "Operate",
@@ -350,8 +350,8 @@ export const navSections: NavSection[] = [
     fit: {
       title: "What does your operation need?",
       links: [
-        { label: "I manage multiple rooms", href: "/pro" },
-        { label: "I need compliance tooling", href: "/pro" },
+        { label: "I manage multiple rooms", href: "/manage-multiple-rooms" },
+        { label: "I need compliance tooling", href: "/compliance-tooling" },
         { label: "I need to integrate systems", href: "/pro/integration-api" },
       ],
     },

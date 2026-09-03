@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import { useRouter } from "next/navigation";
@@ -21,9 +21,13 @@ const floatUpVariants: Variants = {
 function Field({
   label,
   placeholder,
+  value,
+  onChange,
 }: {
   label: string;
   placeholder: string;
+  value: string;
+  onChange: (value: string) => void;
 }) {
   return (
     <label className="flex flex-col gap-1.5">
@@ -33,6 +37,8 @@ function Field({
       <input
         type="text"
         placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
         className="h-11 w-full rounded-xl border border-stone-200 bg-white px-3 text-sm text-neutral-800 placeholder:text-neutral-500 outline-none transition focus:border-sky-900 focus:ring-2 focus:ring-sky-900/15"
       />
     </label>
@@ -42,6 +48,19 @@ function Field({
 export default function RoomsByCitySection() {
   const router = useRouter();
   const [locating, setLocating] = useState(false);
+  const [cityQuery, setCityQuery] = useState("");
+  const [moveIn, setMoveIn] = useState("");
+  const [budget, setBudget] = useState("");
+
+  function handleSearchSubmit(e: FormEvent) {
+    e.preventDefault();
+    const params = new URLSearchParams();
+    if (cityQuery.trim()) params.set("city", cityQuery.trim());
+    if (moveIn.trim()) params.set("moveIn", moveIn.trim());
+    if (budget.trim()) params.set("budget", budget.trim());
+    const query = params.toString();
+    router.push(query ? `/find-a-room/search-rooms?${query}` : "/find-a-room/search-rooms");
+  }
 
   function handleUseCurrentLocation() {
     if (typeof navigator === "undefined" || !navigator.geolocation) {
@@ -99,25 +118,34 @@ export default function RoomsByCitySection() {
             variants={floatUpVariants}
             className="mt-3 rounded-2xl border border-stone-200 bg-white p-4 shadow-sm"
           >
-            <div className="grid gap-4 md:grid-cols-3">
-              <Field label="City or region" placeholder="e.g. Boston, MA" />
-              <Field label="Move-in" placeholder="Optional" />
-              <Field label="Monthly budget" placeholder="Optional" />
-            </div>
+            <form onSubmit={handleSearchSubmit}>
+              <div className="grid gap-4 md:grid-cols-3">
+                <Field label="City or region" placeholder="e.g. Boston, MA" value={cityQuery} onChange={setCityQuery} />
+                <Field label="Move-in" placeholder="Optional" value={moveIn} onChange={setMoveIn} />
+                <Field label="Monthly budget" placeholder="Optional" value={budget} onChange={setBudget} />
+              </div>
 
-            <div className="mt-5 flex flex-wrap items-center gap-4">
-              <motion.a
-                href="#cities"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center justify-center rounded-full bg-sky-900 px-7 py-3.5 text-base font-semibold text-white transition-colors duration-200 hover:bg-sky-950"
-              >
-                Explore Cities
-              </motion.a>
+              <div className="mt-5 flex flex-wrap items-center gap-4">
+                <motion.button
+                  type="submit"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-flex items-center justify-center rounded-full bg-sky-900 px-7 py-3.5 text-base font-semibold text-white transition-colors duration-200 hover:bg-sky-950"
+                >
+                  Search Rooms
+                </motion.button>
 
-              
-            </div>
-            
+                <motion.a
+                  href="#cities"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-flex items-center justify-center rounded-full border border-stone-200 bg-white px-7 py-3.5 text-base font-semibold text-gray-800 transition-colors duration-200 hover:border-stone-400"
+                >
+                  Explore Cities
+                </motion.a>
+              </div>
+            </form>
+
           </motion.div>
         </motion.div>
 

@@ -27,7 +27,7 @@ export function OrganizationsProSection() {
 
           <InfoTable columns={[t("Situation"), t("Route")]} rows={rows.map((row) => row.map((cell) => t(cell)))} />
 
-          <Button href="/pro" variant="outline" size="md" className="w-fit">
+          <Button href="/pro/overview" variant="outline" size="md" className="w-fit">
             {t("Explore Zoiko Rooms Pro")}
           </Button>
         </Reveal>
