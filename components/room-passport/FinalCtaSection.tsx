@@ -26,7 +26,7 @@ export function FinalCtaSection() {
               href="/list-a-room"
               size="lg"
               variant="outline"
-              className="border-white/30 text-white hover:bg-white hover:text-brand-navy"
+              className="border-white/30 text-white hover:!bg-white hover:!text-brand-navy"
             >
               {t("List a Room")}
             </Button>

@@ -44,7 +44,7 @@ export function HeroSection() {
                   href="/contact-us"
                   size="lg"
                   variant="outline"
-                  className="border-brand-navy/30 bg-white/40 text-brand-navy hover:bg-white"
+                  className="border-brand-navy/30 bg-white/40 text-brand-navy hover:!bg-white hover:!text-brand-navy"
                 >
                   {t("Talk to Zoiko Rooms")}
                 </Button>
