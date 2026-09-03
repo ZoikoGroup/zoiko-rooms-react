@@ -152,6 +152,7 @@ export default function HelpCenterHeroSection({ onSelectCategory }: HelpCenterHe
           >
             <div className="bg-white rounded-full p-1.5 pl-5 flex items-center shadow-lg">
               <input
+                id="hc-search-input"
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}

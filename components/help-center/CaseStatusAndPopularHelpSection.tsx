@@ -63,7 +63,7 @@ export default function CaseStatusAndPopularHelpSection() {
   };
 
   return (
-    <section className="w-full text-[#1E2022] pb-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
+    <section id="check-case-status" className="w-full scroll-mt-24 text-[#1E2022] pb-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
       <div className="max-w-6xl mx-auto space-y-16">
         {/* Top Block: Check Case Status */}
         <div className="space-y-6">
