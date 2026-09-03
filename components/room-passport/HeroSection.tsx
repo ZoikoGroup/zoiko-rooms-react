@@ -36,7 +36,7 @@ export function HeroSection() {
                 href="/how-it-works"
                 size="lg"
                 variant="outline"
-                className="border-white/30 text-white hover:bg-white hover:text-brand-navy"
+                className="border-white/30 text-white hover:!bg-white hover:!text-brand-navy"
               >
                 {t("How Verification Works")}
               </Button>
