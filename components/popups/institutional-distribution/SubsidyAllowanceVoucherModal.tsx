@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 interface SubsidyAllowanceVoucherModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onTalkToZoiko?: () => void;
 }
 
 const exampleFlowSteps = [
@@ -18,7 +17,6 @@ const exampleFlowSteps = [
 export default function SubsidyAllowanceVoucherModal({
   isOpen,
   onClose,
-  onTalkToZoiko,
 }: SubsidyAllowanceVoucherModalProps) {
   // Lock background page scrolling when modal is open
   useEffect(() => {
@@ -135,13 +133,12 @@ export default function SubsidyAllowanceVoucherModal({
 
           {/* Modal Footer CTA */}
           <div className="p-4 sm:px-10 sm:py-6 border-t border-[#EAE6DF] bg-white flex justify-end">
-            <button
-              type="button"
-              onClick={onTalkToZoiko || onClose}
+            <a
+              href="/contact-us"
               className="bg-[#1C2C5E] hover:bg-[#14213D] text-white text-xs sm:text-sm font-bold py-3.5 px-7 rounded-full transition-all cursor-pointer shadow-xs active:scale-95 flex items-center gap-2"
             >
               Talk to Zoiko Rooms &rarr;
-            </button>
+            </a>
           </div>
         </motion.div>
       </div>
