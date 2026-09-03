@@ -1,17 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function NextStepsCalloutSection() {
   const { t } = useLanguage();
-  const [activeStep, setActiveStep] = useState("Search Help");
 
   const steps = [
-    { id: "Search Help", label: "Search Help", href: undefined },
+    { id: "Search Help", label: "Search Help", href: "#hc-search-input" },
     { id: "Contact Support", label: "Contact Support", href: "/contact-us" },
-    { id: "Check Case Status", label: "Check Case Status", href: undefined },
+    { id: "Check Case Status", label: "Check Case Status", href: "#check-case-status" },
     { id: "Safety Help", label: "Safety Help", href: "/resources/safety-scam-prevention" },
   ];
 
@@ -32,26 +31,18 @@ export default function NextStepsCalloutSection() {
 
           {/* Button Group */}
           <div className="flex flex-wrap justify-center items-center gap-3 pt-2">
-            {steps.map((step) => {
-              const isActive = activeStep === step.id;
+            {steps.map((step, index) => {
+              const isPrimary = index === 0;
               const className = `text-xs sm:text-sm font-semibold py-3 px-6 rounded-full border transition-all duration-200 cursor-pointer ${
-                isActive
+                isPrimary
                   ? "bg-[#142550] text-white border-[#142550] shadow-xs"
                   : "bg-transparent text-[#555E68] border-[#DCD3C7] hover:border-[#142550] hover:text-[#14213D]"
               }`;
 
-              if (step.href) {
-                return (
-                  <a key={step.id} href={step.href} className={className}>
-                    {t(step.label)}
-                  </a>
-                );
-              }
-
               return (
-                <button key={step.id} type="button" onClick={() => setActiveStep(step.id)} className={className}>
+                <a key={step.id} href={step.href} className={className}>
                   {t(step.label)}
-                </button>
+                </a>
               );
             })}
           </div>
