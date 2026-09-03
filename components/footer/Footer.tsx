@@ -38,7 +38,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 border-t border-white/10 pt-10 sm:grid-cols-3 xl:grid-cols-6">
+          <div className="grid grid-cols-2 gap-8 border-t border-white/10 pt-10 sm:grid-cols-3 xl:grid-cols-7">
             {footerColumns.map((column) => (
               <FooterColumn key={column.title} title={column.title} links={column.links} />
             ))}
