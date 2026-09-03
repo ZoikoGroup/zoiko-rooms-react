@@ -16,12 +16,12 @@ export function FooterColumn({ title, links }: FooterColumnData) {
             <Link
               key={link.label}
               href={link.href}
-              className="whitespace-nowrap text-sm text-white transition-colors hover:text-[#D98C5F]"
+              className="text-xs text-white transition-colors hover:text-[#D98C5F] sm:text-sm"
             >
               {t(link.label)}
             </Link>
           ) : (
-            <span key={link.label} className="whitespace-nowrap text-sm text-white/40">
+            <span key={link.label} className="text-xs text-white/40 sm:text-sm">
               {t(link.label)}
             </span>
           ),
