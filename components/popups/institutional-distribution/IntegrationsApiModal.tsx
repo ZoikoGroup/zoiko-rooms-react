@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 interface IntegrationsApiModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onTalkToZoiko?: () => void;
 }
 
 const capabilityPoints = [
@@ -18,7 +17,6 @@ const capabilityPoints = [
 export default function IntegrationsApiModal({
   isOpen,
   onClose,
-  onTalkToZoiko,
 }: IntegrationsApiModalProps) {
   // Lock background page scrolling when modal is open
   useEffect(() => {
@@ -106,13 +104,12 @@ export default function IntegrationsApiModal({
 
           {/* Modal Footer CTA */}
           <div className="p-3.5 sm:px-6 sm:py-3.5 border-t border-[#EAE6DF] bg-white flex justify-end">
-            <button
-              type="button"
-              onClick={onTalkToZoiko || onClose}
+            <a
+              href="/contact-us"
               className="bg-[#1C2C5E] hover:bg-[#14213D] text-white text-xs sm:text-sm font-bold py-2.5 px-6 rounded-full transition-all cursor-pointer shadow-xs active:scale-95 flex items-center gap-2"
             >
               Talk to Zoiko Rooms &rarr;
-            </button>
+            </a>
           </div>
         </motion.div>
       </div>

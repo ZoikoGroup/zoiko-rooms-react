@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 export interface PortfolioStructureModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onExploreRoomPassports?: () => void;
 }
 
 interface BulletItem {
@@ -55,7 +54,6 @@ const portfolioStructureItems: BulletItem[] = [
 export default function PortfolioStructureModal({
   isOpen,
   onClose,
-  onExploreRoomPassports,
 }: PortfolioStructureModalProps) {
   // Lock background scroll and handle Escape key
   useEffect(() => {
@@ -132,19 +130,12 @@ export default function PortfolioStructureModal({
 
               {/* Bottom Action Button */}
               <div className="pt-2">
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (onExploreRoomPassports) {
-                      onExploreRoomPassports();
-                    } else {
-                      onClose();
-                    }
-                  }}
+                <a
+                  href="/how-it-works/room-passport"
                   className="bg-transparent hover:bg-white text-[#101C33] text-xs font-semibold px-6 py-3 rounded-full border border-[#101C33] transition-colors shadow-xs cursor-pointer"
                 >
                   Explore Room Passports
-                </button>
+                </a>
               </div>
             </div>
           </motion.div>
