@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 
 export default function SafetyScamPreventionSection() {
   // Dynamic links for action buttons
-  const checkRiskHref = "#";
-  const reportIssueHref = "#";
+  const checkRiskHref = "#risk-checker";
+  const reportIssueHref = "#report-safety-issue";
 
   return (
     <section className="w-full bg-gradient-to-r from-[#121824] via-[#1E222D] to-[#2B2325] text-white py-20 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
@@ -47,7 +47,7 @@ export default function SafetyScamPreventionSection() {
 
           {/* Right Button (Transparent) */}
           <a
-            href="/contact-us"
+            href={reportIssueHref}
             className="w-full sm:w-auto inline-flex items-center justify-center bg-transparent hover:bg-white/10 text-white border border-white/30 hover:border-white text-xs font-semibold px-8 py-3.5 rounded-full transition-all duration-200 active:scale-95"
           >
             Report a Safety Issue

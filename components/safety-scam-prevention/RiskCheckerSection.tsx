@@ -114,7 +114,7 @@ export default function RiskCheckerSection() {
   }
 
   return (
-    <section className="w-full text-[#1E2022] py-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
+    <section id="risk-checker" className="w-full scroll-mt-24 text-[#1E2022] py-16 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Section Header */}
         <div className="flex flex-col items-start text-left space-y-3 w-full">
