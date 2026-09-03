@@ -34,7 +34,7 @@ const paths = [
     description:
       "Manage room portfolios, compliance, applications and institutional relationships.",
     cta: "Explore Zoiko Rooms Pro",
-    href: "/pro",
+    href: "/pro/overview",
     variant: "outline" as const,
   },
 ];

@@ -65,7 +65,7 @@ export function RightsDueProcessSection() {
                 </motion.div>
               ))}
 
-              <Button href="/resources" variant="outline" size="md" className="mt-2 w-fit">
+              <Button href="/legal/your-privacy-choices" variant="outline" size="md" className="mt-2 w-fit">
                 {t("Review Participant Rights")}
               </Button>
             </div>

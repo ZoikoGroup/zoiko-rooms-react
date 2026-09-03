@@ -12,9 +12,9 @@ import { locationOptions, costDisclosuresByLocation } from "./data";
 export function PricingPrimaryObligationSection() {
   const { t } = useLanguage();
   const [location, setLocation] = useState(locationOptions[0]);
-  const [confirmedLocation, setConfirmedLocation] = useState(locationOptions[0]);
+  const [confirmedLocation, setConfirmedLocation] = useState<string | null>(null);
 
-  const rows = costDisclosuresByLocation[confirmedLocation] ?? [];
+  const rows = confirmedLocation ? costDisclosuresByLocation[confirmedLocation] ?? [] : [];
 
   return (
     <SectionDivider className="bg-white">
@@ -69,20 +69,32 @@ export function PricingPrimaryObligationSection() {
               <span>{t("Illustrative display")}</span>
             </div>
             <AnimatePresence mode="wait">
-              <motion.div
-                key={confirmedLocation}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2, ease: easeOut }}
-                className="divide-y divide-[#E9E0D3] bg-white"
-              >
-                {rows.map((row) => (
-                  <div key={row.item} className="grid grid-cols-2 gap-4 px-5 py-4 text-sm sm:px-6">
-                    <span className="font-medium text-brand-navy">{t(row.item)}</span>
-                    <span className="text-neutral-600">{t(row.display)}</span>
-                  </div>
-                ))}
-              </motion.div>
+              {confirmedLocation ? (
+                <motion.div
+                  key={confirmedLocation}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2, ease: easeOut }}
+                  className="divide-y divide-[#E9E0D3] bg-white"
+                >
+                  {rows.map((row) => (
+                    <div key={row.item} className="grid grid-cols-2 gap-4 px-5 py-4 text-sm sm:px-6">
+                      <span className="font-medium text-brand-navy">{t(row.item)}</span>
+                      <span className="text-neutral-600">{t(row.display)}</span>
+                    </div>
+                  ))}
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="empty"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2, ease: easeOut }}
+                  className="bg-white px-5 py-6 text-sm text-neutral-500 sm:px-6"
+                >
+                  {t("Choose your property location above and select \"Check My Requirements\" to see the disclosure structure.")}
+                </motion.div>
+              )}
             </AnimatePresence>
           </div>
 

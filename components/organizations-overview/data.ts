@@ -35,7 +35,7 @@ export const pathwayCards = [
     title: "Zoiko Rooms Pro",
     description: "Operate portfolios, availability, applications, agreements, payments, institutional distribution, and integrations.",
     image: "/images/organizations-overview/pathway-zoiko-rooms-pro.png",
-    href: "/pro",
+    href: "/pro/overview",
   },
 ];
 

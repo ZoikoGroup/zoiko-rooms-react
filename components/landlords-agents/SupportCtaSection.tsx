@@ -49,7 +49,7 @@ export function SupportCtaSection() {
               <Button href="/list-a-room/requirements-pricing" size="lg" variant="outline">
                 {t("Requirements & Pricing")}
               </Button>
-              <Button href="/pro" size="lg" variant="outline">
+              <Button href="/pro/overview" size="lg" variant="outline">
                 {t("Explore Zoiko Rooms Pro")}
               </Button>
               <Button href="/contact-us" size="lg" variant="outline">
