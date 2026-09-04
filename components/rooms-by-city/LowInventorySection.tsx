@@ -5,6 +5,8 @@ import { Check } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
 import { useRouter } from "next/navigation";
 
+const PLATFORM_API_URL = process.env.NEXT_PUBLIC_PLATFORM_API_URL || "http://localhost:8000";
+
 const floatUpVariants: Variants = {
   hidden: {
     opacity: 0,
@@ -24,6 +26,11 @@ const floatUpVariants: Variants = {
 export default function LowInventorySection() {
   const router = useRouter();
   const [alertSaved, setAlertSaved] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [email, setEmail] = useState("");
+  const [city, setCity] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const saved = window.localStorage.getItem("zoiko-low-inventory-alert") === "1";
@@ -33,12 +40,37 @@ export default function LowInventorySection() {
     }
   }, []);
 
-  function toggleAlert() {
-    setAlertSaved((prev) => {
-      const next = !prev;
-      window.localStorage.setItem("zoiko-low-inventory-alert", next ? "1" : "0");
-      return next;
-    });
+  function openAlertForm() {
+    if (alertSaved) return;
+    setShowForm(true);
+  }
+
+  async function submitAlert() {
+    setError("");
+    if (!email.trim() || !email.includes("@")) {
+      setError("Enter a valid email");
+      return;
+    }
+    if (!city.trim()) {
+      setError("Enter a city");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      const res = await fetch(`${PLATFORM_API_URL}/api/public/alerts`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim(), city: city.trim() }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      window.localStorage.setItem("zoiko-low-inventory-alert", "1");
+      setAlertSaved(true);
+      setShowForm(false);
+    } catch {
+      setError("Could not save your alert. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
   return (
     <section className="w-full border-t border-stone-200 px-6 py-12 font-['Inter',sans-serif] md:px-24">
@@ -112,7 +144,7 @@ export default function LowInventorySection() {
             <motion.button
               whileHover={{ scale: 1.02, backgroundColor: "#f5f5f4", borderColor: "#a8a29e" }}
               whileTap={{ scale: 0.98 }}
-              onClick={toggleAlert}
+              onClick={openAlertForm}
               aria-pressed={alertSaved}
               className={`flex cursor-pointer items-center justify-center gap-1.5 rounded-full border px-7 py-3.5 text-base font-semibold transition-colors duration-200 ${
                 alertSaved
@@ -133,6 +165,34 @@ export default function LowInventorySection() {
               Get Help
             </motion.button>
           </motion.div>
+
+          {showForm && (
+            <div className="mt-3 flex w-full max-w-[560px] flex-col gap-2 rounded-xl border border-stone-200 bg-white p-4 sm:flex-row sm:items-center">
+              <input
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                placeholder="City you're watching"
+                className="h-10 flex-1 rounded-lg border border-stone-200 px-3 text-sm outline-none"
+              />
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                className="h-10 flex-1 rounded-lg border border-stone-200 px-3 text-sm outline-none"
+              />
+              <button
+                type="button"
+                disabled={submitting}
+                onClick={submitAlert}
+                className="h-10 shrink-0 rounded-full bg-amber-700 px-5 text-sm font-semibold text-white disabled:opacity-60"
+              >
+                {submitting ? "Saving..." : "Confirm alert"}
+              </button>
+              {error && <p className="text-xs text-red-600 sm:basis-full">{error}</p>}
+            </div>
+          )}
         </div>
       </div>
     </section>

@@ -20,6 +20,8 @@ const DEFAULT_DRAFT: CalculatorState = {
   billingCountry: locationToCountry[locationOptions[0]],
 };
 
+const PLATFORM_APP_URL = process.env.NEXT_PUBLIC_PLATFORM_APP_URL || "http://localhost:3001";
+
 export function RequirementsPricingView() {
   const [draft, setDraft] = useState<CalculatorState>(DEFAULT_DRAFT);
   const [applied, setApplied] = useState<CalculatorState>(DEFAULT_DRAFT);
@@ -31,9 +33,13 @@ export function RequirementsPricingView() {
 
   const resultKey = `${applied.providerType}|${applied.location}|${applied.activeRooms}|${applied.accountType}`;
 
+  function handleCheckRequirements() {
+    window.location.href = `${PLATFORM_APP_URL}/account/register`;
+  }
+
   return (
     <>
-      <CalculatorHeroSection draft={draft} onDraftChange={setDraft} onSubmit={() => setApplied(draft)} />
+      <CalculatorHeroSection draft={draft} onDraftChange={setDraft} onSubmit={handleCheckRequirements} />
       <SharedRequirementsSection />
       <ProviderPathComparisonSection />
       <EvidenceReviewSection />

@@ -18,6 +18,8 @@ const DEFAULT_DRAFT: DraftFilters = {
   stayLengthKey: "3-6",
 };
 
+const PLATFORM_APP_URL = process.env.NEXT_PUBLIC_PLATFORM_APP_URL || "http://localhost:3001";
+
 export function SearchRoomsView() {
   const { t } = useLanguage();
   const [draft, setDraft] = useState<DraftFilters>(DEFAULT_DRAFT);
@@ -93,6 +95,13 @@ export function SearchRoomsView() {
     setActiveFilters((prev) => (prev.includes(key) ? prev.filter((f) => f !== key) : [...prev, key]));
   }
 
+  function handleUpdateSearch() {
+    const params = new URLSearchParams();
+    if (draft.location.trim()) params.set("city", draft.location.trim());
+    if (draft.moveIn.trim()) params.set("arrival", draft.moveIn.trim());
+    window.location.href = `${PLATFORM_APP_URL}/find-a-room?${params.toString()}`;
+  }
+
   function handleEditSearch() {
     locationInputRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
     locationInputRef.current?.focus();
@@ -125,7 +134,7 @@ export function SearchRoomsView() {
       <SearchFiltersBar
         draft={draft}
         onDraftChange={setDraft}
-        onSubmit={() => setApplied(draft)}
+        onSubmit={handleUpdateSearch}
         locationInputRef={locationInputRef}
       />
 
