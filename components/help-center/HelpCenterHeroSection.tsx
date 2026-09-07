@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useMemo, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
   ArrowRight,
@@ -11,8 +11,11 @@ import {
   CreditCard,
   Building2,
   ShieldCheck,
+  X,
 } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { useOnClickOutside } from "@/lib/hooks/useOnClickOutside";
+import { helpFaqs, type HelpFaq } from "./helpFaqs";
 
 interface HelpCategory {
   id: string;
@@ -29,6 +32,17 @@ interface HelpCenterHeroSectionProps {
 export default function HelpCenterHeroSection({ onSelectCategory }: HelpCenterHeroSectionProps) {
   const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedFaq, setSelectedFaq] = useState<HelpFaq | null>(null);
+  const searchBoxRef = useRef<HTMLDivElement>(null);
+
+  useOnClickOutside(searchBoxRef, () => setShowSuggestions(false));
+
+  const matches = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    if (q.length < 2) return [];
+    return helpFaqs.filter((faq) => faq.question.toLowerCase().includes(q) || faq.answer.toLowerCase().includes(q)).slice(0, 6);
+  }, [searchQuery]);
 
   const quickPills = [
     "I may be at risk or seeing a scam",
@@ -90,9 +104,16 @@ export default function HelpCenterHeroSection({ onSelectCategory }: HelpCenterHe
     },
   ];
 
+  function openFaq(faq: HelpFaq) {
+    setSelectedFaq(faq);
+    setShowSuggestions(false);
+  }
+
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Execute search action
+    if (matches.length > 0) {
+      openFaq(matches[0]);
+    }
   };
 
   const containerVariants = {
@@ -146,27 +167,43 @@ export default function HelpCenterHeroSection({ onSelectCategory }: HelpCenterHe
           </p>
 
           {/* Search Bar */}
-          <form
-            onSubmit={handleSearchSubmit}
-            className="pt-2 max-w-2xl mx-auto"
-          >
-            <div className="bg-white rounded-full p-1.5 pl-5 flex items-center shadow-lg">
-              <input
-                id="hc-search-input"
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={t("What do you need help with?")}
-                className="w-full bg-transparent text-[#14213D] placeholder-[#7A838E] text-xs sm:text-sm font-medium focus:outline-none pr-3"
-              />
-              <button
-                type="submit"
-                className="bg-[#1A2E6E] hover:bg-[#0D1629] text-white text-xs sm:text-sm font-bold py-3 px-6 rounded-[8px] transition-all duration-200 flex-shrink-0 active:scale-95"
-              >
-                {t("Search Help")}
-              </button>
-            </div>
-          </form>
+          <div ref={searchBoxRef} className="relative pt-2 max-w-2xl mx-auto text-left">
+            <form onSubmit={handleSearchSubmit}>
+              <div className="bg-white rounded-full py-3.5 pl-5 pr-4 flex items-center gap-2.5 shadow-lg">
+                <Search className="h-4 w-4 shrink-0 text-[#7A838E]" />
+                <input
+                  id="hc-search-input"
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setShowSuggestions(true);
+                  }}
+                  onFocus={() => setShowSuggestions(true)}
+                  placeholder={t("What do you need help with?")}
+                  className="w-full bg-transparent text-[#14213D] placeholder-[#7A838E] text-xs sm:text-sm font-medium focus:outline-none"
+                  autoComplete="off"
+                />
+              </div>
+            </form>
+
+            {/* Live FAQ Suggestions */}
+            {showSuggestions && matches.length > 0 && (
+              <div className="absolute left-0 right-0 top-[calc(100%+8px)] z-20 overflow-hidden rounded-2xl border border-[#EAE6DF] bg-white text-left shadow-2xl">
+                {matches.map((faq) => (
+                  <button
+                    key={faq.id}
+                    type="button"
+                    onClick={() => openFaq(faq)}
+                    className="flex w-full items-center justify-between gap-3 border-b border-[#EAE6DF] px-5 py-3 text-left text-sm transition-colors last:border-b-0 hover:bg-[#FAF6F0]"
+                  >
+                    <span className="font-semibold text-[#14213D]">{t(faq.question)}</span>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-[#A85A34]" />
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
 
           {/* Warning disclaimer */}
           <p className="text-[11px] text-[#FFFFFF99] pt-1">
@@ -246,6 +283,52 @@ export default function HelpCenterHeroSection({ onSelectCategory }: HelpCenterHe
           </motion.div>
         </div>
       </section>
+
+      {/* FAQ Answer Modal */}
+      <AnimatePresence>
+        {selectedFaq && (
+          <div
+            onClick={() => setSelectedFaq(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs cursor-pointer"
+          >
+            <motion.div
+              onClick={(e) => e.stopPropagation()}
+              initial={{ opacity: 0, scale: 0.96, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 12 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="relative w-full max-w-lg cursor-default rounded-3xl border border-[#EAE6DF] bg-white p-6 sm:p-8 text-[#14213D] shadow-2xl"
+            >
+              <button
+                type="button"
+                onClick={() => setSelectedFaq(null)}
+                aria-label={t("Close")}
+                className="absolute right-5 top-5 flex h-8 w-8 items-center justify-center rounded-full bg-[#F3EFEA] text-[#555E68] transition-colors hover:bg-[#EAE6DF] hover:text-[#14213D]"
+              >
+                <X className="h-4 w-4" />
+              </button>
+
+              <span className="block text-[11px] font-bold uppercase tracking-widest text-[#A85A34]">
+                {t("Help Center answer")}
+              </span>
+              <h2 className="mt-2 font-serif text-xl font-bold leading-snug sm:text-2xl">
+                {t(selectedFaq.question)}
+              </h2>
+              <p className="mt-4 text-sm leading-relaxed text-[#555E68]">
+                {t(selectedFaq.answer)}
+              </p>
+
+              <a
+                href={selectedFaq.href}
+                className="mt-6 inline-flex items-center gap-1.5 text-sm font-bold text-[#A85A34] hover:underline"
+              >
+                {t(selectedFaq.linkLabel)}
+                <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
