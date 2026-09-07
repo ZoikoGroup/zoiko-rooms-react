@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface CookieSetting {
@@ -25,7 +25,7 @@ interface PreferenceCategory {
   settings: CookieSetting[];
 }
 
-const categoriesData: PreferenceCategory[] = [
+export const categoriesData: PreferenceCategory[] = [
   {
     id: "essential",
     title: "Essential & Security",
@@ -198,23 +198,17 @@ const categoriesData: PreferenceCategory[] = [
   },
 ];
 
-export default function CookiePreferencesList() {
+interface CookiePreferencesListProps {
+  toggles: Record<string, boolean>;
+  onToggle: (id: string, disabled?: boolean) => void;
+}
+
+export default function CookiePreferencesList({ toggles, onToggle }: CookiePreferencesListProps) {
   const { t } = useLanguage();
-  const [toggles, setToggles] = useState<Record<string, boolean>>(() => {
-    const initial: Record<string, boolean> = {};
-    categoriesData.forEach((cat) => {
-      cat.settings.forEach((s) => {
-        if (s.type === "toggle") {
-          initial[s.id] = s.defaultChecked ?? false;
-        }
-      });
-    });
-    return initial;
-  });
 
   const handleToggle = (id: string, disabled?: boolean) => {
     if (disabled) return;
-    setToggles((prev) => ({ ...prev, [id]: !prev[id] }));
+    onToggle(id, disabled);
   };
 
   const getHeaderBadgeClass = (type: PreferenceCategory["badgeType"]) => {

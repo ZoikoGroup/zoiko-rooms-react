@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { SendMessageSchema } from "@/assistant/types/api";
 import { handleTurn, type TurnResult } from "@/assistant/orchestration/turn-handler";
 import { OpenAIAdapter } from "@/assistant/intelligence/adapters/openai";
+import { AnthropicAdapter } from "@/assistant/intelligence/adapters/anthropic";
 import { getConfig } from "@/assistant/config";
 import type { ModelGateway } from "@/assistant/intelligence/model-gateway";
 
@@ -35,6 +36,10 @@ function getModelGateway(): ModelGateway {
       modelId: config.model.modelId,
       baseUrl: "https://api.groq.com/openai/v1",
     });
+  }
+
+  if (provider === "anthropic") {
+    return new AnthropicAdapter({ apiKey, modelId: config.model.modelId });
   }
 
   return new OpenAIAdapter({ apiKey, modelId: config.model.modelId });
