@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Search } from "lucide-react";
 
 interface GlossaryHeroSectionProps {
   onSelectQuestionTerm: (termId: string) => void;
@@ -21,8 +20,6 @@ const popularQuestionTermIds: Record<string, string> = {
 };
 
 export default function GlossaryHeroSection({ onSelectQuestionTerm }: GlossaryHeroSectionProps) {
-  const [searchQuery, setSearchQuery] = useState("");
-
   const popularQuestions = [
     "What is a Room Passport?",
     "What is the difference between rent and a deposit?",
@@ -31,10 +28,6 @@ export default function GlossaryHeroSection({ onSelectQuestionTerm }: GlossaryHe
     "What is a reservation or hold?",
     "What is direct billing?",
   ];
-
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-  };
 
   return (
     <section className="w-full text-[#1E2022] py-12 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased overflow-x-clip">
@@ -60,20 +53,6 @@ export default function GlossaryHeroSection({ onSelectQuestionTerm }: GlossaryHe
               local or program-specific limitations, and open the live record
               that controls the current room journey.
             </p>
-
-            {/* Search Input Bar */}
-            <form onSubmit={handleSearchSubmit} className="pt-2 max-w-md">
-              <div className="bg-white rounded-full p-4 pl-5 flex items-center shadow-xs border border-[#E6DFD3]">
-                <Search className="w-4 h-4 text-[#7A838E] mr-3 flex-shrink-0" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search a term, phrase, abbreviation, or misspelling"
-                  className="w-full bg-transparent text-[#14213D] placeholder-[#A0AEC0] text-xs font-medium focus:outline-none"
-                />
-              </div>
-            </form>
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap items-center gap-3 pt-2">
