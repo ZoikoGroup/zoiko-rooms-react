@@ -169,7 +169,8 @@ export default function HelpCenterHeroSection({ onSelectCategory }: HelpCenterHe
           {/* Search Bar */}
           <div ref={searchBoxRef} className="relative pt-2 max-w-2xl mx-auto text-left">
             <form onSubmit={handleSearchSubmit}>
-              <div className="bg-white rounded-full p-1.5 pl-5 flex items-center shadow-lg">
+              <div className="bg-white rounded-full py-3.5 pl-5 pr-4 flex items-center gap-2.5 shadow-lg">
+                <Search className="h-4 w-4 shrink-0 text-[#7A838E]" />
                 <input
                   id="hc-search-input"
                   type="text"
@@ -180,15 +181,9 @@ export default function HelpCenterHeroSection({ onSelectCategory }: HelpCenterHe
                   }}
                   onFocus={() => setShowSuggestions(true)}
                   placeholder={t("What do you need help with?")}
-                  className="w-full bg-transparent text-[#14213D] placeholder-[#7A838E] text-xs sm:text-sm font-medium focus:outline-none pr-3"
+                  className="w-full bg-transparent text-[#14213D] placeholder-[#7A838E] text-xs sm:text-sm font-medium focus:outline-none"
                   autoComplete="off"
                 />
-                <button
-                  type="submit"
-                  className="bg-[#1A2E6E] hover:bg-[#0D1629] text-white text-xs sm:text-sm font-bold py-3 px-6 rounded-[8px] transition-all duration-200 flex-shrink-0 active:scale-95"
-                >
-                  {t("Search Help")}
-                </button>
               </div>
             </form>
 
