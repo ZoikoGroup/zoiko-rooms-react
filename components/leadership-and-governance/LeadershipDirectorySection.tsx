@@ -109,7 +109,7 @@ export default function LeadershipDirectorySection() {
               team through our approved contact routes.
             </p>
             <a
-              href="contact-us"
+              href="/contact-us"
               className="inline-flex items-center justify-center px-5 py-2.5 rounded-full border border-[#1C1917] text-[#1C1917] font-semibold text-xs hover:bg-[#1C1917] hover:text-white transition-colors"
             >
               Contact Zoiko Rooms

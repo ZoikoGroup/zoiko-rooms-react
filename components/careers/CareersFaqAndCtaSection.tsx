@@ -91,7 +91,7 @@ export default function CareersFaqAndCtaSection() {
               Explore open roles
             </a>
             <a
-              href="#about"
+              href="/about-us"
               className="px-6 py-3 rounded-full bg-white hover:bg-slate-50 text-[#1C1917] text-xs font-semibold transition-all border border-[#E7DFD3] shadow-xs"
             >
               About Zoiko Rooms

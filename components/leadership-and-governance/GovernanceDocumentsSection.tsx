@@ -2,8 +2,10 @@
 
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function GovernanceDocumentsSection() {
+  const router = useRouter();
   const documents = [
     {
       title: "Corporate Governance Charter",
@@ -69,8 +71,8 @@ export default function GovernanceDocumentsSection() {
 
               {/* Action Button */}
               <button
-                type="button"
-                className="px-5 py-1.5 rounded-full border border-[#E7DFD3] bg-white text-xs font-semibold text-[#1C1917] hover:bg-[#1C1917] hover:text-white hover:border-[#1C1917] transition-colors shrink-0 cursor-pointer"
+              onClick={()=>router.push("https://app.zoikorooms.com/account/login")}
+                className="px-5 py-1.5 rounded-full cursor-pointer border border-[#E7DFD3] bg-white text-xs font-semibold text-[#1C1917] hover:bg-[#1C1917] hover:text-white hover:border-[#1C1917] transition-colors shrink-0 cursor-pointer"
               >
                 Open
               </button>
@@ -103,7 +105,7 @@ export default function GovernanceDocumentsSection() {
               wording.
             </p>
             <a
-              href="#speak-up"
+              href="/resources/help-center"
               className="inline-flex items-center justify-center px-5 py-2.5 rounded-full border border-[#1C1917] text-[#1C1917] font-semibold text-xs hover:bg-[#1C1917] hover:text-white transition-colors"
             >
               Speak-up channel

@@ -2,6 +2,7 @@
 
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export interface JobDetailsModalProps {
   isOpen: boolean;
@@ -24,7 +25,7 @@ export default function JobDetailsModal({
   onClose,
   onApply,
 }: JobDetailsModalProps) {
-  // Lock background scrolling and handle Escape key press
+  const router = useRouter();
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -166,7 +167,7 @@ export default function JobDetailsModal({
               </span>
               <button
                 type="button"
-                onClick={onApply}
+                onClick={()=>router.push("https://app.zoikorooms.com/account/login")}
                 className="w-full sm:w-auto bg-[#1C2C5E] hover:bg-[#101C33] text-white text-sm font-semibold px-6 py-3 rounded-full transition-colors cursor-pointer flex items-center justify-center gap-2"
               >
                 Apply for this role <span>→</span>

@@ -31,7 +31,7 @@ export default function NewsroomHeroSection() {
 
               {/* Primary Action Button */}
               <a
-                href="#latest-news"
+                href="/news"
                 className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-[#1E3A8A] text-white font-semibold text-xs sm:text-sm hover:bg-[#152C6F] transition-colors shadow-xs"
               >
                 Browse latest news

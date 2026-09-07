@@ -9,21 +9,21 @@ export default function MediaResourcesSection() {
       title: "Brand assets",
       description: "Approved logos and usage guidelines for editorial use.",
       actionText: "Open assets",
-      link: "#brand-assets",
+      link: "/news",
     },
     {
       icon: "📄",
       title: "Press releases",
       description: "Approved public release documents, where available.",
       actionText: "View releases",
-      link: "#press-releases",
+      link: "https://www.issuewire.com/zoiko-rooms-introduces-a-global-marketplace-built-for-trusted-room-rentals-1874500543494122",
     },
     {
       icon: "✉️",
       title: "Press contact",
       description: "Reach the Zoiko Rooms communications team for inquiries.",
       actionText: "Contact us",
-      link: "#press-contact",
+      link: "/contact-us",
     },
   ] as const;
 
@@ -84,7 +84,7 @@ export default function MediaResourcesSection() {
             previous announcements.
           </p>
           <a
-            href="#latest-news"
+            href="/news"
             className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-white text-[#182232] font-semibold text-xs sm:text-sm hover:bg-gray-100 transition-colors shadow-xs"
           >
             Browse Latest News

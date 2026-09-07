@@ -7,22 +7,22 @@ export default function AuthoritativeSourcesSection() {
     {
       title: "Trust & Safety",
       description: "Verification standards and platform safety approach.",
-      link: "#trust-safety",
+      link: "/how-it-works/payments-safety-support",
     },
     {
       title: "Security",
       description: "How Zoiko Rooms protects platform and account security.",
-      link: "#security",
+      link: "/resources/safety-scam-prevention",
     },
     {
       title: "Privacy",
       description: "How personal data is collected, used, and protected.",
-      link: "#privacy",
+      link: "/legal/privacy-notice",
     },
     {
       title: "Accessibility",
       description: "Our approach to accessible design and known limitations.",
-      link: "#accessibility",
+      link: "/about-us",
     },
   ] as const;
 

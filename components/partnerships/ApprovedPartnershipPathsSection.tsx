@@ -17,7 +17,7 @@ export default function ApprovedPartnershipPathsSection() {
         "confirmed institutional need for recurring room placement. Specific onboarding criteria are confirmed during evaluation.",
       primaryAction: "Start interest form",
       secondaryAction: "Learn about Institutional Programs →",
-      secondaryLink: "#institutional-programs",
+      secondaryLink: "/find-a-room/university-rooms",
       image: "/images/partnerships/7.png",
     },
     {
@@ -45,7 +45,7 @@ export default function ApprovedPartnershipPathsSection() {
         "lawful authority to list the relevant properties. Portfolio size and market criteria are confirmed during evaluation, not fixed in advance.",
       primaryAction: "Start interest form",
       secondaryAction: "See Zoiko Rooms Pro →",
-      secondaryLink: "#zoiko-rooms-pro",
+      secondaryLink: "/pro/overview",
       image: "/images/partnerships/9.png",
     },
     {
@@ -64,7 +64,7 @@ export default function ApprovedPartnershipPathsSection() {
   ] as const;
 
   return (
-    <div className="flex items-center justify-center py-12 md:py-20 text-[#1C1917] bg-[#f6efe3]">
+    <div id="partnership-paths" className="flex items-center justify-center py-12 md:py-20 text-[#1C1917] bg-[#f6efe3]">
       <div className="max-w-6xl w-full flex flex-col items-center px-4 sm:px-6">
         {/* Section Header */}
         <div className="flex flex-col items-start w-full max-w-2xl mr-auto mb-12">
