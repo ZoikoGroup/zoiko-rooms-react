@@ -130,7 +130,7 @@ export const navSections: NavSection[] = [
             icon: Plus,
             label: "Start a Listing",
             description: "Create a Room Passport and publish",
-            href: "/list-a-room/start-a-listing",
+            href: "https://app.zoikorooms.com/account/login",
           },
           {
             icon: FileText,

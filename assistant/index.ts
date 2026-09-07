@@ -1,6 +1,7 @@
 export { getConfig } from "./config";
 export { handleTurn, type TurnRequest, type TurnResult } from "./orchestration/turn-handler";
 export { OpenAIAdapter } from "./intelligence/adapters/openai";
+export { AnthropicAdapter } from "./intelligence/adapters/anthropic";
 export type { ModelGateway, ModelRequest, ModelResponse } from "./intelligence/model-gateway";
 export { buildContextEnvelope } from "./trust/context-envelope";
 export { authorize, isAuthorized, isAnonymousAuthorized } from "./trust/rbac-engine";

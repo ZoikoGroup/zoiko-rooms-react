@@ -14,7 +14,7 @@ const rows = [
 
 const links = [
   { label: "Payments, Safety & Support", href: "/how-it-works/payments-safety-support" },
-  { label: "Report a Concern", href: "/resources" },
+  { label: "Report a Concern", href: "/resources/safety-scam-prevention" },
 ];
 
 export function PaymentsScamSection() {

@@ -32,7 +32,7 @@ export default function HelpCenterHeroSection({ onSelectCategory }: HelpCenterHe
 
   const quickPills = [
     "I may be at risk or seeing a scam",
-    "I can&apos;t access my account",
+    "I can't access my account",
     "I need help with a room or listing",
     "I need help with an application or agreement",
     "I have a payment, refund, or deposit issue",

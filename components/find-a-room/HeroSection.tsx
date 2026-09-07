@@ -1,5 +1,7 @@
 "use client";
 
+import { useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
@@ -14,6 +16,21 @@ const tags = [
 
 export function HeroSection() {
   const { t } = useLanguage();
+  const router = useRouter();
+  const [location, setLocation] = useState("");
+  const [moveInDate, setMoveInDate] = useState("");
+  const [monthlyBudget, setMonthlyBudget] = useState("");
+
+  function handleSearchSubmit(e: FormEvent) {
+    e.preventDefault();
+    const params = new URLSearchParams();
+    if (location.trim()) params.set("location", location.trim());
+    if (moveInDate.trim()) params.set("moveIn", moveInDate.trim());
+    if (monthlyBudget.trim()) params.set("budget", monthlyBudget.trim());
+    const query = params.toString();
+    router.push(query ? `/find-a-room/search-rooms?${query}` : "/find-a-room/search-rooms");
+  }
+
   return (
     <section className="border-b border-[#E9E0D3] py-10 sm:py-14">
       <Container>
@@ -42,7 +59,8 @@ export function HeroSection() {
               )}
             </motion.p>
 
-            <motion.div
+            <motion.form
+              onSubmit={handleSearchSubmit}
               variants={fadeUp}
               className="flex flex-col gap-4 rounded-2xl border border-[#D9C7B3] bg-white p-4 shadow-sm"
             >
@@ -55,6 +73,8 @@ export function HeroSection() {
                   <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
                     <input
                       type="text"
+                      value={location}
+                      onChange={(e) => setLocation(e.target.value)}
                       placeholder={t(
                         "City, neighborhood, university, or landmark",
                       )}
@@ -73,12 +93,14 @@ export function HeroSection() {
                     <input
                       type="text"
                       name="moveInDate"
+                      value={moveInDate}
+                      onChange={(e) => setMoveInDate(e.target.value)}
                       placeholder={t("Date or flexible")}
                       className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none placeholder:text-neutral-400"
                     />
                   </div>
                 </div>
-                
+
                 {/* Field 3 */}
                 <div className="flex min-w-0 flex-col gap-1">
                   <span className="px-1 text-[11.5px] font-medium text-neutral-600">
@@ -89,16 +111,18 @@ export function HeroSection() {
                     <input
                       type="text"
                       name="monthlyBudget"
+                      value={monthlyBudget}
+                      onChange={(e) => setMonthlyBudget(e.target.value)}
                       placeholder={t("Min – Max")}
                       className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none placeholder:text-neutral-400"
                     />
                   </div>
                 </div>
               </div>
-              <Button variant="secondary" size="md" className="w-fit">
+              <Button type="submit" variant="secondary" size="md" className="w-fit">
                 {t("Search Rooms")}
               </Button>
-            </motion.div>
+            </motion.form>
 
             <motion.div
               variants={fadeUp}

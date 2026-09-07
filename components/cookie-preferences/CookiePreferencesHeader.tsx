@@ -3,7 +3,12 @@
 import React from "react";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
-export default function CookiePreferencesHeader() {
+interface CookiePreferencesHeaderProps {
+  onAcceptAll: () => void;
+  onRejectNonEssential: () => void;
+}
+
+export default function CookiePreferencesHeader({ onAcceptAll, onRejectNonEssential }: CookiePreferencesHeaderProps) {
   const { t } = useLanguage();
   return (
     <section className="w-full text-[#14213D] py-12 px-4 sm:px-8 md:px-12 lg:px-16 font-sans antialiased">
@@ -58,6 +63,7 @@ export default function CookiePreferencesHeader() {
             {/* Reject Button */}
             <button
               type="button"
+              onClick={onRejectNonEssential}
               className="w-full py-3.5 px-6 rounded-full border border-[#101C33] text-xs sm:text-sm font-bold text-[#101C33] bg-[#FFFDF8] hover:bg-[#101C33]/5 transition-colors cursor-pointer"
             >
               {t("Reject non-essential")}
@@ -66,6 +72,7 @@ export default function CookiePreferencesHeader() {
             {/* Accept Button */}
             <button
               type="button"
+              onClick={onAcceptAll}
               className="w-full py-3.5 px-6 rounded-full bg-[#241C14] text-xs sm:text-sm font-bold text-white hover:bg-[#2C241D] transition-colors cursor-pointer shadow-xs"
             >
               {t("Accept all")}
@@ -74,7 +81,7 @@ export default function CookiePreferencesHeader() {
 
           {/* Subtext Note */}
           <p className="text-[11px] text-[#A39B8B] font-normal leading-relaxed">
-            {t('Changes below are not applied until you select "Save preferences".')}
+            {t("Every optional setting below updates immediately, and is saved for this browser and device.")}
           </p>
         </div>
       </div>
