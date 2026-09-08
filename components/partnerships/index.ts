@@ -1,0 +1,13 @@
+export { default as PartnershipsHeroSection } from "./PartnershipsHeroSection";
+export { default as WhyPartnerWithUsSection } from "./WhyPartnerWithUsSection";
+export { default as ApprovedPartnershipPathsSection } from "./ApprovedPartnershipPathsSection";
+export { default as WhoItMayFitSection } from "./WhoItMayFitSection";
+export { default as PartnershipEvaluationProcessSection } from "./PartnershipEvaluationProcessSection";
+export { default as PartnerValueEnablementSection } from "./PartnerValueEnablementSection";
+export { default as TechnicalReadinessSection } from "./TechnicalReadinessSection";
+export { default as BrandGovernanceSection } from "./BrandGovernanceSection";
+export { default as DataPrivacyLegalBoundariesSection } from "./DataPrivacyLegalBoundariesSection";
+export { default as ApprovedPartnerProofSection } from "./ApprovedPartnerProofSection";
+export { default as SubmitPartnershipInterestSection } from "./SubmitPartnershipInterestSection";
+export { default as ApprovedPartnerPortalCallout } from "./ApprovedPartnerPortalCallout";
+export { default as PartnershipFaqSection } from "./PartnershipFaqSection";
