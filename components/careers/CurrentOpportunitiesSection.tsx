@@ -11,7 +11,6 @@ interface Role {
   location: string;
   workplaceType: "Hybrid" | "Remote" | "On-site";
   employmentType: string;
-  isModalRole?: boolean;
 }
 
 const ROLES_DATA: Role[] = [
@@ -22,7 +21,6 @@ const ROLES_DATA: Role[] = [
     location: "Berlin, Germany",
     workplaceType: "Hybrid",
     employmentType: "Full-time",
-    isModalRole: true,
   },
   {
     id: "2",
@@ -75,6 +73,7 @@ export default function CurrentOpportunitiesSection() {
 
   // State for Job Details Modal
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRole, setSelectedRole] = useState<Role | null>(null);
 
   // Filter lists derived from data
   const teams = [
@@ -119,12 +118,8 @@ export default function CurrentOpportunitiesSection() {
   };
 
   const handleRoleClick = (role: Role) => {
-    if (role.isModalRole) {
-      setIsModalOpen(true);
-    } else {
-      // Fallback action for other roles
-      console.log(`Viewing role: ${role.title}`);
-    }
+    setSelectedRole(role);
+    setIsModalOpen(true);
   };
 
   return (
@@ -283,11 +278,8 @@ export default function CurrentOpportunitiesSection() {
       {/* Render Modal */}
       <JobDetailsModal
         isOpen={isModalOpen}
+        role={selectedRole}
         onClose={() => setIsModalOpen(false)}
-        onApply={() => {
-          alert("Redirecting to application...");
-          setIsModalOpen(false);
-        }}
       />
     </>
   );

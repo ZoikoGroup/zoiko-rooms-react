@@ -3,7 +3,13 @@
 import React from "react";
 import Image from "next/image";
 
-export default function ApprovedPartnershipPathsSection() {
+interface ApprovedPartnershipPathsSectionProps {
+  onSelectPath?: (pathValue: string) => void;
+}
+
+export default function ApprovedPartnershipPathsSection({
+  onSelectPath,
+}: ApprovedPartnershipPathsSectionProps) {
   const paths = [
     {
       badge: "OPEN",
@@ -16,6 +22,7 @@ export default function ApprovedPartnershipPathsSection() {
       prerequisites:
         "confirmed institutional need for recurring room placement. Specific onboarding criteria are confirmed during evaluation.",
       primaryAction: "Start interest form",
+      pathValue: "institutional",
       secondaryAction: "Learn about Institutional Programs →",
       secondaryLink: "/find-a-room/university-rooms",
       image: "/images/partnerships/7.png",
@@ -31,6 +38,7 @@ export default function ApprovedPartnershipPathsSection() {
       prerequisites:
         "a defined integration purpose and the ability to operate within our authorization and data-governance model.",
       primaryAction: "Start interest form",
+      pathValue: "technology",
       image: "/images/partnerships/8.png",
     },
     {
@@ -44,6 +52,7 @@ export default function ApprovedPartnershipPathsSection() {
       prerequisites:
         "lawful authority to list the relevant properties. Portfolio size and market criteria are confirmed during evaluation, not fixed in advance.",
       primaryAction: "Start interest form",
+      pathValue: "property",
       secondaryAction: "See Zoiko Rooms Pro →",
       secondaryLink: "/pro/overview",
       image: "/images/partnerships/9.png",
@@ -59,6 +68,7 @@ export default function ApprovedPartnershipPathsSection() {
       prerequisites:
         "none fixed in advance — every general inquiry goes through the same initial review stage described below.",
       primaryAction: "Start interest form",
+      pathValue: "general",
       image: "/images/partnerships/ten.png",
     },
   ] as const;
@@ -78,14 +88,14 @@ export default function ApprovedPartnershipPathsSection() {
 
           {/* Main Headline */}
           <h2 className="text-3xl sm:text-4xl md:text-[36px] font-serif font-bold text-[#1C1917] tracking-tight mb-4">
-            Choose the path that matches what you're building.
+            Choose the path that matches what you&apos;re building.
           </h2>
 
           {/* Subtitle */}
           <p className="text-xs sm:text-sm text-[#78716C] leading-relaxed font-normal">
             These are the relationship categories currently open for evaluation.
             If none of them fit, use the general partnership interest path
-            instead of guessing at a category that doesn't exist.
+            instead of guessing at a category that doesn&apos;t exist.
           </p>
         </div>
 
@@ -151,8 +161,9 @@ export default function ApprovedPartnershipPathsSection() {
 
               {/* Action Buttons */}
               <div className="px-6 pb-6 sm:px-8 sm:pb-8 pt-0 flex flex-wrap items-center gap-4">
-                <button
-                  type="button"
+                <a
+                  href="#submit-partnership-interest"
+                  onClick={() => onSelectPath?.(path.pathValue)}
                   className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-colors cursor-pointer ${
                     path.badge === "SUBJECT TO REVIEW"
                       ? "border border-[#182232] text-[#182232] bg-transparent hover:bg-[#182232] hover:text-white"
@@ -160,7 +171,7 @@ export default function ApprovedPartnershipPathsSection() {
                   }`}
                 >
                   {path.primaryAction}
-                </button>
+                </a>
 
                 {"secondaryAction" in path && path.secondaryAction && (
                   <a

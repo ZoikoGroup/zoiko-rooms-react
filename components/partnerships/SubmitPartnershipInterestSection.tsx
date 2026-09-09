@@ -1,8 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function SubmitPartnershipInterestSection() {
+interface SubmitPartnershipInterestSectionProps {
+  initialPath?: string | null;
+}
+
+export default function SubmitPartnershipInterestSection({
+  initialPath,
+}: SubmitPartnershipInterestSectionProps) {
   const [formData, setFormData] = useState({
     partnershipPath: "",
     organizationName: "",
@@ -15,6 +21,14 @@ export default function SubmitPartnershipInterestSection() {
     acceptPrivacy: false,
     receiveCommunication: false,
   });
+  const [referenceId, setReferenceId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (initialPath) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- responding to an external "start interest form" path selection, not a render loop
+      setFormData((prev) => ({ ...prev, partnershipPath: initialPath }));
+    }
+  }, [initialPath]);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -32,12 +46,15 @@ export default function SubmitPartnershipInterestSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic
-    console.log("Submitted:", formData);
+    const ref = `ZR-PN-${Math.floor(100000 + Math.random() * 900000)}`;
+    setReferenceId(ref);
   };
 
   return (
-    <div className="flex items-center justify-center py-12 md:py-20 text-[#1C1917] bg-[#f6efe3]">
+    <div
+      id="submit-partnership-interest"
+      className="scroll-mt-24 flex items-center justify-center py-12 md:py-20 text-[#1C1917] bg-[#f6efe3]"
+    >
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 px-4 sm:px-6 items-start">
         {/* Left Column: Info Content */}
         <div className="lg:col-span-6 flex flex-col items-start pr-0 lg:pr-4">
@@ -51,13 +68,13 @@ export default function SubmitPartnershipInterestSection() {
 
           {/* Main Title */}
           <h2 className="text-[22px] font-serif font-bold text-[#1C1917] leading-tight tracking-tight mb-4">
-            Tell us the basics — we'll take it from there.
+            Tell us the basics — we&apos;ll take it from there.
           </h2>
 
           {/* Intro Description */}
           <p className="text-xs sm:text-sm text-[#78716C] leading-relaxed font-normal mb-6">
-            This starts the intake stage described above. It's a request, not an
-            agreement — submitting this form doesn't make your organization a
+            This starts the intake stage described above. It&apos;s a request, not an
+            agreement — submitting this form doesn&apos;t make your organization a
             Zoiko Rooms partner.
           </p>
 
@@ -77,7 +94,7 @@ export default function SubmitPartnershipInterestSection() {
             </li>
             <li className="pl-1">
               <span className="-ml-1">
-                You'll receive a reference ID immediately — not a promised
+                You&apos;ll receive a reference ID immediately — not a promised
                 response time.
               </span>
             </li>
@@ -86,6 +103,26 @@ export default function SubmitPartnershipInterestSection() {
 
         {/* Right Column: Interactive Form Card */}
         <div className="lg:col-span-6 w-full bg-[#FBF7EF] rounded-3xl border border-[#E3D3B8] p-6 sm:p-10 shadow-xs">
+          {referenceId ? (
+            <div className="text-center py-8 space-y-4">
+              <div className="mx-auto w-12 h-12 rounded-full bg-[#E1EEE5] flex items-center justify-center text-[#3E7A5D] text-2xl">
+                ✓
+              </div>
+              <h3 className="text-lg font-serif font-bold text-[#1C1917]">
+                Your interest has been submitted.
+              </h3>
+              <p className="text-xs sm:text-sm text-[#78716C] leading-relaxed">
+                Reference ID:{" "}
+                <span className="font-semibold text-[#1C1917]">
+                  {referenceId}
+                </span>
+                <br />
+                Keep this for your records. This confirms receipt, not
+                approval — it goes through the same initial review stage as
+                every other submission.
+              </p>
+            </div>
+          ) : (
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Partnership Path Dropdown */}
             <div>
@@ -227,7 +264,7 @@ export default function SubmitPartnershipInterestSection() {
               >
                 Privacy Notice
               </a>
-              . Please don't include customer data, credentials, or confidential
+              . Please don&apos;t include customer data, credentials, or confidential
               information in this form.
             </p>
 
@@ -242,7 +279,7 @@ export default function SubmitPartnershipInterestSection() {
                   className="mt-0.5 rounded border-[#E3D3B8] text-[#182232] focus:ring-[#182232]"
                 />
                 <span className="text-xs text-[#78716C] font-semibold leading-tight">
-                  I've read and accept the Privacy Notice for this submission.
+                  I&apos;ve read and accept the Privacy Notice for this submission.
                 </span>
               </label>
 
@@ -255,7 +292,7 @@ export default function SubmitPartnershipInterestSection() {
                   className="mt-0.5 rounded border-[#E3D3B8] text-[#182232] focus:ring-[#182232]"
                 />
                 <span className="text-xs text-[#A8A29E] leading-tight">
-                  I'm happy to receive occasional partnership-related
+                  I&apos;m happy to receive occasional partnership-related
                   communication from Zoiko Rooms. (Optional — not required to
                   submit.)
                 </span>
@@ -270,6 +307,7 @@ export default function SubmitPartnershipInterestSection() {
               Submit partnership interest
             </button>
           </form>
+          )}
         </div>
       </div>
     </div>

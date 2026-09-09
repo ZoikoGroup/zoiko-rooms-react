@@ -11,3 +11,4 @@ export { default as ApprovedPartnerProofSection } from "./ApprovedPartnerProofSe
 export { default as SubmitPartnershipInterestSection } from "./SubmitPartnershipInterestSection";
 export { default as ApprovedPartnerPortalCallout } from "./ApprovedPartnerPortalCallout";
 export { default as PartnershipFaqSection } from "./PartnershipFaqSection";
+export { default as PartnershipsView } from "./PartnershipsView";
