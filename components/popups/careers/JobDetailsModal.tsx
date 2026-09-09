@@ -4,26 +4,35 @@ import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 
+export interface JobDetailsRole {
+  id: string;
+  title: string;
+  category: string;
+  location: string;
+  workplaceType: "Hybrid" | "Remote" | "On-site";
+  employmentType: string;
+}
+
 export interface JobDetailsModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onApply?: () => void;
+  role: JobDetailsRole | null;
 }
 
-const responsibilities: string[] = [
+const backendResponsibilities: string[] = [
   "Design and maintain services powering Room Passport evidence and availability.",
   "Partner with Trust & Safety and Product on data-quality and freshness guarantees.",
   "Participate in on-call rotation for platform reliability.",
 ];
 
-const requirements: string[] = [
+const backendRequirements: string[] = [
   "3+ years of backend engineering experience in a production environment.",
 ];
 
 export default function JobDetailsModal({
   isOpen,
   onClose,
-  onApply,
+  role,
 }: JobDetailsModalProps) {
   const router = useRouter();
   useEffect(() => {
@@ -44,9 +53,11 @@ export default function JobDetailsModal({
     };
   }, [isOpen, onClose]);
 
+  const isBackendRole = role?.id === "1";
+
   return (
     <AnimatePresence>
-      {isOpen && (
+      {isOpen && role && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 font-sans">
           {/* Semi-transparent Backdrop */}
           <motion.div
@@ -85,89 +96,105 @@ export default function JobDetailsModal({
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold text-[#855B28] bg-[#FDF8EE] border border-[#F5E6CC] border-dashed">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#855B28]" />
-                  Full-time
+                  {role.employmentType}
                 </span>
               </div>
 
               {/* Title & Metadata */}
               <div className="space-y-4">
                 <h2 className="text-2xl sm:text-[25px] font-serif font-bold text-[#101C33] tracking-tight leading-snug">
-                  Backend Engineer, Room Passport Platform
+                  {role.title}
                 </h2>
 
                 <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs sm:text-sm font-semibold text-[#101C33]">
                   <div className="flex items-center gap-1.5">
                     <span>📍</span>
-                    <span>Berlin, Germany</span>
+                    <span>{role.location}</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span>🏢</span>
-                    <span>Hybrid</span>
+                    <span>{role.workplaceType}</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span>👥</span>
-                    <span>Engineering</span>
+                    <span>{role.category}</span>
                   </div>
                 </div>
               </div>
 
               <hr className="border-[#EAE6DF]" />
 
-              {/* Role Summary */}
-              <div className="space-y-2">
-                <h3 className="text-xs font-bold tracking-wider text-[#9A9EA6] uppercase">
-                  Role Summary
-                </h3>
-                <p className="text-sm sm:text-sm text-[#6B6F76] leading-relaxed">
-                  You'll help build and scale the systems behind Room Passport
-                  evidence, availability, and provider authority — the
-                  foundation every other Zoiko Rooms surface depends on.
-                </p>
-              </div>
+              {isBackendRole ? (
+                <>
+                  {/* Role Summary */}
+                  <div className="space-y-2">
+                    <h3 className="text-xs font-bold tracking-wider text-[#9A9EA6] uppercase">
+                      Role Summary
+                    </h3>
+                    <p className="text-sm sm:text-sm text-[#6B6F76] leading-relaxed">
+                      You&apos;ll help build and scale the systems behind Room Passport
+                      evidence, availability, and provider authority — the
+                      foundation every other Zoiko Rooms surface depends on.
+                    </p>
+                  </div>
 
-              {/* Responsibilities */}
-              <div className="space-y-3">
-                <h3 className="text-xs font-bold tracking-wider text-[#9A9EA6] uppercase">
-                  Responsibilities
-                </h3>
-                <div className="space-y-2.5">
-                  {responsibilities.map((item, index) => (
-                    <div
-                      key={index}
-                      className="p-4 rounded-xl bg-[#FAF7F0] border border-[#E6DFD3] text-[13px] text-[#16233F]"
-                    >
-                      {item}
+                  {/* Responsibilities */}
+                  <div className="space-y-3">
+                    <h3 className="text-xs font-bold tracking-wider text-[#9A9EA6] uppercase">
+                      Responsibilities
+                    </h3>
+                    <div className="space-y-2.5">
+                      {backendResponsibilities.map((item, index) => (
+                        <div
+                          key={index}
+                          className="p-4 rounded-xl bg-[#FAF7F0] border border-[#E6DFD3] text-[13px] text-[#16233F]"
+                        >
+                          {item}
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </div>
+                  </div>
 
-              {/* Requirements */}
-              <div className="space-y-3">
-                <h3 className="text-xs font-bold tracking-wider text-[#8A8880] uppercase">
-                  Requirements
-                </h3>
-                <div className="space-y-2.5">
-                  {requirements.map((item, index) => (
-                    <div
-                      key={index}
-                      className="p-4 rounded-xl bg-[#FAF7F0] border border-[#E6DFD3] text-xs sm:text-sm text-[#16233F]"
-                    >
-                      {item}
+                  {/* Requirements */}
+                  <div className="space-y-3">
+                    <h3 className="text-xs font-bold tracking-wider text-[#8A8880] uppercase">
+                      Requirements
+                    </h3>
+                    <div className="space-y-2.5">
+                      {backendRequirements.map((item, index) => (
+                        <div
+                          key={index}
+                          className="p-4 rounded-xl bg-[#FAF7F0] border border-[#E6DFD3] text-xs sm:text-sm text-[#16233F]"
+                        >
+                          {item}
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
+                </>
+              ) : (
+                <div className="space-y-2">
+                  <h3 className="text-xs font-bold tracking-wider text-[#9A9EA6] uppercase">
+                    Role Summary
+                  </h3>
+                  <p className="text-sm sm:text-sm text-[#6B6F76] leading-relaxed">
+                    Full role summary, responsibilities, and requirements for
+                    the {role.title} posting are shared during the application
+                    review — apply below to receive the current requisition
+                    details.
+                  </p>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Sticky Footer */}
             <div className="p-6 sm:px-10 border-t border-[#EAE6DF] bg-white flex flex-col sm:flex-row items-center justify-between gap-4">
               <span className="text-xs text-[#8A8880] font-medium">
-                Requisition ID: REQ-2026-114
+                {role.category} · {role.location}
               </span>
               <button
                 type="button"
-                onClick={()=>router.push("https://app.zoikorooms.com/account/login")}
+                onClick={() => router.push("https://app.zoikorooms.com/account/login")}
                 className="w-full sm:w-auto bg-[#1C2C5E] hover:bg-[#101C33] text-white text-sm font-semibold px-6 py-3 rounded-full transition-colors cursor-pointer flex items-center justify-center gap-2"
               >
                 Apply for this role <span>→</span>

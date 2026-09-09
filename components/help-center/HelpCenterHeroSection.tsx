@@ -138,7 +138,7 @@ export default function HelpCenterHeroSection({ onSelectCategory }: HelpCenterHe
   return (
     <div className="w-full font-sans antialiased">
       {/* Dark Hero Header Section */}
-      <section className="w-full bg-gradient-to-b from-[#2E4A3E] via-[#1C2230] to-[#0F1420] text-white pt-20 pb-28 px-4 sm:px-8 md:px-12 lg:px-16 relative overflow-hidden">
+      <section className="w-full bg-gradient-to-b from-[#2E4A3E] via-[#1C2230] to-[#0F1420] text-white pt-20 pb-28 px-4 sm:px-8 md:px-12 lg:px-16 relative overflow-x-clip">
         {/* Center Radial Glow Overlay */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -189,7 +189,7 @@ export default function HelpCenterHeroSection({ onSelectCategory }: HelpCenterHe
 
             {/* Live FAQ Suggestions */}
             {showSuggestions && matches.length > 0 && (
-              <div className="absolute left-0 right-0 top-[calc(100%+8px)] z-20 overflow-hidden rounded-2xl border border-[#EAE6DF] bg-white text-left shadow-2xl">
+              <div className="absolute left-0 right-0 top-[calc(100%+8px)] z-30 overflow-hidden rounded-2xl border border-[#EAE6DF] bg-white text-left shadow-2xl">
                 {matches.map((faq) => (
                   <button
                     key={faq.id}
