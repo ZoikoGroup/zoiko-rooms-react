@@ -39,12 +39,11 @@ export function BlogListSection() {
                   href={`/company/blogs/${post.slug}`}
                   className="group flex h-full flex-col overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm transition-shadow hover:shadow-md"
                 >
-                  <div className="relative aspect-16/10 w-full overflow-hidden bg-neutral-100">
+                  <div className="w-full overflow-hidden bg-neutral-100">
                     <ImageFade
                       src={post.coverImage}
                       alt={post.coverAlt}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="h-auto w-full transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
                   <div className="flex flex-1 flex-col gap-3 p-6">
