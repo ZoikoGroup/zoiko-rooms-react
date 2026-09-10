@@ -18,7 +18,7 @@ export function BlogPostHeroSection({ post }: { post: BlogPost }) {
         <Reveal className="flex flex-col gap-6">
           <motion.div variants={fadeUp}>
             <Link
-              href="/company/blogs"
+              href="/blogs"
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-navy hover:text-brand-red"
             >
               <ArrowLeft className="h-4 w-4" />

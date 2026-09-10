@@ -216,7 +216,7 @@ export function BlogPostBodySection({ post }: { post: BlogPost }) {
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <Link
-              href="/company/blogs"
+              href="/blogs"
               className="flex w-fit items-center gap-1.5 rounded-full border border-[#E9E0D3] bg-[#FFFDF8] px-6 py-3 text-sm font-semibold text-brand-navy transition-colors hover:border-brand-red hover:text-brand-red"
             >
               {t("Back to Blog")}
