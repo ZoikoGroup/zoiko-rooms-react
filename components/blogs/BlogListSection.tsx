@@ -36,7 +36,7 @@ export function BlogListSection() {
             {blogPosts.map((post) => (
               <motion.div key={post.slug} variants={fadeUp}>
                 <Link
-                  href={`/company/blogs/${post.slug}`}
+                  href={`/blogs/${post.slug}`}
                   className="group flex h-full flex-col overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm transition-shadow hover:shadow-md"
                 >
                   <div className="w-full overflow-hidden bg-neutral-100">
