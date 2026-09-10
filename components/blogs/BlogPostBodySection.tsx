@@ -109,8 +109,8 @@ function BlockRenderer({ block }: { block: BlogBlock }) {
 
     case "image":
       return (
-        <motion.div variants={fadeUp} className="relative aspect-16/9 w-full overflow-hidden rounded-2xl bg-neutral-100">
-          <ImageFade src={block.src} alt={t(block.alt)} fill className="object-cover" />
+        <motion.div variants={fadeUp} className="w-full overflow-hidden rounded-2xl bg-neutral-100">
+          <ImageFade src={block.src} alt={t(block.alt)} className="h-auto w-full" />
         </motion.div>
       );
 

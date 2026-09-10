@@ -1,3 +1,11 @@
+import type { StaticImageData } from "next/image";
+import blog1Header from "@/public/images/blogs/blog-1/Header.webp";
+import blog1Image1 from "@/public/images/blogs/blog-1/Image_1.jpg";
+import blog1Image2 from "@/public/images/blogs/blog-1/Image_2.webp";
+import blog1Image3 from "@/public/images/blogs/blog-1/Image_3.webp";
+import blog1Image4 from "@/public/images/blogs/blog-1/Image_4.webp";
+import blog1Image5 from "@/public/images/blogs/blog-1/Image_5.webp";
+
 export interface BlogFaq {
   question: string;
   answer: string;
@@ -14,7 +22,7 @@ export type BlogBlock =
       items: { heading: string; paragraphs?: string[]; items?: string[] }[];
     }
   | { type: "table"; heading: string; rows: [string, string][] }
-  | { type: "image"; src: string; alt: string }
+  | { type: "image"; src: StaticImageData; alt: string }
   | { type: "quote"; text: string };
 
 export interface BlogPost {
@@ -26,7 +34,7 @@ export interface BlogPost {
   category: string;
   publishedDate: string;
   readTime: string;
-  coverImage: string;
+  coverImage: StaticImageData;
   coverAlt: string;
   quickSummary: string[];
   blocks: BlogBlock[];
@@ -50,7 +58,7 @@ export const blogPosts: BlogPost[] = [
     category: "Renter Guides",
     publishedDate: "Sep 10, 2026",
     readTime: "10 min read",
-    coverImage: "/images/blogs/blog-1/Header.webp",
+    coverImage: blog1Header,
     coverAlt: "Renter reviewing verified room listings before choosing a place to rent",
     quickSummary: [
       "Compare location, rent, amenities, safety, rental terms, and verification before deciding.",
@@ -85,7 +93,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "image",
-        src: "/images/blogs/blog-1/Image_1.jpg",
+        src: blog1Image1,
         alt: "Renter comparing room location, rent, and amenities before deciding",
       },
       {
@@ -194,7 +202,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "image",
-        src: "/images/blogs/blog-1/Image_2.webp",
+        src: blog1Image2,
         alt: "Map and search interface for finding rooms in an unfamiliar city",
       },
       {
@@ -269,7 +277,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "image",
-        src: "/images/blogs/blog-1/Image_3.webp",
+        src: blog1Image3,
         alt: "Renter reviewing a step-by-step accommodation search checklist",
       },
       {
@@ -341,7 +349,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "image",
-        src: "/images/blogs/blog-1/Image_4.webp",
+        src: blog1Image4,
         alt: "Furnished short-term room set up for a temporary worker",
       },
       {
@@ -424,7 +432,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "image",
-        src: "/images/blogs/blog-1/Image_5.webp",
+        src: blog1Image5,
         alt: "Renter checking a final room-renting checklist before signing an agreement",
       },
       {

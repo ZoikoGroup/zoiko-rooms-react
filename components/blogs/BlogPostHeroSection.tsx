@@ -39,11 +39,8 @@ export function BlogPostHeroSection({ post }: { post: BlogPost }) {
             {post.publishedDate} · {t(post.readTime)}
           </motion.p>
 
-          <motion.div
-            variants={fadeUp}
-            className="relative aspect-16/9 w-full overflow-hidden rounded-2xl bg-neutral-100 sm:aspect-21/9"
-          >
-            <ImageFade src={post.coverImage} alt={post.coverAlt} fill priority className="object-cover" />
+          <motion.div variants={fadeUp} className="w-full overflow-hidden rounded-2xl bg-neutral-100">
+            <ImageFade src={post.coverImage} alt={post.coverAlt} priority className="h-auto w-full" />
           </motion.div>
 
           <div className="flex flex-col gap-3 rounded-2xl border border-[#E9E0D3] bg-[#FFFDF8] p-6 sm:p-8">
