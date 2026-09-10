@@ -76,6 +76,7 @@ export const footerColumns: FooterColumnData[] = [
       { label: "About Zoiko Rooms", href: "/about-us" },
       { label: "Leadership & Governance", href:"/company/leadership-and-governance" },
       { label: "Newsroom", href: "/company/newsrooms" },
+      { label: "Blog", href: "/company/blogs" },
       { label: "Careers",href:"/company/careers" },
       { label: "Partnerships", href:"/company/partnerships" },
       { label: "Contact", href: "/contact-us" },
