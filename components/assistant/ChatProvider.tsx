@@ -75,6 +75,46 @@ export function useChatContext() {
 
 let _sessionId: string | null = null;
 
+const SESSION_KEY = "zoiko-assistant-session-id";
+
+/**
+ * Base URL of the Zoiko Rooms public assistant API. Configure locally with
+ * NEXT_PUBLIC_ASSISTANT_API_URL (e.g. http://localhost:8000); defaults to the
+ * hosted platform, whose CORS allowlist includes this site.
+ */
+const PUBLIC_AI_API_URL = (process.env.NEXT_PUBLIC_ASSISTANT_API_URL ?? "https://app.zoikorooms.com").replace(/\/$/, "");
+
+function createSessionId(): string {
+  const id =
+    typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+      ? crypto.randomUUID()
+      : `sess_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+  try {
+    localStorage.setItem(SESSION_KEY, id);
+  } catch {
+    // ignore storage failures
+  }
+  return id;
+}
+
+function getOrCreateSessionId(): string {
+  if (_sessionId) return _sessionId;
+  if (typeof window !== "undefined") {
+    const stored = localStorage.getItem(SESSION_KEY);
+    if (stored) {
+      _sessionId = stored;
+      return stored;
+    }
+  }
+  _sessionId = createSessionId();
+  return _sessionId;
+}
+
+function freshSessionId(): string {
+  _sessionId = createSessionId();
+  return _sessionId;
+}
+
 function getInitialTheme(): "light" | "dark" | "system" {
   if (typeof window !== "undefined") {
     const stored = localStorage.getItem("zoiko-assistant-theme") as "light" | "dark" | "system" | null;
@@ -156,14 +196,14 @@ export function ChatProvider({ children }: { children: ReactNode }) {
     if (!currentId || msgs.length === 0) return;
     setHistory((prev) => {
       const exists = prev.some((s) => s.id === currentId);
-      let next: ArchivedSession[];
       const entry: ArchivedSession = {
         id: currentId,
         title: titleFromMessages(msgs),
         createdAt: prev.find((s) => s.id === currentId)?.createdAt || new Date().toISOString(),
         messages: msgs,
       };
-      next = exists ? prev.map((s) => (s.id === currentId ? entry : s)) : [entry, ...prev];
+      const next: ArchivedSession[] =
+        exists ? prev.map((s) => (s.id === currentId ? entry : s)) : [entry, ...prev];
       try {
         localStorage.setItem(HISTORY_KEY, JSON.stringify(next));
       } catch {
@@ -189,8 +229,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
   const newConversation = useCallback(() => {
     finalizeCurrent();
-    _sessionId = null;
-    activeSessionRef.current = null;
+    activeSessionRef.current = freshSessionId();
     const welcomeMessage: ChatMessage = {
       id: `sys_${Date.now()}`,
       role: "system",
@@ -298,40 +337,54 @@ export function ChatProvider({ children }: { children: ReactNode }) {
     setError(null);
 
     try {
-      if (!_sessionId) {
-        const sessionRes = await fetch("/api/assistant/sessions", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ market_code: "GB", locale: "en-GB" }),
-        });
-        const sessionData = await sessionRes.json();
-        if (!sessionData.ok) throw new Error("Failed to create session");
-        _sessionId = sessionData.data.session_id;
-      }
-      activeSessionRef.current = _sessionId;
+      const sessionId = getOrCreateSessionId();
+      activeSessionRef.current = sessionId;
 
-      const res = await fetch(`/api/assistant/sessions/${_sessionId}/messages`, {
+      // Untrusted, client-held conversation context. The server re-caps this too;
+      // we keep ~3 exchanges (6 turns) of non-system history to bound payload size.
+      const history = messagesRef.current
+        .filter((m) => m.role !== "system")
+        .slice(-6)
+        .map((m) => ({ role: m.role, content: m.content }));
+
+      const res = await fetch(`${PUBLIC_AI_API_URL}/api/public/assistant/messages`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content, content_type: "text" }),
+        body: JSON.stringify({ message: content, history, sessionId }),
       });
+
+      if (res.status === 429) {
+        throw new Error("You've sent a lot of messages recently — please wait a minute and try again.");
+      }
+      if (!res.ok) {
+        throw new Error("The assistant is temporarily unavailable. Please try again shortly.");
+      }
 
       const data = await res.json();
 
-      if (!data.ok) {
-        throw new Error(data.error?.detail || "Failed to send message");
+      if (data.sessionId) {
+        _sessionId = data.sessionId;
+        try {
+          localStorage.setItem(SESSION_KEY, data.sessionId);
+        } catch {
+          // ignore
+        }
       }
 
       const assistantMessage: ChatMessage = {
-        id: data.data.message_id,
+        id: `asst_${Date.now()}`,
         role: "assistant",
-        content: data.data.content,
-        answer_type: data.data.answer_type,
-        citations: data.data.citations,
-        suggestions: data.data.suggestions,
-        deep_links: data.data.deep_links,
-        handoff: data.data.handoff,
-        created_at: data.data.created_at,
+        content: data.answer ?? "",
+        answer_type: "GUIDANCE",
+        citations: Array.isArray(data.citations)
+          ? data.citations.map((c: Record<string, unknown>) => ({
+              citation_id: String(c.citationId ?? ""),
+              source_type: String(c.sourceType ?? "KNOWLEDGE") === "KNOWLEDGE" ? "knowledge_base" : "source",
+              source_id: String(c.sourceId ?? ""),
+              section: c.section ? String(c.section) : undefined,
+            }))
+          : [],
+        created_at: new Date().toISOString(),
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
