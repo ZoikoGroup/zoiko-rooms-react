@@ -22,18 +22,21 @@
   --color-gray-800: #1f2937;
   --color-gray-900: #111827;
 
-  --color-assistant-bubble-bg: var(--color-gray-100);
-  --color-assistant-bubble-text: var(--color-brand-ink);
-  --color-user-bubble-bg: var(--color-brand-navy);
+  --color-chat-panel-bg: #ffffff;
+  --color-chat-panel-border: rgba(226, 232, 240, 0.6);
+  --color-assistant-bubble-bg: #ffffff;
+  --color-assistant-bubble-text: #334155;
+  --color-assistant-bubble-border: #e2e8f0;
+  --color-user-bubble-bg: #0e2f73;
   --color-user-bubble-text: #ffffff;
-  --color-composer-bg: var(--color-gray-50);
-  --color-composer-border: var(--color-gray-200);
-  --color-header-border: var(--color-gray-200);
+  --color-composer-bg: #f1f5f9;
+  --color-composer-border: #e2e8f0;
+  --color-header-border: #f1f5f9;
   --color-suggestion-bg: #ffffff;
-  --color-suggestion-border: var(--color-gray-200);
-  --color-suggestion-text: var(--color-brand-navy);
-  --color-suggestion-hover-bg: var(--color-brand-navy);
-  --color-suggestion-hover-text: #ffffff;
+  --color-suggestion-border: #e2e8f0;
+  --color-suggestion-text: #475569;
+  --color-suggestion-hover-bg: #f1f5f9;
+  --color-suggestion-hover-text: #1e293b;
   --color-citation-bg: #ffffff;
   --color-citation-border: var(--color-gray-100);
   --color-citation-label-bg: var(--color-brand-navy);
@@ -75,18 +78,21 @@
 }
 
 .zoiko-assistant-root[data-theme="light"] {
-  --color-assistant-bubble-bg: var(--color-gray-100);
-  --color-assistant-bubble-text: var(--color-brand-ink);
-  --color-user-bubble-bg: var(--color-brand-navy);
+  --color-chat-panel-bg: #ffffff;
+  --color-chat-panel-border: rgba(226, 232, 240, 0.6);
+  --color-assistant-bubble-bg: #ffffff;
+  --color-assistant-bubble-text: #334155;
+  --color-assistant-bubble-border: #e2e8f0;
+  --color-user-bubble-bg: #0e2f73;
   --color-user-bubble-text: #ffffff;
-  --color-composer-bg: var(--color-gray-50);
-  --color-composer-border: var(--color-gray-200);
-  --color-header-border: var(--color-gray-200);
+  --color-composer-bg: #f1f5f9;
+  --color-composer-border: #e2e8f0;
+  --color-header-border: #f1f5f9;
   --color-suggestion-bg: #ffffff;
-  --color-suggestion-border: var(--color-gray-200);
-  --color-suggestion-text: var(--color-brand-navy);
-  --color-suggestion-hover-bg: var(--color-brand-navy);
-  --color-suggestion-hover-text: #ffffff;
+  --color-suggestion-border: #e2e8f0;
+  --color-suggestion-text: #475569;
+  --color-suggestion-hover-bg: #f1f5f9;
+  --color-suggestion-hover-text: #1e293b;
   --color-citation-bg: #ffffff;
   --color-citation-border: var(--color-gray-100);
   --color-citation-label-bg: var(--color-brand-navy);
@@ -128,21 +134,24 @@
 }
 
 .zoiko-assistant-root[data-theme="dark"] {
-  --color-assistant-bubble-bg: #111827;
-  --color-assistant-bubble-text: #f3f4f6;
-  --color-user-bubble-bg: #3b82f6;
+  --color-chat-panel-bg: #0f172a;
+  --color-chat-panel-border: rgba(255,255,255,0.1);
+  --color-assistant-bubble-bg: rgba(255,255,255,0.05);
+  --color-assistant-bubble-text: #e2e8f0;
+  --color-assistant-bubble-border: rgba(255,255,255,0.1);
+  --color-user-bubble-bg: #0e2f73;
   --color-user-bubble-text: #ffffff;
-  --color-composer-bg: #111827;
-  --color-composer-border: #374151;
-  --color-header-border: #374151;
-  --color-suggestion-bg: #1f2937;
-  --color-suggestion-border: #374151;
-  --color-suggestion-text: #93c5fd;
-  --color-suggestion-hover-bg: #3b82f6;
-  --color-suggestion-hover-text: #ffffff;
-  --color-citation-bg: #1f2937;
-  --color-citation-border: #374151;
-  --color-citation-label-bg: #3b82f6;
+  --color-composer-bg: rgba(255,255,255,0.1);
+  --color-composer-border: rgba(255,255,255,0.1);
+  --color-header-border: rgba(255,255,255,0.1);
+  --color-suggestion-bg: rgba(255,255,255,0.05);
+  --color-suggestion-border: rgba(255,255,255,0.1);
+  --color-suggestion-text: #cbd5e1;
+  --color-suggestion-hover-bg: rgba(255,255,255,0.1);
+  --color-suggestion-hover-text: #f1f5f9;
+  --color-citation-bg: rgba(255,255,255,0.05);
+  --color-citation-border: rgba(255,255,255,0.1);
+  --color-citation-label-bg: #0e2f73;
   --color-citation-label-text: #ffffff;
   --color-citation-label-text-dim: rgba(255,255,255,0.7);
   --color-citation-text: #9ca3af;
@@ -169,15 +178,15 @@
   --color-deep-link-border: rgba(59, 130, 246, 0.3);
   --color-deep-link-text: #93c5fd;
   --color-deep-link-hover-bg: rgba(59, 130, 246, 0.25);
-  --color-welcome-bg: #111827;
-  --color-welcome-text: #f3f4f6;
-  --color-menu-bg: #111827;
-  --color-menu-border: #374151;
-  --color-menu-item-hover: #1f2937;
-  --color-menu-item-text: #f3f4f6;
+  --color-welcome-bg: #1e293b;
+  --color-welcome-text: #e2e8f0;
+  --color-menu-bg: #0f172a;
+  --color-menu-border: rgba(255,255,255,0.1);
+  --color-menu-item-hover: #1e293b;
+  --color-menu-item-text: #e2e8f0;
   --color-overlay: rgba(0, 0, 0, 0.5);
   --color-scrollbar-thumb: #4b5563;
-  --color-scrollbar-track: #111827;
+  --color-scrollbar-track: #0f172a;
 }
 
 .zoiko-assistant-root textarea::placeholder {
@@ -356,4 +365,161 @@ body {
   animation:
     zoiko-launcher-bounce 0.7s ease-in-out infinite,
     zoiko-launcher-glow 3.5s ease-in-out infinite;
+}
+
+/* ---------- Chat panel platform-parity animations ---------- */
+
+@keyframes chat-panel-open {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes chat-msg-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes chat-msg-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes chat-typing-bounce {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  40% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
+@keyframes chat-chip-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes chat-fade-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes panel-ping {
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes soft-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes pulse-ring {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(232, 67, 67, 0.5);
+  }
+  60% {
+    box-shadow: 0 0 0 10px rgba(232, 67, 67, 0);
+  }
+}
+
+.zoiko-assistant-root .animate-chat-panel-open {
+  animation: chat-panel-open 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.zoiko-assistant-root .animate-chat-msg-left {
+  animation: chat-msg-in-left 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.zoiko-assistant-root .animate-chat-msg-right {
+  animation: chat-msg-in-right 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.zoiko-assistant-root .animate-chat-chip {
+  animation: chat-chip-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.zoiko-assistant-root .animate-chat-fade-slide {
+  animation: chat-fade-slide-in 0.3s ease-out both;
+}
+
+.zoiko-assistant-root .animate-fade-up {
+  animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.zoiko-assistant-root .typing-dot-1 {
+  animation: chat-typing-bounce 1.2s ease-in-out infinite;
+}
+
+.zoiko-assistant-root .typing-dot-2 {
+  animation: chat-typing-bounce 1.2s ease-in-out 0.15s infinite;
+}
+
+.zoiko-assistant-root .typing-dot-3 {
+  animation: chat-typing-bounce 1.2s ease-in-out 0.3s infinite;
+}
+
+.zoiko-launcher-notification-ping {
+  animation: panel-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.zoiko-launcher-float {
+  animation: soft-float 4s ease-in-out infinite;
+}
+
+.zoiko-assistant-root .animate-pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

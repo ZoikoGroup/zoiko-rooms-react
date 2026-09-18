@@ -45,11 +45,11 @@ export function ContactCard({ contact }: ContactCardProps) {
         </div>
 
         <div
-          className="rounded-2xl rounded-bl-sm border p-4 text-sm"
+          className="rounded-2xl rounded-tl-sm border p-4 text-sm"
           style={{
             backgroundColor: "var(--color-assistant-bubble-bg)",
             color: "var(--color-assistant-bubble-text)",
-            borderColor: "var(--color-header-border)",
+            borderColor: "var(--color-assistant-bubble-border)",
           }}
         >
           <div className="mb-3 flex flex-col gap-2">
@@ -149,7 +149,7 @@ export function ContactCard({ contact }: ContactCardProps) {
               type="button"
               onClick={handleConfirm}
               disabled={busy || !recipient.trim() || !subject.trim() || !body.trim()}
-              className="flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs font-medium text-white transition-colors disabled:opacity-40"
+              className="flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:opacity-90 disabled:opacity-40"
               style={{ backgroundColor: "var(--color-brand-navy)" }}
             >
               {busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Send className="h-3.5 w-3.5" />}
