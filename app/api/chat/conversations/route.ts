@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { contextFromHeaders } from "@/assistant/platform/route-context";
+import { contextFromHeaders, requireChatRateLimit } from "@/assistant/platform/route-context";
 import { createConversation, listConversations, appendMessage } from "@/assistant/platform/store";
 import { log } from "@/assistant/platform/log";
 
@@ -10,6 +10,15 @@ export async function GET(request: NextRequest) {
       { ok: false, error: { title: "Missing Identity", status: 401, detail: error } },
       { status: 401 }
     );
+  }
+  const rate = requireChatRateLimit(context.principalId);
+  if (!rate.allowed) {
+    const res = NextResponse.json(
+      { ok: false, error: { title: "Too Many Requests", status: 429, detail: "Rate limit exceeded. Retry after the time given by Retry-After." } },
+      { status: 429 }
+    );
+    res.headers.set("Retry-After", String(rate.retryAfterSeconds));
+    return res;
   }
   const conversations = listConversations(context.principalId);
   return NextResponse.json({
@@ -33,6 +42,15 @@ export async function POST(request: NextRequest) {
       { ok: false, error: { title: "Missing Identity", status: 401, detail: error } },
       { status: 401 }
     );
+  }
+  const rate = requireChatRateLimit(context.principalId);
+  if (!rate.allowed) {
+    const res = NextResponse.json(
+      { ok: false, error: { title: "Too Many Requests", status: 429, detail: "Rate limit exceeded. Retry after the time given by Retry-After." } },
+      { status: 429 }
+    );
+    res.headers.set("Retry-After", String(rate.retryAfterSeconds));
+    return res;
   }
 
   let body: { firstMessage?: string } = {};
