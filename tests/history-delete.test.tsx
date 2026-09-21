@@ -76,6 +76,15 @@ function welcomeHtml(): string {
 describe("History delete behavior", () => {
   beforeEach(() => {
     localStorage.clear();
+    vi.useRealTimers();
+    vi.clearAllTimers();
+    let idCounter = 0;
+    vi.stubGlobal(
+      "crypto",
+      Object.assign({}, globalThis.crypto, {
+        randomUUID: vi.fn(() => `test-uuid-${idCounter++}`),
+      })
+    );
     Object.defineProperty(window, "matchMedia", {
       writable: true,
       value: vi.fn().mockImplementation((query: string) => ({
@@ -183,7 +192,10 @@ describe("History delete behavior", () => {
     const ask = async (prompt: string) => {
       fireEvent.change(screen.getByPlaceholderText(/Ask about rooms/), { target: { value: prompt } });
       fireEvent.click(screen.getByRole("button", { name: "Send message" }));
-      await waitFor(() => expect(screen.getByTestId("message-count").textContent).toBe("2"));
+      // "2" here is welcome + the user prompt; do NOT archive until the mocked
+      // assistant reply is actually committed ("3") — otherwise the archived
+      // conversation races ahead of the reply and flakes 1-message vs 2.
+      await waitFor(() => expect(screen.getByTestId("message-count").textContent).toBe("3"));
       fireEvent.click(screen.getByRole("button", { name: "New chat" }));
       await waitFor(() => expect(screen.getByTestId("message-count").textContent).toBe("1"));
     };
