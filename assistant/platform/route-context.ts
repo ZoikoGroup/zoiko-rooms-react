@@ -1,6 +1,4 @@
 import type { ChatContext, ChatRole } from "./types";
-import { checkRateLimit, type RateLimitDecision } from "../rate-limit";
-import { getConfig } from "../config";
 
 // ---------------------------------------------------------------------------
 // ROUTE CONTEXT (BEST-EFFORT AUTH STAND-IN)
@@ -27,13 +25,4 @@ export function contextFromHeaders(
     return { context: { principalId, role: "user" }, error: `Invalid X-Zoiko-Role: ${roleRaw}` };
   }
   return { context: { principalId, role } };
-}
-
-/**
- * Rate-limit an authenticated platform-chat request, keyed by principal ID.
- * Uses the authenticated limit from config (60 rpm by default).
- */
-export function requireChatRateLimit(principalId: string): RateLimitDecision {
-  const limit = getConfig().rateLimit.authenticatedRequestsPerMinute;
-  return checkRateLimit(`chat:${principalId}`, limit);
 }

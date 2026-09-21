@@ -1,7 +1,6 @@
 "use client";
 
 import { createContext, useContext, useState, useCallback, useEffect, useRef, type ReactNode } from "react";
-import { WELCOME_MESSAGE } from "./welcome";
 
 export interface ChatMessage {
   id: string;
@@ -58,10 +57,7 @@ interface ChatContextValue extends ChatState {
   closeChat: () => void;
   sendMessage: (content: string) => Promise<void>;
   clearMessages: () => void;
-  stopGenerating: () => void;
   newConversation: () => void;
-  clearChat: () => void;
-  deleteHistory: (sessionId: string) => void;
   setTheme: (theme: "light" | "dark" | "system") => void;
   openHistory: (sessionId: string) => void;
   openContact: () => void;
@@ -82,57 +78,11 @@ let _sessionId: string | null = null;
 const SESSION_KEY = "zoiko-assistant-session-id";
 
 /**
- * Base URL of the Zoiko Rooms public assistant API.
- *
- * Defaults to an empty string, which resolves the request to the same-origin
- * route handler `app/api/public/assistant/messages` — no CORS, no extra host,
- * works identically on any dev/prod origin.
- *
- * Set NEXT_PUBLIC_ASSISTANT_API_URL only when pointing at a separate hosted
- * backend whose CORS allowlist includes this site (e.g. https://app.zoikorooms.com).
+ * Base URL of the Zoiko Rooms public assistant API. Configure locally with
+ * NEXT_PUBLIC_ASSISTANT_API_URL (e.g. http://localhost:8000); defaults to the
+ * hosted platform, whose CORS allowlist includes this site.
  */
-const PUBLIC_AI_API_URL = (process.env.NEXT_PUBLIC_ASSISTANT_API_URL ?? "").replace(/\/+$/, "");
-const ASSISTANT_MESSAGES_PATH = "/api/public/assistant/messages";
-
-/** Resolve the REST path prefix to its NEXT_PUBLIC_* source, inlined at build time. */
-const PUBLIC_AI_API_URL_SOURCE = process.env.NEXT_PUBLIC_ASSISTANT_API_URL ?? "";
-
-class ChatRequestError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = "ChatRequestError";
-  }
-}
-
-function normalizeSourceType(raw: unknown): string {
-  if (typeof raw !== "string") return "source";
-  const v = raw.toUpperCase();
-  if (v === "KNOWLEDGE" || v === "KNOWLEDGE_BASE") return "knowledge_base";
-  if (v === "AUTHORITATIVE_API") return "authoritative_api";
-  return "source";
-}
-
-/**
- * Translate a fetch failure into a human-readable, actionable message.
- * The browser only surfaces network/CORS failures as `TypeError: Failed to fetch`,
- * so we surface the actual resolved URL and rebuild the reason from context.
- */
-function chatErrorText(err: unknown, signal: AbortSignal, url: string): string {
-  if (err instanceof ChatRequestError) return err.message;
-
-  if (err && typeof err === "object" && (err as { name?: string }).name === "AbortError") {
-    if (signal.reason && (signal.reason as { message?: string })?.message === "timeout") {
-      return "The assistant took too long to respond. Please try again.";
-    }
-    return "Request cancelled.";
-  }
-
-  if (err instanceof TypeError || (err && typeof err === "object" && (err as { name?: string }).name === "TypeError")) {
-    return `Couldn't reach the assistant API at ${url}. The backend may be offline or blocking the request (CORS). Verify the service is running and that CORS allows this origin, then try again.`;
-  }
-
-  return err instanceof Error ? err.message : "An unexpected error occurred.";
-}
+const PUBLIC_AI_API_URL = (process.env.NEXT_PUBLIC_ASSISTANT_API_URL ?? "https://app.zoikorooms.com").replace(/\/$/, "");
 
 function createSessionId(): string {
   const id =
@@ -216,18 +166,9 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   const messagesRef = useRef<ChatMessage[]>([]);
   const activeSessionRef = useRef<string | null>(null);
   const mountedRef = useRef(false);
-  const generationRef = useRef(0);
-  const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
     mountedRef.current = true;
-  }, []);
-
-  // Log the resolved assistant API endpoint once at mount so misconfiguration
-  // (undefined / wrong host / wrong port) is visible in the browser console.
-  useEffect(() => {
-    const endpoint = `${PUBLIC_AI_API_URL || "(same-origin)"}${ASSISTANT_MESSAGES_PATH}`;
-    console.info(`[assistant] NEXT_PUBLIC_ASSISTANT_API_URL=${PUBLIC_AI_API_URL_SOURCE === "" ? "(unset — using same-origin route)" : PUBLIC_AI_API_URL_SOURCE} → endpoint=${endpoint}`);
   }, []);
 
   useEffect(() => {
@@ -277,10 +218,6 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   const closeChat = useCallback(() => setIsOpen(false), []);
 
   const clearMessages = useCallback(() => {
-    generationRef.current += 1;
-    abortRef.current?.abort();
-    abortRef.current = null;
-    setIsLoading(false);
     const confirmationMessage: ChatMessage = {
       id: `sys_${Date.now()}`,
       role: "system",
@@ -292,84 +229,21 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
   const newConversation = useCallback(() => {
     finalizeCurrent();
-    generationRef.current += 1;
-    abortRef.current?.abort();
-    abortRef.current = null;
-    setIsLoading(false);
     activeSessionRef.current = freshSessionId();
     const welcomeMessage: ChatMessage = {
       id: `sys_${Date.now()}`,
       role: "system",
-      content: WELCOME_MESSAGE,
+      content: "Hello! I'm the Zoiko Rooms assistant. I can help you with:\n\n- **Finding a room** — search, filtering, and application guidance\n- **Listing a room** — how to list and manage your property\n- **Payments & payouts** — understanding how payments work\n- **Compliance** — England housing requirements\n- **Account help** — navigating your dashboard\n\nHow can I help you today?",
       created_at: new Date().toISOString(),
     };
     setMessages([welcomeMessage]);
     setError(null);
   }, [finalizeCurrent]);
 
-  const clearChat = useCallback(() => {
-    generationRef.current += 1;
-    abortRef.current?.abort();
-    abortRef.current = null;
-    setIsLoading(false);
-    const welcomeMessage: ChatMessage = {
-      id: `sys_${Date.now()}`,
-      role: "system",
-      content: WELCOME_MESSAGE,
-      created_at: new Date().toISOString(),
-    };
-    setMessages([welcomeMessage]);
-    setError(null);
-    const currentId = activeSessionRef.current || _sessionId;
-    if (currentId) {
-      setHistory((prev) => {
-        const next = prev.filter((s) => s.id !== currentId);
-        try {
-          localStorage.setItem(HISTORY_KEY, JSON.stringify(next));
-        } catch {
-          // ignore storage failures
-        }
-        return next;
-      });
-    }
-  }, []);
-
-  const deleteHistory = useCallback((sessionId: string) => {
-    setHistory((prev) => {
-      const next = prev.filter((s) => s.id !== sessionId);
-      try {
-        localStorage.setItem(HISTORY_KEY, JSON.stringify(next));
-      } catch {
-        // ignore storage failures
-      }
-      return next;
-    });
-
-    if (activeSessionRef.current === sessionId || _sessionId === sessionId) {
-      generationRef.current += 1;
-      abortRef.current?.abort();
-      abortRef.current = null;
-      setIsLoading(false);
-      setError(null);
-      activeSessionRef.current = freshSessionId();
-      const welcomeMessage: ChatMessage = {
-        id: `sys_${Date.now()}`,
-        role: "system",
-        content: WELCOME_MESSAGE,
-        created_at: new Date().toISOString(),
-      };
-      setMessages([welcomeMessage]);
-    }
-  }, []);
-
   const openHistory = useCallback(
     (sessionId: string) => {
       const session = loadHistory().find((s) => s.id === sessionId);
       if (!session) return;
-      generationRef.current += 1;
-      abortRef.current?.abort();
-      abortRef.current = null;
-      setIsLoading(false);
       setMessages(session.messages);
       activeSessionRef.current = sessionId;
       _sessionId = sessionId;
@@ -377,10 +251,6 @@ export function ChatProvider({ children }: { children: ReactNode }) {
     },
     []
   );
-
-  const stopGenerating = useCallback(() => {
-    abortRef.current?.abort();
-  }, []);
 
   const setTheme = useCallback((newTheme: "light" | "dark" | "system") => {
     setThemeState(newTheme);
@@ -466,17 +336,6 @@ export function ChatProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
     setError(null);
 
-    const requestGeneration = generationRef.current;
-    const controller = new AbortController();
-    abortRef.current?.abort();
-    abortRef.current = controller;
-    const url = `${PUBLIC_AI_API_URL || ""}${ASSISTANT_MESSAGES_PATH}`;
-    const timeoutMs = 90000;
-    const timeoutId = setTimeout(
-      () => controller.abort(new Error("timeout")),
-      timeoutMs
-    );
-
     try {
       const sessionId = getOrCreateSessionId();
       activeSessionRef.current = sessionId;
@@ -488,23 +347,17 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         .slice(-6)
         .map((m) => ({ role: m.role, content: m.content }));
 
-      const res = await fetch(url, {
+      const res = await fetch(`${PUBLIC_AI_API_URL}/api/public/assistant/messages`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: content, history, sessionId }),
-        signal: controller.signal,
-        cache: "no-store",
       });
 
       if (res.status === 429) {
-        throw new Error(
-          "You've sent a lot of messages recently — please wait a minute and try again."
-        );
+        throw new Error("You've sent a lot of messages recently — please wait a minute and try again.");
       }
       if (!res.ok) {
-        throw new Error(
-          "The assistant is temporarily unavailable. Please try again shortly."
-        );
+        throw new Error("The assistant is temporarily unavailable. Please try again shortly.");
       }
 
       const data = await res.json();
@@ -518,50 +371,26 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         }
       }
 
-      if (generationRef.current !== requestGeneration) return;
-
       const assistantMessage: ChatMessage = {
         id: `asst_${Date.now()}`,
         role: "assistant",
-        content: typeof data.answer === "string" ? data.answer : "",
-        answer_type: typeof data.answerType === "string" ? data.answerType : "GUIDANCE",
+        content: data.answer ?? "",
+        answer_type: "GUIDANCE",
         citations: Array.isArray(data.citations)
           ? data.citations.map((c: Record<string, unknown>) => ({
               citation_id: String(c.citationId ?? ""),
-              source_type: normalizeSourceType(c.sourceType ?? ""),
+              source_type: String(c.sourceType ?? "KNOWLEDGE") === "KNOWLEDGE" ? "knowledge_base" : "source",
               source_id: String(c.sourceId ?? ""),
               section: c.section ? String(c.section) : undefined,
-              title: c.title ? String(c.title) : undefined,
-              url: c.url ? String(c.url) : undefined,
             }))
           : [],
-        suggestions: Array.isArray(data.suggestions)
-          ? data.suggestions.map((s: unknown) => String(s)).filter(Boolean)
-          : [],
-        deep_links: Array.isArray(data.deepLinks)
-          ? data.deepLinks
-              .map((d: Record<string, unknown>) =>
-                typeof d.label === "string" && typeof d.path === "string" ? { label: d.label, path: d.path } : null
-              )
-              .filter((d: { label: string; path: string } | null): d is { label: string; path: string } => d !== null)
-          : [],
-        handoff:
-          data.handoff && typeof data.handoff === "object"
-            ? {
-                id: String((data.handoff as { id?: unknown }).id ?? "HD-UNKNOWN"),
-                message: String((data.handoff as { message?: unknown }).message ?? ""),
-              }
-            : undefined,
         created_at: new Date().toISOString(),
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (err) {
-      if (generationRef.current !== requestGeneration) return;
-      setError(chatErrorText(err, controller.signal, url));
+      setError(err instanceof Error ? err.message : "An unexpected error occurred");
     } finally {
-      clearTimeout(timeoutId);
-      if (abortRef.current === controller) abortRef.current = null;
       setIsLoading(false);
     }
   }, []);
@@ -583,10 +412,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         closeChat,
         sendMessage,
         clearMessages,
-        stopGenerating,
         newConversation,
-        clearChat,
-        deleteHistory,
         openHistory,
         setTheme,
         openContact,

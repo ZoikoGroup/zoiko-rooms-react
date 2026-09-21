@@ -82,17 +82,6 @@ export const helpCenterChunks: KnowledgeChunk[] = [
     release_state: "ACTIVE",
     effective_at: "2026-01-01",
   }),
-  chunk("kb_help_003b", "Listing a room on Zoiko Rooms is free for hosts. There is no setup cost, no listing fee, and no monthly charge to create or publish a room listing. A small service fee is deducted from the rent only once a booking is confirmed, and renters are also charged a fee on their side. The exact amount is always shown before any booking is confirmed. Full requirements and pricing are covered on the Requirements & Pricing page.", {
-    source_type: "knowledge_base",
-    source_id: "help-center-listing-fees",
-    section: "Listing costs and fees",
-    title: "Listing a Room Costs Nothing",
-    url: "/list-a-room/requirements-pricing",
-    market_code: "GB",
-    access_class: "K0",
-    release_state: "ACTIVE",
-    effective_at: "2026-01-01",
-  }),
   chunk("kb_help_006", "Zoiko Rooms has a verification process for both renters and hosts. This includes identity verification, address verification for hosts, and property inspections where applicable. Verified accounts receive a verification badge.", {
     source_type: "knowledge_base",
     source_id: "help-center-verification",

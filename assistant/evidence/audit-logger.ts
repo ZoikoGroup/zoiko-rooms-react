@@ -1,5 +1,3 @@
-import { getConfig } from "../config";
-
 export type AuditEventType =
   | "turn.created"
   | "turn.completed"
@@ -39,39 +37,6 @@ export interface AuditEntry {
 
 const auditLog: AuditEntry[] = [];
 
-// ---------------------------------------------------------------------------
-// Persistence circuit breaker
-//
-// Audit persistence is best-effort. When the underlying store is unreachable or
-// misconfigured (e.g. DATABASE_URL without credentials → SCRAM "password must be
-// a string"), a failed write must never spam per-turn ERROR logs or disturb the
-// user-facing turn. After the first failure we wait PERSISTENCE_RETRY_MS before
-// trying again and report the outage exactly once per window.
-// ---------------------------------------------------------------------------
-
-const PERSISTENCE_RETRY_MS = 60_000;
-let persistenceDownUntil = 0;
-let persistenceOutageReported = false;
-
-function shouldAttemptPersistence(): boolean {
-  try {
-    return getConfig().features.auditPersistenceEnabled;
-  } catch {
-    return true;
-  }
-}
-
-function reportPersistenceDownOnce(error: string): void {
-  if (persistenceOutageReported) return;
-  persistenceOutageReported = true;
-  console.error(
-    `[assistant][audit] audit persistence is unavailable - writes are degraded to in-memory for the next ${Math.round(PERSISTENCE_RETRY_MS / 1000)}s. Set ASSISTANT_AUDIT_PERSISTENCE=false to disable persistence writes entirely. Root cause: ${error}`
-  );
-  setTimeout(() => {
-    persistenceOutageReported = false;
-  }, PERSISTENCE_RETRY_MS);
-}
-
 export function logAuditEvent(entry: Omit<AuditEntry, "id" | "created_at">): AuditEntry {
   const record: AuditEntry = {
     ...entry,
@@ -82,11 +47,10 @@ export function logAuditEvent(entry: Omit<AuditEntry, "id" | "created_at">): Aud
   auditLog.push(record);
 
   // Persist to the real audit table (best-effort; DB may not be available in tests).
-  const now = Date.now();
-  const persistenceEnabled = shouldAttemptPersistence();
-  if (persistenceEnabled && now >= persistenceDownUntil) {
-    void import("../db/repositories")
-      .then((repo) => repo.insertAudit({
+  try {
+    // Defer so the synchronous audit path never blocks turn processing.
+    void import("../db/repositories").then((repo) =>
+      repo.insertAudit({
         id: record.id,
         trace_id: record.trace_id,
         request_id: record.request_id,
@@ -97,11 +61,10 @@ export function logAuditEvent(entry: Omit<AuditEntry, "id" | "created_at">): Aud
         principal_role: record.principal_role,
         market_code: record.market_code,
         payload: record.payload,
-      }))
-      .catch((err) => {
-        persistenceDownUntil = Date.now() + PERSISTENCE_RETRY_MS;
-        reportPersistenceDownOnce(err instanceof Error ? err.message : String(err));
-      });
+      })
+    );
+  } catch {
+    // ignore persistence errors; in-memory record stands
   }
 
   if (process.env.NODE_ENV !== "production") {

@@ -1,14 +1,14 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { History, SquarePen, Trash2, Mail, X } from "lucide-react";
+import { History, SquarePen, Mail, X } from "lucide-react";
 import { useChatContext } from "./ChatProvider";
 import { ChatPanel } from "./ChatPanel";
 import { HistoryPanel } from "./HistoryPanel";
 import { AssistantAvatar } from "./AssistantAvatar";
 
 export function ChatShell() {
-  const { isOpen, closeChat, newConversation, clearChat, resolvedTheme, openContact } = useChatContext();
+  const { isOpen, closeChat, newConversation, resolvedTheme, openContact } = useChatContext();
   const [historyOpen, setHistoryOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
 
@@ -24,10 +24,6 @@ export function ChatShell() {
 
   const handleNewChat = () => {
     newConversation();
-  };
-
-  const handleClearChat = () => {
-    clearChat();
   };
 
   return (
@@ -65,7 +61,6 @@ export function ChatShell() {
               {[
                 { icon: History, label: "Conversation history", action: () => setHistoryOpen(true) },
                 { icon: SquarePen, label: "New chat", action: handleNewChat },
-                { icon: Trash2, label: "Clear chat", action: handleClearChat },
                 { icon: Mail, label: "Contact Admin", action: openContact },
                 { icon: X, label: "Close", action: closeChat },
               ].map(({ icon: Icon, label, action }) => (

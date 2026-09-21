@@ -29,7 +29,6 @@ export interface AssistantConfig {
     defaultMarket: string;
     handoffEnabled: boolean;
     feedbackEnabled: boolean;
-    auditPersistenceEnabled: boolean;
   };
 }
 
@@ -75,7 +74,6 @@ const defaults: AssistantConfig = {
     defaultMarket: process.env.ASSISTANT_DEFAULT_MARKET || "GB",
     handoffEnabled: process.env.ASSISTANT_HANDOFF_ENABLED !== "false",
     feedbackEnabled: process.env.ASSISTANT_FEEDBACK_ENABLED !== "false",
-    auditPersistenceEnabled: process.env.ASSISTANT_AUDIT_PERSISTENCE !== "false",
   },
 };
 

@@ -21,26 +21,6 @@ import {
 // model cannot escalate privileges by inventing a tool call.
 // ---------------------------------------------------------------------------
 
-/**
- * Build a JSON Schema property that accepts either a typed value or `null`.
- *
- * Models frequently emit `{ city: null, status: null }` for unused optional
- * filters. Groq validates tool-call arguments against the advertised schema
- * before returning them, and rejects `null` against a plain `type: "string"`
- * with a `tool_use_failed` 400 — which previously aborted the whole turn.
- * Advertising `anyOf: [typed, null]` keeps validation honest while letting
- * the model omit filters that way. `executeTool` also treats null as "absent".
- */
-function nullable(opts: { type: "string" | "number"; enum?: string[]; description?: string }): Record<string, unknown> {
-  return {
-    ...(opts.description ? { description: opts.description } : {}),
-    anyOf: [
-      { type: opts.type, ...(opts.enum ? { enum: opts.enum } : {}) },
-      { type: "null" },
-    ],
-  };
-}
-
 export function groqToolDefinitions(role: ChatContext["role"]): ToolDefinition[] {
   return allTools.filter((t) => canUse(role, t));
 }
@@ -57,28 +37,13 @@ export function executeTool(ctx: ChatContext, call: ToolCallRequest): ToolResult
   if (!canUse(ctx.role, def)) {
     return { ok: false, error: `Forbidden: '${call.name}' requires role '${def.minRole}'` };
   }
-  const args = stripNullArgs(call.arguments || {});
+  const args = call.arguments || {};
   try {
     const data = handlers[call.name](ctx, args);
     return { ok: true, data };
   } catch (err) {
     return { ok: false, error: err instanceof Error ? err.message : String(err) };
   }
-}
-
-/**
- * Defensive normalization: optional filter params are advertised as nullable,
- * so the model may legitimately send `null`. Drop null/undefined values here so
- * handlers can rely on truthiness ("if (args.city)") as "no filter", even if a
- * future schema change or a non-Groq provider passes null through.
- */
-function stripNullArgs(args: Record<string, unknown>): Record<string, unknown> {
-  const out: Record<string, unknown> = {};
-  for (const [key, value] of Object.entries(args)) {
-    if (value === null || value === undefined) continue;
-    out[key] = value;
-  }
-  return out;
 }
 
 // ---------------------------------------------------------------------------
@@ -88,23 +53,23 @@ function stripNullArgs(args: Record<string, unknown>): Record<string, unknown> {
 const allTools: ToolDefinition[] = [
   // ---- Admin general tools -------------------------------------------------
   { name: "search_platform", minRole: "admin", adminOnly: true, description: "Global search across listings, guests, bookings, reviews, and payments. Returns matching records grouped by category.", parameters: { type: "object", properties: { query: { type: "string", description: "Search text" } }, required: ["query"] } },
-  { name: "list_listings", minRole: "admin", adminOnly: true, description: "List all listings across the platform with status and city.", parameters: { type: "object", properties: { city: nullable({ type: "string", description: "Optional city filter" }), status: nullable({ type: "string", enum: ["published", "unpublished"] }) } } },
+  { name: "list_listings", minRole: "admin", adminOnly: true, description: "List all listings across the platform with status and city.", parameters: { type: "object", properties: { city: { type: "string", description: "Optional city filter" }, status: { type: "string", enum: ["published", "unpublished"] } } } },
   { name: "get_listing", minRole: "admin", adminOnly: true, description: "Get full listing details including host, pricing, and publish blockers.", parameters: { type: "object", properties: { listingId: { type: "string" } }, required: ["listingId"] } },
-  { name: "list_obligations", minRole: "admin", adminOnly: true, description: "List tenant payment obligations, filterable by occupancy/status.", parameters: { type: "object", properties: { status: nullable({ type: "string", enum: ["due", "paid", "overdue"] }), tenantId: nullable({ type: "string" }) } } },
-  { name: "list_occupancies", minRole: "admin", adminOnly: true, description: "List active or ended occupancies.", parameters: { type: "object", properties: { status: nullable({ type: "string", enum: ["active", "ended"] }) } } },
-  { name: "list_applications", minRole: "admin", adminOnly: true, description: "List rental applications including applicant info.", parameters: { type: "object", properties: { status: nullable({ type: "string", enum: ["pending", "approved", "rejected"] }) } } },
+  { name: "list_obligations", minRole: "admin", adminOnly: true, description: "List tenant payment obligations, filterable by occupancy/status.", parameters: { type: "object", properties: { status: { type: "string", enum: ["due", "paid", "overdue"] }, tenantId: { type: "string" } } } },
+  { name: "list_occupancies", minRole: "admin", adminOnly: true, description: "List active or ended occupancies.", parameters: { type: "object", properties: { status: { type: "string", enum: ["active", "ended"] } } } },
+  { name: "list_applications", minRole: "admin", adminOnly: true, description: "List rental applications including applicant info.", parameters: { type: "object", properties: { status: { type: "string", enum: ["pending", "approved", "rejected"] } } } },
 
   // ---- Super admin-only tools ---------------------------------------------
-  { name: "list_bookings", minRole: "super_admin", superAdminOnly: true, description: "List all bookings with guest email/name, check-in/out, amount.", parameters: { type: "object", properties: { status: nullable({ type: "string", enum: ["confirmed", "cancelled"] }) } } },
+  { name: "list_bookings", minRole: "super_admin", superAdminOnly: true, description: "List all bookings with guest email/name, check-in/out, amount.", parameters: { type: "object", properties: { status: { type: "string", enum: ["confirmed", "cancelled"] } } } },
   { name: "list_guests", minRole: "super_admin", superAdminOnly: true, description: "List all guests with email and phone. Contains admin PII.", parameters: { type: "object", properties: {} } },
-  { name: "list_reviews", minRole: "super_admin", superAdminOnly: true, description: "List guest reviews with ratings and comments.", parameters: { type: "object", properties: { minRating: nullable({ type: "number" }) } } },
-  { name: "list_payments", minRole: "super_admin", superAdminOnly: true, description: "List simulated payment records.", parameters: { type: "object", properties: { status: nullable({ type: "string", enum: ["paid", "pending", "refunded"] }) } } },
-  { name: "revenue_trend", minRole: "super_admin", superAdminOnly: true, description: "Monthly revenue trend. Provide a number of months.", parameters: { type: "object", properties: { months: nullable({ type: "number", description: "Number of months, e.g. 3" }) } } },
+  { name: "list_reviews", minRole: "super_admin", superAdminOnly: true, description: "List guest reviews with ratings and comments.", parameters: { type: "object", properties: { minRating: { type: "number" } } } },
+  { name: "list_payments", minRole: "super_admin", superAdminOnly: true, description: "List simulated payment records.", parameters: { type: "object", properties: { status: { type: "string", enum: ["paid", "pending", "refunded"] } } } },
+  { name: "revenue_trend", minRole: "super_admin", superAdminOnly: true, description: "Monthly revenue trend. Provide a number of months.", parameters: { type: "object", properties: { months: { type: "number", description: "Number of months, e.g. 3" } } } },
   { name: "bookings_by_type", minRole: "super_admin", superAdminOnly: true, description: "Booking count breakdown by room type.", parameters: { type: "object", properties: {} } },
   { name: "occupancy_by_city", minRole: "super_admin", superAdminOnly: true, description: "Occupancy counts by city.", parameters: { type: "object", properties: {} } },
 
   // ---- User tools (self-scoped) --------------------------------------------
-  { name: "search_listings", minRole: "user", description: "Search published listings. Does not expose host contact info.", parameters: { type: "object", properties: { city: nullable({ type: "string" }), query: nullable({ type: "string" }) } } },
+  { name: "search_listings", minRole: "user", description: "Search published listings. Does not expose host contact info.", parameters: { type: "object", properties: { city: { type: "string" }, query: { type: "string" } } } },
   { name: "get_listing_details", minRole: "user", description: "Details of a published listing.", parameters: { type: "object", properties: { listingId: { type: "string" } }, required: ["listingId"] } },
   { name: "my_applications", minRole: "user", description: "The caller's own rental applications.", parameters: { type: "object", properties: {} } },
   { name: "my_occupancies", minRole: "user", description: "The caller's own occupancies.", parameters: { type: "object", properties: {} } },

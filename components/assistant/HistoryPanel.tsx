@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { Trash2, X } from "lucide-react";
+import { Trash2, Sun, Moon, Plus, X } from "lucide-react";
 import { useChatContext } from "./ChatProvider";
 
 interface HistoryPanelProps {
@@ -18,7 +18,7 @@ interface HistoryPanelProps {
  * browsers/devices and is backed server-side.
  */
 export function HistoryPanel({ open, onClose }: HistoryPanelProps) {
-  const { history, openHistory, deleteHistory } = useChatContext();
+  const { history, openHistory, newConversation, clearMessages, resolvedTheme, setTheme } = useChatContext();
 
   const sorted = useMemo(
     () => [...history].sort((a, b) => b.createdAt.localeCompare(a.createdAt)),
@@ -26,6 +26,8 @@ export function HistoryPanel({ open, onClose }: HistoryPanelProps) {
   );
 
   if (!open) return null;
+
+  const toggleTheme = () => setTheme(resolvedTheme === "dark" ? "light" : "dark");
 
   const handleSelect = (id: string) => {
     openHistory(id);
@@ -73,23 +75,58 @@ export function HistoryPanel({ open, onClose }: HistoryPanelProps) {
                 {s.messages.length} message{s.messages.length !== 1 ? "s" : ""}
               </p>
             </button>
-            <button
-              onClick={() => deleteHistory(s.id)}
-              aria-label={`Delete conversation: ${s.title}`}
-              title="Delete conversation"
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full opacity-60 transition-colors hover:opacity-100"
-              style={{ color: "var(--color-gray-400)" }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = "var(--color-brand-red)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = "var(--color-gray-400)";
-              }}
-            >
-              <Trash2 className="h-4 w-4" />
-            </button>
           </div>
         ))}
+      </div>
+
+      <div className="flex flex-col gap-1 border-t p-2" style={{ borderColor: "var(--color-header-border)" }}>
+        <button
+          onClick={() => {
+            newConversation();
+            onClose();
+          }}
+          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors"
+          style={{ color: "var(--color-gray-700)" }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = "var(--color-hover-overlay)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = "transparent";
+          }}
+        >
+          <Plus className="h-4 w-4 text-brand-red" /> New conversation
+        </button>
+        <button
+          onClick={toggleTheme}
+          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors"
+          style={{ color: "var(--color-gray-700)" }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = "var(--color-hover-overlay)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = "transparent";
+          }}
+        >
+          {resolvedTheme === "dark" ? (
+            <Sun className="h-4 w-4 text-brand-red" />
+          ) : (
+            <Moon className="h-4 w-4 text-brand-red" />
+          )}
+          {resolvedTheme === "dark" ? "Light mode" : "Dark mode"}
+        </button>
+        <button
+          onClick={clearMessages}
+          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors"
+          style={{ color: "var(--color-gray-700)" }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = "var(--color-hover-overlay)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = "transparent";
+          }}
+        >
+          <Trash2 className="h-4 w-4 text-brand-red" /> Clear chat
+        </button>
       </div>
     </div>
   );

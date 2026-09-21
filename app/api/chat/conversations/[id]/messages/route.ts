@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { contextFromHeaders, requireChatRateLimit } from "@/assistant/platform/route-context";
+import { contextFromHeaders } from "@/assistant/platform/route-context";
 import { getConversation, getMessages, appendMessage } from "@/assistant/platform/store";
 import { runChatTurn } from "@/assistant/platform/service";
 import { log } from "@/assistant/platform/log";
@@ -29,17 +29,6 @@ export async function POST(
     return new Response(sse("error", { title: "Not Found", detail: "Conversation not found" }), {
       status: 404,
       headers: { "Content-Type": "text/event-stream" },
-    });
-  }
-
-  const rate = requireChatRateLimit(context.principalId);
-  if (!rate.allowed) {
-    return new Response(sse("error", { title: "Too Many Requests", detail: `Rate limit exceeded. Retry after ${rate.retryAfterSeconds} seconds.` }), {
-      status: 429,
-      headers: {
-        "Content-Type": "text/event-stream",
-        "Retry-After": String(rate.retryAfterSeconds),
-      },
     });
   }
 

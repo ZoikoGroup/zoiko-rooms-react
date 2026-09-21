@@ -314,10 +314,7 @@ export async function insertAudit(row: {
       ]
     );
   } catch (err) {
-    // Outage reporting is owned by the audit-logger circuit breaker; rethrow so
-    // callers can track retry windows. Do not log here — that would reintroduce
-    // per-turn log spam.
-    throw err;
+    console.error("[assistant][audit] failed to persist audit event:", err);
   }
 }
 

@@ -16,28 +16,8 @@ export function clearChunks(): void {
   inMemoryChunks.length = 0;
 }
 
-// Common function words that should never drive retrieval scores on their own.
-const STOPWORDS = new Set([
-  "a", "an", "the", "and", "or", "but", "if", "then", "else", "for", "of", "at",
-  "by", "in", "on", "to", "with", "from", "as", "up", "down", "over", "under",
-  "is", "am", "are", "was", "were", "be", "been", "being", "have", "has", "had",
-  "do", "does", "did", "will", "would", "can", "could", "should", "may", "might",
-  "must", "shall", "what", "which", "who", "whom", "whose", "when", "where",
-  "why", "how", "this", "that", "these", "those", "there", "here", "all", "any",
-  "some", "no", "not", "so", "too", "very", "just", "now", "please", "about",
-  "into", "than", "i", "me", "my", "mine", "we", "our", "you", "your", "he",
-  "she", "it", "they", "them", "us", "its", "their", "go", "get", "does",
-]);
-
 function computeSimilarity(query: string, content: string): number {
-  const rawTerms = query.toLowerCase().split(/\s+/).filter(Boolean);
-  // Query words that carry meaning. Without this, a query like "what is the
-  // capital of France?" scores 0.65 against recipe/help-center text purely on
-  // stopwords ("is/the/of") — letting the model answer trivia from its own
-  // knowledge instead of abstaining (scope-consistency bug).
-  const substantive = rawTerms.filter((t) => !STOPWORDS.has(t));
-  const queryTerms = substantive.length > 0 ? substantive : rawTerms;
-
+  const queryTerms = query.toLowerCase().split(/\s+/);
   const contentLower = content.toLowerCase();
   const contentTerms = new Set(contentLower.split(/\s+/));
 
@@ -46,10 +26,8 @@ function computeSimilarity(query: string, content: string): number {
     payout: ["paid", "payment", "payments", "earnings"],
     payments: ["paid", "payout", "payouts", "payment", "earnings"],
     payment: ["paid", "payout", "payouts", "payments", "earnings"],
-    pay: ["payment", "payments", "paid", "payout", "payouts"],
-    listing: ["list", "listed", "listings"],
+    listing: ["list", "listed", "listing"],
     listed: ["list", "listing", "listings"],
-    list: ["listing", "listed", "listings", "publish"],
     find: ["search", "browse", "finding"],
     host: ["hosts", "provider", "providers", "landlord"],
     hosts: ["host", "provider", "providers", "landlord"],
@@ -61,13 +39,6 @@ function computeSimilarity(query: string, content: string): number {
     smoke: ["smoke-alarm", "alarms"],
     alarm: ["smoke", "alarms", "smoke-alarm"],
     alarms: ["smoke", "alarm", "smoke-alarm"],
-    cost: ["charge", "charges", "fee", "fees", "pricing", "price", "free"],
-    charge: ["cost", "fee", "fees", "charges"],
-    charges: ["charge", "fee", "fees", "cost"],
-    fees: ["fee", "charge", "charges", "cost"],
-    fee: ["fees", "charge", "charges", "cost"],
-    monthly: ["month", "per month"],
-    month: ["monthly"],
   };
 
   let matchCount = 0;
