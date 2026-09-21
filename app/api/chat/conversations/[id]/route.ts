@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { contextFromHeaders } from "@/assistant/platform/route-context";
+import { contextFromHeaders, requireChatRateLimit } from "@/assistant/platform/route-context";
 import { getConversation, getMessages, deleteConversation } from "@/assistant/platform/store";
 
 export async function GET(
@@ -12,6 +12,15 @@ export async function GET(
       { ok: false, error: { title: "Missing Identity", status: 401, detail: error } },
       { status: 401 }
     );
+  }
+  const rate = requireChatRateLimit(context.principalId);
+  if (!rate.allowed) {
+    const res = NextResponse.json(
+      { ok: false, error: { title: "Too Many Requests", status: 429, detail: "Rate limit exceeded. Retry after the time given by Retry-After." } },
+      { status: 429 }
+    );
+    res.headers.set("Retry-After", String(rate.retryAfterSeconds));
+    return res;
   }
   const { id } = await params;
   const conv = getConversation(id, context.principalId);
@@ -49,6 +58,15 @@ export async function DELETE(
       { ok: false, error: { title: "Missing Identity", status: 401, detail: error } },
       { status: 401 }
     );
+  }
+  const rate = requireChatRateLimit(context.principalId);
+  if (!rate.allowed) {
+    const res = NextResponse.json(
+      { ok: false, error: { title: "Too Many Requests", status: 429, detail: "Rate limit exceeded. Retry after the time given by Retry-After." } },
+      { status: 429 }
+    );
+    res.headers.set("Retry-After", String(rate.retryAfterSeconds));
+    return res;
   }
   const { id } = await params;
   // Cross-actor deletion returns 404 (owner scoping) via deleteConversation returning false.

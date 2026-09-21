@@ -27,12 +27,12 @@ export function AttachmentsSection() {
                   <span className="text-xs text-neutral-400">{attachment.meta}</span>
                 </div>
               </div>
-              <button
-                type="button"
+              <a
+                href="/login"
                 className="shrink-0 rounded-full border border-[#E9E0D3] bg-white px-4 py-1.5 text-sm font-semibold text-brand-navy transition-colors hover:bg-brand-navy/5"
               >
                 Open
-              </button>
+              </a>
             </div>
           ))}
         </div>
