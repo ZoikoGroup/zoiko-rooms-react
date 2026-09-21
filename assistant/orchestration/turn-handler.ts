@@ -7,7 +7,7 @@ import { initiateHandoff, getHandoffMessage } from "./handoff-manager";
 import { buildContextEnvelope } from "../trust/context-envelope";
 import { authorize, isAnonymousAuthorized } from "../trust/rbac-engine";
 import { resolveMarket, isEnglandMarket } from "../trust/market-resolver";
-import { validateRoute } from "../trust/route-allowlist";
+import { validateRoute, resolveNavigationRoute } from "../trust/route-allowlist";
 import { checkForInjection, isPromptLeakageAttempt } from "../trust/guardrails/injection-defense";
 import { retrieve } from "../intelligence/retrieval";
 import { rerank } from "../intelligence/reranker";
@@ -126,9 +126,9 @@ export async function handleTurn(
   }
 
   if (classification.intent === "NAVIGATION") {
-    const routeMatch = request.user_message.match(/(?:go to|navigate to|open)\s+([\/\w-]+)/i);
-    if (routeMatch) {
-      const routeValidation = validateRoute(routeMatch[1], principalRole, market.market_code);
+    const navigation = resolveNavigationRoute(request.user_message);
+    if (navigation.path) {
+      const routeValidation = validateRoute(navigation.path, principalRole, market.market_code);
       if (!routeValidation.valid) {
         return buildAbstentionTurn(request, `I can't navigate you to that page. ${routeValidation.reason}`);
       }
