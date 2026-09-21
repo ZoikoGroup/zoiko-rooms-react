@@ -16,7 +16,6 @@ import {
   Lock,
 } from "lucide-react";
 import { Container, Button, ImageFade } from "@/components/ui";
-import { useSearchModal } from "@/components/search";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
@@ -86,9 +85,19 @@ function AnimatedStat({ value }: { value: string }) {
   );
 }
 
+const PLATFORM_APP_URL = process.env.NEXT_PUBLIC_PLATFORM_APP_URL || "http://localhost:3001";
+
 export function HeroSection() {
-  const { open } = useSearchModal();
   const { t } = useLanguage();
+  const [location, setLocation] = useState("");
+  const [moveInDate, setMoveInDate] = useState("");
+
+  function handleSearch() {
+    const params = new URLSearchParams();
+    if (location.trim()) params.set("city", location.trim());
+    if (moveInDate.trim()) params.set("arrival", moveInDate.trim());
+    window.location.href = `${PLATFORM_APP_URL}/find-a-room?${params.toString()}`;
+  }
 
   return (
     <section className="pb-10 pt-8 sm:pb-14 sm:pt-12">
@@ -160,6 +169,8 @@ export function HeroSection() {
                 <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
                   <input
                     type="text"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
                     placeholder={t("City, neighborhood, university, or landmark")}
                     className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none placeholder:text-neutral-400"
                   />
@@ -170,6 +181,8 @@ export function HeroSection() {
                 <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
                   <input
                     type="date"
+                    value={moveInDate}
+                    onChange={(e) => setMoveInDate(e.target.value)}
                     className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none [color-scheme:light]"
                   />
                 </div>
@@ -190,7 +203,7 @@ export function HeroSection() {
                   variant="secondary"
                   size="md"
                   className="w-full sm:w-auto"
-                  onClick={open}
+                  onClick={handleSearch}
                 >
                   {t("Search rooms")}
                 </Button>
