@@ -11,6 +11,36 @@ export interface RetrievalParams {
   minScore?: number;
 }
 
+/**
+ * Short, deixis-heavy follow-up questions ("what about international ones?",
+ * "and how long must a stay be?") carry no useful retrieval signal on their
+ * own. When the current message looks like a follow-up, prepend the most recent
+ * user turn from the conversation history so chunk matching runs against the
+ * combined intent. Independent, longer questions are left untouched.
+ */
+const FOLLOWUP_MAX_WORDS = 8;
+const FOLLOWUP_MARKERS =
+  /^(?:what about|how about|what if|and how|and what|and|how long|how much|is it|is there|are there|are they|also|then|whats|what's|too|either|it|them|those|they)\b/i;
+
+export function buildRetrievalQuery(
+  userMessage: string,
+  conversationHistory: Array<{ role: "user" | "assistant"; content: string }>
+): string {
+  const trimmed = userMessage.trim();
+  const priorUser = [...conversationHistory].reverse().find((m) => m.role === "user");
+  if (!priorUser) return trimmed;
+
+  const wordCount = trimmed.split(/\s+/).filter(Boolean).length;
+  const looksLikeFollowUp = wordCount <= FOLLOWUP_MAX_WORDS && FOLLOWUP_MARKERS.test(trimmed);
+
+  if (!looksLikeFollowUp) return trimmed;
+
+  // Strip trailing sentence punctuation from the prior turn so its tokens match
+  // chunk content cleanly ("how do I find a room?" → "how do I find a room").
+  const prior = priorUser.content.trim().replace(/[.?!\s]+$/, "");
+  return `${prior} ${trimmed}`;
+}
+
 export async function retrieve(params: RetrievalParams): Promise<KnowledgeResult> {
   const runId = getRetrievalRunId();
 

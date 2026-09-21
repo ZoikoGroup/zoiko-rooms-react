@@ -76,6 +76,24 @@ const INTENT_PATTERNS: Array<{
     agency: "A0",
   },
   {
+    // Generic capability questions ("how can you help me", "what can you do")
+    // must resolve to the capabilities overview, not to HANDOFF_REQUEST (which
+    // "help" would otherwise trigger) or to a low-confidence guidance abstention.
+    // The `(?!\s+with\b)` / `(?!\s+\w)` guards keep "…help with <topic>" and
+    // "…do with <thing>" phrasings flowing through to GUIDANCE/HANDOFF.
+    patterns: [
+      /\bhow (?:can|do) you help(?: me)?\b(?!\s+(?:me\s+)?with\b)/i,
+      /\bwhat can you do(?: for me)?\b(?!\s+(?:for me\s+)?with\b)/i,
+      /\bwhat do you help with\b(?!\s+\w)/i,
+      /\bwhat can you help(?: me)? with\b(?!\s+\w)/i,
+      /\bwhat do you do\b(?!\s+with\b)/i,
+      /\bhow do you help(?: me)?\b(?!\s+(?:me\s+)?with\b)/i,
+    ],
+    intent: "CAPABILITIES",
+    risk: "LOW",
+    agency: "A0",
+  },
+  {
     patterns: [/\b(support|help|human|agent|talk to someone|escalate|handoff|complaint)\b/i],
     intent: "HANDOFF_REQUEST",
     risk: "LOW",

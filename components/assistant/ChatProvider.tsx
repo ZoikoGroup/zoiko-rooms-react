@@ -249,6 +249,18 @@ export function ChatProvider({ children }: { children: ReactNode }) {
     return () => mediaQuery.removeEventListener("change", handler);
   }, [theme]);
 
+  // Single commit path for every message-list change. It updates `messagesRef`
+  // synchronously before scheduling state, so callers that read the ref in the
+  // same tick (finalizeCurrent on New chat) always see the latest messages —
+  // otherwise a reply committed in the same tick as "New chat" could be missed
+  // by the archive and the whole session lost.
+  const commitMessages = useCallback((updater: ChatMessage[] | ((prev: ChatMessage[]) => ChatMessage[])) => {
+    const prev = messagesRef.current;
+    const next = typeof updater === "function" ? (updater as (prev: ChatMessage[]) => ChatMessage[])(prev) : updater;
+    messagesRef.current = next;
+    setMessages(next);
+  }, []);
+
   const finalizeCurrent = useCallback(() => {
     const currentId = activeSessionRef.current || _sessionId;
     const msgs = messagesRef.current;
@@ -287,8 +299,8 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       content: "Chat cleared. What can I help you with?",
       created_at: new Date().toISOString(),
     };
-    setMessages([confirmationMessage]);
-  }, []);
+    commitMessages([confirmationMessage]);
+  }, [commitMessages]);
 
   const newConversation = useCallback(() => {
     finalizeCurrent();
@@ -303,9 +315,9 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       content: WELCOME_MESSAGE,
       created_at: new Date().toISOString(),
     };
-    setMessages([welcomeMessage]);
+    commitMessages([welcomeMessage]);
     setError(null);
-  }, [finalizeCurrent]);
+  }, [finalizeCurrent, commitMessages]);
 
   const clearChat = useCallback(() => {
     generationRef.current += 1;
@@ -318,7 +330,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       content: WELCOME_MESSAGE,
       created_at: new Date().toISOString(),
     };
-    setMessages([welcomeMessage]);
+    commitMessages([welcomeMessage]);
     setError(null);
     const currentId = activeSessionRef.current || _sessionId;
     if (currentId) {
@@ -332,7 +344,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         return next;
       });
     }
-  }, []);
+  }, [commitMessages]);
 
   const deleteHistory = useCallback((sessionId: string) => {
     setHistory((prev) => {
@@ -358,9 +370,9 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         content: WELCOME_MESSAGE,
         created_at: new Date().toISOString(),
       };
-      setMessages([welcomeMessage]);
+      commitMessages([welcomeMessage]);
     }
-  }, []);
+  }, [commitMessages]);
 
   const openHistory = useCallback(
     (sessionId: string) => {
@@ -370,12 +382,12 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       abortRef.current?.abort();
       abortRef.current = null;
       setIsLoading(false);
-      setMessages(session.messages);
+      commitMessages(session.messages);
       activeSessionRef.current = sessionId;
       _sessionId = sessionId;
       setError(null);
     },
-    []
+    [commitMessages]
   );
 
   const stopGenerating = useCallback(() => {
@@ -387,7 +399,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const openContact = useCallback(() => {
-    setMessages((prev) => [
+    commitMessages((prev) => [
       ...prev,
       {
         id: `usr_${Date.now()}`,
@@ -403,14 +415,14 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       status: "draft",
     });
     setError(null);
-  }, []);
+  }, [commitMessages]);
 
   const cancelContact = useCallback(() => {
     setContact((prev) => {
       if (prev && prev.status === "sending") return prev;
       return null;
     });
-    setMessages((prev) => [
+    commitMessages((prev) => [
       ...prev,
       {
         id: `sys_${Date.now()}`,
@@ -420,7 +432,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       },
     ]);
     setError(null);
-  }, []);
+  }, [commitMessages]);
 
   const confirmContact = useCallback(
     async (payload: { recipient: string; subject: string; body: string }) => {
@@ -436,7 +448,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         if (!data.ok) {
           throw new Error(data.error?.detail || "Failed to send email");
         }
-        setMessages((prev) => [
+        commitMessages((prev) => [
           ...prev,
           {
             id: `asst_${Date.now()}`,
@@ -451,7 +463,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         setContact((prev) => (prev ? { ...prev, status: "error", error: message } : prev));
       }
     },
-    []
+    [commitMessages]
   );
 
   const sendMessage = useCallback(async (content: string) => {
@@ -462,7 +474,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       created_at: new Date().toISOString(),
     };
 
-    setMessages((prev) => [...prev, userMessage]);
+    commitMessages((prev) => [...prev, userMessage]);
     setIsLoading(true);
     setError(null);
 
@@ -555,7 +567,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         created_at: new Date().toISOString(),
       };
 
-      setMessages((prev) => [...prev, assistantMessage]);
+      commitMessages((prev) => [...prev, assistantMessage]);
     } catch (err) {
       if (generationRef.current !== requestGeneration) return;
       setError(chatErrorText(err, controller.signal, url));
@@ -564,7 +576,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       if (abortRef.current === controller) abortRef.current = null;
       setIsLoading(false);
     }
-  }, []);
+  }, [commitMessages]);
 
   return (
     <ChatContext.Provider

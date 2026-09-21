@@ -32,6 +32,7 @@ export type IntentCode =
   | "COMPLIANCE"
   | "NAVIGATION"
   | "HANDOFF_REQUEST"
+  | "CAPABILITIES"
   | "GENERAL"
   | "UNKNOWN";
 
