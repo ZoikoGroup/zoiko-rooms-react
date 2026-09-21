@@ -9,7 +9,7 @@ import { authorize, isAnonymousAuthorized } from "../trust/rbac-engine";
 import { resolveMarket, isEnglandMarket } from "../trust/market-resolver";
 import { validateRoute, resolveNavigationRoute } from "../trust/route-allowlist";
 import { checkForInjection, isPromptLeakageAttempt } from "../trust/guardrails/injection-defense";
-import { retrieve } from "../intelligence/retrieval";
+import { retrieve, buildRetrievalQuery } from "../intelligence/retrieval";
 import { rerank } from "../intelligence/reranker";
 import { packContext } from "../intelligence/context-packer";
 import { validateResponse } from "../intelligence/response-validator";
@@ -17,6 +17,7 @@ import { getSystemPrompt, getTaskPrompt } from "../intelligence/prompt-registry"
 import { logAuditEvent } from "../evidence/audit-logger";
 import { generateMessageId } from "../evidence/trace";
 import type { ModelGateway, ModelResponse } from "../intelligence/model-gateway";
+import { WELCOME_MESSAGE } from "../../components/assistant/welcome";
 
 import { getAccountStatus } from "../domains/account-adapter";
 import { getActionCenter } from "../domains/action-center-adapter";
@@ -95,6 +96,13 @@ export async function handleTurn(
     market_code: market.market_code,
     locale: market.locale,
   });
+
+  if (classification.intent === "CAPABILITIES") {
+    const turn = buildAbstentionTurn(request, WELCOME_MESSAGE);
+    turn.response_components.answer_type = "CLARIFICATION";
+    turn.message.content_type = "text";
+    return turn;
+  }
 
   if (principalRole === "anonymous") {
     const permitted = isAnonymousAuthorized("navigation:read");
@@ -258,12 +266,14 @@ export async function handleTurn(
       break;
   }
 
+  const retrievalQuery = buildRetrievalQuery(request.user_message, request.conversation_history || []);
+
   const retrievalResult = await retrieve({
-    query: request.user_message,
+    query: retrievalQuery,
     context,
   });
 
-  const topChunks = rerank(retrievalResult.chunks, request.user_message, 4);
+  const topChunks = rerank(retrievalResult.chunks, retrievalQuery, 4);
 
   const hasLowConfidence = topChunks.length === 0 || (topChunks[0]?.score || 0) < 0.15;
 

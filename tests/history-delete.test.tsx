@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor, act } from "@testing-library/react";
 import { ChatProvider, useChatContext, type ChatMessage, type ArchivedSession } from "../components/assistant/ChatProvider";
 import { ChatPanel } from "../components/assistant/ChatPanel";
 
@@ -76,6 +76,15 @@ function welcomeHtml(): string {
 describe("History delete behavior", () => {
   beforeEach(() => {
     localStorage.clear();
+    vi.useRealTimers();
+    vi.clearAllTimers();
+    let idCounter = 0;
+    vi.stubGlobal(
+      "crypto",
+      Object.assign({}, globalThis.crypto, {
+        randomUUID: vi.fn(() => `test-uuid-${idCounter++}`),
+      })
+    );
     Object.defineProperty(window, "matchMedia", {
       writable: true,
       value: vi.fn().mockImplementation((query: string) => ({
@@ -180,10 +189,23 @@ describe("History delete behavior", () => {
     vi.stubGlobal("fetch", fetchMock);
     renderWidget(seed);
 
+    // Establish a fresh baseline session. The previous tests leave the
+    // module-scoped `_sessionId` populated, and a mount starts with an empty
+    // message list (the welcome is rendered statically, not stored). Starting
+    // with an explicit New chat makes every archive in this test deterministic.
+    fireEvent.click(screen.getByRole("button", { name: "New chat" }));
+    await waitFor(() => expect(screen.getByTestId("message-count").textContent).toBe("1"));
+
     const ask = async (prompt: string) => {
       fireEvent.change(screen.getByPlaceholderText(/Ask about rooms/), { target: { value: prompt } });
       fireEvent.click(screen.getByRole("button", { name: "Send message" }));
-      await waitFor(() => expect(screen.getByTestId("message-count").textContent).toBe("2"));
+      // The welcome message is only rendered statically by ChatPanel while the
+      // message list is empty — it is NOT part of the `messages` state at mount.
+      // Wait until the mocked assistant reply is actually committed AND the
+      // messagesRef sync effect has run, otherwise finalizeCurrent archives the
+      // conversation before the reply lands and the session is lost.
+      await waitFor(() => expect(screen.getByText("Fake answer.")).toBeTruthy());
+      await act(async () => {});
       fireEvent.click(screen.getByRole("button", { name: "New chat" }));
       await waitFor(() => expect(screen.getByTestId("message-count").textContent).toBe("1"));
     };
@@ -193,9 +215,74 @@ describe("History delete behavior", () => {
 
     const stored = JSON.parse(localStorage.getItem(HISTORY_KEY)!) as ArchivedSession[];
     expect(stored.map((s) => s.id)).toContain("sess_a");
-    expect(stored.some((s) => s.title === "How do payments work?" && s.messages.length === 2)).toBe(true);
-    expect(stored.some((s) => s.title === "Tell me about verification" && s.messages.length === 2)).toBe(true);
+    // Sessions are archived after the assistant reply lands. The first session
+    // starts from an empty mount (user + assistant), later ones may also carry
+    // the seeded welcome system message, so compare ignoring system messages.
+    const exchange = (title: string) =>
+      stored.some(
+        (s) =>
+          s.title === title &&
+          s.messages.filter((m) => m.role !== "system").length === 2 &&
+          s.messages.some((m) => m.role === "user" && m.content === title)
+      );
+    expect(exchange("How do payments work?")).toBe(true);
+    expect(exchange("Tell me about verification")).toBe(true);
     expect(screen.getByTestId("history-count").textContent).toBe("3");
+  });
+
+  it("does not lose an archived session when New chat fires while a reply is in flight", async () => {
+    const seed: ArchivedSession[] = [];
+    let resolveReply: ((value: unknown) => void) | undefined;
+    const pending = new Promise((r) => {
+      resolveReply = r;
+    });
+    const fetchMock = vi.fn(() =>
+      pending.then(() => ({
+        ok: true,
+        status: 200,
+        async json() {
+          return { ok: true, answer: "The reply.", citations: [] };
+        },
+      }))
+    );
+    vi.stubGlobal("fetch", fetchMock);
+    renderWidget(seed);
+
+    // Deterministic baseline so archiving is fully controlled by this test.
+    fireEvent.click(screen.getByRole("button", { name: "New chat" }));
+    await waitFor(() => expect(screen.getByTestId("message-count").textContent).toBe("1"));
+
+    fireEvent.change(screen.getByPlaceholderText(/Ask about rooms/), { target: { value: "How do I find a room?" } });
+
+    // Reproduce the race window as a single batched act: "Send message" commits
+    // the user message and "New chat" finalizes the session BEFORE React flushes
+    // the passive effect that would sync messagesRef with React state. finalizeCurrent
+    // must therefore see the committed user message through the synchronously-updated
+    // messagesRef (commitMessages) — otherwise the session is archived empty/stale
+    // (or dropped entirely) and lost from history.
+    await act(async () => {
+      fireEvent.click(screen.getByRole("button", { name: "Send message" }));
+      fireEvent.click(screen.getByRole("button", { name: "New chat" }));
+    });
+
+    // Let the in-flight reply complete after New chat already started a fresh
+    // session: generation is bumped so the late reply must be discarded — it must
+    // neither land in the new session nor retroactively alter the archived one.
+    await act(async () => {
+      resolveReply!(undefined);
+      await new Promise((r) => setTimeout(r, 0));
+    });
+
+    expect(screen.getByTestId("message-count").textContent).toBe("1");
+
+    await waitFor(() => {
+      const stored = JSON.parse(localStorage.getItem(HISTORY_KEY)!) as ArchivedSession[];
+      const archived = stored.find((s) => s.title === "How do I find a room?");
+      expect(archived).toBeTruthy();
+      expect(
+        archived!.messages.some((m) => m.role === "user" && m.content === "How do I find a room?")
+      ).toBe(true);
+    });
   });
 
   afterEach(() => {
