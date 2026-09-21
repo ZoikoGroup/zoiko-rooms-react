@@ -5,7 +5,9 @@ import { Send, Mic, Square, AlertTriangle } from "lucide-react";
 import { useChatContext } from "./ChatProvider";
 import { AnswerCard } from "./AnswerCard";
 import { ContactCard } from "./ContactCard";
+import { SystemMessage } from "./SystemMessage";
 import { AssistantAvatar } from "./AssistantAvatar";
+import { WELCOME_MESSAGE } from "./welcome";
 import { useVoiceInput } from "./use-voice-input";
 
 const SUGGESTIONS = [
@@ -25,18 +27,8 @@ function TypingDots() {
   );
 }
 
-function SystemMessage({ content }: { content: string }) {
-  return (
-    <div className="mb-3 flex justify-center">
-      <div className="animate-chat-msg-left max-w-[85%] rounded-2xl rounded-tl-sm bg-white px-4 py-2.5 text-sm leading-relaxed text-slate-500 ring-1 ring-slate-200" style={{ borderColor: "var(--color-assistant-bubble-border)" }}>
-        {content}
-      </div>
-    </div>
-  );
-}
-
 export function ChatPanel() {
-  const { messages, isLoading, error, sendMessage, contact } = useChatContext();
+  const { messages, isLoading, error, sendMessage, contact, stopGenerating } = useChatContext();
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -107,10 +99,7 @@ export function ChatPanel() {
         {messages.length === 0 && !isLoading && (
           <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
             <AssistantAvatar size="lg" />
-            <p className="animate-chat-fade-slide max-w-[300px] text-sm leading-relaxed text-slate-400 dark:text-slate-400" style={{ animationDelay: "0.08s" }}>
-              Ask Zoiko is an AI assistant. It can provide information and help you use Zoiko Rooms. It does not make
-              eligibility, compliance, ranking, application, payment, agreement, or tenancy decisions.
-            </p>
+            <SystemMessage content={WELCOME_MESSAGE} />
             <div className="flex max-w-[320px] flex-wrap justify-center gap-2">
               {SUGGESTIONS.map((prompt, i) => (
                 <button
@@ -202,8 +191,7 @@ export function ChatPanel() {
             handleSend();
           }}
           className="flex items-end gap-2"
-        >
-          {micSupported && (
+        >          {micSupported && (
             <button
               type="button"
               onClick={toggleMic}
@@ -245,6 +233,7 @@ export function ChatPanel() {
               type="button"
               aria-label="Stop generating"
               title="Stop generating"
+              onClick={stopGenerating}
               className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-slate-300 text-slate-700 transition-colors hover:bg-slate-400 dark:bg-white/20 dark:text-slate-100"
             >
               <Square className="h-4 w-4 fill-current" />

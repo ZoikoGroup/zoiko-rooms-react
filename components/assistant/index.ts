@@ -3,6 +3,8 @@ export type { ChatMessage, ChatState, ArchivedSession } from "./ChatProvider";
 export { ChatLauncher } from "./ChatLauncher";
 export { ChatShell } from "./ChatShell";
 export { ChatPanel } from "./ChatPanel";
+export { SystemMessage } from "./SystemMessage";
+export { WELCOME_MESSAGE } from "./welcome";
 export { AnswerCard } from "./AnswerCard";
 export { ContactCard } from "./ContactCard";
 export { Citation } from "./Citation";

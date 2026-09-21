@@ -45,10 +45,7 @@ export function composeResponse(params: {
   }
 
   const extractedCitations = extractCitationsFromContent(params.modelOutput, params.citationMap);
-  const cleanedContent = params.modelOutput
-    .replace(/\[citation:\s*\w+\s*\]/gi, "")
-    .replace(/\[source:\s*[^\]]+\]/gi, "")
-    .trim();
+  const cleanedContent = stripCitationMarkers(params.modelOutput);
 
   const answerType: ResponseComponents["answer_type"] =
     extractedCitations.length > 0 ? "GUIDANCE" : "CLARIFICATION";
@@ -60,6 +57,32 @@ export function composeResponse(params: {
     suggestions: generateSuggestions(params.intent),
     deep_links: generateDeepLinks(params.intent),
   };
+}
+
+// Dash characters used by the model to wrap raw citation markers: hyphen-minus,
+// non-breaking hyphen, figure dash, en dash, em dash, horizontal bar (U+2010–U+2015).
+const DASH = "[\\u2010-\\u2015-]";
+
+// Matches every known citation-marker variant:
+//   [citation:kb_help_006]        [source:kb_pay_001]      (bracketed)
+//   —citation:kb_help_006—        --citation:kb_help_006-- (dash-delimited)
+//   –citation:kb_help_006–        -citation:kb_help_006-
+//   citation:kb_help_006                                     (bare)
+// with optional surrounding dashes and trailing punctuation. Case-insensitive.
+const CITATION_MARKER_PATTERN = new RegExp(
+  `\\[(?:citation|source):\\s*[\\w.-]+\\s*\\]` +
+    `|` +
+    `(?:${DASH}{1,2}\\s*)?(?:citation|source):[\\w.-]+(?:${DASH}{1,2})?(?:[.,;!?])?`,
+  "gi"
+);
+
+/**
+ * Remove inline citation/source markers from a model answer. Citations are still
+ * rendered separately as chip/link objects (extractCitationsFromContent), so this
+ * only cleans the raw text the user sees — it must never touch the citation array.
+ */
+export function stripCitationMarkers(content: string): string {
+  return content.replace(CITATION_MARKER_PATTERN, "").trim();
 }
 
 function formatDomainData(intent: string, data: unknown): string {

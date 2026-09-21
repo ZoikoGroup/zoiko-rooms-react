@@ -58,6 +58,14 @@ export function isPromptLeakageAttempt(content: string): boolean {
     /show me (your|the) (system )?(prompt|instructions?|rules?)/i,
     /what (instructions?|rules?|guidelines?) (were|are) you (given|provided|trained)/i,
     /reveal (your|the) (system )?(prompt|instructions?)/i,
+    // Meta-queries that ask the model to enumerate or dump its own knowledge
+    // base / internal index. These leak internal chunk IDs and system structure
+    // even when they don't directly ask for the system prompt.
+    /\b(list|enumerate|dump|extract|output|show|get|give|print|export)\b.*\b(all|every|your|the|full|complete)?\b.*(knowledge ?base|kb chunks|chunks|sources|documents?|files?|index|corpus|contents)\b/i,
+    /what (is|are) (in|inside|on) (your|the) (knowledge ?base|database|index|system)/i,
+    /(describe|explain) (your|the) (knowledge ?base|index|corpus|retrieval system)/i,
+    /how many chunks|how many documents|how many sources/i,
+    /(what|which) (chunks|sources|documents|sections) (are|did) you (using|retrieving|pull|search)/i,
   ];
 
   return leakagePatterns.some((p) => p.test(content));

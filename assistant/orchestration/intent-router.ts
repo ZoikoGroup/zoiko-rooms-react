@@ -32,6 +32,14 @@ const INTENT_PATTERNS: Array<{
     domain: "action_center",
   },
   {
+    patterns: [/\bapplications?\b(?:\s+status)?/i],
+    intent: "ACTION_CENTER",
+    risk: "LOW",
+    agency: "A0",
+    domain: "action_center",
+    requirePersonal: true,
+  },
+  {
     patterns: [/\b(compliance|regulation|legal requirement|right to rent|deposit protection|epc|gas safety|smoke alarm)\b/i],
     intent: "COMPLIANCE",
     risk: "LOW",
@@ -84,7 +92,20 @@ const INTENT_PATTERNS: Array<{
   },
 ];
 
-const PERSONAL_FRAMING = /\b(mine|I\b|me\b|am I|do I|have I|has my|is my|does my|did my|when (will|do|did) I|will I|should I|can I)\b/i;
+// Matches first-person framing that indicates the query targets the caller's own
+// data. Covers "mine/I/me" constructions plus possessive "my <noun>" phrasings
+// over personal/account nouns (payments, applications, bookings, …). This closes
+// the gap where "what are my payment charges?" previously skipped the
+// requirePersonal gate and fell through to generic guidance.
+const PERSONAL_FRAMING = new RegExp(
+  [
+    "\\b(mine|i|me)\\b",
+    "\\b(?:am|do|have|is|does|did|will|should|can)\\s+I\\b",
+    "\\bmy\\s+(?:next\\s+)?(?:payment|payments|charge|charges|invoice|invoices|billing|application|applications|booking|bookings|account|status|dashboard|obligation|obligations|occupancy|occupancies|payout|payouts|earnings|listing|listings|rent|balance|fees)\\b",
+    "\\bwhen\\s+(?:will|do|did)\\s+I\\b",
+  ].join("|"),
+  "i"
+);
 
 export function classifyIntent(
   query: string,
