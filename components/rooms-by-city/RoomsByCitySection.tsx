@@ -3,7 +3,12 @@
 import { useState, type FormEvent } from "react";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
-import { useRouter } from "next/navigation";
+
+// Where the real Zoiko Rooms platform (Zoiko-Rooms-Platform's src/) is
+// reachable -- "Search Rooms" here hands off to the platform's own public
+// room search, since this marketing site has no live room inventory of its
+// own to search against.
+const PLATFORM_APP_URL = process.env.NEXT_PUBLIC_PLATFORM_APP_URL || "http://localhost:3001";
 
 const floatUpVariants: Variants = {
   hidden: { opacity: 0, y: 32 },
@@ -46,25 +51,32 @@ function Field({
 }
 
 export default function RoomsByCitySection() {
-  const router = useRouter();
   const [locating, setLocating] = useState(false);
   const [cityQuery, setCityQuery] = useState("");
   const [moveIn, setMoveIn] = useState("");
   const [budget, setBudget] = useState("");
+
+  function goToPlatformSearch(params: URLSearchParams) {
+    const query = params.toString();
+    // Cross-app navigation (a different Next.js origin) -- router.push from
+    // next/navigation only handles routes within this app, so a real
+    // browser navigation is required here, same as SearchRoomsView's own
+    // platform hand-off.
+    window.location.href = query ? `${PLATFORM_APP_URL}/find-a-room?${query}` : `${PLATFORM_APP_URL}/find-a-room`;
+  }
 
   function handleSearchSubmit(e: FormEvent) {
     e.preventDefault();
     const params = new URLSearchParams();
     if (cityQuery.trim()) params.set("city", cityQuery.trim());
     if (moveIn.trim()) params.set("moveIn", moveIn.trim());
-    if (budget.trim()) params.set("budget", budget.trim());
-    const query = params.toString();
-    router.push(query ? `/find-a-room/search-rooms?${query}` : "/find-a-room/search-rooms");
+    if (budget.trim()) params.set("maxPrice", budget.trim());
+    goToPlatformSearch(params);
   }
 
   function handleUseCurrentLocation() {
     if (typeof navigator === "undefined" || !navigator.geolocation) {
-      router.push("/find-a-room/search-rooms");
+      goToPlatformSearch(new URLSearchParams());
       return;
     }
     setLocating(true);
@@ -74,11 +86,11 @@ export default function RoomsByCitySection() {
         // hand off to search with location access granted rather than
         // guessing or leaving the button inert.
         setLocating(false);
-        router.push("/find-a-room/search-rooms");
+        goToPlatformSearch(new URLSearchParams());
       },
       () => {
         setLocating(false);
-        router.push("/find-a-room/search-rooms");
+        goToPlatformSearch(new URLSearchParams());
       },
     );
   }

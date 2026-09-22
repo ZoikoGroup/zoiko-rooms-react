@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
@@ -14,21 +13,20 @@ const tags = [
   "Institution or employer",
 ];
 
+const PLATFORM_APP_URL = process.env.NEXT_PUBLIC_PLATFORM_APP_URL || "http://localhost:3001";
+
 export function HeroSection() {
   const { t } = useLanguage();
-  const router = useRouter();
   const [location, setLocation] = useState("");
   const [moveInDate, setMoveInDate] = useState("");
-  const [monthlyBudget, setMonthlyBudget] = useState("");
+  const [budget, setBudget] = useState("");
 
-  function handleSearchSubmit(e: FormEvent) {
-    e.preventDefault();
+  function handleSearch() {
     const params = new URLSearchParams();
-    if (location.trim()) params.set("location", location.trim());
-    if (moveInDate.trim()) params.set("moveIn", moveInDate.trim());
-    if (monthlyBudget.trim()) params.set("budget", monthlyBudget.trim());
-    const query = params.toString();
-    router.push(query ? `/find-a-room/search-rooms?${query}` : "/find-a-room/search-rooms");
+    if (location.trim()) params.set("city", location.trim());
+    if (moveInDate.trim()) params.set("arrival", moveInDate.trim());
+    if (budget.trim()) params.set("maxPrice", budget.trim());
+    window.location.href = `${PLATFORM_APP_URL}/find-a-room?${params.toString()}`;
   }
 
   return (
@@ -59,8 +57,7 @@ export function HeroSection() {
               )}
             </motion.p>
 
-            <motion.form
-              onSubmit={handleSearchSubmit}
+            <motion.div
               variants={fadeUp}
               className="flex flex-col gap-4 rounded-2xl border border-[#D9C7B3] bg-white p-4 shadow-sm"
             >
@@ -100,7 +97,7 @@ export function HeroSection() {
                     />
                   </div>
                 </div>
-
+                
                 {/* Field 3 */}
                 <div className="flex min-w-0 flex-col gap-1">
                   <span className="px-1 text-[11.5px] font-medium text-neutral-600">
@@ -111,18 +108,18 @@ export function HeroSection() {
                     <input
                       type="text"
                       name="monthlyBudget"
-                      value={monthlyBudget}
-                      onChange={(e) => setMonthlyBudget(e.target.value)}
+                      value={budget}
+                      onChange={(e) => setBudget(e.target.value)}
                       placeholder={t("Min – Max")}
                       className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none placeholder:text-neutral-400"
                     />
                   </div>
                 </div>
               </div>
-              <Button type="submit" variant="secondary" size="md" className="w-fit">
+              <Button variant="secondary" size="md" className="w-fit" onClick={handleSearch}>
                 {t("Search Rooms")}
               </Button>
-            </motion.form>
+            </motion.div>
 
             <motion.div
               variants={fadeUp}

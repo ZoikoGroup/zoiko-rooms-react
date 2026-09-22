@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Container, Reveal } from "@/components/ui";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { rooms, budgetOptions } from "./data";
@@ -18,10 +19,21 @@ const DEFAULT_DRAFT: DraftFilters = {
   stayLengthKey: "3-6",
 };
 
+const PLATFORM_APP_URL = process.env.NEXT_PUBLIC_PLATFORM_APP_URL || "http://localhost:3001";
+
+function draftFromSearchParams(searchParams: URLSearchParams): DraftFilters {
+  return {
+    ...DEFAULT_DRAFT,
+    location: searchParams.get("city") ?? DEFAULT_DRAFT.location,
+    moveIn: searchParams.get("moveIn") ?? DEFAULT_DRAFT.moveIn,
+  };
+}
+
 export function SearchRoomsView() {
   const { t } = useLanguage();
-  const [draft, setDraft] = useState<DraftFilters>(DEFAULT_DRAFT);
-  const [applied, setApplied] = useState<DraftFilters>(DEFAULT_DRAFT);
+  const searchParams = useSearchParams();
+  const [draft, setDraft] = useState<DraftFilters>(() => draftFromSearchParams(searchParams));
+  const [applied, setApplied] = useState<DraftFilters>(() => draftFromSearchParams(searchParams));
   const [activeFilters, setActiveFilters] = useState<string[]>([
     "furnished",
     "bills-included",
@@ -93,6 +105,13 @@ export function SearchRoomsView() {
     setActiveFilters((prev) => (prev.includes(key) ? prev.filter((f) => f !== key) : [...prev, key]));
   }
 
+  function handleUpdateSearch() {
+    const params = new URLSearchParams();
+    if (draft.location.trim()) params.set("city", draft.location.trim());
+    if (draft.moveIn.trim()) params.set("arrival", draft.moveIn.trim());
+    window.location.href = `${PLATFORM_APP_URL}/find-a-room?${params.toString()}`;
+  }
+
   function handleEditSearch() {
     locationInputRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
     locationInputRef.current?.focus();
@@ -125,7 +144,7 @@ export function SearchRoomsView() {
       <SearchFiltersBar
         draft={draft}
         onDraftChange={setDraft}
-        onSubmit={() => setApplied(draft)}
+        onSubmit={handleUpdateSearch}
         locationInputRef={locationInputRef}
       />
 

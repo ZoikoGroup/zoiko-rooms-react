@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
@@ -8,8 +9,21 @@ import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const tags = ["International arrival", "Visiting researcher", "Placement / Internship", "Accessible features"];
 
+const PLATFORM_APP_URL = process.env.NEXT_PUBLIC_PLATFORM_APP_URL || "http://localhost:3001";
+
 export function HeroSection() {
   const { t } = useLanguage();
+  const [university, setUniversity] = useState("");
+  const [moveIn, setMoveIn] = useState("");
+  const [budget, setBudget] = useState("");
+
+  function handleSearch() {
+    const params = new URLSearchParams();
+    if (university.trim()) params.set("city", university.trim());
+    if (moveIn.trim()) params.set("arrival", moveIn.trim());
+    if (budget.trim()) params.set("maxPrice", budget.trim());
+    window.location.href = `${PLATFORM_APP_URL}/find-a-room?${params.toString()}`;
+  }
 
   return (
     <section id="hero" className="border-b border-[#E9E0D3] py-10 sm:py-14">
@@ -44,6 +58,8 @@ export function HeroSection() {
                   <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
                     <input
                       type="text"
+                      value={university}
+                      onChange={(e) => setUniversity(e.target.value)}
                       placeholder={t("e.g. Northbridge University")}
                       className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none placeholder:text-neutral-400"
                     />
@@ -54,6 +70,8 @@ export function HeroSection() {
                   <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
                     <input
                       type="text"
+                      value={moveIn}
+                      onChange={(e) => setMoveIn(e.target.value)}
                       placeholder={t("Date or term")}
                       className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none placeholder:text-neutral-400"
                     />
@@ -64,13 +82,15 @@ export function HeroSection() {
                   <div className="flex h-10 items-center rounded-lg border border-[#E9E0D3] bg-white px-3">
                     <input
                       type="text"
+                      value={budget}
+                      onChange={(e) => setBudget(e.target.value)}
                       placeholder={t("Optional")}
                       className="w-full min-w-0 bg-transparent text-sm text-brand-ink outline-none placeholder:text-neutral-400"
                     />
                   </div>
                 </div>
               </div>
-              <Button variant="secondary" size="md" className="w-fit">
+              <Button variant="secondary" size="md" className="w-fit" onClick={handleSearch}>
                 {t("Search University Rooms")}
               </Button>
             </motion.div>
