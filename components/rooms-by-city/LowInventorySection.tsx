@@ -5,7 +5,7 @@ import { Check } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
 import { useRouter } from "next/navigation";
 
-const PLATFORM_API_URL = process.env.NEXT_PUBLIC_PLATFORM_API_URL || "http://localhost:8000";
+const PLATFORM_API_URL = process.env.NEXT_PUBLIC_PLATFORM_API_URL || "https://api.zoikorooms.com";
 
 const floatUpVariants: Variants = {
   hidden: {

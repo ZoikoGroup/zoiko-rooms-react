@@ -6,7 +6,7 @@ import { Container, Reveal, Button } from "@/components/ui";
 import { fadeUp } from "@/lib/motion";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
-const PLATFORM_API_URL = process.env.NEXT_PUBLIC_PLATFORM_API_URL || "http://localhost:8000";
+const PLATFORM_API_URL = process.env.NEXT_PUBLIC_PLATFORM_API_URL || "https://api.zoikorooms.com";
 
 export function FinalCtaSection() {
   const { t } = useLanguage();

@@ -13,7 +13,7 @@ const tags = [
   "Institution or employer",
 ];
 
-const PLATFORM_APP_URL = process.env.NEXT_PUBLIC_PLATFORM_APP_URL || "http://localhost:3001";
+const PLATFORM_APP_URL = process.env.NEXT_PUBLIC_PLATFORM_APP_URL || "https://app.zoikorooms.com";
 
 export function HeroSection() {
   const { t } = useLanguage();
