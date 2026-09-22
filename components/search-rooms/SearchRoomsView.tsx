@@ -19,7 +19,7 @@ const DEFAULT_DRAFT: DraftFilters = {
   stayLengthKey: "3-6",
 };
 
-const PLATFORM_APP_URL = process.env.NEXT_PUBLIC_PLATFORM_APP_URL || "http://localhost:3001";
+const PLATFORM_APP_URL = process.env.NEXT_PUBLIC_PLATFORM_APP_URL || "https://app.zoikorooms.com";
 
 function draftFromSearchParams(searchParams: URLSearchParams): DraftFilters {
   return {

@@ -20,7 +20,7 @@ const DEFAULT_DRAFT: CalculatorState = {
   billingCountry: locationToCountry[locationOptions[0]],
 };
 
-const PLATFORM_APP_URL = process.env.NEXT_PUBLIC_PLATFORM_APP_URL || "http://localhost:3001";
+const PLATFORM_APP_URL = process.env.NEXT_PUBLIC_PLATFORM_APP_URL || "https://app.zoikorooms.com";
 
 export function RequirementsPricingView() {
   const [draft, setDraft] = useState<CalculatorState>(DEFAULT_DRAFT);

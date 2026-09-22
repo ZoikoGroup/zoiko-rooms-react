@@ -9,7 +9,7 @@ import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const tags = ["International arrival", "Visiting researcher", "Placement / Internship", "Accessible features"];
 
-const PLATFORM_APP_URL = process.env.NEXT_PUBLIC_PLATFORM_APP_URL || "http://localhost:3001";
+const PLATFORM_APP_URL = process.env.NEXT_PUBLIC_PLATFORM_APP_URL || "https://app.zoikorooms.com";
 
 export function HeroSection() {
   const { t } = useLanguage();

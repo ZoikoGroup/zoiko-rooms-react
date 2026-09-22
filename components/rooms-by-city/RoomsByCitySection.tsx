@@ -8,7 +8,7 @@ import { motion, type Variants } from "framer-motion";
 // reachable -- "Search Rooms" here hands off to the platform's own public
 // room search, since this marketing site has no live room inventory of its
 // own to search against.
-const PLATFORM_APP_URL = process.env.NEXT_PUBLIC_PLATFORM_APP_URL || "http://localhost:3001";
+const PLATFORM_APP_URL = process.env.NEXT_PUBLIC_PLATFORM_APP_URL || "https://app.zoikorooms.com";
 
 const floatUpVariants: Variants = {
   hidden: { opacity: 0, y: 32 },
