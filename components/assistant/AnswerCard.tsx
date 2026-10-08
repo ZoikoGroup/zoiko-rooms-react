@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { ExternalLink, ChevronDown, ChevronUp, Volume2, VolumeX } from "lucide-react";
-import Markdown from "react-markdown";
 import type { ChatMessage } from "./ChatProvider";
 import { Citation } from "./Citation";
 import { AssistantAvatar } from "./AssistantAvatar";
+import { MessageMarkdown } from "./MessageMarkdown";
 import { onTtsState, isSpeakingId, speakText, stopTts, ttsAvailable } from "./tts";
 
 interface AnswerCardProps {
@@ -43,9 +43,7 @@ export function AnswerCard({ message, onSuggestionClick }: AnswerCardProps) {
             borderColor: "var(--color-assistant-bubble-border)",
           }}
         >
-          <div className="prose-chat">
-            <Markdown>{message.content}</Markdown>
-          </div>
+          <MessageMarkdown content={message.content} />
 
           {message.suggestions && message.suggestions.length > 0 && (
             <div className="mt-2 flex flex-wrap gap-1.5">

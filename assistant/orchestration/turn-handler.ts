@@ -25,6 +25,12 @@ import { getPaymentStatus } from "../domains/payment-adapter";
 import { getPayoutStatus } from "../domains/payout-adapter";
 import { draftMessage } from "../domains/message-adapter";
 import { getComplianceStatus } from "../domains/compliance-adapter";
+import {
+  extractRoomSearchParams,
+  formatRoomSearchReply,
+  searchRooms,
+  ROOM_SEARCH_UNAVAILABLE,
+} from "../domains/room-search-adapter";
 
 import { seedChunks, getChunks } from "../knowledge/chunk-store";
 import { allSeedChunks } from "../knowledge/seed";
@@ -89,13 +95,19 @@ export async function handleTurn(
   const market = resolveMarket(request.market_code, request.locale);
   const principalRole = request.principal_role || "anonymous";
 
-  const classification = classifyIntent(request.user_message, {
+  let classification = classifyIntent(request.user_message, {
     id: request.principal_id,
     role: principalRole,
     session_id: request.session_id,
     market_code: market.market_code,
     locale: market.locale,
   });
+
+  // A short reply ("Manchester", "UK") to the room search's own follow-up
+  // question continues that search instead of starting a new topic.
+  if (classification.confidence < 0.85 && isRoomSearchFollowUp(request.conversation_history)) {
+    classification = { intent: "ROOM_SEARCH", risk_tier: "LOW", agency_tier: "A0", confidence: 0.85, target_domain: "room_search" };
+  }
 
   if (classification.intent === "CAPABILITIES") {
     const turn = buildAbstentionTurn(request, WELCOME_MESSAGE);
@@ -106,7 +118,7 @@ export async function handleTurn(
 
   if (principalRole === "anonymous") {
     const permitted = isAnonymousAuthorized("navigation:read");
-    if (!permitted && classification.intent !== "GUIDANCE" && classification.intent !== "NAVIGATION" && classification.intent !== "HANDOFF_REQUEST") {
+    if (!permitted && classification.intent !== "GUIDANCE" && classification.intent !== "NAVIGATION" && classification.intent !== "HANDOFF_REQUEST" && classification.intent !== "ROOM_SEARCH") {
       return buildAbstentionTurn(request, "You need to sign in to access this feature. Would you like me to help you with general information instead?");
     }
   } else {
@@ -177,6 +189,10 @@ export async function handleTurn(
       message_length: request.user_message.length,
     },
   });
+
+  if (classification.intent === "ROOM_SEARCH") {
+    return handleRoomSearch(request, context, classification, modelGateway);
+  }
 
   let domainData: unknown;
   let responseComponents: ResponseComponents;
@@ -410,6 +426,94 @@ export async function handleTurn(
   };
 }
 
+/**
+ * ROOM_SEARCH: Zoiko Rooms listings first, then approved external sources, via
+ * the platform's public search (see room-search-adapter). The model only
+ * extracts the city/country; the reply is written from the platform's data.
+ */
+async function handleRoomSearch(
+  request: TurnRequest,
+  context: ContextEnvelope,
+  classification: { intent: IntentCode; risk_tier: RiskTier; agency_tier: AgencyTier },
+  modelGateway: ModelGateway
+): Promise<TurnResult> {
+  const params = await extractRoomSearchParams(
+    request.user_message,
+    request.conversation_history || [],
+    modelGateway,
+    context.budgets.timeout_ms
+  );
+
+  let components: ResponseComponents;
+  let outcomeLabel: string;
+  if (!params.city) {
+    components = {
+      answer_type: "CLARIFICATION",
+      content: "Which city or town would you like to rent in?",
+      citations: [],
+    };
+    outcomeLabel = "needs_city";
+  } else if (!params.country) {
+    components = {
+      answer_type: "CLARIFICATION",
+      content: `Which country is ${params.city} in?`,
+      citations: [],
+    };
+    outcomeLabel = "needs_country";
+  } else {
+    const outcome = await searchRooms({ ...params, city: params.city, country: params.country }, request.session_id);
+    if (!outcome.ok) {
+      components = { answer_type: "ABSTENTION", content: ROOM_SEARCH_UNAVAILABLE[outcome.reason], citations: [] };
+      outcomeLabel = outcome.reason;
+    } else {
+      components = {
+        answer_type: "ACCOUNT_DATA",
+        content: formatRoomSearchReply(outcome.data, { city: params.city }),
+        citations: [
+          {
+            citation_id: `cit_rooms_${Date.now()}`,
+            source_type: "authoritative_api",
+            source_id: "domain:ROOM_SEARCH",
+            source_version: "1.0.0",
+            effective_at: new Date().toISOString(),
+            title: "Zoiko Rooms room search",
+          },
+        ],
+      };
+      outcomeLabel = `${outcome.data.state}:internal=${outcome.data.internal_matches}:external=${outcome.data.external_matches.length}`;
+    }
+  }
+
+  const validation = validateResponse({
+    content: components.content,
+    citations: components.citations,
+    answer_type: components.answer_type,
+    context,
+  });
+  if (validation.blocked) {
+    return buildAbstentionTurn(request, "I couldn't complete that room search. Please try rephrasing it.", context);
+  }
+  components.content = validation.content;
+  components.citations = validation.citations;
+
+  const turn = createTurn(context, "COMPLETED", classification.intent, classification.risk_tier, classification.agency_tier);
+  const message = createMessage(turn.id, context.conversation_id, components);
+
+  // Outcome and counts only: no city, message text or visitor identifiers.
+  logAuditEvent({
+    trace_id: context.trace_id,
+    request_id: context.request_id,
+    conversation_id: context.conversation_id,
+    turn_id: context.turn_id,
+    event_type: "turn.completed",
+    principal_id: context.principal.id,
+    principal_role: context.principal.role,
+    payload: { intent: "ROOM_SEARCH", outcome: outcomeLabel, answer_type: components.answer_type },
+  });
+
+  return { turn, message, citations: components.citations, response_components: components };
+}
+
 function createTurn(
   context: ContextEnvelope,
   status: TurnStatus,
@@ -446,6 +550,13 @@ function createMessage(
     citations_json: JSON.stringify(components.citations),
     created_at: new Date().toISOString(),
   };
+}
+
+const ROOM_SEARCH_QUESTIONS = [/^Which city or town would you like to rent in\?$/, /^Which country is .+ in\?$/];
+
+function isRoomSearchFollowUp(history: TurnRequest["conversation_history"]): boolean {
+  const last = history?.[history.length - 1];
+  return last?.role === "assistant" && ROOM_SEARCH_QUESTIONS.some((q) => q.test(last.content.trim()));
 }
 
 function isGreeting(text: string): boolean {

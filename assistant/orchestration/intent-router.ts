@@ -16,7 +16,24 @@ const INTENT_PATTERNS: Array<{
   agency: AgencyTier;
   domain?: string;
   requirePersonal?: boolean;
+  /** Skip this intent when the query also matches (e.g. hosting phrasing). */
+  exclude?: RegExp;
 }> = [
+  {
+    // A visitor looking for somewhere to rent: "rooms in Manchester", "find me
+    // a flat near Austin", "any PG in Hyderabad under 15000". Checked first so
+    // "search"/"rent" don't fall through to generic guidance. Hosting and
+    // how-to phrasing ("how do I list my room in London") is excluded.
+    patterns: [
+      /\b(?:find|search(?:ing)?|look(?:ing)? for|need|want|show(?: me)?|any|get me|rent)\b[^.?!]{0,40}\b(?:rooms?|flats?|apartments?|studios?|pgs?|accommodation|house ?shares?|flat ?shares?|co-?living|place to (?:stay|live|rent))\b/i,
+      /\b(?:rooms?|flats?|apartments?|studios?|pgs?|accommodation|house ?shares?|flat ?shares?|co-?living)\b(?:\s+(?:to rent|for rent|available))?[^.?!]{0,25}\b(?:in|near|around|at)\s+[a-z]/i,
+    ],
+    exclude: /\b(?:list(?:ing)?|host(?:ing)?|advertise|let out|my (?:room|flat|house|home|property|listing))\b|\bhow (?:do|can|does)\b/i,
+    intent: "ROOM_SEARCH",
+    risk: "LOW",
+    agency: "A0",
+    domain: "room_search",
+  },
   {
     patterns: [/\b(account|profile|status|my account|account status)\b/i],
     intent: "ACCOUNT_STATUS",
@@ -131,7 +148,10 @@ export function classifyIntent(
 ): IntentClassification {
   const normalizedQuery = query.trim().toLowerCase();
 
-  for (const { patterns, intent, risk, agency, domain, requirePersonal } of INTENT_PATTERNS) {
+  for (const { patterns, intent, risk, agency, domain, requirePersonal, exclude } of INTENT_PATTERNS) {
+    if (exclude?.test(normalizedQuery)) {
+      continue;
+    }
     for (const pattern of patterns) {
       if (pattern.test(normalizedQuery)) {
         if (requirePersonal && !PERSONAL_FRAMING.test(normalizedQuery)) {
