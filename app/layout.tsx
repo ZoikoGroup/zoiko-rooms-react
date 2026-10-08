@@ -23,6 +23,9 @@ export const metadata: Metadata = {
   title: "Verified Private Rooms for Rent for 30+ Nights | Zoiko Rooms",
   description:
     "Find and list verified private rooms for stays of 30 nights or longer. No broker fees, flexible terms, built-in safety.",
+  verification: {
+    google: "2S8GNgYHCXNCMEVpHF9c_t_5DahHUW9qLxOPIlPltiE",
+  },
 };
 
 export default function RootLayout({
