@@ -31,6 +31,15 @@ export interface AssistantConfig {
     feedbackEnabled: boolean;
     auditPersistenceEnabled: boolean;
   };
+  /**
+   * Zoiko Rooms platform backend used for room search (ZR-AI-SEARCH-001).
+   * Server-side only: the token is never sent to the browser.
+   */
+  platform: {
+    apiUrl: string;
+    searchServiceToken: string;
+    timeoutMs: number;
+  };
 }
 
 function getDefaultModelId(provider: "openai" | "anthropic" | "groq"): string {
@@ -76,6 +85,11 @@ const defaults: AssistantConfig = {
     handoffEnabled: process.env.ASSISTANT_HANDOFF_ENABLED !== "false",
     feedbackEnabled: process.env.ASSISTANT_FEEDBACK_ENABLED !== "false",
     auditPersistenceEnabled: process.env.ASSISTANT_AUDIT_PERSISTENCE !== "false",
+  },
+  platform: {
+    apiUrl: (process.env.PLATFORM_API_URL || "").replace(/\/+$/, ""),
+    searchServiceToken: process.env.PLATFORM_SEARCH_SERVICE_TOKEN || "",
+    timeoutMs: parseInt(process.env.PLATFORM_SEARCH_TIMEOUT_MS || "20000", 10),
   },
 };
 

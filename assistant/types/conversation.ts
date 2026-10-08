@@ -33,6 +33,7 @@ export type IntentCode =
   | "NAVIGATION"
   | "HANDOFF_REQUEST"
   | "CAPABILITIES"
+  | "ROOM_SEARCH"
   | "GENERAL"
   | "UNKNOWN";
 

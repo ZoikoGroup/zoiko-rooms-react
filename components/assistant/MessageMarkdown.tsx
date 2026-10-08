@@ -13,7 +13,13 @@ import type { Components } from "react-markdown";
  * open in a new tab with `noopener`.
  */
 const markdownComponents: Components = {
-  a: ({ node: _node, ...props }) => {
+  // Tables scroll sideways instead of overflowing the narrow chat bubble.
+  table: ({ node: _node, ...props }) => (
+    <div className="prose-chat-table">
+      <table {...props} />
+    </div>
+  ),
+  a:({ node: _node, ...props }) => {
     const href = typeof props.href === "string" ? props.href : "";
     const unsafeScheme = /^(?:javascript|data|vbscript):/i;
     const safeHref = unsafeScheme.test(href) ? "#" : href;
