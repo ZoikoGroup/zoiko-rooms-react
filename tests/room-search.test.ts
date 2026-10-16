@@ -60,6 +60,7 @@ const EXTERNAL: RoomSearchResult = {
   external_matches: [
     { location_city: "Austin", rent_monthly: 1650, currency: "USD", room_type: "Studio", last_seen_at: "2026-10-08T10:00:00Z" },
     { location_city: "Austin", rent_monthly: null, currency: null, room_type: null, last_seen_at: null },
+    { location_city: "Austin", rent_monthly: 1051, rent_is_from: true, currency: "USD", room_type: "1-3 bedrooms", last_seen_at: null },
   ],
   disclosure_text:
     "No matching Zoiko Rooms listings were found. We found potential room listings from approved external web sources. These are not Zoiko Rooms listings and have not been verified by Zoiko Rooms.",
@@ -143,8 +144,10 @@ describe("Reply formatting", () => {
     expect(text).toContain("have not been verified by Zoiko Rooms");
     expect(text).toContain("**Disclosure:**");
     expect(text).toContain("| Option | Area | Room type | Advertised price | Found |");
-    expect(text).toContain("US$1,650 per month");
-    expect(text).toContain("Price not listed");
+    expect(text).not.toContain("US$1,650");   // the Studio card is dropped
+    expect(text).toContain("price not listed");
+    expect(text).toContain("advertised from about USD 1,051 per month");
+    expect(text).not.toMatch(/\|\s*Studio\s*\|/);   // studio cards are not shown
     expect(text).toContain("not verified by Zoiko Rooms");
     expect(text).toContain("appears listed");
     expect(text).toContain("sign in");
@@ -192,6 +195,35 @@ describe("handleTurn room search", () => {
     );
     expect(followUp.turn.intent_code).toBe("ROOM_SEARCH");
     expect(followUp.message.content).toContain("Bright room");
+  });
+
+  it("answers that studios, shops and offices aren't covered, without searching", async () => {
+    Object.assign(platform, { apiUrl: "https://platform.test" });
+    const fetchMock = vi.fn(async () => new Response(JSON.stringify(EXTERNAL), { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    for (const [message, extraction] of [
+      ["find a studio flat in Leeds", '{"city":"Leeds","country":"United Kingdom","room_type":"studio"}'],
+      ["I need a shop to rent in Austin", '{"city":"Austin","country":"United States","room_type":"shop"}'],
+      ["office space for rent in Pune", '{"city":"Pune","country":"India","room_type":null}'],
+    ] as const) {
+      const result = await handleTurn(turn(message), makeGateway(extraction).gateway);
+      expect(result.turn.intent_code).toBe("ROOM_SEARCH");
+      expect(result.message.content).toContain("rooms to live in only");
+    }
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it("still searches when 'office' is only a landmark", async () => {
+    Object.assign(platform, { apiUrl: "https://platform.test" });
+    const fetchMock = vi.fn(async () => new Response(JSON.stringify(EXTERNAL), { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+    const result = await handleTurn(
+      turn("rooms in Austin near my office"),
+      makeGateway('{"city":"Austin","country":"United States","room_type":null}').gateway
+    );
+    expect(result.message.content).toContain("| Option |");
+    expect(fetchMock).toHaveBeenCalledOnce();
   });
 
   it("explains when room search is not configured", async () => {
