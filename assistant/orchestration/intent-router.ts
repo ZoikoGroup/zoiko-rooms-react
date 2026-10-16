@@ -25,8 +25,10 @@ const INTENT_PATTERNS: Array<{
     // "search"/"rent" don't fall through to generic guidance. Hosting and
     // how-to phrasing ("how do I list my room in London") is excluded.
     patterns: [
-      /\b(?:find|search(?:ing)?|look(?:ing)? for|need|want|show(?: me)?|any|get me|rent)\b[^.?!]{0,40}\b(?:rooms?|flats?|apartments?|studios?|pgs?|accommodation|house ?shares?|flat ?shares?|co-?living|place to (?:stay|live|rent))\b/i,
-      /\b(?:rooms?|flats?|apartments?|studios?|pgs?|accommodation|house ?shares?|flat ?shares?|co-?living)\b(?:\s+(?:to rent|for rent|available))?[^.?!]{0,25}\b(?:in|near|around|at)\s+[a-z]/i,
+      // Shops, offices and other commercial space are matched too, so the
+      // room search can answer that Zoiko Rooms doesn't cover them.
+      /\b(?:find|search(?:ing)?|look(?:ing)? for|need|want|show(?: me)?|any|get me|rent)\b[^.?!]{0,40}\b(?:rooms?|flats?|apartments?|studios?|pgs?|accommodation|house ?shares?|flat ?shares?|co-?living|place to (?:stay|live|rent)|shops?|office ?spaces?|commercial (?:space|property)|warehouses?)\b/i,
+      /\b(?:rooms?|flats?|apartments?|studios?|pgs?|accommodation|house ?shares?|flat ?shares?|co-?living|shops?|office ?spaces?|warehouses?)\b(?:\s+(?:to rent|for rent|available))?[^.?!]{0,25}\b(?:in|near|around|at)\s+[a-z]/i,
     ],
     exclude: /\b(?:list(?:ing)?|host(?:ing)?|advertise|let out|my (?:room|flat|house|home|property|listing))\b|\bhow (?:do|can|does)\b/i,
     intent: "ROOM_SEARCH",

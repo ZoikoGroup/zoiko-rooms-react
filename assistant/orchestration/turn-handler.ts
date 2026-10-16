@@ -28,6 +28,8 @@ import { getComplianceStatus } from "../domains/compliance-adapter";
 import {
   extractRoomSearchParams,
   formatRoomSearchReply,
+  isNotARoomRequest,
+  notARoomReply,
   searchRooms,
   ROOM_SEARCH_UNAVAILABLE,
 } from "../domains/room-search-adapter";
@@ -446,7 +448,10 @@ async function handleRoomSearch(
 
   let components: ResponseComponents;
   let outcomeLabel: string;
-  if (!params.city) {
+  if (isNotARoomRequest(request.user_message, params.roomType)) {
+    components = { answer_type: "CLARIFICATION", content: notARoomReply(params.city), citations: [] };
+    outcomeLabel = "not_a_room";
+  } else if (!params.city) {
     components = {
       answer_type: "CLARIFICATION",
       content: "Which city or town would you like to rent in?",
