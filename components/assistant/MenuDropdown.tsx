@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useCallback } from "react";
-import { Sun, Moon, Plus, Trash2 } from "lucide-react";
+import { Sun, Moon, Plus, Trash2, Mail } from "lucide-react";
 import { useChatContext } from "./ChatProvider";
 
 interface MenuDropdownProps {
@@ -11,7 +11,7 @@ interface MenuDropdownProps {
 }
 
 export function MenuDropdown({ isOpen, onClose, triggerRef }: MenuDropdownProps) {
-  const { resolvedTheme, newConversation, clearMessages, setTheme } = useChatContext();
+  const { resolvedTheme, newConversation, clearChat, setTheme, openContact } = useChatContext();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
@@ -72,7 +72,12 @@ export function MenuDropdown({ isOpen, onClose, triggerRef }: MenuDropdownProps)
   };
 
   const handleClearChat = () => {
-    clearMessages();
+    clearChat();
+    onClose();
+  };
+
+  const handleContact = () => {
+    openContact();
     onClose();
   };
 
@@ -84,13 +89,8 @@ export function MenuDropdown({ isOpen, onClose, triggerRef }: MenuDropdownProps)
   if (!isOpen) return null;
 
   return (
-    <div
-      className="fixed z-50"
-      style={{
-        top: "64px",
-        right: "16px",
-      }}
-    >
+    // Anchored under the header's "More" button (the header is position: relative).
+    <div className="absolute right-3 top-full z-50 mt-1">
       <div
         className="fixed inset-0"
         aria-hidden="true"
@@ -133,6 +133,20 @@ export function MenuDropdown({ isOpen, onClose, triggerRef }: MenuDropdownProps)
         >
           <Trash2 className="h-4 w-4 flex-shrink-0" style={{ color: "var(--color-brand-red)" }} />
           <span>Clear chat</span>
+        </button>
+
+        <button
+          onClick={handleContact}
+          className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-left transition-colors"
+          style={{
+            color: "var(--color-menu-item-text)",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "var(--color-menu-item-hover)")}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+          role="menuitem"
+        >
+          <Mail className="h-4 w-4 flex-shrink-0" style={{ color: "var(--color-brand-navy)" }} />
+          <span>Contact admin</span>
         </button>
 
         <button

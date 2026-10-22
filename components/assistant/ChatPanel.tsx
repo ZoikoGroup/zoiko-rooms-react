@@ -1,21 +1,14 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Send, Mic, Square, AlertTriangle } from "lucide-react";
+import { Send, Mic, Square, AlertTriangle, Sparkles } from "lucide-react";
 import { useChatContext } from "./ChatProvider";
 import { AnswerCard } from "./AnswerCard";
 import { ContactCard } from "./ContactCard";
 import { SystemMessage } from "./SystemMessage";
 import { AssistantAvatar } from "./AssistantAvatar";
-import { WELCOME_MESSAGE } from "./welcome";
+import { AssistantHome } from "./AssistantHome";
 import { useVoiceInput } from "./use-voice-input";
-
-const SUGGESTIONS = [
-  "How do I find a room?",
-  "Tell me about verification",
-  "How do payments work?",
-  "What is a Room Passport?",
-];
 
 function TypingDots() {
   return (
@@ -74,6 +67,9 @@ export function ChatPanel() {
   };
 
   const micSupported = voice.supported;
+  // The home screen stays until the visitor sends their first message (a
+  // cleared chat only holds the system welcome, so it shows the home again).
+  const showHome = !isLoading && !messages.some((m) => m.role === "user");
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -96,47 +92,24 @@ export function ChatPanel() {
   return (
     <div className="flex flex-1 flex-col overflow-hidden">
       <div ref={messagesEndRef} className="flex-1 space-y-4 overflow-y-auto px-5 py-4">
-        {messages.length === 0 && !isLoading && (
-          <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
-            <AssistantAvatar size="lg" />
-            <SystemMessage content={WELCOME_MESSAGE} />
-            <div className="flex max-w-[320px] flex-wrap justify-center gap-2">
-              {SUGGESTIONS.map((prompt, i) => (
-                <button
-                  key={prompt}
-                  onClick={() => sendMessage(prompt)}
-                  className="animate-chat-chip rounded-full px-3.5 py-2 text-xs font-medium text-slate-600 ring-1 ring-slate-200 transition-colors hover:bg-slate-100 hover:text-slate-800 dark:text-slate-300 dark:ring-white/10 dark:hover:bg-white/10"
-                  style={{ animationDelay: `${0.15 + i * 0.06}s`, borderColor: "var(--color-suggestion-border)", backgroundColor: "var(--color-suggestion-bg)", color: "var(--color-suggestion-text)" }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--color-suggestion-hover-bg)";
-                    e.currentTarget.style.color = "var(--color-suggestion-hover-text)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--color-suggestion-bg)";
-                    e.currentTarget.style.color = "var(--color-suggestion-text)";
-                  }}
+        {showHome ? (
+          <AssistantHome onAsk={sendMessage} disabled={isLoading} />
+        ) : (
+          messages.map((msg) =>
+            msg.role === "user" ? (
+              <div key={msg.id} className="animate-chat-msg-right flex justify-end">
+                <div
+                  className="max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-tr-sm px-4 py-2.5 text-sm leading-relaxed text-white"
+                  style={{ backgroundColor: "var(--color-user-bubble-bg)", color: "var(--color-user-bubble-text)" }}
                 >
-                  {prompt}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {messages.map((msg) =>
-          msg.role === "user" ? (
-            <div key={msg.id} className="animate-chat-msg-right flex justify-end">
-              <div
-                className="max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-tr-sm px-4 py-2.5 text-sm leading-relaxed text-white"
-                style={{ backgroundColor: "var(--color-user-bubble-bg)", color: "var(--color-user-bubble-text)" }}
-              >
-                {msg.content}
+                  {msg.content}
+                </div>
               </div>
-            </div>
-          ) : msg.role === "system" ? (
-            <SystemMessage key={msg.id} content={msg.content} />
-          ) : (
-            <AnswerCard key={msg.id} message={msg} onSuggestionClick={sendMessage} />
+            ) : msg.role === "system" ? (
+              <SystemMessage key={msg.id} content={msg.content} />
+            ) : (
+              <AnswerCard key={msg.id} message={msg} onSuggestionClick={sendMessage} />
+          )
           )
         )}
 
@@ -190,51 +163,50 @@ export function ChatPanel() {
             e.preventDefault();
             handleSend();
           }}
-          className="flex items-end gap-2"
-        >          {micSupported && (
+          className="flex items-end gap-1.5 rounded-[1.75rem] border py-1.5 pl-2 pr-1.5 transition-shadow focus-within:shadow-[0_0_0_1px_var(--color-focus-ring)]"
+          style={{ borderColor: "var(--color-home-question-border)", backgroundColor: "var(--color-composer-bg)" }}
+        >
+          <span
+            aria-hidden="true"
+            className="mb-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full"
+            style={{ backgroundColor: "var(--color-home-red-bg)", color: "var(--color-brand-red)" }}
+          >
+            <Sparkles className="h-[18px] w-[18px]" />
+          </span>
+          <textarea
+            ref={inputRef}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder={voice.listening ? "Listening…" : "Ask me anything about rooms, listings, payments, or rules…"}
+            aria-label="Message Ask Zoiko"
+            rows={1}
+            disabled={isLoading}
+            className="max-h-32 min-w-0 flex-1 resize-none bg-transparent px-1 py-2.5 text-sm outline-none disabled:opacity-60"
+            style={{ color: "var(--color-assistant-bubble-text)" }}
+          />
+          {micSupported && (
             <button
               type="button"
               onClick={toggleMic}
               disabled={isLoading}
               aria-label={voice.listening ? "Stop listening" : "Start voice input"}
               title={voice.listening ? "Stop listening" : "Voice input"}
-              className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl transition-colors disabled:opacity-50 ${
-                voice.listening ? "animate-pulse bg-brand-red text-white" : "text-slate-400 hover:bg-slate-200 hover:text-slate-600 dark:text-slate-400 dark:hover:bg-white/15 dark:hover:text-slate-200"
+              className={`mb-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-colors disabled:opacity-50 ${
+                voice.listening ? "animate-pulse bg-brand-red text-white" : "hover:bg-[var(--color-hover-overlay)]"
               }`}
-              style={{ backgroundColor: voice.listening ? undefined : "var(--color-composer-bg)" }}
+              style={{ color: voice.listening ? undefined : "var(--color-gray-600)" }}
             >
-              <Mic className="h-5 w-5" />
+              <Mic className="h-[18px] w-[18px]" />
             </button>
           )}
-          <textarea
-            ref={inputRef}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder={voice.listening ? "Listening…" : "Ask about rooms, applications, payments…"}
-            rows={1}
-            disabled={isLoading}
-            className="max-h-32 flex-1 resize-none rounded-2xl px-4 py-3 text-sm text-slate-700 outline-none placeholder:text-slate-400 disabled:opacity-60 dark:text-slate-200"
-            style={{
-              backgroundColor: "var(--color-composer-bg)",
-              color: "var(--color-assistant-bubble-text)",
-            }}
-            onFocus={(e) => {
-              e.currentTarget.style.borderColor = "var(--color-focus-ring)";
-              e.currentTarget.style.boxShadow = `0 0 0 1px var(--color-focus-ring)`;
-            }}
-            onBlur={(e) => {
-              e.currentTarget.style.borderColor = "transparent";
-              e.currentTarget.style.boxShadow = "none";
-            }}
-          />
           {isLoading ? (
             <button
               type="button"
               aria-label="Stop generating"
               title="Stop generating"
               onClick={stopGenerating}
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-slate-300 text-slate-700 transition-colors hover:bg-slate-400 dark:bg-white/20 dark:text-slate-100"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-slate-300 text-slate-700 transition-colors hover:bg-slate-400 dark:bg-white/20 dark:text-slate-100"
             >
               <Square className="h-4 w-4 fill-current" />
             </button>
@@ -243,13 +215,15 @@ export function ChatPanel() {
               type="submit"
               disabled={!input.trim()}
               aria-label="Send message"
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-red text-white transition-colors hover:bg-brand-red-dark disabled:opacity-50"
+              className="flex h-11 w-14 shrink-0 items-center justify-center rounded-full bg-brand-red text-white transition-colors hover:bg-brand-red-dark disabled:opacity-50"
             >
               <Send className="h-5 w-5" />
             </button>
           )}
         </form>
-        <p className="mt-3 text-center text-[10px] leading-relaxed text-slate-300 dark:text-slate-600">
+        <p className="mt-2.5 text-center text-[10px] leading-relaxed" style={{ color: "var(--color-gray-400)" }}>
+          Provides information and helps you use Zoiko Rooms. It does not make platform decisions.
+          <br />
           Zoiko Rooms is a trading name of Zoiko Realty Group.
         </p>
       </footer>

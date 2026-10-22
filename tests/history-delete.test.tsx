@@ -67,10 +67,10 @@ function msg(role: "user" | "assistant", content: string): ChatMessage {
   return { id: `${role}_${content}`, role, content, created_at: new Date().toISOString() };
 }
 
-function welcomeHtml(): string {
-  const node = document.querySelector<HTMLElement>(".prose-chat");
-  if (!node) throw new Error("expected a .prose-chat welcome element");
-  return node.outerHTML;
+/** The Ask Zoiko home screen (greeting + topic cards) is showing. */
+function expectHome() {
+  expect(screen.getByTestId("assistant-home")).toBeTruthy();
+  expect(screen.getByRole("heading", { name: /Hello! I'm Ask Zoiko/ })).toBeTruthy();
 }
 
 describe("History delete behavior", () => {
@@ -129,9 +129,7 @@ describe("History delete behavior", () => {
 
     expect(screen.getByTestId("history-count").textContent).toBe("0");
     expect(screen.getByTestId("message-count").textContent).toBe("1");
-    const html = welcomeHtml();
-    expect(html).toContain("<strong>Finding a room</strong>");
-    expect(html).not.toContain("**");
+    expectHome();
   });
 
   it("deletes the only conversation and leaves an empty history", () => {
@@ -155,7 +153,7 @@ describe("History delete behavior", () => {
 
     expect(screen.getByTestId("history-count").textContent).toBe("0");
     expect(screen.getByTestId("message-count").textContent).toBe("1");
-    expect(welcomeHtml()).toContain("<strong>Finding a room</strong>");
+    expectHome();
   });
 
   it("new chat archives the open conversation and starts a fresh session id", () => {
@@ -172,7 +170,7 @@ describe("History delete behavior", () => {
     expect(screen.getByTestId("session-id").textContent).not.toBe("");
     expect(screen.getByTestId("history-count").textContent).toBe("1");
     expect(screen.getByTestId("message-count").textContent).toBe("1");
-    expect(welcomeHtml()).toContain("<strong>Finding a room</strong>");
+    expectHome();
     const stored = JSON.parse(localStorage.getItem(HISTORY_KEY)!) as ArchivedSession[];
     expect(stored.map((s) => s.id)).toContain("sess_a");
   });
@@ -197,7 +195,7 @@ describe("History delete behavior", () => {
     await waitFor(() => expect(screen.getByTestId("message-count").textContent).toBe("1"));
 
     const ask = async (prompt: string) => {
-      fireEvent.change(screen.getByPlaceholderText(/Ask about rooms/), { target: { value: prompt } });
+      fireEvent.change(screen.getByPlaceholderText(/Ask me anything/), { target: { value: prompt } });
       fireEvent.click(screen.getByRole("button", { name: "Send message" }));
       // The welcome message is only rendered statically by ChatPanel while the
       // message list is empty — it is NOT part of the `messages` state at mount.
@@ -252,7 +250,7 @@ describe("History delete behavior", () => {
     fireEvent.click(screen.getByRole("button", { name: "New chat" }));
     await waitFor(() => expect(screen.getByTestId("message-count").textContent).toBe("1"));
 
-    fireEvent.change(screen.getByPlaceholderText(/Ask about rooms/), { target: { value: "How do I find a room?" } });
+    fireEvent.change(screen.getByPlaceholderText(/Ask me anything/), { target: { value: "How do I find a room?" } });
 
     // Reproduce the race window as a single batched act: "Send message" commits
     // the user message and "New chat" finalizes the session BEFORE React flushes
