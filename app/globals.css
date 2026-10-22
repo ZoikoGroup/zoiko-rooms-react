@@ -75,6 +75,21 @@
   --color-overlay: rgba(0, 0, 0, 0.2);
   --color-scrollbar-thumb: var(--color-gray-300);
   --color-scrollbar-track: transparent;
+  /* Ask Zoiko home screen (light; dark values in the dark theme block) */
+  --color-home-hero-bg: radial-gradient(circle at 88% 18%, rgba(255,255,255,0.95), transparent 42%), linear-gradient(115deg, #e6ecf6 0%, #f3eee6 55%, #eadfce 100%);
+  --color-home-bubble-bg: #ffffff;
+  --color-home-title: var(--color-brand-ink);
+  --color-home-text: var(--color-gray-700);
+  --color-home-muted: var(--color-gray-500);
+  --color-home-blue-bg: #eef4fd;
+  --color-home-blue-icon-bg: #d9e6fa;
+  --color-home-blue-icon: var(--color-brand-navy);
+  --color-home-red-bg: #fdf1f1;
+  --color-home-red-icon-bg: #fbdcdc;
+  --color-home-red-icon: var(--color-brand-red);
+  --color-home-question-border: var(--color-gray-200);
+  --color-status-online: #16a34a;
+  --color-status-offline: var(--color-gray-400);
 }
 
 .zoiko-assistant-root[data-theme="light"] {
@@ -187,6 +202,21 @@
   --color-overlay: rgba(0, 0, 0, 0.5);
   --color-scrollbar-thumb: #4b5563;
   --color-scrollbar-track: #0f172a;
+  /* Ask Zoiko home screen */
+  --color-home-hero-bg: linear-gradient(120deg, #13203d 0%, #1b1f2e 100%);
+  --color-home-bubble-bg: rgba(255,255,255,0.06);
+  --color-home-title: #f1f5f9;
+  --color-home-text: #e2e8f0;
+  --color-home-muted: #94a3b8;
+  --color-home-blue-bg: rgba(96,140,220,0.12);
+  --color-home-blue-icon-bg: rgba(96,140,220,0.25);
+  --color-home-blue-icon: #a9c4f5;
+  --color-home-red-bg: rgba(216,11,11,0.10);
+  --color-home-red-icon-bg: rgba(216,11,11,0.25);
+  --color-home-red-icon: #f59a9a;
+  --color-home-question-border: rgba(255,255,255,0.12);
+  --color-status-online: #4ade80;
+  --color-status-offline: #64748b;
 }
 
 .zoiko-assistant-root textarea::placeholder {
