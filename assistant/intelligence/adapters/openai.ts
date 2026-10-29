@@ -10,6 +10,9 @@ export class OpenAIAdapter implements ModelGateway {
   private baseUrl: string;
   private static MAX_RETRIES = 3;
   private static INITIAL_BACKOFF_MS = 1000;
+  // A longer retry-after (e.g. the provider's daily quota is spent) is
+  // returned to the caller at once rather than holding the visitor's request.
+  private static MAX_RETRY_WAIT_MS = 8000;
 
   constructor(config: { apiKey: string; modelId?: string; baseUrl?: string }) {
     this.apiKey = config.apiKey;
@@ -30,10 +33,15 @@ export class OpenAIAdapter implements ModelGateway {
         clearTimeout(timer);
 
         if (response.status === 429 || response.status >= 500) {
-          const retryAfter = response.headers.get("retry-after");
-          const backoffMs = retryAfter
-            ? parseInt(retryAfter, 10) * 1000
+          const retryAfterSeconds = Number(response.headers.get("retry-after") ?? NaN);
+          const backoffMs = Number.isFinite(retryAfterSeconds) && retryAfterSeconds >= 0
+            ? retryAfterSeconds * 1000
             : OpenAIAdapter.INITIAL_BACKOFF_MS * Math.pow(2, attempt);
+          // Out of attempts, or asked to wait too long: hand the response back
+          // so the caller reports the error instead of sleeping for nothing.
+          if (attempt === OpenAIAdapter.MAX_RETRIES - 1 || backoffMs > OpenAIAdapter.MAX_RETRY_WAIT_MS) {
+            return response;
+          }
           console.warn(`[model-gateway] transient error ${response.status} on attempt ${attempt + 1}/${OpenAIAdapter.MAX_RETRIES}, retrying in ${backoffMs}ms`);
           await new Promise((r) => setTimeout(r, backoffMs));
           lastError = new Error(`HTTP ${response.status}`);
