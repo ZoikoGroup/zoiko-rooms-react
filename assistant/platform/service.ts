@@ -26,6 +26,10 @@ export interface ChatTurnResult {
 }
 
 const MAX_TOOL_ROUNDS = 6;
+// Earlier messages replayed per turn. The whole history is resent on every
+// tool round, so an uncapped history grows each turn until Groq's per-minute
+// token limit returns 429s.
+const MAX_HISTORY_MESSAGES = 12;
 
 function systemPrompt(role: ChatContext["role"]): string {
   const roleLine =
@@ -51,6 +55,9 @@ function client(): Groq {
   const config = getConfig();
   return new Groq({
     apiKey: config.model.apiKey || "missing",
+    // The SDK retries 429s (honouring retry-after) and connection errors.
+    maxRetries: 3,
+    timeout: 45_000,
   });
 }
 
@@ -78,7 +85,7 @@ export async function runChatTurn(opts: ChatTurnRequest, handlers: StreamHandler
   const groq = client();
   const messages: Array<Record<string, unknown>> = [
     { role: "system", content: systemPrompt(opts.context.role) },
-    ...opts.history.map((h) => ({ role: h.role, content: h.content })),
+    ...opts.history.slice(-MAX_HISTORY_MESSAGES).map((h) => ({ role: h.role, content: h.content })),
     { role: "user", content: opts.userMessage },
   ];
 
