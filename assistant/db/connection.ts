@@ -1,4 +1,4 @@
-import { Pool } from "pg";
+import { Pool, type PoolClient } from "pg";
 import { getConfig } from "../config";
 
 let _pool: Pool | null = null;
@@ -30,19 +30,31 @@ export function principalSetting(
   return principalId || "anonymous";
 }
 
+// is_local = true: the setting lasts until the end of the current transaction,
+// so it can never leak to the next user of a pooled connection.
 const SET_PRINCIPAL_SQL = `SELECT set_config('app.current_principal_id', $1, true)`;
-const RESET_PRINCIPAL_SQL = `SELECT set_config('app.current_principal_id', '', false)`;
 
+/**
+ * Runs fn with app.current_principal_id set for RLS. Everything runs on ONE
+ * checked-out connection inside ONE transaction: a transaction-local setting
+ * issued through pool.query would end with that single statement, and the
+ * pool may hand each later query a different connection anyway.
+ */
 export async function withPrincipal<T>(
   principalId: string | undefined,
-  fn: (pool: Pool) => Promise<T>
+  fn: (client: PoolClient) => Promise<T>
 ): Promise<T> {
-  const pool = getPool();
-  const value = principalSetting(principalId);
+  const client = await getPool().connect();
   try {
-    await pool.query(SET_PRINCIPAL_SQL, [value]);
-    return await fn(pool);
+    await client.query("BEGIN");
+    await client.query(SET_PRINCIPAL_SQL, [principalSetting(principalId)]);
+    const result = await fn(client);
+    await client.query("COMMIT");
+    return result;
+  } catch (err) {
+    await client.query("ROLLBACK").catch(() => undefined);
+    throw err;
   } finally {
-    await pool.query(RESET_PRINCIPAL_SQL).catch(() => undefined);
+    client.release();
   }
 }
