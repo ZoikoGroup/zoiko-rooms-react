@@ -14,11 +14,14 @@ export const maxDuration = 90;
 const PublicMessageSchema = z.object({
   message: z.string().min(1).max(10000),
   sessionId: z.string().min(1).max(200).optional(),
+  language: z.enum(["EN", "DE", "FR", "ES", "PT"]).optional(),
   history: z
     .array(z.object({ role: z.enum(["user", "assistant"]), content: z.string().max(10000) }))
     .max(50)
     .optional(),
 });
+
+const ASSISTANT_LOCALES = { EN: "en-GB", DE: "de-DE", FR: "fr-FR", ES: "es-ES", PT: "pt-PT" } as const;
 
 function getModelGateway(): ModelGateway {
   const config = getConfig();
@@ -128,7 +131,7 @@ export async function POST(request: NextRequest) {
         user_message: message,
         principal_role: "anonymous",
         market_code: "GB",
-        locale: "en-GB",
+        locale: ASSISTANT_LOCALES[parsed.data.language ?? "EN"],
         conversation_history: history,
       },
       gateway

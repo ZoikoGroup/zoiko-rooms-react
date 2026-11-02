@@ -1,6 +1,7 @@
 import type { Dictionary, LanguageDictionaries } from "./types";
 import { navbarFooterDictionary } from "./dictionaries/navbar-footer";
 import { sharedUiDictionary } from "./dictionaries/shared-ui";
+import { assistantDictionary } from "./dictionaries/assistant";
 
 export type { LanguageCode } from "./types";
 
@@ -17,4 +18,5 @@ function mergeDictionaries(...dictionaries: LanguageDictionaries[]): LanguageDic
 export const translations: Record<keyof LanguageDictionaries, Dictionary> = mergeDictionaries(
   navbarFooterDictionary,
   sharedUiDictionary,
+  assistantDictionary,
 );

@@ -46,12 +46,16 @@ export function packContext(params: {
   };
 }
 
+const REPLY_LANGUAGES: Record<string, string> = { de: "German", fr: "French", es: "Spanish", pt: "Portuguese" };
+
 function buildSystemAddendum(context: ContextEnvelope): string {
   const parts: string[] = [];
 
   parts.push(`Active role: ${context.principal.role}`);
   parts.push(`Market: ${context.market.market_code} (${context.market.jurisdiction})`);
   parts.push(`Locale: ${context.market.locale}`);
+  const replyLanguage = REPLY_LANGUAGES[context.market.locale.split("-")[0]];
+  if (replyLanguage) parts.push(`Reply language: write the entire answer in ${replyLanguage}.`);
   parts.push(`Currency: ${context.market.currency}`);
   parts.push(`Intent: ${context.task.intent_code}`);
   parts.push(`Agency: ${context.task.agency_tier}`);

@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useCallback, useEffect, useRef, type ReactNode } from "react";
 import { WELCOME_MESSAGE } from "./welcome";
+import { translations, type LanguageCode } from "@/lib/i18n/translations";
 
 export interface ChatMessage {
   id: string;
@@ -66,10 +67,17 @@ interface ChatContextValue extends ChatState {
   openHistory: (sessionId: string) => void;
   openContact: () => void;
   cancelContact: () => void;
+  language: LanguageCode;
+  setLanguage: (code: LanguageCode) => void;
+  /** Translate a chat UI string into the assistant's language. */
+  t: (text: string) => string;
   confirmContact: (payload: { recipient: string; subject: string; body: string }) => Promise<void>;
 }
 
 const ChatContext = createContext<ChatContextValue | null>(null);
+
+/** Ids of assistant replies that just arrived, so only they get the reveal animation. */
+export const freshMessageIds = new Set<string>();
 
 export function useChatContext() {
   const ctx = useContext(ChatContext);
@@ -204,7 +212,11 @@ function titleFromMessages(messages: ChatMessage[]): string {
   return clean.length > 48 ? `${clean.slice(0, 48).trimEnd()}…` : clean;
 }
 
+const CHAT_LANGUAGE_KEY = "zoiko-chat-language";
+const CHAT_LANGUAGES = ["EN", "DE", "FR", "ES", "PT"] as const;
+
 export function ChatProvider({ children }: { children: ReactNode }) {
+  const [language, setLanguageState] = useState<LanguageCode>("EN");
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -222,6 +234,34 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     mountedRef.current = true;
   }, []);
+
+  // The assistant keeps its own language, independent of the website's. Until the
+  // user picks one here it starts from the site language.
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem(CHAT_LANGUAGE_KEY) ?? window.localStorage.getItem("zoiko-language");
+      if (stored && (CHAT_LANGUAGES as readonly string[]).includes(stored)) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time sync from localStorage on mount
+        setLanguageState(stored as LanguageCode);
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const setLanguage = useCallback((code: LanguageCode) => {
+    setLanguageState(code);
+    try {
+      window.localStorage.setItem(CHAT_LANGUAGE_KEY, code);
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const t = useCallback(
+    (text: string) => (language === "EN" ? text : translations[language]?.[text] ?? text),
+    [language],
+  );
 
   // Log the resolved assistant API endpoint once at mount so misconfiguration
   // (undefined / wrong host / wrong port) is visible in the browser console.
@@ -503,7 +543,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: content, history, sessionId }),
+        body: JSON.stringify({ message: content, history, sessionId, language }),
         signal: controller.signal,
         cache: "no-store",
       });
@@ -532,8 +572,10 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
       if (generationRef.current !== requestGeneration) return;
 
+      const assistantId = `asst_${Date.now()}`;
+      freshMessageIds.add(assistantId);
       const assistantMessage: ChatMessage = {
-        id: `asst_${Date.now()}`,
+        id: assistantId,
         role: "assistant",
         content: typeof data.answer === "string" ? data.answer : "",
         answer_type: typeof data.answerType === "string" ? data.answerType : "GUIDANCE",
@@ -576,7 +618,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       if (abortRef.current === controller) abortRef.current = null;
       setIsLoading(false);
     }
-  }, [commitMessages]);
+  }, [commitMessages, language]);
 
   return (
     <ChatContext.Provider
@@ -590,6 +632,9 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         resolvedTheme,
         history,
         contact,
+        language,
+        setLanguage,
+        t,
         toggleChat,
         openChat,
         closeChat,

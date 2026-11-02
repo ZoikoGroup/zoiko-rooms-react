@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { History, Maximize2, Minimize2, Ellipsis, X } from "lucide-react";
+import { History, Languages, Maximize2, Minimize2, Ellipsis, X } from "lucide-react";
 import { useChatContext } from "./ChatProvider";
 import { ChatPanel } from "./ChatPanel";
 import { HistoryPanel } from "./HistoryPanel";
 import { MenuDropdown } from "./MenuDropdown";
+import { LanguageMenu } from "./LanguageMenu";
 import { AssistantStatus } from "./AssistantStatus";
 
 const EXPANDED_KEY = "zoiko-assistant-expanded";
@@ -55,13 +56,15 @@ function HeaderButton({
 }
 
 export function ChatShell() {
-  const { isOpen, closeChat, resolvedTheme } = useChatContext();
+  const { isOpen, closeChat, resolvedTheme, t } = useChatContext();
   const [historyOpen, setHistoryOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [languageOpen, setLanguageOpen] = useState(false);
   // Remembered per browser. The panel only renders once opened (client-side),
   // so reading storage here cannot cause a hydration mismatch.
   const [expanded, setExpanded] = useState(() => typeof window !== "undefined" && readExpanded());
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
+  const languageButtonRef = useRef<HTMLButtonElement | null>(null);
 
   if (!isOpen) return null;
 
@@ -82,7 +85,7 @@ export function ChatShell() {
       <button
         aria-label="Close chat"
         onClick={closeChat}
-        className="fixed inset-0 z-40 bg-black/20 backdrop-blur-[2px]"
+        className="fixed inset-0 z-40 bg-black/20"
       />
 
       <div
@@ -134,8 +137,22 @@ export function ChatShell() {
                 </HeaderButton>
               </span>
               <HeaderButton
+                label={t("Language")}
+                onClick={() => {
+                  setMenuOpen(false);
+                  setLanguageOpen((open) => !open);
+                }}
+                buttonRef={languageButtonRef}
+                expanded={languageOpen}
+              >
+                <Languages className="h-5 w-5" />
+              </HeaderButton>
+              <HeaderButton
                 label="More options"
-                onClick={() => setMenuOpen((open) => !open)}
+                onClick={() => {
+                  setLanguageOpen(false);
+                  setMenuOpen((open) => !open);
+                }}
                 buttonRef={menuButtonRef}
                 expanded={menuOpen}
               >
@@ -146,6 +163,7 @@ export function ChatShell() {
               </HeaderButton>
             </div>
           </div>
+          <LanguageMenu isOpen={languageOpen} onClose={() => setLanguageOpen(false)} triggerRef={languageButtonRef} />
           <MenuDropdown isOpen={menuOpen} onClose={() => setMenuOpen(false)} triggerRef={menuButtonRef} />
         </header>
 

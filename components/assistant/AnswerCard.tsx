@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ExternalLink, ChevronDown, ChevronUp, Volume2, VolumeX } from "lucide-react";
 import type { ChatMessage } from "./ChatProvider";
 import { Citation } from "./Citation";
 import { AssistantAvatar } from "./AssistantAvatar";
 import { MessageMarkdown } from "./MessageMarkdown";
+import { useChatContext, freshMessageIds } from "./ChatProvider";
 import { onTtsState, isSpeakingId, speakText, stopTts, ttsAvailable } from "./tts";
 
 interface AnswerCardProps {
@@ -13,11 +14,63 @@ interface AnswerCardProps {
   onSuggestionClick?: (suggestion: string) => void;
 }
 
+/**
+ * Keeps the chat pinned to the newest text, but only while the reader is already at
+ * the bottom; once they scroll up to read, the reveal never pulls them back down.
+ */
+function followBottom(el: HTMLElement | null) {
+  const scroller = el?.closest<HTMLElement>(".overflow-y-auto");
+  if (!scroller) return;
+  const gap = scroller.scrollHeight - scroller.scrollTop - scroller.clientHeight;
+  if (gap > 120) return;
+  requestAnimationFrame(() => {
+    scroller.scrollTop = scroller.scrollHeight;
+  });
+}
+
+/**
+ * Reveals a reply progressively (word by word) like a streamed answer. The reply
+ * arrives whole, so this is purely visual; long answers speed up to stay short.
+ */
+function useReveal(messageId: string, content: string, onTick: () => void) {
+  const [animate] = useState(
+    () => freshMessageIds.has(messageId) && !window.matchMedia?.("(prefers-reduced-motion: reduce)").matches,
+  );
+  const total = content.split(/(\s+)/).length;
+  const [count, setCount] = useState(animate ? 0 : total);
+  const tickRef = useRef(onTick);
+  useEffect(() => {
+    tickRef.current = onTick;
+  });
+
+  useEffect(() => {
+    if (!animate) return;
+    const step = Math.max(2, Math.ceil(total / 50));
+    let shown = 0;
+    const id = window.setInterval(() => {
+      shown = Math.min(total, shown + step);
+      setCount(shown);
+      tickRef.current();
+      if (shown >= total) window.clearInterval(id);
+    }, 50);
+    return () => window.clearInterval(id);
+  }, [animate, total]);
+
+  const done = count >= total;
+  useEffect(() => {
+    if (done) freshMessageIds.delete(messageId);
+  }, [done, messageId]);
+
+  return { text: done ? content : content.split(/(\s+)/).slice(0, count).join(""), done };
+}
+
 export function AnswerCard({ message, onSuggestionClick }: AnswerCardProps) {
+  const { t } = useChatContext();
   const [showSources, setShowSources] = useState(false);
   const [speakingThis, setSpeakingThis] = useState(() => isSpeakingId(message.id));
   const canSpeak = ttsAvailable();
-
+  const rootRef = useRef<HTMLDivElement>(null);
+  const { text, done } = useReveal(message.id, message.content, () => followBottom(rootRef.current));
   useEffect(() => {
     const unsubscribe = onTtsState(() => setSpeakingThis(isSpeakingId(message.id)));
     return unsubscribe;
@@ -32,7 +85,7 @@ export function AnswerCard({ message, onSuggestionClick }: AnswerCardProps) {
   };
 
   return (
-    <div className="animate-chat-msg-left flex flex-col">
+    <div ref={rootRef} className="animate-chat-msg-left flex flex-col">
       <div className="flex items-start gap-2.5">
         <AssistantAvatar />
         <div
@@ -43,23 +96,24 @@ export function AnswerCard({ message, onSuggestionClick }: AnswerCardProps) {
             borderColor: "var(--color-assistant-bubble-border)",
           }}
         >
-          <MessageMarkdown content={message.content} />
+          <MessageMarkdown content={text} />
+          {!done && <span className="chat-reveal-caret" aria-hidden="true" />}
 
-          {message.suggestions && message.suggestions.length > 0 && (
-            <div className="mt-2 flex flex-wrap gap-1.5">
+          {done && message.suggestions && message.suggestions.length > 0 && (
+            <div className="animate-chat-fade-slide mt-2 flex flex-wrap gap-1.5">
               {message.suggestions.map((s) => (
                 <button
                   key={s}
                   onClick={() => onSuggestionClick?.(s)}
                   className="rounded-full px-3 py-1.5 text-xs font-medium ring-1 ring-slate-200 transition-colors hover:bg-slate-100 hover:text-slate-800 dark:text-slate-300 dark:ring-white/10 dark:hover:bg-white/10"
                 >
-                  {s}
+                  {t(s)}
                 </button>
               ))}
             </div>
           )}
 
-          {message.citations && message.citations.length > 0 && (
+          {done && message.citations && message.citations.length > 0 && (
             <div className="mt-2">
               <button
                 onClick={() => setShowSources(!showSources)}
@@ -79,7 +133,7 @@ export function AnswerCard({ message, onSuggestionClick }: AnswerCardProps) {
             </div>
           )}
 
-          {message.deep_links && message.deep_links.length > 0 && (
+          {done && message.deep_links && message.deep_links.length > 0 && (
             <div className="mt-2 flex flex-wrap gap-1.5">
               {message.deep_links.map((link) => (
                 <a
@@ -94,7 +148,7 @@ export function AnswerCard({ message, onSuggestionClick }: AnswerCardProps) {
             </div>
           )}
 
-          {message.handoff && (
+          {done && message.handoff && (
             <div className="mt-2 rounded-lg border px-3 py-2 text-xs" style={{ borderColor: "var(--color-handoff-border)", backgroundColor: "var(--color-handoff-bg)", color: "var(--color-handoff-text)" }}>
               <span className="font-medium">Human support requested.</span> Reference: {message.handoff.id}
             </div>
