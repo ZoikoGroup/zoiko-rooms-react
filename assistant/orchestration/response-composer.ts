@@ -17,6 +17,8 @@ export function composeResponse(params: {
   domainData?: unknown;
   abstain?: boolean;
   abstainReason?: string;
+  userMessage?: string;
+  askedQuestions?: string[];
 }): ResponseComponents {
   if (params.abstain) {
     return {
@@ -54,7 +56,7 @@ export function composeResponse(params: {
     answer_type: answerType,
     content: cleanedContent,
     citations: extractedCitations,
-    suggestions: generateSuggestions(params.intent),
+    suggestions: generateSuggestions(params.intent, params.userMessage, params.askedQuestions),
     deep_links: generateDeepLinks(params.intent),
   };
 }
@@ -216,9 +218,69 @@ function extractCitationsFromContent(
   return citations;
 }
 
-function generateSuggestions(intent: string): string[] {
+// Guidance follow-ups grouped by topic. Each entry lists the keywords that mark
+// a question as being about that topic, so related follow-ups can be ranked first.
+const GUIDANCE_FOLLOW_UPS: Array<{ keywords: RegExp; questions: string[] }> = [
+  {
+    keywords: /\b(payment|pay|paid|payout|escrow|rent|fee|deposit)s?\b/i,
+    questions: [
+      "When do hosts get paid?",
+      "What is escrow and how does it protect me?",
+      "How does the security deposit work?",
+      "What fees does Zoiko Rooms charge?",
+    ],
+  },
+  {
+    keywords: /\b(verif\w*|passport|identity|id check|right to rent)\b/i,
+    questions: [
+      "What is a Room Passport?",
+      "How long does verification take?",
+      "What documents do I need to get verified?",
+      "What is Right to Rent?",
+    ],
+  },
+  {
+    keywords: /\b(list|listing|host|landlord|provider)\b/i,
+    questions: [
+      "How do I list a room?",
+      "What do I need to publish a listing?",
+      "How do I manage applications from renters?",
+      "How do hosts get paid?",
+    ],
+  },
+  {
+    keywords: /\b(find|search|apply|application|renter|book|move[- ]?in|stay)\b/i,
+    questions: [
+      "How do I apply for a room?",
+      "How do I search for a room?",
+      "What happens after I apply?",
+      "How long can I stay?",
+    ],
+  },
+];
+
+const GUIDANCE_GENERAL_FOLLOW_UPS = [
+  "Tell me about verification",
+  "How do payments work?",
+  "What is a Room Passport?",
+  "How do I list a room?",
+  "How do I apply for a room?",
+  "Can I talk to support?",
+];
+
+const normaliseQuestion = (q: string) => q.toLowerCase().replace(/[^a-z0-9 ]/g, "").trim();
+
+function generateGuidanceSuggestions(userMessage: string, askedQuestions: string[]): string[] {
+  const asked = new Set([userMessage, ...askedQuestions].map(normaliseQuestion));
+  const related = GUIDANCE_FOLLOW_UPS.filter((t) => t.keywords.test(userMessage)).flatMap((t) => t.questions);
+  const candidates = [...related, ...GUIDANCE_GENERAL_FOLLOW_UPS];
+  const unique = [...new Set(candidates)].filter((q) => !asked.has(normaliseQuestion(q)));
+  return unique.slice(0, 3);
+}
+
+function generateSuggestions(intent: string, userMessage = "", askedQuestions: string[] = []): string[] {
+  if (intent === "GUIDANCE") return generateGuidanceSuggestions(userMessage, askedQuestions);
   const suggestions: Record<string, string[]> = {
-    GUIDANCE: ["Tell me about verification", "How do payments work?", "What is a Room Passport?"],
     ACCOUNT_STATUS: ["View my action center", "Check my payments", "Update my profile"],
     ACTION_CENTER: ["Tell me about my account", "How do I complete this action?"],
     PAYMENT_STATUS: ["When is my next payment?", "How do payments work?"],

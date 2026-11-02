@@ -2,6 +2,7 @@
 
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, fireEvent, waitFor, act } from "@testing-library/react";
+import { LanguageProvider } from "../lib/i18n/LanguageProvider";
 import { ChatProvider, useChatContext, type ChatMessage, type ArchivedSession } from "../components/assistant/ChatProvider";
 import { ChatPanel } from "../components/assistant/ChatPanel";
 
@@ -49,7 +50,7 @@ function SessionProbe() {
 function renderWidget(seed: ArchivedSession[]) {
   localStorage.setItem(HISTORY_KEY, JSON.stringify(seed));
   render(
-    <ChatProvider>
+    <LanguageProvider><ChatProvider>
       <MessageCountProbe />
       <SessionProbe />
       <HistoryProbe />
@@ -59,7 +60,7 @@ function renderWidget(seed: ArchivedSession[]) {
       <ClearChatProbe />
       <NewChatProbe />
       <ChatPanel />
-    </ChatProvider>
+    </ChatProvider></LanguageProvider>
   );
 }
 

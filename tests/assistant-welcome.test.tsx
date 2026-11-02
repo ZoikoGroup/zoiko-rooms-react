@@ -3,6 +3,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { useEffect } from "react";
+import { LanguageProvider } from "../lib/i18n/LanguageProvider";
 import { ChatProvider, useChatContext } from "../components/assistant/ChatProvider";
 import { ChatPanel } from "../components/assistant/ChatPanel";
 import { ChatShell } from "../components/assistant/ChatShell";
@@ -27,20 +28,20 @@ function OpenOnMount() {
 
 function renderPanel() {
   render(
-    <ChatProvider>
+    <LanguageProvider><ChatProvider>
       <MessageCountProbe />
       <ClearChatProbe />
       <ChatPanel />
-    </ChatProvider>
+    </ChatProvider></LanguageProvider>
   );
 }
 
 function renderShell() {
   render(
-    <ChatProvider>
+    <LanguageProvider><ChatProvider>
       <OpenOnMount />
       <ChatShell />
-    </ChatProvider>
+    </ChatProvider></LanguageProvider>
   );
 }
 

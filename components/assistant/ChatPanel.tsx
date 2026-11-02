@@ -72,7 +72,10 @@ export function ChatPanel() {
   const showHome = !isLoading && !messages.some((m) => m.role === "user");
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Scroll the message list itself (not the page behind it), without a smooth
+    // animation that would fight the reply reveal's own scroll-following.
+    const list = messagesEndRef.current;
+    if (list) list.scrollTop = list.scrollHeight;
   }, [messages, isLoading]);
 
   const handleSend = () => {
@@ -91,7 +94,7 @@ export function ChatPanel() {
 
   return (
     <div className="flex flex-1 flex-col overflow-hidden">
-      <div ref={messagesEndRef} className="flex-1 space-y-4 overflow-y-auto px-5 py-4">
+      <div ref={messagesEndRef} className="flex-1 space-y-4 overflow-y-auto overscroll-contain px-5 py-4">
         {showHome ? (
           <AssistantHome onAsk={sendMessage} disabled={isLoading} />
         ) : (

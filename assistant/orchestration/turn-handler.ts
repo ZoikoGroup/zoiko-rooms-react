@@ -362,6 +362,8 @@ export async function handleTurn(
     retrievedChunks: topChunks,
     citationMap: packed.citationMap,
     domainData,
+    userMessage: request.user_message,
+    askedQuestions: (request.conversation_history || []).filter((m) => m.role === "user").map((m) => m.content),
   });
 
   if (domainData && classification.intent !== "MESSAGE_DRAFT") {

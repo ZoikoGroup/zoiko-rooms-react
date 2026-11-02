@@ -11,7 +11,7 @@ interface MenuDropdownProps {
 }
 
 export function MenuDropdown({ isOpen, onClose, triggerRef }: MenuDropdownProps) {
-  const { resolvedTheme, newConversation, clearChat, setTheme, openContact } = useChatContext();
+  const { resolvedTheme, newConversation, clearChat, setTheme, openContact, t } = useChatContext();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
@@ -118,7 +118,7 @@ export function MenuDropdown({ isOpen, onClose, triggerRef }: MenuDropdownProps)
           role="menuitem"
         >
           <Plus className="h-4 w-4 flex-shrink-0" style={{ color: "var(--color-brand-navy)" }} />
-          <span>New conversation</span>
+          <span>{t("New conversation")}</span>
         </button>
 
         <button
@@ -132,7 +132,7 @@ export function MenuDropdown({ isOpen, onClose, triggerRef }: MenuDropdownProps)
           role="menuitem"
         >
           <Trash2 className="h-4 w-4 flex-shrink-0" style={{ color: "var(--color-brand-red)" }} />
-          <span>Clear chat</span>
+          <span>{t("Clear chat")}</span>
         </button>
 
         <button
@@ -146,7 +146,7 @@ export function MenuDropdown({ isOpen, onClose, triggerRef }: MenuDropdownProps)
           role="menuitem"
         >
           <Mail className="h-4 w-4 flex-shrink-0" style={{ color: "var(--color-brand-navy)" }} />
-          <span>Contact admin</span>
+          <span>{t("Contact admin")}</span>
         </button>
 
         <button
@@ -164,8 +164,9 @@ export function MenuDropdown({ isOpen, onClose, triggerRef }: MenuDropdownProps)
           ) : (
             <Moon className="h-4 w-4 flex-shrink-0" style={{ color: "var(--color-brand-navy)" }} />
           )}
-          <span>{resolvedTheme === "dark" ? "Light mode" : "Dark mode"}</span>
+          <span>{resolvedTheme === "dark" ? t("Light mode") : t("Dark mode")}</span>
         </button>
+
       </div>
     </div>
   );
