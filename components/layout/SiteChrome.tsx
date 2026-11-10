@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer";
 import { ChatLauncher, ChatShell } from "@/components/assistant";
 import { NewsSideBadge } from "./NewsSideBadge";
 import { AssistantSideButton } from "./AssistantSideButton";
+import { BlackFridayPopup } from "./BlackFridayPopup";
 
 const NO_CHROME_ROUTES = ["/login", "/register", "/reset-password"];
 
@@ -18,6 +19,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
   }
 
   const isChatPage = pathname === "/chat";
+  const isHomePage = pathname === "/";
 
    return (
     <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
@@ -32,6 +34,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       {!isChatPage && <AssistantSideButton />}
       {!isChatPage && <ChatLauncher />}
       {!isChatPage && <ChatShell />}
+      {isHomePage && <BlackFridayPopup />}
     </div>
   );
 }
