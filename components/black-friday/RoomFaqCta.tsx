@@ -9,7 +9,7 @@ const FAQS = [
     question: "How do I claim the Black Friday discount?",
     answer: (
       <>
-        Simply select any eligible room or plan during November 27–30, and the
+        Simply select any eligible room or plan during November 20–30, and the
         20% discount will be automatically applied at checkout or via code{" "}
         <strong className="font-bold text-white">BF20</strong>.
       </>

@@ -94,7 +94,7 @@ export default function RoomHero() {
             </p>
             <p className="text-2xl font-extrabold leading-7">20% OFF</p>
             <p className="font-mono text-sm uppercase tracking-[0.08em] text-[#e0b062]">
-              Nov 27 – 30
+              Nov 20 – 30
             </p>
           </div>
         </div>
