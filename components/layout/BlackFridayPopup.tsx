@@ -9,7 +9,7 @@ import { ArrowRight, Flame, X } from "lucide-react";
 const SHOW_DELAY_MS = 1200;
 
 const HIGHLIGHTS = [
-  "20% off all bookings, Nov 27 – 30",
+  "20% off all bookings, Nov 20 – 30",
   "Zero booking fees when confirmed before Nov 30",
   "Promo code BF20 applied automatically at checkout",
 ] as const;
@@ -97,7 +97,7 @@ export function BlackFridayPopup() {
                   </p>
                   <p className="text-2xl font-extrabold leading-7">20% OFF</p>
                   <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-[#e0b062]">
-                    Nov 27 – 30
+                    Nov 20 – 30
                   </p>
                 </motion.div>
               </div>
